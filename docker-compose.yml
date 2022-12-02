@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mysql_db:
+    image: mysql
+    container_name: mysql_db
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_DATABASE=$DB_NAME
+    ports:
+      - $DB_PORT:$DB_PORT
+    volumes:
+      - mysql_db:/var/lib/mysql
+    networks:
+      - node-network
+  app:
+    depends_on:
+      - mysql_db
+    build: .
+    container_name: cons-node
+    env_file: .env
+    environment:
+      - DB_HOST=mysql_db
+      - DB_DIALECT=$DB_DIALECT
+      - DB_NAME=$DB_NAME
+      - DB_PORT=$DB_PORT
+      - DB_ROOT=$DB_USER
+      - DB_PASS=$DB_PASSWORD
+    ports:
+     - "3200:8080"
+    networks:
+      - node-network
+volumes:
+  mysql_db:
+    driver: local
+networks:
+  node-network:
