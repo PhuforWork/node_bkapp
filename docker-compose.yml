@@ -1,21 +1,21 @@
 version: '3'
 services:
-  mysql_db:
-    image: mysql
-    container_name: mysql_db
+  mariadb:
+    image: mariadb:latest
+    container_name: maria-docker
     env_file: .env
     environment:
       - MYSQL_ROOT_PASSWORD=1234
       - MYSQL_DATABASE=db_booking
     ports:
-      - 3308:3306
+      - 3306:3306
     volumes:
-      - mysql_db:/var/lib/mysql
+      - maria-data:/var/lib/mysql
     networks:
       - node-network
   app:
     depends_on:
-      - mysql_db
+      - mariadb
     build: .
     container_name: cons-node
     env_file: .env
@@ -23,7 +23,7 @@ services:
       - DB_HOST=mysql_db
       - DB_DIALECT=mysql
       - DB_NAME=db_booking
-      - DB_PORT=3308
+      - DB_PORT=3306
       - DB_USER=root
       - DB_PASS=1234
     ports:
