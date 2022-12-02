@@ -10,4 +10,8 @@ app.use(express.static("."));
 
 app.listen(8080);
 
+app.get("/test", (req, res) => {
+  res.send("Hello");
+});
+
 app.use("/api", rootRoute);
