@@ -27,7 +27,7 @@ services:
       - DB_ROOT=$DB_USER
       - DB_PASS=$DB_PASSWORD
     ports:
-     - "3200:8080"
+     - "3200:80"
     networks:
       - node-network
 volumes:
