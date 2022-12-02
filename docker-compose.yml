@@ -1,7 +1,7 @@
 version: '3'
 services:
   mariadb:
-    image: mariadb:v1
+    image: mariadb
     container_name: maria-docker
     env_file: .env
     environment:
