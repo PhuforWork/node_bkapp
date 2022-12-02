@@ -14,8 +14,8 @@ services:
     # networks:
     #   - node-network
   app:
-    depends_on:
-      - mysql
+    # depends_on:
+    #   - mysql
     build: .
     container_name: cons-node
     env_file: .env
