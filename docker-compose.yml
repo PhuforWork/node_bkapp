@@ -10,7 +10,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - maria-data:/var/lib/mysql
+      - mysql_db:/var/lib/mysql
     networks:
       - node-network
   app:
