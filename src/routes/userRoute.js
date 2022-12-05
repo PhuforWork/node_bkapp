@@ -16,7 +16,7 @@ userRoute.get("/get-user/:id", getUserId);
 // login
 userRoute.post("/login-user", loginUser);
 // register
-userRoute.post("/sig-up-user", sigUp);
+userRoute.post("/sigup-user", sigUp);
 // put
 // update user
 userRoute.put("/update-user", updateUser);
