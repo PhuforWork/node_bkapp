@@ -1,6 +1,6 @@
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
-const { successCode, failCode, errorCode } = require("../utils/respone");
+const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 
 //Read all user
