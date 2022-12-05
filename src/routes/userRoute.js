@@ -19,7 +19,7 @@ userRoute.post("/login", loginUser);
 userRoute.post("/sigup-user", sigUp);
 // put
 // update user
-userRoute.put("/update-user", updateUser);
+userRoute.put("/update-user/:id", updateUser);
 // delete
 
 module.exports = userRoute;

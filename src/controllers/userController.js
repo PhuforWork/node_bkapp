@@ -23,7 +23,7 @@ const loginUser = async (req, res) => {
     },
   });
   if (checkUser) {
-    if (checkUser._password = _password) {
+    if ((checkUser._password = _password)) {
       successCode(res, "", "Login successfully");
     } else {
       failCode(res, "", "User not correct");
@@ -35,8 +35,8 @@ const loginUser = async (req, res) => {
 // register
 const sigUp = async (req, res) => {
   try {
-    let { user_name, email, _password, confirm_password, image_url } = req.body;
-    let data = { user_name, email, _password, confirm_password, image_url };
+    let { user_name, email, _password, image_url } = req.body;
+    let data = { user_name, email, _password, image_url };
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
@@ -56,14 +56,13 @@ const sigUp = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let { id } = req.params;
-    let { user_name, email, _password, confirm_password, image_url } = req.body;
+    let { user_name, email, _password, image_url } = req.body;
     // check data user
     let checkUser = model.users.findByPk(id);
     let update_User = {
       user_name,
       email,
       _password,
-      confirm_password,
       image_url,
     };
     if (checkUser) {
