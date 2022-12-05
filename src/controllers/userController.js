@@ -16,17 +16,17 @@ const getUserId = async (req, res) => {
 };
 // Login user
 const loginUser = async (req, res) => {
-  let { user_name, _password } = req.body;
+  let { user_name, password } = req.body;
   const checkUser = await model.users.findOne({
     where: {
       user_name,
     },
   });
   if (checkUser) {
-    if ((checkUser._password = _password)) {
+    if ((checkUser.passwork = password)) {
       successCode(res, "", "Login successfully");
     } else {
-      failCode(res, "", "Email không đúng");
+      failCode(res, "", "");
     }
   } else {
     errorCode(res, "", "Login fail");
