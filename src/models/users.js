@@ -24,10 +24,6 @@ class users extends Sequelize.Model {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    confirm_password: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
     image_url: {
       type: DataTypes.STRING(255),
       allowNull: true
