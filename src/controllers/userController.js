@@ -16,21 +16,22 @@ const getUserId = async (req, res) => {
 };
 // Login user
 const loginUser = async (req, res) => {
-  let { user_name, password } = req.body;
+  let { user_name, _password } = req.body;
   const checkUser = await model.users.findOne({
     where: {
       user_name,
     },
   });
-  if (checkUser) {
-    if ((checkUser.passwork = password)) {
-      successCode(res, "", "Login successfully");
-    } else {
-      failCode(res, "", "");
-    }
-  } else {
-    errorCode(res, "", "Login fail");
-  }
+  res.send(checkUser);
+  // if (checkUser) {
+  //   if ((checkUser._passwork = _password)) {
+  //     successCode(res, "", "Login successfully");
+  //   } else {
+  //     failCode(res, "", "");
+  //   }
+  // } else {
+  //   errorCode(res, "", "Login fail");
+  // }
 };
 // register
 const sigUp = async (req, res) => {
