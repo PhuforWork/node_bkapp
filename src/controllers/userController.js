@@ -22,16 +22,15 @@ const loginUser = async (req, res) => {
       user_name,
     },
   });
-  res.send(checkUser);
-  // if (checkUser) {
-  //   if ((checkUser._passwork = _password)) {
-  //     successCode(res, "", "Login successfully");
-  //   } else {
-  //     failCode(res, "", "");
-  //   }
-  // } else {
-  //   errorCode(res, "", "Login fail");
-  // }
+  if (checkUser) {
+    if (checkUser._password = _password) {
+      successCode(res, "", "Login successfully");
+    } else {
+      failCode(res, "", "User not correct");
+    }
+  } else {
+    errorCode(res, "", "Login fail");
+  }
 };
 // register
 const sigUp = async (req, res) => {
