@@ -2,7 +2,8 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
-
+const fs = require("fs");
+const { log } = require("console");
 //Read all user
 const getuser = async (req, res) => {
   let data = await model.users.findAll();
@@ -36,16 +37,24 @@ const loginUser = async (req, res) => {
 const sigUp = async (req, res) => {
   try {
     let { user_name, email, _password, image_url } = req.body;
-    let data = { user_name, email, _password, image_url };
+    let dataUser = { user_name, email, _password, image_url };
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
       },
     });
+    await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
+      let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
+        data
+      ).toString("base64")}`;
+      fs.unlinkSync(process.cwd() + "/" + req.file.path);
+      dataUser.image_url = fileName;
+    });
+    console.log(dataUser);
     if (checkUsername) {
       failCode(res, "", "User name already used");
     } else {
-      await model.users.create(data);
+      await model.users.create(dataUser);
       successCode(res, "", "Sig up successfully");
     }
   } catch (error) {
@@ -65,6 +74,13 @@ const updateUser = async (req, res) => {
       _password,
       image_url,
     };
+    await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
+      let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
+        data
+      ).toString("base64")}`;
+      fs.unlinkSync(process.cwd() + "/" + req.file.path);
+      update_User.image_url = fileName;
+    });
     if (checkUser) {
       await model.users.update(update_User, { where: { id_user: id } });
       successCode(res, update_User, "Update successfully");
@@ -75,4 +91,11 @@ const updateUser = async (req, res) => {
     errorCode(res, "Error 500");
   }
 };
-module.exports = { getuser, loginUser, sigUp, updateUser, getUserId };
+
+module.exports = {
+  getuser,
+  loginUser,
+  sigUp,
+  updateUser,
+  getUserId,
+};
