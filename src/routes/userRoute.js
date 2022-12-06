@@ -23,7 +23,7 @@ userRoute.post("/sigup-user", sigUp);
 // update user
 userRoute.put("/update-user/:id", updateUser);
 
-userRoute.post("/upimg", upload.single("upload"), update_img);
+userRoute.post("/upimg/:id", upload.single("upload"), update_img);
 // delete
 
 module.exports = userRoute;
