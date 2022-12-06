@@ -88,16 +88,16 @@ const updateUser = async (req, res) => {
 const update_img = async (req, res) => {
   let { id } = req.params;
   // let checkUser = model.users.findByPk(id);
-
   console.log(process.cwd() + "/" + req.file.path);
   await fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
-    let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+    let { image_url } = req.body;
+     image_url = `data:${req.file.mimetype};base64,${Buffer.from(
       data
     ).toString("base64")}`;
     fs.unlinkSync(process.cwd() + "/" + req.file.path);
     res.send(image_url);
-    await model.users.update(image_url, { where: { id_user: id } });
-    successCode(res, image_url, "Update successfully");
+    // await model.users.update(image_url, { where: { id_user: id } });
+    // successCode(res, image_url, "Update successfully");
   });
 };
 
