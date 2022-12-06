@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("."));
 
-app.listen(8081);
+app.listen(8080);
 
 app.get("/test", (req, res) => {
   res.send("Hello");

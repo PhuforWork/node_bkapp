@@ -74,13 +74,7 @@ const updateUser = async (req, res) => {
       _password,
       image_url,
     };
-    await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
-      let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
-        data
-      ).toString("base64")}`;
-      fs.unlinkSync(process.cwd() + "/" + req.file.path);
-      update_User.image_url = fileName;
-    });
+
     if (checkUser) {
       await model.users.update(update_User, { where: { id_user: id } });
       successCode(res, update_User, "Update successfully");
@@ -92,10 +86,21 @@ const updateUser = async (req, res) => {
   }
 };
 
+const update_img = async (req, res) => {
+  await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
+    let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
+      data
+    ).toString("base64")}`;
+    fs.unlinkSync(process.cwd() + "/" + req.file.path);
+    res.send(fileName);
+  });
+};
+
 module.exports = {
   getuser,
   loginUser,
   sigUp,
   updateUser,
   getUserId,
+  update_img,
 };

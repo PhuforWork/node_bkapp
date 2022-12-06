@@ -5,6 +5,7 @@ const {
   sigUp,
   updateUser,
   getUserId,
+  update_img,
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -17,10 +18,12 @@ userRoute.get("/get-user/:id", getUserId);
 // login
 userRoute.post("/login", loginUser);
 // register
-userRoute.post("/sigup-user",upload.single("upload"), sigUp);
+userRoute.post("/sigup-user", sigUp);
 // put
 // update user
-userRoute.put("/update-user/:id",upload.single("upload"), updateUser);
+userRoute.put("/update-user/:id", updateUser);
+
+userRoute.post("/upimg", upload.single("upload"), update_img);
 // delete
 
 module.exports = userRoute;
