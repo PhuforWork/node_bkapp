@@ -18,10 +18,10 @@ userRoute.get("/get-user/:id", getUserId);
 // login
 userRoute.post("/login", loginUser);
 // register
-userRoute.post("/sigup-user", sigUp);
+userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
 // put
 // update user
-userRoute.put("/update-user/:id", upload.single("image_url"),updateUser);
+userRoute.put("/update-user/:id", upload.single("image_url"), updateUser);
 
 userRoute.post("/upimg/:id", upload.single("image_url"), update_img);
 // delete

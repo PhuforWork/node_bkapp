@@ -68,12 +68,6 @@ const updateUser = async (req, res) => {
     let { user_name, email, _password, image_url } = req.body;
     // check data user
     let checkUser = model.users.findByPk(id);
-    // let update_User = {
-    //   user_name,
-    //   email,
-    //   _password,
-    //   image_url,
-    // };
     if (checkUser) {
       await fs.readFile(
         process.cwd() + "/" + req.file.path,
@@ -82,12 +76,15 @@ const updateUser = async (req, res) => {
             data
           ).toString("base64")}`;
           fs.unlinkSync(process.cwd() + "/" + req.file.path);
-          res.send(image_url);
           await model.users.update(
             { user_name, email, _password, image_url },
             { where: { id_user: id } }
           );
-          // successCode(res, image_url, "Update successfully");
+          successCode(
+            res,
+            { user_name, email, _password, image_url },
+            "Update successfully"
+          );
         }
       );
       // await model.users.update(update_User, { where: { id_user: id } });
