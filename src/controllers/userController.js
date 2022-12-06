@@ -68,13 +68,12 @@ const updateUser = async (req, res) => {
     let { user_name, email, _password, image_url } = req.body;
     // check data user
     let checkUser = model.users.findByPk(id);
-
+    let update_User = {
+      user_name,
+      email,
+      _password,
+    };
     if (checkUser) {
-      let update_User = {
-        user_name,
-        email,
-        _password,
-      };
       await fs.readFile(
         process.cwd() + "/" + req.file.path,
         async (err, data) => {
