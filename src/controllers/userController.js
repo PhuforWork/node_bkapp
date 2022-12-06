@@ -74,6 +74,9 @@ const updateUser = async (req, res) => {
       _password,
       image_url,
     };
+    if(process.cwd() + "/" + req.file.path){
+      console.log(123);
+    }
     if (checkUser) {
       await model.users.update(update_User, { where: { id_user: id } });
       successCode(res, update_User, "Update successfully");
