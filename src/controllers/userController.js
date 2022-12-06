@@ -37,25 +37,28 @@ const loginUser = async (req, res) => {
 const sigUp = async (req, res) => {
   try {
     let { user_name, email, _password, image_url } = req.body;
-    let dataUser = { user_name, email, _password, image_url };
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
       },
     });
-    await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
-      let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
-        data
-      ).toString("base64")}`;
-      fs.unlinkSync(process.cwd() + "/" + req.file.path);
-      dataUser.image_url = fileName;
-    });
-    console.log(dataUser);
+
     if (checkUsername) {
       failCode(res, "", "User name already used");
     } else {
-      await model.users.create(dataUser);
-      successCode(res, "", "Sig up successfully");
+      await fs.readFile(
+        process.cwd() + "/" + req.file.path,
+        async (err, data) => {
+          image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+            data
+          ).toString("base64")}`;
+          fs.unlinkSync(process.cwd() + "/" + req.file.path);
+          await model.users.create({ user_name, email, _password, image_url });
+          successCode(res, "", "Sig up successfully");
+        }
+      );
+      // await model.users.create(dataUser);
+      // successCode(res, "", "Sig up successfully");
     }
   } catch (error) {
     errorCode(res, "Sig up failed");
