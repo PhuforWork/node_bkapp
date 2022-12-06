@@ -98,7 +98,7 @@ const update_img = async (req, res) => {
         ).toString("base64")}`;
         fs.unlinkSync(process.cwd() + "/" + req.file.path);
         let update_user = { image_url };
-        update_user.image_url = fileName;
+        update_user = { ...image_url, image_url: fileName };
         await model.users.update(update_user, { where: { id_user: id } });
       }
     );
