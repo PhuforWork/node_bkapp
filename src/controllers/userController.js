@@ -86,7 +86,7 @@ const updateUser = async (req, res) => {
 };
 
 const update_img = async (req, res) => {
-  console.log(req.file);
+  console.log(process.cwd() + "/" + req.file.path);
   await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
     let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
       data
