@@ -1,7 +1,7 @@
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./public/images");
+    cb(null,__dirname + "./public/images");
   },
   filename: (req, file, cb) => {
     const fileNameNew = Date.now() + "_" + file.originalname;
