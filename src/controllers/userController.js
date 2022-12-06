@@ -93,13 +93,12 @@ const update_img = async (req, res) => {
     await fs.readFile(
       process.cwd() + "/" + req.file.path,
       async (err, data) => {
-        let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
+        let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
           data
         ).toString("base64")}`;
         fs.unlinkSync(process.cwd() + "/" + req.file.path);
-        let update_user = { image_url };
-        update_user = { ...image_url, image_url: fileName };
-        await model.users.update(update_user, { where: { id_user: id } });
+
+        await model.users.update(image_url, { where: { id_user: id } });
       }
     );
   }
