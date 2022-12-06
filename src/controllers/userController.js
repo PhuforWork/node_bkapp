@@ -54,7 +54,11 @@ const sigUp = async (req, res) => {
           ).toString("base64")}`;
           fs.unlinkSync(process.cwd() + "/" + req.file.path);
           await model.users.create({ user_name, email, _password, image_url });
-          successCode(res, "", "Sig up successfully");
+          successCode(
+            res,
+            { user_name, email, _password, image_url },
+            "Sig up successfully"
+          );
         }
       );
       // await model.users.create(dataUser);
