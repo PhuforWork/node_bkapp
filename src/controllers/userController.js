@@ -74,7 +74,14 @@ const updateUser = async (req, res) => {
       _password,
       image_url,
     };
-
+    console.log(req);
+    // await fs.readFile(process.cwd() + "/" + req.file.path, (err, data) => {
+    //   let fileName = `data:${req.file.mimetype};base64,${Buffer.from(
+    //     data
+    //   ).toString("base64")}`;
+    //   fs.unlinkSync(process.cwd() + "/" + req.file.path);
+    //   res.send(fileName);
+    // });
     if (checkUser) {
       await model.users.update(update_User, { where: { id_user: id } });
       successCode(res, update_User, "Update successfully");
