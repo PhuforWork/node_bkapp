@@ -6,7 +6,7 @@ const rootRoute = require("../src/routes/index");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("."));
+app.use(express.static(__dirname + "/public"));
 
 app.listen(8081);
 
