@@ -21,7 +21,7 @@ userRoute.post("/login", loginUser);
 userRoute.post("/sigup-user", sigUp);
 // put
 // update user
-userRoute.put("/update-user/:id", upload.single("upload"),updateUser);
+userRoute.put("/update-user/:id", upload.single("image_url"),updateUser);
 
 userRoute.post("/upimg/:id", upload.single("image_url"), update_img);
 // delete

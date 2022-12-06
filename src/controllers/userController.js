@@ -68,13 +68,26 @@ const updateUser = async (req, res) => {
     let { user_name, email, _password, image_url } = req.body;
     // check data user
     let checkUser = model.users.findByPk(id);
-    let update_User = {
-      user_name,
-      email,
-      _password,
-      image_url,
-    };
+
     if (checkUser) {
+      let update_User = {
+        user_name,
+        email,
+        _password,
+      };
+      await fs.readFile(
+        process.cwd() + "/" + req.file.path,
+        async (err, data) => {
+          let { image_url } = req.body;
+          image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+            data
+          ).toString("base64")}`;
+          fs.unlinkSync(process.cwd() + "/" + req.file.path);
+          res.send(image_url);
+          await model.users.update({ image_url }, { where: { id_user: id } });
+          // successCode(res, image_url, "Update successfully");
+        }
+      );
       await model.users.update(update_User, { where: { id_user: id } });
       successCode(res, update_User, "Update successfully");
     } else {
