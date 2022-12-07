@@ -36,8 +36,8 @@ const loginUser = async (req, res) => {
 // register
 const sigUp = async (req, res) => {
   try {
-    let { user_name, email, _password, confirm_password } = req.body;
-    console.log({ image_url, user_name, email, _password, confirm_password });
+    let { user_name, email, _password } = req.body;
+    console.log({ image_url, user_name, email, _password });
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
