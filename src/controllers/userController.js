@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
     },
   });
   if (checkUser) {
-    if ((checkUser._password = _password)) {
+    if ((checkUser._password === _password)) {
       successCode(res, checkUser, "Login successfully");
     } else {
       failCode(res, "", "User not correct");
