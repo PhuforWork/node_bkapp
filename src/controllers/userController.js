@@ -122,10 +122,8 @@ const update_img = async (req, res) => {
 
 // forgot password
 const forgot_password = async (req, res) => {
-  let data = { authentication: true };
   let { email } = req.body;
-  console.log({ email });
-  const check_email = model.users.findOne({ where: { email } });
+  const check_email = model.users.findOne({ where: { email, } });
 
   if (check_email) {
     successCode(res, check_email, "Successful authentication");
