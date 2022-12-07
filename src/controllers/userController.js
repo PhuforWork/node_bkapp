@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
 const sigUp = async (req, res) => {
   try {
     let { user_name, email, _password } = req.body;
-    console.log({ image_url, user_name, email, _password });
+    console.log({ user_name, email, _password });
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
@@ -45,8 +45,6 @@ const sigUp = async (req, res) => {
     });
     if (checkUsername) {
       failCode(res, "", "User name already used");
-    } else if (_password !== confirm_password) {
-      failCode(res, "", "Confirmation password does not match");
     } else {
       await model.users.create({
         user_name,
