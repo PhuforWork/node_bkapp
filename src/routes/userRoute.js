@@ -24,7 +24,7 @@ userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
 // forgot_password
 userRoute.post("/forgot-pass",upload.none(),forgot_password);
 // change_pass
-userRoute.post("/change-pass", upload.none(),change_pass);
+userRoute.post("/change-pass",change_pass);
 // put
 // update user
 userRoute.put("/update-user/:id", upload.single("image_url"), updateUser);
