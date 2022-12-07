@@ -125,7 +125,11 @@ const forgot_password = async (req, res) => {
   let { email } = req.body;
   user_name = "test000";
   console.log({ email });
-  const check_email = model.users.findOne({ where: { user_name } });
+  const check_email = await model.users.findOne({
+    where: {
+      email,
+    },
+  });
 
   if (check_email) {
     successCode(res, check_email, "Successful authentication");
