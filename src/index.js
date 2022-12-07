@@ -15,3 +15,4 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/api", rootRoute);
+
