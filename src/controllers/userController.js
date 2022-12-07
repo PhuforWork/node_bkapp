@@ -43,7 +43,6 @@ const sigUp = async (req, res) => {
         user_name,
       },
     });
-
     if (checkUsername) {
       failCode(res, "", "User name already used");
     } else {
