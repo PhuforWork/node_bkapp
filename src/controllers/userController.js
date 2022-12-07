@@ -18,7 +18,6 @@ const getUserId = async (req, res) => {
 // Login user
 const loginUser = async (req, res) => {
   let { user_name, _password } = req.body;
-  console.log({ user_name, _password });
   const checkUser = await model.users.findOne({
     where: {
       user_name,
@@ -37,7 +36,8 @@ const loginUser = async (req, res) => {
 // register
 const sigUp = async (req, res) => {
   try {
-    let { user_name, email, _password, image_url } = req.body;
+    let { image_url, user_name, email, _password } = req.body;
+    console.log({ image_url, user_name, email, _password });
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
