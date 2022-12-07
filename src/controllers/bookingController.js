@@ -33,7 +33,7 @@ const add_booking = async (req, res) => {
   let { start_time, end_time, _date, details } = req.body;
   let data = { start_time, end_time, _date, details, id_user };
   if (data) {
-    const data_bk = await model.select_type.create(data);
+    const data_bk = await model.booking_info.create(data);
     successCode(res, data_bk, "Select type success");
   } else {
     failCode(res, "", "Missing fields booking");
