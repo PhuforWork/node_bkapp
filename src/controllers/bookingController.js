@@ -5,10 +5,13 @@ const model = init_models(sequelize);
 
 const booking_user = async (req, res) => {
   let { id } = req.params;
-  let id_booking = { id };
-  if (id_booking) {
+  let id_user = { id };
+  if (id_user) {
     const check_bkUser = await model.booking_info.findAll({
-     include:["select_types","persionalities"]
+      include: ["select_types", "persionalities"],
+      where: {
+        id_user,
+      },
     });
     successCode(res, check_bkUser, "Get success booking of user");
   }
