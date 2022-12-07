@@ -22,7 +22,7 @@ userRoute.post("/login",upload.fields(["user_name","_password"]), loginUser);
 // register
 userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
 // forgot_password
-userRoute.post("/forgot-pass",forgot_password);
+userRoute.post("/forgot-pass",upload.single("email"),forgot_password);
 // change_pass
 userRoute.post("/change-pass", upload.fields(["email","_password","confirm_password"]),change_pass);
 // put
