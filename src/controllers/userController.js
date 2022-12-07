@@ -126,13 +126,16 @@ const forgot_password = async (req, res) => {
   }
 };
 const change_pass = async (req, res) => {
-  let { email, _password, confirm_password } = req.body;
-  data_review = { email, _password, confirm_password };
-  console.log({ email, _password, confirm_password });
-
-  if (_password === confirm_password) {
+  let { email, _password } = req.body;
+  data_review = { email, _password };
+  const check_email = await model.users.findOne({
+    where: {
+      email,
+    },
+  });
+  if (check_email) {
     await model.users.update({ _password }, { where: { email: email } });
-    successCode(res, data_review, "Change password successfully");
+    successCode(res, "", "Change password successfully");
   } else {
     errorCode(res, "", "Error 400");
   }
