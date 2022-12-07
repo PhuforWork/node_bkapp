@@ -137,11 +137,11 @@ const forgot_password = async (req, res) => {
   }
 };
 const change_pass = async (req, res) => {
-  let { email, _password, confirm_password } = req.body;
-  console.log({ email, _password, confirm_password });
-  let data = { _password };
+  let data = req.body;
+  console.log(data);
+  
   if (_password === confirm_password) {
-    await model.users.update(data, { where: { email } });
+    // await model.users.update(data, { where: { email } });
     successCode(res, "", "Change password successfully");
   } else {
     errorCode(res, "", "Error 400");
