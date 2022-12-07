@@ -25,7 +25,6 @@ const loginUser = async (req, res) => {
   });
   if (checkUser) {
     if ((checkUser._password = _password)) {
-      
       successCode(res, checkUser, "Login successfully");
     } else {
       failCode(res, "", "User not correct");
@@ -104,7 +103,7 @@ const updateUser = async (req, res) => {
     errorCode(res, "Error 500");
   }
 };
-
+// testing not use for FE
 const update_img = async (req, res) => {
   let { id } = req.params;
   // let checkUser = model.users.findByPk(id);
@@ -121,6 +120,27 @@ const update_img = async (req, res) => {
   });
 };
 
+// forgot password
+const forgot_password = async (req, res) => {
+  let data = { authentication: true };
+  let { email } = req.body;
+  let check_email = model.users.findOne({ where: { email: email } });
+  if (check_email.email === email) {
+    successCode(res, { check_email, data }, "Successful authentication");
+  } else {
+    failCode(res, "", "Email is not correct");
+  }
+};
+const change_pass = async (req, res) => {
+  let { email, _password, confirm_password } = req.body;
+  let data = { _password };
+  if (_password === confirm_password) {
+    await model.users.update(data, { where: { email: email } });
+    successCode(res, "", "Change password successfully");
+  } else {
+    errorCode(res, "", "Error 400");
+  }
+};
 module.exports = {
   getuser,
   loginUser,
@@ -128,4 +148,6 @@ module.exports = {
   updateUser,
   getUserId,
   update_img,
+  forgot_password,
+  change_pass,
 };
