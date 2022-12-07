@@ -18,13 +18,17 @@ userRoute.get("/get-user", getuser);
 userRoute.get("/get-user/:id", getUserId);
 // post
 // login
-userRoute.post("/login",upload.fields(["user_name","_password"]), loginUser);
+userRoute.post("/login", upload.fields(["user_name", "_password"]), loginUser);
 // register
 userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
 // forgot_password
-userRoute.post("/forgot-pass",upload.none(),forgot_password);
+userRoute.post("/forgot-pass", upload.none(), forgot_password);
 // change_pass
-userRoute.post("/change-pass",change_pass);
+userRoute.post(
+  "/change-pass",
+  upload.fields(["email", "_password", "confirm_password"]),
+  change_pass
+);
 // put
 // update user
 userRoute.put("/update-user/:id", upload.single("image_url"), updateUser);
