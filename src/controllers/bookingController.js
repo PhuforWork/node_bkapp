@@ -7,7 +7,7 @@ const booking_user = async (req, res) => {
   let { id } = req.params;
   let check_id = { id };
   if (check_id) {
-    const check_bkUser = await model.users.findOne({
+    const check_bkUser = await model.booking_info.findOne({
       includes: ["persionalities", "select_types"],
       where: {
         id_user: id,
