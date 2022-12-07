@@ -110,6 +110,7 @@ const update_img = async (req, res) => {
 // forgot password
 const forgot_password = async (req, res) => {
   let { email } = req.body;
+  let status = { status: true };
   console.log({ email });
   const check_email = await model.users.findOne({
     where: {
@@ -118,7 +119,7 @@ const forgot_password = async (req, res) => {
   });
 
   if (check_email) {
-    successCode(res, check_email, "Successful authentication");
+    successCode(res, status, "Successful authentication");
   } else {
     failCode(res, "", "Email is not correct");
   }
