@@ -19,12 +19,13 @@ const getUserId = async (req, res) => {
 const loginUser = async (req, res) => {
   let { user_name, _password } = req.body;
   const checkUser = await model.users.findOne({
+    include: ["booking_infos"],
     where: {
       user_name,
     },
   });
   if (checkUser) {
-    if ((checkUser._password === _password)) {
+    if (checkUser._password === _password) {
       successCode(res, checkUser, "Login successfully");
     } else {
       failCode(res, "", "User not correct");
