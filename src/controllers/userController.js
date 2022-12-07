@@ -38,13 +38,14 @@ const sigUp = async (req, res) => {
   try {
     let { user_name, email, _password } = req.body;
     let data = { user_name, email, _password };
+    let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
       },
     });
     if (checkUsername) {
-      failCode(res, "", "User name already used");
+      failCode(res, status, "User name already used");
     } else {
       await model.users.create(data);
       successCode(res, data, "Sig up successfully");
