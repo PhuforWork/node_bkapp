@@ -52,7 +52,6 @@ const sigUp = async (req, res) => {
         user_name,
         email,
         _password,
-        confirm_password,
       });
       successCode(
         res,
