@@ -18,14 +18,15 @@ const getUserId = async (req, res) => {
 // Login user
 const loginUser = async (req, res) => {
   let { user_name, _password } = req.body;
-  const checkUser = await model.users.findOne({
+  let checkUser = await model.users.findOne({
     where: {
       user_name,
     },
   });
   if (checkUser) {
     if ((checkUser._password = _password)) {
-      successCode(res, "", "Login successfully");
+      
+      successCode(res, checkUser, "Login successfully");
     } else {
       failCode(res, "", "User not correct");
     }
