@@ -125,9 +125,9 @@ const forgot_password = async (req, res) => {
   let data = { authentication: true };
   let { email } = req.body;
   console.log({ email });
-  let check_email = model.users.findOne({ where: { email } });
-  console.log(check_email);
-  if (check_email.email === email) {
+  const check_email = model.users.findOne({ where: { email } });
+
+  if (check_email) {
     successCode(res, { check_email, data }, "Successful authentication");
   } else {
     failCode(res, "", "Email is not correct");
