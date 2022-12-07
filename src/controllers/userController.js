@@ -121,7 +121,7 @@ const forgot_password = async (req, res) => {
   });
 
   if (check_email) {
-    successCode(res, check_email, "Successful authentication");
+    successCode(res, { check_email, status }, "Successful authentication");
   } else {
     failCode(res, "", "Email is not correct");
   }
