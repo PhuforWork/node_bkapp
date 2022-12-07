@@ -55,10 +55,10 @@ const add_type = async (req, res) => {
 const add_persionality = async (req, res) => {
   let { id } = req.params;
   let id_booking = id;
-  let { _position, _department } = req.params;
+  let { _position, _department } = req.body;
   let data = { _position, _department, id_booking };
   if (data) {
-    let data_persional = await model.persionality.create(data);
+    const data_persional = await model.persionality.create(data);
     successCode(res, data_persional, "Add persional success");
   } else {
     failCode(res, "", "Missing fields Persionality");
