@@ -123,6 +123,7 @@ const update_img = async (req, res) => {
 // forgot password
 const forgot_password = async (req, res) => {
   let { email } = req.body;
+  console.log({email});
   const check_email = model.users.findOne({ where: { email, } });
 
   if (check_email) {
