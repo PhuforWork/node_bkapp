@@ -19,9 +19,9 @@ const booking_userid = async (req, res) => {
   if (check_id) {
     const check_bkUser = await model.booking_info.findAll({
       include: ["select_types", "persionalities"],
-        where: {
-          id_user: id,
-        },
+      where: {
+        id_user: id,
+      },
     });
     successCode(res, check_bkUser, "Get success booking of user");
   }
@@ -34,9 +34,21 @@ const add_booking = async (req, res) => {
   let data = { start_time, end_time, _date, details, id_user };
   if (data) {
     const data_bk = await model.booking_info.create(data);
-    successCode(res, data_bk, "Select type success");
+    successCode(res, data_bk, "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
   }
 };
-module.exports = { booking_user, add_booking,booking_userid };
+const add_type = async (req, res) => {
+  let { id } = req.params; //id booking
+  let id_booking = id;
+  let { _selection } = req.body;
+  let data = { _selection, id_booking };
+  if (data) {
+    const data_type = await model.select_type.create(data);
+    successCode(res, data_type, "Add type success");
+  } else {
+    failCode(res, "", "Missing fields Selection");
+  }
+};
+module.exports = { booking_user, add_booking, booking_userid, add_type };
