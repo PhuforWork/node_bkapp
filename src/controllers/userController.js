@@ -18,7 +18,7 @@ const getUserId = async (req, res) => {
 // Login user
 const loginUser = async (req, res) => {
   let { user_name, _password } = req.body;
-  let checkUser = await model.users.findOne({
+  const checkUser = await model.users.findOne({
     where: {
       user_name,
     },
