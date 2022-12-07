@@ -128,7 +128,7 @@ const forgot_password = async (req, res) => {
   const check_email = model.users.findOne({ where: { email } });
 
   if (check_email) {
-    successCode(res, { check_email, data }, "Successful authentication");
+    successCode(res, check_email, "Successful authentication");
   } else {
     failCode(res, "", "Email is not correct");
   }
