@@ -20,7 +20,7 @@ userRoute.get("/get-user/:id", getUserId);
 // login
 userRoute.post("/login", upload.none(), loginUser);
 // register
-userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
+userRoute.post("/sigup-user", upload.none(), sigUp);
 // forgot_password
 userRoute.post("/forgot-pass", upload.none(), forgot_password);
 // change_pass

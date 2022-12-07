@@ -36,8 +36,8 @@ const loginUser = async (req, res) => {
 // register
 const sigUp = async (req, res) => {
   try {
-    let { image_url, user_name, email, _password } = req.body;
-    console.log({ image_url, user_name, email, _password });
+    let { user_name, email, _password, confirm_password } = req.body;
+    console.log({ image_url, user_name, email, _password, confirm_password });
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
@@ -45,21 +45,19 @@ const sigUp = async (req, res) => {
     });
     if (checkUsername) {
       failCode(res, "", "User name already used");
+    } else if (_password !== confirm_password) {
+      failCode(res, "", "Confirmation password does not match");
     } else {
-      await fs.readFile(
-        process.cwd() + "/" + req.file.path,
-        async (err, data) => {
-          image_url = `data:${req.file.mimetype};base64,${Buffer.from(
-            data
-          ).toString("base64")}`;
-          fs.unlinkSync(process.cwd() + "/" + req.file.path);
-          await model.users.create({ user_name, email, _password, image_url });
-          successCode(
-            res,
-            { user_name, email, _password, image_url },
-            "Sig up successfully"
-          );
-        }
+      await model.users.create({
+        user_name,
+        email,
+        _password,
+        confirm_password,
+      });
+      successCode(
+        res,
+        { user_name, email, _password, image_url },
+        "Sig up successfully"
       );
       // await model.users.create(dataUser);
       // successCode(res, "", "Sig up successfully");
