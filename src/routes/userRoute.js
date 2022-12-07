@@ -18,7 +18,7 @@ userRoute.get("/get-user", getuser);
 userRoute.get("/get-user/:id", getUserId);
 // post
 // login
-userRoute.post("/login-user", loginUser);
+userRoute.post("/login", loginUser);
 // register
 userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
 // forgot_password
