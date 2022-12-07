@@ -36,8 +36,8 @@ const loginUser = async (req, res) => {
 // register
 const sigUp = async (req, res) => {
   try {
-    let data = req.body;
-    console.log(data);
+    let { user_name, email, _password } = req.body;
+    let data = { user_name, email, _password };
     const checkUsername = await model.users.findOne({
       where: {
         user_name,
@@ -46,16 +46,8 @@ const sigUp = async (req, res) => {
     if (checkUsername) {
       failCode(res, "", "User name already used");
     } else {
-      await model.users.create({
-        user_name,
-        email,
-        _password,
-      });
-      successCode(
-        res,
-        { user_name, email, _password, image_url },
-        "Sig up successfully"
-      );
+      await model.users.create(data);
+      successCode(res, data, "Sig up successfully");
       // await model.users.create(dataUser);
       // successCode(res, "", "Sig up successfully");
     }
