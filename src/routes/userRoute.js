@@ -20,14 +20,14 @@ userRoute.get("/get-user/:id", getUserId);
 // login
 userRoute.post("/login",upload.fields(["user_name","_password"]), loginUser);
 // register
-userRoute.post("/sigup-user", upload.single("image_url"), sigUp);
+userRoute.post("/sigup-user", upload.fields(["image_url","user_name","email","_password"]), sigUp);
 // forgot_password
-userRoute.post("/forgot-pass", forgot_password);
+userRoute.post("/forgot-pass", upload.single("email"),forgot_password);
 // change_pass
-userRoute.post("/change-pass", change_pass);
+userRoute.post("/change-pass", upload.fields(["email","_password","confirm_password"]),change_pass);
 // put
 // update user
-userRoute.put("/update-user/:id", upload.single("image_url"), updateUser);
+userRoute.put("/update-user/:id", upload.fields(["image_url","user_name","email","_password"]), updateUser);
 
 userRoute.post("/upimg/:id", upload.single("image_url"), update_img);
 // delete
