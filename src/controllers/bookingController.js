@@ -9,6 +9,9 @@ const booking_user = async (req, res) => {
   if (check_id) {
     const check_bkUser = await model.booking_info.findAll({
       include: ["select_types", "persionalities"],
+    //   where: {
+    //     id_user: id,
+    //   },
     });
     successCode(res, check_bkUser, "Get success booking of user");
   }
