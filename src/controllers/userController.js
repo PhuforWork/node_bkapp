@@ -123,7 +123,6 @@ const update_img = async (req, res) => {
 // forgot password
 const forgot_password = async (req, res) => {
   let { email } = req.body;
-  user_name = "test000";
   console.log({ email });
   const check_email = await model.users.findOne({
     where: {
@@ -139,6 +138,7 @@ const forgot_password = async (req, res) => {
 };
 const change_pass = async (req, res) => {
   let { email, _password, confirm_password } = req.body;
+  console.log({ email, _password, confirm_password });
   let data = { _password };
   if (_password === confirm_password) {
     await model.users.update(data, { where: { email } });
