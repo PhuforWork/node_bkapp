@@ -59,40 +59,24 @@ const sigUp = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  // try {
-  let { id } = req.params;
-  let { user_name, email, _password} = req.body;
-  // check data user
-  console.log({ user_name, email, _password });
-  let checkUser = model.users.findByPk(id);
-  if (checkUser) {
-    // await fs.readFile(
-    //   process.cwd() + "/" + req.file.path,
-    //   async (err, data) => {
-    //     image_url = `data:${req.file.mimetype};base64,${Buffer.from(
-    //       data
-    //     ).toString("base64")}`;
-    //     fs.unlinkSync(process.cwd() + "/" + req.file.path);
-    //   }
-    //   );
-    await model.users.update(
-      { user_name, email, _password },
-      { where: { id_user: id } }
-    );
-    successCode(
-      res,
-      { user_name, email, _password },
-      "Update successfully"
-    );
-    // await model.users.update(update_User, { where: { id_user: id } });
-    // successCode(res, update_User, "Update successfully");
-  } else {
-    failCode(res, "", "Update failed");
+  try {
+    let { id } = req.params;
+    let { user_name, email, _password } = req.body;
+    // check data user
+    console.log({ user_name, email, _password });
+    let checkUser = model.users.findByPk(id);
+    if (checkUser) {
+      await model.users.update(
+        { user_name, email, _password },
+        { where: { id_user: id } }
+      );
+      successCode(res, { user_name, email, _password }, "Update successfully");
+    } else {
+      failCode(res, "", "Update failed");
+    }
+  } catch (error) {
+    errorCode(res, "Error 500");
   }
-  // }
-  // catch (error) {
-  //   errorCode(res, "Error 500");
-  // }
 };
 // testing not use for FE
 const update_img = async (req, res) => {
@@ -129,14 +113,10 @@ const forgot_password = async (req, res) => {
   }
 };
 const change_pass = async (req, res) => {
-  let { email, _password } = req.body;
-  data_review = { email, _password };
-  const check_email = await model.users.findOne({
-    where: {
-      email,
-    },
-  });
-  if (check_email) {
+  let { confirm_password, _password } = req.body;
+
+
+  if (confirm_password === _password) {
     await model.users.update({ _password }, { where: { email: email } });
     successCode(res, "", "Change password successfully");
   } else {
