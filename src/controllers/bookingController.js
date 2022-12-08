@@ -68,11 +68,56 @@ const add_persionality = async (req, res) => {
     failCode(res, "", "Missing fields Persionality");
   }
 };
-
+//
+const update_booking = async (req, res) => {
+  let { id } = req.params; // id booking
+  let { start_time, end_time, _date, details } = req.body;
+  let data = { start_time, end_time, _date, details };
+  if (data && id) {
+    const updatebk = await model.booking_info.update(data, {
+      where: { id_booking: id },
+    });
+    successCode(res, updatebk, "Success update booking");
+  } else {
+    failCode(res, "", "Update booking failed");
+  }
+};
+const update_slect = async (req, res) => {
+  let { _selection, id_booking, _date, start_time, end_time } = req.params;
+  let data = { _selection, id_booking, _date, start_time, end_time };
+  if (data) {
+    const up_slect = await model.select_type.update(data, {
+      where: {
+        id_booking: id_booking,
+        _date: _date,
+        start_time: start_time,
+        end_time: end_time,
+      },
+    });
+    successCode(res, up_slect, "Update success selection");
+  }
+};
+const update_persion = async (req, res) => {
+  let { _department, id_booking, _date, start_time, end_time } = req.params;
+  let data = { _department, id_booking, _date, start_time, end_time };
+  if (data) {
+    const up_persion = await model.persionality.update(data, {
+      where: {
+        id_booking: id_booking,
+        _date: _date,
+        start_time: start_time,
+        end_time: end_time,
+      },
+    });
+  }
+};
 module.exports = {
   booking_user,
   add_booking,
   booking_userid,
   add_type,
   add_persionality,
+  update_booking,
+  update_slect,
+  update_persion,
 };
