@@ -86,9 +86,8 @@ const update_booking = async (req, res) => {
 };
 const update_slect = async (req, res) => {
   let { id } = req.params;
-  let { _selection } = req.params;
+  let { _selection } = req.body;
   let data = { _selection };
-  console.log(data);
   const check_select = await model.select_type.findAll({
     where: {
       id_booking: id,
@@ -98,20 +97,25 @@ const update_slect = async (req, res) => {
   if (check_select) {
     await model.select_type.update(data, {
       where: {
-        id_selection: check_select.id_selection,
+        id_booking: id,
       },
     });
-    successCode(res, check_select, "Update success selection");
+    successCode(res, "", "Update success selection");
   } else {
     failCode(res, "", "Update selection failed");
   }
 };
 const update_persion = async (req, res) => {
   let { id } = req.params;
-  let { _department } = req.params;
+  let { _department } = req.body;
   let data = { _department };
-  if (data) {
-    const up_persion = await model.persionality.update(data, {
+  const check_persion = await model.select_type.findAll({
+    where: {
+      id_booking: id,
+    },
+  });
+  if (check_persion) {
+    await model.persionality.update(data, {
       where: {
         id_booking: id,
       },
