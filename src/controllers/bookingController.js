@@ -94,9 +94,6 @@ const update_slect = async (req, res) => {
     const up_slect = await model.select_type.update(data, {
       where: {
         id_booking: id_booking,
-        _date: _date,
-        start_time: start_time,
-        end_time: end_time,
       },
     });
     successCode(res, "", "Update success selection");
