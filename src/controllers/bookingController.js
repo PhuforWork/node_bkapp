@@ -19,11 +19,12 @@ const booking_userid = async (req, res) => {
     successCode(res, check_bkUser, "Get success booking of user");
   }
 };
-
+// post
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start_time, end_time, _date, details } = req.body;
+  let { start_time, end_time, _date, details, _department, _selection } =
+    req.body;
   let data = {
     start_time,
     end_time,
@@ -40,40 +41,32 @@ const add_booking = async (req, res) => {
     failCode(res, "", "Missing fields booking");
   }
 };
-const add_type = async (req, res) => {
-  let { id } = req.params; //id booking
-  let id_booking = id;
-  let { _selection } = req.body;
-  let data = { _selection, id_booking };
-  if (data) {
-    const data_type = await model.select_type.create(data);
-    successCode(res, data_type, "Add type success");
-  } else {
-    failCode(res, "", "Missing fields Selection");
+const add_bk_first = async (req, res) => {
+  let { id } = req.params;
+  let id_user = id;
+  let { _department } = req.body;
+  let data = { _department, id_user };
+  if(data){
+    const data_bk = await model.booking_info.create(data);
+    successCode(res,data_bk,"Add department success")
   }
 };
 
-const add_persionality = async (req, res) => {
-  let { id } = req.params; //id booking
-  let id_booking = id;
-  let { _position, _department } = req.body;
-  let data = {
-    _position,
-    _department,
-    id_booking,
-  };
-  if (data) {
-    const data_persional = await model.persionality.create(data);
-    successCode(res, data_persional, "Add persional success");
-  } else {
-    failCode(res, "", "Missing fields Persionality");
-  }
-};
 //
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
-  let { start_time, end_time, _date, details } = req.body;
-  let data = { start_time, end_time, _date, details };
+  let id_user = id;
+  let { start_time, end_time, _date, details, _department, _selection } =
+    req.body;
+  let data = {
+    start_time,
+    end_time,
+    _date,
+    details,
+    id_user,
+    _department,
+    _selection,
+  };
   if (data && id) {
     const updatebk = await model.booking_info.update(data, {
       where: {
@@ -86,10 +79,10 @@ const update_booking = async (req, res) => {
   }
 };
 const update_slect = async (req, res) => {
-  let { id } = req.params;
+  let { id } = req.params; //id booking
   let { _selection } = req.body;
   let data = { _selection };
-  const check_select = await model.select_type.findAll({
+  const check_select = await model.booking_info.findAll({
     where: {
       id_booking: id,
     },
@@ -107,10 +100,10 @@ const update_slect = async (req, res) => {
   }
 };
 const update_persion = async (req, res) => {
-  let { id } = req.params;
+  let { id } = req.params; // id booking
   let { _department } = req.body;
   let data = { _department };
-  const check_persion = await model.select_type.findAll({
+  const check_persion = await model.booking_info.findAll({
     where: {
       id_booking: id,
     },
@@ -131,8 +124,7 @@ module.exports = {
   booking_user,
   add_booking,
   booking_userid,
-  add_type,
-  add_persionality,
+  add_bk_first,
   update_booking,
   update_slect,
   update_persion,
