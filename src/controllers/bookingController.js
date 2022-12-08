@@ -27,10 +27,6 @@ const booking_userid = async (req, res) => {
   }
 };
 
-const update_bk_userid = async (req, res) => {
-  let { id } = req.params;
-};
-
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
@@ -57,7 +53,7 @@ const add_type = async (req, res) => {
 };
 
 const add_persionality = async (req, res) => {
-  let { id } = req.params;
+  let { id } = req.params; //id booking
   let id_booking = id;
   let { _position, _department } = req.body;
   let data = { _position, _department, id_booking };
@@ -75,7 +71,9 @@ const update_booking = async (req, res) => {
   let data = { start_time, end_time, _date, details };
   if (data && id) {
     const updatebk = await model.booking_info.update(data, {
-      where: { id_booking: id },
+      where: {
+        id_booking: id,
+      },
     });
     successCode(res, updatebk, "Success update booking");
   } else {
