@@ -17,10 +17,10 @@ bookingRoute.get("/get-booking/:id", booking_userid);
 
 bookingRoute.post("/add-booking/:id", upload.none(), add_booking);
 bookingRoute.post("/add-type/:id", upload.any(), add_type);
-bookingRoute.post("/add-persionality/:id", upload.none(), add_persionality);
+bookingRoute.post("/add-persionality/:id", upload.any(), add_persionality);
 
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
-bookingRoute.put("/update-select/:id", upload.none(), update_slect);
-bookingRoute.put("/update-persional/:id", upload.none(), update_persion);
+bookingRoute.put("/update-select/:id", upload.any(), update_slect);
+bookingRoute.put("/update-persional/:id", upload.any(), update_persion);
 
 module.exports = bookingRoute;
