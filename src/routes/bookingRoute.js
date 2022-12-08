@@ -20,7 +20,7 @@ bookingRoute.post("/add-type/:id", upload.any(), add_type);
 bookingRoute.post("/add-persionality/:id", upload.none(), add_persionality);
 
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
-bookingRoute.put("/update-select", upload.none(), update_slect);
-bookingRoute.put("/update-persional", upload.none(), update_persion);
+bookingRoute.put("/update-select/:id", upload.none(), update_slect);
+bookingRoute.put("/update-persional/:id", upload.none(), update_persion);
 
 module.exports = bookingRoute;
