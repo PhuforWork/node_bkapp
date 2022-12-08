@@ -59,7 +59,7 @@ const sigUp = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  try {
+  // try {
     let { id } = req.params;
     let { user_name, email, _password, image_url } = req.body;
     // check data user
@@ -88,9 +88,10 @@ const updateUser = async (req, res) => {
     } else {
       failCode(res, "", "Update failed");
     }
-  } catch (error) {
-    errorCode(res, "Error 500");
-  }
+  // } 
+  // catch (error) {
+  //   errorCode(res, "Error 500");
+  // }
 };
 // testing not use for FE
 const update_img = async (req, res) => {

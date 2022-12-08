@@ -27,7 +27,7 @@ userRoute.post("/forgot-pass", upload.none(), forgot_password);
 userRoute.post("/change-pass", upload.none(), change_pass);
 // put
 // update user
-userRoute.put("/update-user/:id", upload.single("image_url"), updateUser);
+userRoute.put("/update-user/:id", upload.none(), updateUser);
 
 userRoute.post("/upimg/:id", upload.single("image_url"), update_img);
 // delete
