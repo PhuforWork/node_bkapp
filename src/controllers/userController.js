@@ -60,35 +60,36 @@ const sigUp = async (req, res) => {
 
 const updateUser = async (req, res) => {
   // try {
-    let { id } = req.params;
-    let { user_name, email, _password, image_url } = req.body;
-    // check data user
-    let checkUser = model.users.findByPk(id);
-    if (checkUser) {
-      await fs.readFile(
-        process.cwd() + "/" + req.file.path,
-        async (err, data) => {
-          image_url = `data:${req.file.mimetype};base64,${Buffer.from(
-            data
-          ).toString("base64")}`;
-          fs.unlinkSync(process.cwd() + "/" + req.file.path);
-          await model.users.update(
-            { user_name, email, _password, image_url },
-            { where: { id_user: id } }
-          );
-          successCode(
-            res,
-            { user_name, email, _password, image_url },
-            "Update successfully"
-          );
-        }
-      );
-      // await model.users.update(update_User, { where: { id_user: id } });
-      // successCode(res, update_User, "Update successfully");
-    } else {
-      failCode(res, "", "Update failed");
-    }
-  // } 
+  let { id } = req.params;
+  let { user_name, email, _password} = req.body;
+  // check data user
+  console.log({ user_name, email, _password });
+  let checkUser = model.users.findByPk(id);
+  if (checkUser) {
+    // await fs.readFile(
+    //   process.cwd() + "/" + req.file.path,
+    //   async (err, data) => {
+    //     image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+    //       data
+    //     ).toString("base64")}`;
+    //     fs.unlinkSync(process.cwd() + "/" + req.file.path);
+    //   }
+    //   );
+    await model.users.update(
+      { user_name, email, _password },
+      { where: { id_user: id } }
+    );
+    successCode(
+      res,
+      { user_name, email, _password },
+      "Update successfully"
+    );
+    // await model.users.update(update_User, { where: { id_user: id } });
+    // successCode(res, update_User, "Update successfully");
+  } else {
+    failCode(res, "", "Update failed");
+  }
+  // }
   // catch (error) {
   //   errorCode(res, "Error 500");
   // }
