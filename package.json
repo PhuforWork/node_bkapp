@@ -18,5 +18,7 @@
     "sequelize-auto": "^0.8.8",
     "ssh2": "^1.11.0",
     "tunnel-ssh": "^4.1.6"
-  }
+  },
+  "repository": "https://github.com/PhuforWork/node_bkapp.git",
+  "author": "PhuforWork <vqphu97@gmail.com>"
 }

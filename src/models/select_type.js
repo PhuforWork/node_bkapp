@@ -23,6 +23,10 @@ class select_type extends Sequelize.Model {
         model: 'booking_info',
         key: 'id_booking'
       }
+    },
+    _date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
     }
   }, {
     sequelize,

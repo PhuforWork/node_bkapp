@@ -13,19 +13,19 @@ class users extends Sequelize.Model {
       primaryKey: true
     },
     user_name: {
-      type: DataTypes.STRING(255),
-      allowNull: true
+      type: DataTypes.STRING(20),
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false
     },
     _password: {
-      type: DataTypes.STRING(255),
-      allowNull: true
+      type: DataTypes.STRING(20),
+      allowNull: false
     },
     image_url: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {

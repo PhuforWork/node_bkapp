@@ -14,15 +14,15 @@ class booking_info extends Sequelize.Model {
     },
     start_time: {
       type: DataTypes.TIME,
-      allowNull: true
+      allowNull: false
     },
     end_time: {
       type: DataTypes.TIME,
-      allowNull: true
+      allowNull: false
     },
     _date: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     },
     details: {
       type: DataTypes.STRING(255),
@@ -30,7 +30,7 @@ class booking_info extends Sequelize.Model {
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'users',
         key: 'id_user'
