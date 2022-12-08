@@ -97,7 +97,7 @@ const update_slect = async (req, res) => {
   if (check_select) {
     await model.select_type.update(data, {
       where: {
-        id_booking: id,
+        id_selection: check_select.id_selection,
       },
     });
     successCode(res, check_select, "Update success selection");
