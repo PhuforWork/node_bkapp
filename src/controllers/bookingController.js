@@ -88,8 +88,12 @@ const update_slect = async (req, res) => {
   let { id } = req.params;
   let { _selection } = req.params;
   let data = { _selection };
-  const check_select = await model.select_type.findByPk(id);
-  
+  const check_select = await model.select_type.findAll({
+    where: {
+      id_booking: id,
+    },
+  });
+
   if (check_select) {
     await model.select_type.update(data, {
       where: {
