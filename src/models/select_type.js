@@ -27,6 +27,14 @@ class select_type extends Sequelize.Model {
     _date: {
       type: DataTypes.DATEONLY,
       allowNull: false
+    },
+    start_time: {
+      type: DataTypes.TIME,
+      allowNull: false
+    },
+    end_time: {
+      type: DataTypes.TIME,
+      allowNull: false
     }
   }, {
     sequelize,
