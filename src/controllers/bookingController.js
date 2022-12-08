@@ -88,6 +88,7 @@ const update_slect = async (req, res) => {
   let { id } = req.params;
   let { _selection } = req.params;
   let data = { _selection };
+  console.log(data);
   const check_select = await model.select_type.findAll({
     where: {
       id_booking: id,
