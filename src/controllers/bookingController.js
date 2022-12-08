@@ -125,6 +125,7 @@ const update_persion = async (req, res) => {
     failCode(res, "", "Update persional failed");
   }
 };
+
 module.exports = {
   booking_user,
   add_booking,
