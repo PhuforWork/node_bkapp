@@ -24,7 +24,15 @@ const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start_time, end_time, _date, details } = req.body;
-  let data = { start_time, end_time, _date, details, id_user };
+  let data = {
+    start_time,
+    end_time,
+    _date,
+    details,
+    id_user,
+    _department,
+    _selection,
+  };
   if (data) {
     const data_bk = await model.booking_info.create(data);
     successCode(res, data_bk, "Add booking success");

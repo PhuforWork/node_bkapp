@@ -113,10 +113,14 @@ const forgot_password = async (req, res) => {
   }
 };
 const change_pass = async (req, res) => {
-  let { confirm_password, _password } = req.body;
-
-
-  if (confirm_password === _password) {
+  let { email, _password } = req.body;
+  data_review = { email, _password };
+  const check_email = await model.users.findOne({
+    where: {
+      email,
+    },
+  });
+  if (check_email) {
     await model.users.update({ _password }, { where: { email: email } });
     successCode(res, "", "Change password successfully");
   } else {
