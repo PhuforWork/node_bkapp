@@ -42,8 +42,8 @@ const add_booking = async (req, res) => {
 const add_type = async (req, res) => {
   let { id } = req.params; //id booking
   let id_booking = id;
-  let { _selection, _date, start_time, end_time } = req.body;
-  let data = { _selection, id_booking, _date, start_time, end_time };
+  let { _selection } = req.body;
+  let data = { _selection, id_booking };
   if (data) {
     const data_type = await model.select_type.create(data);
     successCode(res, data_type, "Add type success");
@@ -55,14 +55,11 @@ const add_type = async (req, res) => {
 const add_persionality = async (req, res) => {
   let { id } = req.params; //id booking
   let id_booking = id;
-  let { _position, _department, _date, start_time, end_time } = req.body;
+  let { _position, _department } = req.body;
   let data = {
     _position,
     _department,
     id_booking,
-    _date,
-    start_time,
-    end_time,
   };
   if (data) {
     const data_persional = await model.persionality.create(data);
@@ -88,12 +85,13 @@ const update_booking = async (req, res) => {
   }
 };
 const update_slect = async (req, res) => {
-  let { _selection, id_booking, _date, start_time, end_time } = req.params;
-  let data = { _selection, id_booking, _date, start_time, end_time };
+  let { id } = req.params;
+  let { _selection } = req.params;
+  let data = { _selection };
   if (data) {
     const up_slect = await model.select_type.update(data, {
       where: {
-        id_booking: id_booking,
+        id_booking: id,
       },
     });
     successCode(res, "", "Update success selection");
@@ -102,15 +100,13 @@ const update_slect = async (req, res) => {
   }
 };
 const update_persion = async (req, res) => {
-  let { _department, id_booking, _date, start_time, end_time } = req.params;
-  let data = { _department, id_booking, _date, start_time, end_time };
+  let { id } = req.params;
+  let { _department } = req.params;
+  let data = { _department };
   if (data) {
     const up_persion = await model.persionality.update(data, {
       where: {
-        id_booking: id_booking,
-        _date: _date,
-        start_time: start_time,
-        end_time: end_time,
+        id_booking: id,
       },
     });
     successCode(res, "", "Update success persional");
