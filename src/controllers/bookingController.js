@@ -27,6 +27,11 @@ const booking_userid = async (req, res) => {
   }
 };
 
+const update_bk_userid = async (req, res) => {
+    let { id } = req.params;
+    
+};
+
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
@@ -64,6 +69,7 @@ const add_persionality = async (req, res) => {
     failCode(res, "", "Missing fields Persionality");
   }
 };
+
 module.exports = {
   booking_user,
   add_booking,
