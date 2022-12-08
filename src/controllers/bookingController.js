@@ -82,7 +82,7 @@ const update_booking = async (req, res) => {
         id_booking: id,
       },
     });
-    successCode(res, updatebk, "Success update booking");
+    successCode(res, "", "Success update booking");
   } else {
     failCode(res, "", "Update booking failed");
   }
@@ -99,7 +99,9 @@ const update_slect = async (req, res) => {
         end_time: end_time,
       },
     });
-    successCode(res, up_slect, "Update success selection");
+    successCode(res, "", "Update success selection");
+  } else {
+    failCode(res, "", "Update selection failed");
   }
 };
 const update_persion = async (req, res) => {
@@ -114,6 +116,9 @@ const update_persion = async (req, res) => {
         end_time: end_time,
       },
     });
+    successCode(res, "", "Update success persional");
+  } else {
+    failCode(res, "", "Update persional failed");
   }
 };
 module.exports = {
