@@ -14,7 +14,7 @@ bookingRoute.get("/get-booking", booking_user);
 bookingRoute.get("/get-booking/:id", booking_userid);
 
 bookingRoute.post("/add-booking/:id", upload.none(), add_booking);
-bookingRoute.post("/add-type/:id", upload.array("_selection", 20), add_type);
+bookingRoute.post("/add-type/:id", upload.none(), add_type);
 bookingRoute.post(
   "/add-persionality/:id",
   upload.array("_department", 20),

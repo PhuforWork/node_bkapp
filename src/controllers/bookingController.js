@@ -28,8 +28,7 @@ const booking_userid = async (req, res) => {
 };
 
 const update_bk_userid = async (req, res) => {
-    let { id } = req.params;
-
+  let { id } = req.params;
 };
 
 const add_booking = async (req, res) => {
@@ -47,8 +46,7 @@ const add_booking = async (req, res) => {
 const add_type = async (req, res) => {
   let { id } = req.params; //id booking
   let id_booking = id;
-  let A = req.body;
-  console.log(A);
+  let { _selection } = req.body;
   let data = { _selection, id_booking };
   if (data) {
     const data_type = await model.select_type.create(data);
