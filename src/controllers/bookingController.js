@@ -103,6 +103,7 @@ const update_persion = async (req, res) => {
   let { id } = req.params; // id booking
   let { _department } = req.body;
   let data = { _department };
+  console.log(data);
   const check_persion = await model.booking_info.findAll({
     where: {
       id_booking: id,
