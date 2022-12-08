@@ -14,15 +14,15 @@ class booking_info extends Sequelize.Model {
     },
     start_time: {
       type: DataTypes.TIME,
-      allowNull: false
+      allowNull: true
     },
     end_time: {
       type: DataTypes.TIME,
-      allowNull: false
+      allowNull: true
     },
     _date: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: true
     },
     details: {
       type: DataTypes.STRING(255),
@@ -42,7 +42,7 @@ class booking_info extends Sequelize.Model {
     },
     _selection: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
