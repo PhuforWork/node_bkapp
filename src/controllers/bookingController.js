@@ -42,8 +42,8 @@ const add_booking = async (req, res) => {
 const add_type = async (req, res) => {
   let { id } = req.params; //id booking
   let id_booking = id;
-  let { _selection } = req.body;
-  let data = { _selection, id_booking };
+  let { _selection, _date, start_time, end_time } = req.body;
+  let data = { _selection, id_booking, _date, start_time, end_time };
   if (data) {
     const data_type = await model.select_type.create(data);
     successCode(res, data_type, "Add type success");
@@ -55,8 +55,15 @@ const add_type = async (req, res) => {
 const add_persionality = async (req, res) => {
   let { id } = req.params; //id booking
   let id_booking = id;
-  let { _position, _department } = req.body;
-  let data = { _position, _department, id_booking };
+  let { _position, _department, _date, start_time, end_time } = req.body;
+  let data = {
+    _position,
+    _department,
+    id_booking,
+    _date,
+    start_time,
+    end_time,
+  };
   if (data) {
     const data_persional = await model.persionality.create(data);
     successCode(res, data_persional, "Add persional success");
