@@ -89,13 +89,14 @@ const update_slect = async (req, res) => {
   let { _selection } = req.params;
   let data = { _selection };
   const check_select = await model.select_type.findByPk(id);
+  
   if (check_select) {
     await model.select_type.update(data, {
       where: {
         id_booking: id,
       },
     });
-    successCode(res, "", "Update success selection");
+    successCode(res, check_select, "Update success selection");
   } else {
     failCode(res, "", "Update selection failed");
   }
