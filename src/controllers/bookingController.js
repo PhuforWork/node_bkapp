@@ -92,7 +92,7 @@ const update_slect = async (req, res) => {
     },
   });
   if (check_select) {
-    await model.booking_info.update(data, {
+    await model.select_type.update(data, {
       where: {
         id_booking: id,
       },
@@ -113,7 +113,7 @@ const update_depart = async (req, res) => {
     },
   });
   if (check_persion) {
-    await model.booking_info.update(data, {
+    await model.persionality.update(data, {
       where: {
         id_booking: id,
       },
