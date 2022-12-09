@@ -17,21 +17,25 @@ const getUserId = async (req, res) => {
 };
 // Login user
 const loginUser = async (req, res) => {
-  let { user_name, _password } = req.body;
-  const checkUser = await model.users.findOne({
-    include: ["booking_infos"],
-    where: {
-      user_name,
-    },
-  });
-  if (checkUser) {
-    if (checkUser._password === _password) {
-      successCode(res, checkUser, "Login successfully");
+  try {
+    let { user_name, _password } = req.body;
+    const checkUser = await model.users.findOne({
+      include: ["booking_infos"],
+      where: {
+        user_name,
+      },
+    });
+    if (checkUser) {
+      if (checkUser._password === _password) {
+        successCode(res, checkUser, "Login successfully");
+      } else {
+        failCode(res, "Login fail", "Password not correct");
+      }
     } else {
-      failCode(res, "", "User not correct");
+      failCode(res, "Login fail", "User not correct");
     }
-  } else {
-    errorCode(res, "", "Login fail");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
   }
 };
 // register
