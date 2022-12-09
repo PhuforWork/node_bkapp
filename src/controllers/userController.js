@@ -58,7 +58,7 @@ const sigUp = async (req, res) => {
       // successCode(res, "", "Sig up successfully");
     }
   } catch (error) {
-    errorCode(res, "Sig up failed");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -79,7 +79,7 @@ const updateUser = async (req, res) => {
       failCode(res, "", "Update failed");
     }
   } catch (error) {
-    errorCode(res, "Error 500");
+    errorCode(res, "Error BackEnd");
   }
 };
 // testing not use for FE
@@ -101,34 +101,41 @@ const update_img = async (req, res) => {
 
 // forgot password
 const forgot_password = async (req, res) => {
-  let { email } = req.body;
-  let status = { status: true };
-  console.log({ email });
-  const check_email = await model.users.findOne({
-    where: {
-      email,
-    },
-  });
-
-  if (check_email) {
-    successCode(res, { check_email, status }, "Successful authentication");
-  } else {
-    failCode(res, "", "Email is not correct");
+  try {
+    let { email } = req.body;
+    let status = { status: true };
+    console.log({ email });
+    const check_email = await model.users.findOne({
+      where: {
+        email,
+      },
+    });
+    if (check_email) {
+      successCode(res, { check_email, status }, "Check email successful");
+    } else {
+      failCode(res, "", "Email is not correct");
+    }
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const change_pass = async (req, res) => {
-  let { email, _password } = req.body;
-  data_review = { email, _password };
-  const check_email = await model.users.findOne({
-    where: {
-      email,
-    },
-  });
-  if (check_email) {
-    await model.users.update({ _password }, { where: { email: email } });
-    successCode(res, "", "Change password successfully");
-  } else {
-    errorCode(res, "", "Error 400");
+  try {
+    let { email, _password } = req.body;
+    data_review = { email, _password };
+    const check_email = await model.users.findOne({
+      where: {
+        email,
+      },
+    });
+    if (check_email) {
+      await model.users.update({ _password }, { where: { email: email } });
+      successCode(res, "", "Change password successfully");
+    } else {
+      failCode(res, "", "Change password failed");
+    }
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
   }
 };
 module.exports = {
