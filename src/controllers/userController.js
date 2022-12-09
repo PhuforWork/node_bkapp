@@ -33,7 +33,7 @@ const loginUser = async (req, res) => {
     let resdata = {
       id_user: checkUser.id_user,
       user_name: checkUser.user_name,
-      email: checkUser.email,
+      // email: checkUser.email,
     };
     if (checkUser) {
       if (checkUser._password === _password) {
