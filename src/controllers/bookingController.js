@@ -41,7 +41,7 @@ const add_booking = async (req, res) => {
     failCode(res, "", "Missing fields booking");
   }
 };
-const add_bk_first = async (req, res) => {
+const add_depart = async (req, res) => {
   let { id } = req.params;
   let id_user = id;
   let { _department } = req.body;
@@ -125,7 +125,7 @@ module.exports = {
   booking_user,
   add_booking,
   booking_userid,
-  add_bk_first,
+  add_depart,
   update_booking,
   update_slect,
   update_persion,

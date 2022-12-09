@@ -3,7 +3,7 @@ const {
   booking_user,
   add_booking,
   booking_userid,
-  add_bk_first,
+  add_depart,
   update_booking,
   update_persion,
   update_slect,
@@ -15,7 +15,7 @@ bookingRoute.get("/get-booking", booking_user);
 bookingRoute.get("/get-booking/:id", booking_userid);
 
 bookingRoute.post("/add-booking/:id", upload.none(), add_booking);
-bookingRoute.post("/add-depart-fst/:id", upload.any(), add_bk_first);
+bookingRoute.post("/add-depart/:id", upload.any(), add_depart);
 
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
