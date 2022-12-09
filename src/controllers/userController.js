@@ -30,9 +30,14 @@ const loginUser = async (req, res) => {
         user_name,
       },
     });
+    let resdata = {
+      id_user: checkUser.id_user,
+      user_name: checkUser.user_name,
+      email: checkUser.email,
+    };
     if (checkUser) {
       if (checkUser._password === _password) {
-        successCode(res, checkUser, "Login successfully");
+        successCode(res, resdata, "Login successfully");
       } else {
         failCode(res, "Login fail", "Password not correct");
       }
