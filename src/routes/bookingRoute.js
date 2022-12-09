@@ -17,7 +17,7 @@ bookingRoute.get("/get-booking/:id", booking_userid);
 
 bookingRoute.post("/add-booking/:id", upload.none(), add_booking);
 bookingRoute.post("/add-depart/:id", upload.any(), add_depart);
-bookingRoute.post("/add-select:id", upload.any(), add_slect);
+bookingRoute.post("/add-select/:id", upload.any(), add_slect);
 
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
