@@ -88,13 +88,13 @@ const update_slect = async (req, res) => {
   let data = { _selection };
   const check_select = await model.select_type.findAll({
     where: {
-      id_booking: id,
+      id_user: id,
     },
   });
   if (check_select) {
     await model.select_type.update(data, {
       where: {
-        id_booking: id,
+        id_user: id,
       },
     });
     successCode(res, "", "Update success selection");
@@ -103,19 +103,19 @@ const update_slect = async (req, res) => {
   }
 };
 const update_depart = async (req, res) => {
-  let { id } = req.params; // id booking
+  let { id } = req.params; // id user
   let { _department } = req.body;
   let data = { _department };
   console.log(data);
   const check_persion = await model.persionality.findAll({
     where: {
-      id_booking: id,
+      id_user: id,
     },
   });
   if (check_persion) {
     await model.persionality.update(data, {
       where: {
-        id_booking: id,
+        id_user: id,
       },
     });
     successCode(res, "", "Update success persional");
