@@ -24,12 +24,12 @@ const getUserId = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     let { user_name, _password } = req.body;
-    console.log({ user_name, _password });
     const checkUser = await model.users.findOne({
       where: {
         user_name,
       },
     });
+    console.log(checkUser);
     let resdata = {
       id_user: checkUser.id_user,
       user_name: checkUser.user_name,
