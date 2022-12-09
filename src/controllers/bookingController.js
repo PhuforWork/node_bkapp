@@ -51,8 +51,8 @@ const add_booking = async (req, res) => {
 const add_depart = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
-  let { _department } = req.body;
-  let data = { _department, id_user };
+  let { _name, _value } = req.body;
+  let data = { _name, _value, id_user };
   if (data) {
     const data_bk = await model.persionality.create(data);
     successCode(res, data_bk, "Add department success");
@@ -61,8 +61,8 @@ const add_depart = async (req, res) => {
 const add_slect = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
-  let { _selection } = req.body;
-  let data = { _selection, id_user };
+  let { _name, _value } = req.body;
+  let data = { _name, _value, id_user };
   if (data) {
     const data_bk = await model.select_type.create(data);
     successCode(res, data_bk, "Add department success");
@@ -94,8 +94,8 @@ const update_booking = async (req, res) => {
 };
 const update_slect = async (req, res) => {
   let { id } = req.params; //id booking
-  let { _selection } = req.body;
-  let data = { _selection };
+  let { _name, _value } = req.body;
+  let data = { _name, _value };
   const check_select = await model.select_type.findAll({
     where: {
       id_user: id,
@@ -114,8 +114,8 @@ const update_slect = async (req, res) => {
 };
 const update_depart = async (req, res) => {
   let { id } = req.params; // id user
-  let { _department } = req.body;
-  let data = { _department };
+  let { _name, _value } = req.body;
+  let data = { _name, _value };
   console.log(data);
   const check_persion = await model.persionality.findAll({
     where: {
