@@ -12,7 +12,7 @@ class select_type extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    _selection: {
+    _name: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
@@ -23,6 +23,10 @@ class select_type extends Sequelize.Model {
         model: 'users',
         key: 'id_user'
       }
+    },
+    _value: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
