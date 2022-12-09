@@ -130,7 +130,12 @@ const change_pass = async (req, res) => {
     });
     if (check_email) {
       await model.users.update({ _password }, { where: { email: email } });
-      successCode(res, "", "Change password successfully");
+      const check_new_email = await model.users.findOne({
+        where: {
+          email,
+        },
+      });
+      successCode(res, check_new_email, "Change password successfully");
     } else {
       failCode(res, "", "Change password failed");
     }
