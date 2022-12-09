@@ -54,10 +54,10 @@ const add_depart = async (req, res) => {
   console.log(req.body);
   let { _name, _value } = req.body;
   let data = { _name, _value, id_user };
-  if (data) {
-    const data_bk = await model.persionality.create(data);
-    successCode(res, data_bk, "Add department success");
-  }
+  // if (data) {
+  //   const data_bk = await model.persionality.create(data);
+  //   successCode(res, data_bk, "Add department success");
+  // }
 };
 const add_slect = async (req, res) => {
   let { id } = req.params; //id user
