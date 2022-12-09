@@ -20,7 +20,7 @@ const loginUser = async (req, res) => {
   try {
     let { user_name, _password } = req.body;
     const checkUser = await model.users.findOne({
-      include: ["booking_infos"],
+      // include: ["booking_infos"],
       where: {
         user_name,
       },
