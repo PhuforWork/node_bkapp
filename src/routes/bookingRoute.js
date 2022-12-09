@@ -8,12 +8,14 @@ const {
   update_booking,
   update_depart,
   update_slect,
+  get_department_slect,
 } = require("../controllers/bookingController");
 const upload = require("../Middlewares/upload");
 const bookingRoute = express.Router();
 
 bookingRoute.get("/get-booking", booking_user);
 bookingRoute.get("/get-booking/:id", booking_userid);
+bookingRoute.get("/get-service/:id", get_department_slect);
 
 bookingRoute.post("/add-booking/:id", upload.none(), add_booking);
 bookingRoute.post("/add-depart/:id", upload.any(), add_depart);

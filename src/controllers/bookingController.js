@@ -3,6 +3,7 @@ const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 
+// get
 const booking_user = async (req, res) => {
   const check_bkUser = await model.booking_info.findAll();
   successCode(res, check_bkUser, "Get success booking of user");
@@ -17,6 +18,15 @@ const booking_userid = async (req, res) => {
       },
     });
     successCode(res, check_bkUser, "Get success booking of user");
+  }
+};
+const get_department_slect = async (req, res) => {
+  let { id } = req.params;
+  let check_id = { id };
+  if (check_id) {
+    const get_depart = await model.persionality.findByPk(id);
+    const get_slect = await model.select_type.findByPk(id);
+    successCode(res, { get_depart, get_slect }, "Get successfull");
   }
 };
 // post
@@ -133,4 +143,5 @@ module.exports = {
   update_booking,
   update_slect,
   update_depart,
+  get_department_slect,
 };
