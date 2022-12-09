@@ -129,6 +129,7 @@ module.exports = {
   add_booking,
   booking_userid,
   add_depart,
+  add_slect,
   update_booking,
   update_slect,
   update_depart,
