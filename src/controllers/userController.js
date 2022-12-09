@@ -21,6 +21,7 @@ const loginUser = async (req, res) => {
     let { user_name, _password } = req.body;
     console.log({ user_name, _password });
     const checkUser = await model.users.findOne({
+      include:["select_types","persionalities"],
       where: {
         user_name,
       },
