@@ -16,12 +16,12 @@ class select_type extends Sequelize.Model {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    id_booking: {
+    id_user: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'booking_info',
-        key: 'id_booking'
+        model: 'users',
+        key: 'id_user'
       }
     }
   }, {
@@ -38,10 +38,10 @@ class select_type extends Sequelize.Model {
         ]
       },
       {
-        name: "id_booking",
+        name: "id_user",
         using: "BTREE",
         fields: [
-          { name: "id_booking" },
+          { name: "id_user" },
         ]
       },
     ]

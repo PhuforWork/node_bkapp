@@ -30,19 +30,11 @@ class booking_info extends Sequelize.Model {
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'users',
         key: 'id_user'
       }
-    },
-    _department: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    },
-    _selection: {
-      type: DataTypes.STRING(255),
-      allowNull: true
     }
   }, {
     sequelize,
