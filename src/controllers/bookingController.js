@@ -51,6 +51,7 @@ const add_booking = async (req, res) => {
 const add_depart = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
+  console.log(req.body);
   let { _name, _value } = req.body;
   let data = { _name, _value, id_user };
   if (data) {
