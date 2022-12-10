@@ -102,9 +102,9 @@ const update_slect = async (req, res) => {
   // console.log("data req", json);
   Promise.all(data).then((values)=>{
     console.log(values);
-  })
     successCode(res, "", "Update success selection");
-  });
+  })
+  
   // const checkheck = await model.select_type.update(json, {
   //   where: {
   //     id_user: id,
