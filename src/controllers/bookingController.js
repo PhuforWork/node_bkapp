@@ -97,38 +97,20 @@ const update_booking = async (req, res) => {
 const update_slect = async (req, res) => {
   let { id } = req.params; //id user
   let data = req.body;
+  let vl = 0;
   // let json = { _values: JSON.stringify(data) };
-
   // console.log("data req", json);
   Promise.all(data).then((values) => {
-    values.map(async(ele) => {
+    values.map(async (ele) => {
       console.log(ele._values);
+      vl += ele._values;
       await model.select_type.update(
-        { _values: ele._values },
+        { _values: vl},
         { where: { id_user: id } }
       );
     });
   });
   successCode(res, "", "Update success selection");
-
-  // const checkheck = await model.select_type.update(json, {
-  //   where: {
-  //     id_user: id,
-  //   },
-  // });
-  // console.log("checkcheck", checkheck);
-  // successCode(res, "", "Update success selection");
-
-  // if (check_select) {
-  //   let res_lect = await model.select_type.update(data, {
-  //     where: {
-  //       id_user: id,
-  //     },
-  //   });
-  //   successCode(res, res_lect, "Update success selection");
-  // } else {
-  //   failCode(res, "", "Update selection failed");
-  // }
 };
 const update_depart = async (req, res) => {
   let { id } = req.params; // id user
