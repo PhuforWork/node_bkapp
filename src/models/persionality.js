@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
 class persionality extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    id_person: {
+    value: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    _values: {
+    label: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
@@ -38,7 +38,7 @@ class persionality extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_person" },
+          { name: "value" },
         ]
       },
       {
