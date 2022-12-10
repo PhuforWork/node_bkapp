@@ -97,20 +97,20 @@ const update_booking = async (req, res) => {
 const update_slect = async (req, res) => {
   let { id } = req.params; //id user
   let data = req.body;
+  let json = { _values: JSON.stringify(data) };
+
+  console.log("data req", json);
   // const check_select = await model.select_type.findAll({
   //   where: {
   //     id_user: id,
   //   },
   // });
   // console.log("checkout", check_select);
-  const checkheck = await model.select_type.update(
-    data,
-    {
-      where: {
-        id_user: id,
-      },
-    }
-  );
+  const checkheck = await model.select_type.update(json, {
+    where: {
+      id_user: id,
+    },
+  });
   console.log("checkcheck", checkheck);
   successCode(res, "", "Update success selection");
 
