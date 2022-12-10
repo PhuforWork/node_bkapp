@@ -99,7 +99,7 @@ const update_slect = async (req, res) => {
   let data = req.body;
   // let json = { _values: JSON.stringify(data) };
 
-  console.log("data req", json);
+  // console.log("data req", json);
   data.forEach(async (element) => {
     await model.select_type.update(
       { _value: element._values, id_user: element.id_user },
