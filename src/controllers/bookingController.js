@@ -96,8 +96,8 @@ const update_booking = async (req, res) => {
 };
 const update_slect = async (req, res) => {
   let { id } = req.params; //id user
-  let dta = req.body;
-  let data = { _values: dta };
+  let _values = req.body;
+  // let d;
   console.log("data req", data);
   // const check_select = await model.select_type.findAll({
   //   where: {
@@ -105,7 +105,7 @@ const update_slect = async (req, res) => {
   //   },
   // });
   // console.log("checkout", check_select);
-  const checkheck = await model.select_type.update(data, {
+  const checkheck = await model.select_type.update(_values, {
     where: {
       id_user: id,
     },
