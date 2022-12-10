@@ -97,14 +97,14 @@ const update_booking = async (req, res) => {
 const update_slect = async (req, res) => {
   let { id } = req.params; //id user
   let data = req.body;
-  let vl = 0;
   // let json = { _values: JSON.stringify(data) };
   // console.log("data req", json);
   Promise.all(data).then((values) => {
     values.map(async (ele) => {
-      console.log(ele._values);
-      vl = ele._values;
-      await model.select_type.create({ _values: vl, id_user: ele.id_user });
+      await model.select_type.create({
+        _values: ele._values,
+        id_user: ele.id_user,
+      });
     });
   });
   successCode(res, "", "Update success selection");
