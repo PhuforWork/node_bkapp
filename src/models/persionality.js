@@ -12,7 +12,7 @@ class persionality extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    _value: {
+    _values: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
