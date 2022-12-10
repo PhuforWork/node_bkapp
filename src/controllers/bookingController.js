@@ -105,12 +105,12 @@ const update_slect = async (req, res) => {
   //   },
   // });
   // console.log("checkout", check_select);
-  // const checkheck = await model.select_type.update(data, {
-  //   where: {
-  //     id_user: id,
-  //   },
-  // });
-  // console.log("checkcheck", checkheck);
+  const checkheck = await model.select_type.update(data, {
+    where: {
+      id_user: id,
+    },
+  });
+  console.log("checkcheck", checkheck);
   successCode(res, "", "Update success selection");
 
   // if (check_select) {
