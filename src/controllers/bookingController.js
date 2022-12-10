@@ -102,6 +102,7 @@ const update_slect = async (req, res) => {
   // console.log("data req", json);
   Promise.all(data).then((values) => {
     values.map(async(ele) => {
+      console.log(ele._values);
       await model.select_type.update(
         { _values: ele._values },
         { where: { id_user: id } }
