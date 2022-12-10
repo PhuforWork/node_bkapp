@@ -23,6 +23,10 @@ class persionality extends Sequelize.Model {
         model: 'users',
         key: 'id_user'
       }
+    },
+    _name: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
