@@ -98,7 +98,6 @@ const update_slect = async (req, res) => {
   let { id } = req.params; //id user
   let data = req.body;
   let json = { _values: JSON.stringify(data) };
-  
 
   console.log("data req", json);
   // const check_select = await model.select_type.findAll({
@@ -107,16 +106,13 @@ const update_slect = async (req, res) => {
   //   },
   // });
   // console.log("checkout", check_select);
-  const checkheck = await model.select_type.update(
-    json,
-    {
-      where: {
-        id_user: id,
-      },
-    }
-  );
+  const checkheck = await model.select_type.update(json, {
+    where: {
+      id_user: id,
+    },
+  });
   console.log("checkcheck", checkheck);
-  successCode(res, "", "Update success selection");
+  successCode(res, JSON.parse(checkheck._values), "Update success selection");
 
   // if (check_select) {
   //   let res_lect = await model.select_type.update(data, {
