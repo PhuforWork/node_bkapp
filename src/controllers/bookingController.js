@@ -112,7 +112,8 @@ const update_slect = async (req, res) => {
     },
   });
   console.log("checkcheck", checkheck);
-  successCode(res, JSON.parse(checkheck._values), "Update success selection");
+  let parjson = checkheck._values
+  successCode(res, JSON.parse(parjson), "Update success selection");
 
   // if (check_select) {
   //   let res_lect = await model.select_type.update(data, {
