@@ -96,10 +96,11 @@ const update_booking = async (req, res) => {
 };
 const update_slect = async (req, res) => {
   let { id } = req.params; //id user
-  let _values = req.body;
-  let a = String.valueOf(_values);
+  let data = req.body;
+  let json = { _values: data };
+  json = JSON.stringify(json);
 
-  console.log("data req", a);
+  console.log("data req", json);
   // const check_select = await model.select_type.findAll({
   //   where: {
   //     id_user: id,
