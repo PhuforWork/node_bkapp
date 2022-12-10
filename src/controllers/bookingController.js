@@ -112,7 +112,7 @@ const update_slect = async (req, res) => {
     },
   });
   console.log("checkcheck", checkheck);
-  successCode(res, "", "Update success selection");
+  successCode(res, JSON.parse(checkheck._values), "Update success selection");
 
   // if (check_select) {
   //   let res_lect = await model.select_type.update(data, {
@@ -136,12 +136,12 @@ const update_depart = async (req, res) => {
     },
   });
   if (check_persion) {
-    await model.persionality.update(data, {
+    let checkcheck = await model.persionality.update(data, {
       where: {
         id_user: id,
       },
     });
-    successCode(res, "", "Update success persional");
+    successCode(res, JSON.parse(checkcheck), "Update success persional");
   } else {
     failCode(res, "", "Update persional failed");
   }
