@@ -103,7 +103,7 @@ const update_slect = async (req, res) => {
   Promise.all(data).then((values) => {
     values.map(async (ele) => {
       console.log(ele._values);
-      vl += ele._values;
+      vl = ele._values;
       await model.select_type.create(
         { _values: vl },
         { where: { id_user: id } }
