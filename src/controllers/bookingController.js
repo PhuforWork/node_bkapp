@@ -95,40 +95,39 @@ const update_booking = async (req, res) => {
   }
 };
 const update_slect = async (req, res) => {
-  let { id } = req.params; //id user
-  let data = req.body;
-  // let json = { _values: JSON.stringify(data) };
-  // console.log("data req", json);
-  await model.select_type.destroy({ where: { id_user: id } });
-  Promise.all(data).then((values) => {
-    values.map(async (ele) => {
-      await model.select_type.create({
-        _values: ele._values,
-        id_user: ele.id_user,
+  try {
+    let { id } = req.params; //id user
+    let data = req.body;
+    await model.select_type.destroy({ where: { id_user: id } });
+    Promise.all(data).then((values) => {
+      values.map(async (ele) => {
+        await model.select_type.create({
+          _values: ele._values,
+          id_user: ele.id_user,
+        });
       });
     });
-  });
-  successCode(res, "", "Update success selection");
+    successCode(res, "", "Update success selection");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
+  }
 };
 const update_depart = async (req, res) => {
-  let { id } = req.params; // id user
-  let { _name, _value } = req.body;
-  let data = { _name, _value };
-  console.log(data);
-  const check_persion = await model.persionality.findAll({
-    where: {
-      id_user: id,
-    },
-  });
-  if (check_persion) {
-    let checkcheck = await model.persionality.update(data, {
-      where: {
-        id_user: id,
-      },
+  try {
+    let { id } = req.params; //id user
+    let data = req.body;
+    await model.persionality.destroy({ where: { id_user: id } });
+    Promise.all(data).then((values) => {
+      values.map(async (ele) => {
+        await model.persionality.create({
+          _value: ele._values,
+          id_user: ele.id_user,
+        });
+      });
     });
-    successCode(res, JSON.parse(checkcheck), "Update success persional");
-  } else {
-    failCode(res, "", "Update persional failed");
+    successCode(res, "", "Update success selection");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
