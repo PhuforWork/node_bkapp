@@ -109,7 +109,7 @@ const update_slect = async (req, res) => {
         id_user: id,
       },
     });
-    successCode(res, , "Update success selection");
+    successCode(res, "", "Update success selection");
   } else {
     failCode(res, "", "Update selection failed");
   }
