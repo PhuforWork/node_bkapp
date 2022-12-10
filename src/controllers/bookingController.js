@@ -99,17 +99,17 @@ const update_slect = async (req, res) => {
   let dta = req.body;
   let data = { _values: dta };
   console.log("data req", data);
-  const check_select = await model.select_type.findAll({
-    where: {
-      id_user: id,
-    },
-  });
+  // const check_select = await model.select_type.findAll({
+  //   where: {
+  //     id_user: id,
+  //   },
+  // });
   console.log("checkout", check_select);
-  const checkheck = await model.select_type.update(data, {
-    where: {
-      id_user: id,
-    },
-  });
+  // const checkheck = await model.select_type.update(data, {
+  //   where: {
+  //     id_user: id,
+  //   },
+  // });
   console.log("checkcheck", checkheck);
   successCode(res, "", "Update success selection");
 
