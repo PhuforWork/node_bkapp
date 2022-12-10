@@ -99,6 +99,7 @@ const update_slect = async (req, res) => {
   let data = req.body;
   // let json = { _values: JSON.stringify(data) };
   // console.log("data req", json);
+  await model.select_type.destroy({ where: { id_user: id } });
   Promise.all(data).then((values) => {
     values.map(async (ele) => {
       await model.select_type.create({
