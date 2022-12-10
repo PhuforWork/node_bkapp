@@ -97,23 +97,21 @@ const update_booking = async (req, res) => {
 const update_slect = async (req, res) => {
   let { id } = req.params; //id booking
   let data = req.body;
-  console.log(data);
-  res.send("success");
-  // const check_select = await model.select_type.findAll({
-  //   where: {
-  //     id_user: id,
-  //   },
-  // });
-  // if (check_select) {
-  //   await model.select_type.update(data, {
-  //     where: {
-  //       id_user: id,
-  //     },
-  //   });
-  //   successCode(res, "", "Update success selection");
-  // } else {
-  //   failCode(res, "", "Update selection failed");
-  // }
+  const check_select = await model.select_type.findAll({
+    where: {
+      id_user: id,
+    },
+  });
+  if (check_select) {
+    await model.select_type.update(data, {
+      where: {
+        id_user: id,
+      },
+    });
+    successCode(res, "", "Update success selection");
+  } else {
+    failCode(res, "", "Update selection failed");
+  }
 };
 const update_depart = async (req, res) => {
   let { id } = req.params; // id user
