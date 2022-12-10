@@ -98,7 +98,7 @@ const update_slect = async (req, res) => {
   let { id } = req.params; //id user
   let _values = req.body;
   // let d;
-  console.log("data req", data);
+  // console.log("data req", data);
   // const check_select = await model.select_type.findAll({
   //   where: {
   //     id_user: id,
