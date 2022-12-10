@@ -96,20 +96,20 @@ const update_booking = async (req, res) => {
 };
 const update_slect = async (req, res) => {
   let { id } = req.params; //id user
-  let _values = req.body;
-
+  let dta = req.body;
+  let data = { _values: dta };
   const check_select = await model.select_type.findAll({
     where: {
       id_user: id,
     },
   });
   if (check_select) {
-    await model.select_type.update(req.body, {
+    let res_lect = await model.select_type.update(data, {
       where: {
         id_user: id,
       },
     });
-    successCode(res, "", "Update success selection");
+    successCode(res, res_lect, "Update success selection");
   } else {
     failCode(res, "", "Update selection failed");
   }
