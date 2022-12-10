@@ -53,6 +53,7 @@ const add_depart = async (req, res) => {
   let id_user = id;
   let { array } = req.body;
   let data = { array, id_user };
+  console.log(data);
   if (data) {
     const data_bk = await model.persionality.create(data);
     successCode(res, data_bk, "Add department success");

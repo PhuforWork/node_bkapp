@@ -29,7 +29,6 @@ const loginUser = async (req, res) => {
         user_name,
       },
     });
-    console.log(checkUser);
     let resdata = {
       id_user: checkUser.id_user,
       user_name: checkUser.user_name,
