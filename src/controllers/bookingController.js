@@ -101,7 +101,12 @@ const update_slect = async (req, res) => {
 
   // console.log("data req", json);
   Promise.all(data).then((values) => {
-    console.log(values._values,values.id_user);
+    values.map((ele) => {
+      model.select_type.update(
+        { _values: ele._values },
+        { where: { id_user: id } }
+      );
+    });
   });
   successCode(res, "", "Update success selection");
 
