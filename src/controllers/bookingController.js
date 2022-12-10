@@ -101,7 +101,7 @@ const update_slect = async (req, res) => {
 
   // console.log("data req", json);
   Promise.all(data).then((values) => {
-    console.log(values);
+    console.log(values._values,values.id_user);
   });
   successCode(res, "", "Update success selection");
 
