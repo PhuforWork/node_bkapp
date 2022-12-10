@@ -120,8 +120,8 @@ const update_depart = async (req, res) => {
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
         await model.persionality.create({
-          _values: ele._values,
-          _name: ele._values,
+          label: ele.label,
+          _name: ele.label,
           id_user: ele.id_user,
         });
       });
