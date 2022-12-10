@@ -62,10 +62,11 @@ const add_depart = async (req, res) => {
 const add_slect = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
-  let { _name, _value } = req.body;
-  let data = { _name, _value, id_user };
-  if (data) {
-    const data_bk = await model.select_type.create(data);
+  let { data } = req.body;
+  let dta = { data, id_user };
+  console.log(data);
+  if (dta) {
+    const data_bk = await model.select_type.create(dta);
     successCode(res, data_bk, "Add department success");
   }
 };
