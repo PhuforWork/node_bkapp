@@ -104,12 +104,12 @@ const update_slect = async (req, res) => {
     },
   });
   if (check_select) {
-    await model.select_type.update(_values, {
+    await model.select_type.update(req.body, {
       where: {
         id_user: id,
       },
     });
-    successCode(res, check_select, "Update success selection");
+    successCode(res, , "Update success selection");
   } else {
     failCode(res, "", "Update selection failed");
   }
