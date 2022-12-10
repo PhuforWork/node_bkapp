@@ -103,16 +103,25 @@ const update_slect = async (req, res) => {
       id_user: id,
     },
   });
-  if (check_select) {
-    let res_lect = await model.select_type.update(data, {
-      where: {
-        id_user: id,
-      },
-    });
-    successCode(res, res_lect, "Update success selection");
-  } else {
-    failCode(res, "", "Update selection failed");
-  }
+  console.log("checkout", check_select);
+  const checkheck = await model.select_type.update(data, {
+    where: {
+      id_user: id,
+    },
+  });
+  console.log(checkheck);
+  successCode(res, "", "Update success selection");
+
+  // if (check_select) {
+  //   let res_lect = await model.select_type.update(data, {
+  //     where: {
+  //       id_user: id,
+  //     },
+  //   });
+  //   successCode(res, res_lect, "Update success selection");
+  // } else {
+  //   failCode(res, "", "Update selection failed");
+  // }
 };
 const update_depart = async (req, res) => {
   let { id } = req.params; // id user
