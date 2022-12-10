@@ -100,16 +100,16 @@ const update_slect = async (req, res) => {
   // let json = { _values: JSON.stringify(data) };
 
   // console.log("data req", json);
-  data.forEach(async (element) => {
+  data.map(async (ele) => {
     await model.select_type.update(
-      { _value: element._values, id_user: element.id_user },
+      { _value: ele._values, id_user: ele.id_user },
       {
         where: {
           id_user: id,
         },
       }
     );
-  successCode(res, "", "Update success selection");
+    successCode(res, "", "Update success selection");
   });
   // const checkheck = await model.select_type.update(json, {
   //   where: {
