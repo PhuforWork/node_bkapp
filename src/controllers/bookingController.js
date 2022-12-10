@@ -121,6 +121,7 @@ const update_depart = async (req, res) => {
       values.map(async (ele) => {
         await model.persionality.create({
           _values: ele._values,
+          _name: ele._values,
           id_user: ele.id_user,
         });
       });
