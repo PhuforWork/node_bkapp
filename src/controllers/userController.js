@@ -18,7 +18,7 @@ const getUserId = async (req, res) => {
       id_user: id,
     },
   });
-  let data_bk = await model.users.findOne({
+  let data_bk = await model.booking_info.findOne({
     include: ["department_tbs", "select_type_tbs"],
     where: {
       id_user: id,
