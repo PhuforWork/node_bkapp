@@ -38,33 +38,35 @@ const add_booking = async (req, res) => {
   let { _values } = req.body.service;
   let arr_bk = req.body.personality;
   console.log(arr_bk);
-  res.send("succes");
-  // let data = {
-  //   start,
-  //   end,
-  //   detail,
-  //   id_user,
-  //   _values,
-  // };
-  // if (data) {
-  //   const data_bk = await model.booking_info.create(data);
-  //   const idbk = await model.booking_info.findOne({ where: { id_user: id } });
-  //   Promise.all(
-  //     arr_bk.map((values) => {
-  //       model.department_tb.create({
-  //         label: values.label,
-  //         id_booking: idbk.id_booking,
-  //       });
-  //     })
-  //   );
-  //   const res_postbk = await model.booking_info.findOne({
-  //     include: ["department_tbs"],
-  //     where: { id_user: id },
-  //   });
-  //   successCode(res, res_postbk, "Add booking success");
-  // } else {
-  //   failCode(res, "", "Missing fields booking");
-  // }
+  let data = {
+    start,
+    end,
+    detail,
+    id_user,
+  };
+  if (data) {
+    const data_bk = await model.booking_info.create(data);
+    const idbk = await model.booking_info.findOne({ where: { id_user: id } });
+    await model.select_type_tb.create({
+      _values: _values,
+      id_booking: id,
+    });
+    Promise.all(
+      arr_bk.map((values) => {
+        model.department_tb.create({
+          label: values.label,
+          id_booking: idbk.id_booking,
+        });
+      })
+    );
+    const res_postbk = await model.booking_info.findOne({
+      include: ["department_tbs"],
+      where: { id_user: id },
+    });
+    successCode(res, res_postbk, "Add booking success");
+  } else {
+    failCode(res, "", "Missing fields booking");
+  }
 };
 
 const add_depart = async (req, res) => {
