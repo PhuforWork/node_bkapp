@@ -35,7 +35,7 @@ const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start, end, detail } = req.body;
-  let { _values } = req.body.service;
+  let { _values } = req.body.service._values;
   let arr_bk = req.body.personality;
   console.log(arr_bk);
   let data = {
