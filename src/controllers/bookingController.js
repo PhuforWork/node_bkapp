@@ -38,19 +38,22 @@ const add_booking = async (req, res) => {
   let { start, end, detail } = req.body;
   let _values = req.body.service._values;
   let arr_bk = req.body.personality;
+  let id_selection = Math.random();
   let data = {
     start,
     end,
     detail,
     id_user,
+    id_selection,
+    _values
   };
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
-    await model.select_type_tb.create({
-      _values: _values,
-      id_booking: idbk.id_booking,
-    });
+    // await model.select_type_tb.create({
+    //   _values: _values,
+    //   id_booking: idbk.id_booking,
+    // });
     await model.department_tb.destroy({
       where: { id_booking: idbk.id_booking },
     });
