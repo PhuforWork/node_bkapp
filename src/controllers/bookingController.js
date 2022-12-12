@@ -157,7 +157,8 @@ const update_persional = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
   let id_user = id;
-  let { start, end, detail, _values } = req.body;
+  let { start, end, detail } = req.body;
+  let _values = req.body.service._values;
   let personality = req.body.personality;
   let department = req.body.department;
   let data = {
