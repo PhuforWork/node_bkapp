@@ -13,18 +13,31 @@ const getuser = async (req, res) => {
 const getUserId = async (req, res) => {
   let { id } = req.params;
   let data = await model.users.findOne({
-    include: ["select_types", "persionalities","booking_infos"],
+    include: ["select_types", "persionalities", "booking_infos"],
     where: {
       id_user: id,
     },
   });
   let data_bk = await model.users.findOne({
-    include: ["select_types", "persionalities","booking_infos"],
+    include: ["select_types", "persionalities", "booking_infos"],
     where: {
       id_user: id,
     },
   });
-  res.send(data);
+  let user_name = data.user_name;
+  let _password = data._password;
+  let id_user = data.id_user;
+  let email = data.email;
+  let persionalities = data.persionalities;
+  let select_types = data.select_types;
+  res.send({
+    user_name,
+    _password,
+    id_user,
+    email,
+    persionalities,
+    select_types,
+  });
 };
 // Login user
 const loginUser = async (req, res) => {
