@@ -178,7 +178,8 @@ const update_booking = async (req, res) => {
 };
 
 const delete_bk = async (req, res) => {
-  
+  let { id } = req.params;
+  await model.booking_info.destroy({ where: { id_booking: id } });
 };
 
 module.exports = {
@@ -191,4 +192,5 @@ module.exports = {
   update_slect,
   update_depart,
   get_department_slect,
+  delete_bk
 };
