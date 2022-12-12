@@ -24,7 +24,7 @@ const getUserId = async (req, res) => {
       id_user: id,
     },
   });
-  res.send(data,data_bk);
+  res.send(data);
 };
 // Login user
 const loginUser = async (req, res) => {
