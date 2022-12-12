@@ -38,6 +38,7 @@ const getUserId = async (req, res) => {
     select_types,
     persionalities,
     departments,
+    data_booking
   });
 };
 // Login user
