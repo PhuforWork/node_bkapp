@@ -48,7 +48,9 @@ const add_booking = async (req, res) => {
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
-    await model.persionality_tb.destroy({ where: { id_user: id } });
+    await model.persionality_tb.destroy({
+      where: { id_booking: idbk.id_booking },
+    });
     Promise.all(
       personality.map((values) => {
         model.persionality_tb.create({
@@ -155,7 +157,7 @@ const update_persional = async (req, res) => {
 };
 // booking calender
 const update_booking = async (req, res) => {
-  let { id } = req.params; // id user
+  let { id } = req.params; // id booking
   let id_user = id;
   let { start, end, detail, _values } = req.body;
   let personality = req.body.personality;
@@ -168,9 +170,11 @@ const update_booking = async (req, res) => {
     _values,
   };
   if (data) {
-    await model.booking_info.update(data, { where: { id_user: id } });
+    await model.booking_info.update(data, { where: { id_booking: id } });
     const idbk = await model.booking_info.findOne({ where: { end: end } });
-    await model.persionality_tb.destroy({ where: { id_user: id } });
+    await model.persionality_tb.destroy({
+      where: { id_booking: idbk.id_booking },
+    });
     Promise.all(
       personality.map((values) => {
         model.persionality_tb.create({
