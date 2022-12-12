@@ -177,6 +177,10 @@ const update_booking = async (req, res) => {
   }
 };
 
+const delete_bk = async (req, res) => {
+  
+};
+
 module.exports = {
   booking_user,
   add_booking,
