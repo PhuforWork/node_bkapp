@@ -71,29 +71,7 @@ const add_slect = async (req, res) => {
   }
 };
 
-//
-const update_booking = async (req, res) => {
-  let { id } = req.params; // id booking
-  let id_user = id;
-  let { start_time, end_time, _date, details } = req.body;
-  let data = {
-    start_time,
-    end_time,
-    _date,
-    details,
-    id_user,
-  };
-  if (data && id) {
-    const updatebk = await model.booking_info.update(data, {
-      where: {
-        id_booking: id,
-      },
-    });
-    successCode(res, "", "Success update booking");
-  } else {
-    failCode(res, "", "Update booking failed");
-  }
-};
+//setting user
 const update_slect = async (req, res) => {
   try {
     let { id } = req.params; //id user
@@ -112,6 +90,7 @@ const update_slect = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// setting user
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
@@ -131,7 +110,43 @@ const update_depart = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// booking calender
+const update_booking = async (req, res) => {
+  let { id } = req.params; // id user
+  let id_user = id;
+  let { start_time, end_time, _date, details, _selection } = req.body;
+  let data_bk = {
+    start_time,
+    end_time,
+    _date,
+    details,
+    id_user,
+    _selection,
+  };
+  let data_select = { data_select };
+  if (data && id) {
+    const updatebk = await model.booking_info.create(data_bk);
 
+    successCode(res, "", "Success update booking");
+  } else {
+    failCode(res, "", "Update booking failed");
+  }
+};
+const update_depart_tb = async (req, res) => {
+  let { id } = req.params; //id booking
+  let id_booking = id;
+  let data = req.body;
+  await model.department_tb.destroy({ where: { id_booking: id } });
+  Promise.all(
+    data.map((values) => {
+      model.department_tb.create({
+        label: values.label,
+        id_booking,
+      });
+    })
+  );
+  successCode(res, "", "Update booking success");
+};
 module.exports = {
   booking_user,
   add_booking,
@@ -142,4 +157,5 @@ module.exports = {
   update_slect,
   update_depart,
   get_department_slect,
+  update_depart_tb,
 };
