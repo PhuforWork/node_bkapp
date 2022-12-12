@@ -30,16 +30,17 @@ const getUserId = async (req, res) => {
   let email = data.email;
   let persionalities = data.persionalities;
   let select_types = data.select_types;
-  // let
-  // res.send({
-  //   user_name,
-  //   _password,
-  //   id_user,
-  //   email,
-  //   persionalities,
-  //   select_types,
-  // });
-  res.send(data_bk);
+
+  res.send({
+    user_name,
+    _password,
+    id_user,
+    email,
+    persionalities,
+    select_types,
+    data_bk
+  });
+
 };
 // Login user
 const loginUser = async (req, res) => {
