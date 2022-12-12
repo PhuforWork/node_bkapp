@@ -34,21 +34,37 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  console.log(req.body);
-  // let { start, end, detail } = req.body;
-  // let data = {
-  //   start,
-  //   end,
-  //   detail,
-  //   id_user,
-  // };
-  // if (data) {
-  //   const data_bk = await model.booking_info.create(data);
-  //   successCode(res, data_bk, "Add booking success");
-  // } else {
-  //   failCode(res, "", "Missing fields booking");
-  // }
+  let { start, end, detail } = req.body;
+  let { _values } = req.body.service;
+  let arr_bk = req.body.persionality;
+  let data = {
+    start,
+    end,
+    detail,
+    id_user,
+    _values,
+  };
+  if (data) {
+    const data_bk = await model.booking_info.create(data);
+    const idbk = await model.booking_info.findOne({ where: { id_user: id } });
+    Promise.all(
+      arr_bk.map((values) => {
+        model.department_tb.create({
+          label: values.label,
+          id_booking: idbk.id_booking,
+        });
+      })
+    );
+    const res_postbk = await model.booking_info.findOne({
+      include: ["department_tbs"],
+      where: { id_user: id },
+    });
+    successCode(res, res_postbk, "Add booking success");
+  } else {
+    failCode(res, "", "Missing fields booking");
+  }
 };
+
 const add_depart = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
@@ -115,54 +131,37 @@ const update_depart = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  console.log(req.body);
-  res.send("success");
-  // let { start, end_time, detail } = req.body;
-  // let { _selection } = req.body.service;
-  // let arr_depart = req.body.personality;
-  // let data_bk = {
-  //   start,
-  //   end,
-  //   detail,
-  //   id_user,
-  //   _selection,
-  // };
-  // let data_select = { data_select };
-  // if (data && id) {
-  //   const updatebk = await model.booking_info.create(data_bk);
-  //   let idbk = await model.booking_info.findAll({ where: { end_time } });
-  //   Promise.all(
-  //     arr_depart.map((values) => {
-  //       model.department_tb.create({
-  //         label: values.label,
-  //         id_booking: idbk.id_booking,
-  //       });
-  //     })
-  //   );
-  //   let res_upbk = await model.booking_info.findAll({
-  //     include: ["department_tbs"],
-  //     where: { id_user },
-  //   });
-  //   successCode(res, res_upbk, "Success update booking");
-  // } else {
-  //   failCode(res, "", "Update booking failed");
-  // }
+  let { start, end_time, detail } = req.body;
+  let { _values } = req.body.service;
+  let arr_depart = req.body.personality;
+  let data_bk = {
+    start,
+    end,
+    detail,
+    id_user,
+    _values,
+  };
+  if (data_bk) {
+    const updatebk = await model.booking_info.update(data_bk);
+    let idbk = await model.booking_info.findAll({ where: { id_user: id } });
+    Promise.all(
+      arr_depart.map((values) => {
+        model.department_tb.create({
+          label: values.label,
+          id_booking: idbk.id_booking,
+        });
+      })
+    );
+    let res_upbk = await model.booking_info.findAll({
+      include: ["department_tbs"],
+      where: { id_user: id },
+    });
+    successCode(res, res_upbk, "Success update booking");
+  } else {
+    failCode(res, "", "Update booking failed");
+  }
 };
-// const update_depart_tb = async (req, res) => {
-//   let { id } = req.params; //id booking
-//   let id_booking = id;
-//   let data = req.body;
-//   await model.department_tb.destroy({ where: { id_booking: id } });
-//   Promise.all(
-//     data.map((values) => {
-//       model.department_tb.create({
-//         label: values.label,
-//         id_booking,
-//       });
-//     })
-//   );
-//   successCode(res, "", "Update booking success");
-// };
+
 module.exports = {
   booking_user,
   add_booking,
