@@ -35,10 +35,9 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end, detail, service } = req.body;
+  let { start, end, detail} = req.body;
 
   let _values = req.body.service._values;
-  console.log(_values);
   let personality = req.body.personality;
   let department = req.body.department;
   let data = {
@@ -51,9 +50,6 @@ const add_booking = async (req, res) => {
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
-    await model.persionality_tb.destroy({
-      where: { id_booking: idbk.id_booking },
-    });
     Promise.all(
       personality.map((values) => {
         model.persionality_tb.create({
@@ -62,9 +58,6 @@ const add_booking = async (req, res) => {
         });
       })
     );
-    await model.department_tb.destroy({
-      where: { id_booking: idbk.id_booking },
-    });
     Promise.all(
       department.map((values) => {
         model.department_tb.create({
