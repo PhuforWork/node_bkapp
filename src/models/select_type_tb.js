@@ -12,7 +12,7 @@ class select_type_tb extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    _selection: {
+    _values: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
