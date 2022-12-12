@@ -117,10 +117,10 @@ const update_persional = async (req, res) => {
   try {
     let { id } = req.params; //id user
     let data = req.body;
-    await model.department.destroy({ where: { id_user: id } });
+    await model.persionality.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
-        await model.department.create({
+        await model.persionality.create({
           label: ele.label,
           _name: ele.label,
           id_user: ele.id_user,
