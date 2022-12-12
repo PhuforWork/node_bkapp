@@ -36,7 +36,7 @@ const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start, end, detail, service } = req.body;
-  console.log(req.body.service);
+  console.log(req.body.service._values);
   let _values = req.body.service._values;
   let personality = req.body.personality;
   let department = req.body.department;
