@@ -22,6 +22,7 @@ const getUserId = async (req, res) => {
     where: { id_user: id },
   });
   let {
+    id_user,
     user_name,
     email,
     _password,
@@ -30,6 +31,7 @@ const getUserId = async (req, res) => {
     departments,
   } = data;
   res.send({
+    id_user,
     user_name,
     email,
     _password,
