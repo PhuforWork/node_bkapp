@@ -18,11 +18,8 @@ const getUserId = async (req, res) => {
       id_user: id,
     },
   });
-  let data_bk = await model.booking_info.findOne({
+  let data_bk = await model.booking_info.findAll({
     include: ["department_tbs", "select_type_tbs"],
-    where: {
-      id_user: id,
-    },
   });
   let user_name = data.user_name;
   let _password = data._password;
@@ -38,9 +35,8 @@ const getUserId = async (req, res) => {
     email,
     persionalities,
     select_types,
-    data_bk
+    data_bk,
   });
-
 };
 // Login user
 const loginUser = async (req, res) => {
