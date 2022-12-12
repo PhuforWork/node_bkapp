@@ -208,12 +208,12 @@ const delete_bk = async (req, res) => {
   const check = await model.booking_info.findByPk(id);
   if (check) {
     console.log(123);
+    res.send("success delete");
   }
 
-  await model.booking_info.destroy({ where: { id_booking: id } });
-  await model.department_tb.destroy({ where: { id_booking: id } });
-  await model.persionality_tb.destroy({ where: { id_booking: id } });
-  res.send("success delete");
+  // await model.booking_info.destroy({ where: { id_booking: id } });
+  // await model.department_tb.destroy({ where: { id_booking: id } });
+  // await model.persionality_tb.destroy({ where: { id_booking: id } });
 };
 
 module.exports = {
