@@ -156,7 +156,6 @@ const update_persional = async (req, res) => {
 // booking calender
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
-  let id_user = id;
   let { start, end, detail } = req.body;
   let _values = req.body.service._values;
   let personality = req.body.personality;
@@ -165,7 +164,6 @@ const update_booking = async (req, res) => {
     start,
     end,
     detail,
-    id_user,
     _values,
   };
   if (data) {
