@@ -206,6 +206,7 @@ const update_booking = async (req, res) => {
 const delete_bk = async (req, res) => {
   let { id } = req.params;
   const check = await model.booking_info.findByPk(id);
+  console.log(check);
   if (check) {
     console.log(123);
     res.send("success delete");

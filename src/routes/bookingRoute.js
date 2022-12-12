@@ -28,5 +28,5 @@ bookingRoute.put("/update-select/:id", upload.none(), update_slect);
 bookingRoute.put("/update-department/:id", upload.none(), update_depart);
 bookingRoute.put("/update-persional/:id", upload.none(), update_persional);
 
-bookingRoute.put("delete-booking/:id", delete_bk);
+bookingRoute.delete("delete-booking/:id", delete_bk);
 module.exports = bookingRoute;
