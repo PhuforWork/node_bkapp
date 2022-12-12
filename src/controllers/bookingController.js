@@ -35,7 +35,8 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end, detail, _values } = req.body;
+  let { start, end, detail, service } = req.body;
+  let _values = service._value;
   let personality = req.body.personality;
   let department = req.body.department;
   let data = {
@@ -205,6 +206,8 @@ const update_booking = async (req, res) => {
 const delete_bk = async (req, res) => {
   let { id } = req.params;
   await model.booking_info.destroy({ where: { id_booking: id } });
+  await model.department_tb.destroy({ where: { id_booking: id } });
+  await model.persionality_tb.destroy({ where: { id_booking: id } });
   res.send("success delete");
 };
 
