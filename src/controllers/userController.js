@@ -18,8 +18,25 @@ const getUserId = async (req, res) => {
       id_user: id,
     },
   });
-
-  res.send(data);
+  let data_booking = await model.booking_info.findAll({
+    where: { id_user: id },
+  });
+  let {
+    user_name,
+    email,
+    _password,
+    select_types,
+    persionalities,
+    departments,
+  } = data;
+  res.send({
+    user_name,
+    email,
+    _password,
+    select_types,
+    persionalities,
+    departments,
+  });
 };
 // Login user
 const loginUser = async (req, res) => {
