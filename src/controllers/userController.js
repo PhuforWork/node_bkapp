@@ -18,7 +18,11 @@ const getUserId = async (req, res) => {
       id_user: id,
     },
   });
-  res.send(data);
+  const bk = await model.booking_info.findOne({
+    include: ["department_tbs", "select_type_tbs"],
+    where: { id_user: id },
+  });
+  res.send({ info_user: data, info_booking: bk, id: bk.id_booking });
 };
 // Login user
 const loginUser = async (req, res) => {
