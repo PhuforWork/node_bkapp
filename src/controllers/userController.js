@@ -13,7 +13,7 @@ const getuser = async (req, res) => {
 const getUserId = async (req, res) => {
   let { id } = req.params;
   let data = await model.users.findOne({
-    include: ["select_types", "departments", "booking_infos"],
+    include: ["select_types", "departments", "persionalities", "booking_infos"],
     where: {
       id_user: id,
     },
