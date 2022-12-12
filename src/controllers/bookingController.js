@@ -59,7 +59,9 @@ const add_booking = async (req, res) => {
         });
       })
     );
-    await model.department_tb.destroy({ where: { id_user: id } });
+    await model.department_tb.destroy({
+      where: { id_booking: idbk.id_booking },
+    });
     Promise.all(
       department.map((values) => {
         model.department_tb.create({
@@ -183,7 +185,9 @@ const update_booking = async (req, res) => {
         });
       })
     );
-    await model.department_tb.destroy({ where: { id_user: id } });
+    await model.department_tb.destroy({
+      where: { id_booking: idbk.id_booking },
+    });
     Promise.all(
       department.map((values) => {
         model.department_tb.create({
