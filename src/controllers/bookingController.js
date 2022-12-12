@@ -49,7 +49,7 @@ const add_booking = async (req, res) => {
     const idbk = await model.booking_info.findOne({ where: { id_user: id } });
     await model.select_type_tb.create({
       _values: _values,
-      id_booking: id,
+      id_booking: idbk.id_booking,
     });
     Promise.all(
       arr_bk.map((values) => {
@@ -143,11 +143,14 @@ const update_booking = async (req, res) => {
     end,
     detail,
     id_user,
-    _values,
   };
   if (data_bk) {
     const updatebk = await model.booking_info.update(data_bk);
-    let idbk = await model.booking_info.findAll({ where: { id_user: id } });
+    const idbk = await model.booking_info.findAll({ where: { id_user: id } });
+    await model.select_type_tb.update({
+      _values: _values,
+      id_booking: idbk.id_booking,
+    });
     Promise.all(
       arr_depart.map((values) => {
         model.department_tb.create({
@@ -157,7 +160,7 @@ const update_booking = async (req, res) => {
       })
     );
     let res_upbk = await model.booking_info.findAll({
-      include: ["department_tbs"],
+      include: ["department_tbs", "select_type_tbs"],
       where: { id_user: id },
     });
     successCode(res, res_upbk, "Success update booking");
