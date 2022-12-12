@@ -13,15 +13,11 @@ class booking_info extends Sequelize.Model {
       primaryKey: true
     },
     start_time: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: true
     },
     end_time: {
-      type: DataTypes.TIME,
-      allowNull: true
-    },
-    _date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     },
     details: {
