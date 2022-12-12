@@ -145,7 +145,7 @@ const update_booking = async (req, res) => {
     id_user,
   };
   if (data_bk) {
-    const updatebk = await model.booking_info.update(data_bk);
+    await model.booking_info.update(data_bk);
     const idbk = await model.booking_info.findAll({ where: { id_user: id } });
     await model.select_type_tb.update({
       _values: _values,
