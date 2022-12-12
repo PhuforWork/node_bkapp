@@ -9,7 +9,7 @@ const {
   update_depart,
   update_slect,
   get_department_slect,
-  update_depart_tb,
+
 } = require("../controllers/bookingController");
 const upload = require("../Middlewares/upload");
 const bookingRoute = express.Router();
@@ -25,10 +25,10 @@ bookingRoute.post("/add-select/:id", add_slect);
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
 bookingRoute.put("/update-department/:id", upload.none(), update_depart);
-bookingRoute.put(
-  "/update-booking/department/:id",
-  upload.none(),
-  update_depart_tb
-);
+// bookingRoute.put(
+//   "/update-booking/department/:id",
+//   upload.none(),
+//   update_depart_tb
+// );
 
 module.exports = bookingRoute;

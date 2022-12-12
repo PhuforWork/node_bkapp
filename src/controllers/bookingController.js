@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
@@ -114,39 +115,48 @@ const update_depart = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start_time, end_time, _date, details, _selection } = req.body;
+  let { start, end_time, detail } = req.body;
+  let { _selection } = req.body.service;
+  let arr_depart = req.body.personality;
   let data_bk = {
-    start_time,
-    end_time,
-    _date,
-    details,
+    start,
+    end,
+    detail,
     id_user,
     _selection,
   };
   let data_select = { data_select };
   if (data && id) {
     const updatebk = await model.booking_info.create(data_bk);
-
+    let idbk = await model.booking_info.findAll({ where: { end_time } });
+    Promise.all(
+      arr_depart.map((values) => {
+        model.department_tb.create({
+          label: values.label,
+          id_booking: idbk.id_booking,
+        });
+      })
+    );
     successCode(res, "", "Success update booking");
   } else {
     failCode(res, "", "Update booking failed");
   }
 };
-const update_depart_tb = async (req, res) => {
-  let { id } = req.params; //id booking
-  let id_booking = id;
-  let data = req.body;
-  await model.department_tb.destroy({ where: { id_booking: id } });
-  Promise.all(
-    data.map((values) => {
-      model.department_tb.create({
-        label: values.label,
-        id_booking,
-      });
-    })
-  );
-  successCode(res, "", "Update booking success");
-};
+// const update_depart_tb = async (req, res) => {
+//   let { id } = req.params; //id booking
+//   let id_booking = id;
+//   let data = req.body;
+//   await model.department_tb.destroy({ where: { id_booking: id } });
+//   Promise.all(
+//     data.map((values) => {
+//       model.department_tb.create({
+//         label: values.label,
+//         id_booking,
+//       });
+//     })
+//   );
+//   successCode(res, "", "Update booking success");
+// };
 module.exports = {
   booking_user,
   add_booking,
@@ -157,5 +167,4 @@ module.exports = {
   update_slect,
   update_depart,
   get_department_slect,
-  update_depart_tb,
 };
