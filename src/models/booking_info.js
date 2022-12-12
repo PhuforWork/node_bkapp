@@ -32,7 +32,7 @@ class booking_info extends Sequelize.Model {
         key: 'id_user'
       }
     },
-    _selection: {
+    _values: {
       type: DataTypes.STRING(255),
       allowNull: true
     }
