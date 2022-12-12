@@ -115,32 +115,38 @@ const update_depart = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end_time, detail } = req.body;
-  let { _selection } = req.body.service;
-  let arr_depart = req.body.personality;
-  let data_bk = {
-    start,
-    end,
-    detail,
-    id_user,
-    _selection,
-  };
-  let data_select = { data_select };
-  if (data && id) {
-    const updatebk = await model.booking_info.create(data_bk);
-    let idbk = await model.booking_info.findAll({ where: { end_time } });
-    Promise.all(
-      arr_depart.map((values) => {
-        model.department_tb.create({
-          label: values.label,
-          id_booking: idbk.id_booking,
-        });
-      })
-    );
-    successCode(res, "", "Success update booking");
-  } else {
-    failCode(res, "", "Update booking failed");
-  }
+  console.log(req.body);
+  res.send("success");
+  // let { start, end_time, detail } = req.body;
+  // let { _selection } = req.body.service;
+  // let arr_depart = req.body.personality;
+  // let data_bk = {
+  //   start,
+  //   end,
+  //   detail,
+  //   id_user,
+  //   _selection,
+  // };
+  // let data_select = { data_select };
+  // if (data && id) {
+  //   const updatebk = await model.booking_info.create(data_bk);
+  //   let idbk = await model.booking_info.findAll({ where: { end_time } });
+  //   Promise.all(
+  //     arr_depart.map((values) => {
+  //       model.department_tb.create({
+  //         label: values.label,
+  //         id_booking: idbk.id_booking,
+  //       });
+  //     })
+  //   );
+  //   let res_upbk = await model.booking_info.findAll({
+  //     include: ["department_tbs"],
+  //     where: { id_user },
+  //   });
+  //   successCode(res, res_upbk, "Success update booking");
+  // } else {
+  //   failCode(res, "", "Update booking failed");
+  // }
 };
 // const update_depart_tb = async (req, res) => {
 //   let { id } = req.params; //id booking
