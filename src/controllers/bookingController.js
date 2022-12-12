@@ -35,8 +35,8 @@ const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start, end, detail } = req.body;
-  let { _values } = req.body.service._values;
-  console.log(req.body.service);
+  let _values = req.body.service._values;
+  console.log(req.body.service._values);
   let arr_bk = req.body.personality;
   console.log(arr_bk);
   let data = {
@@ -46,7 +46,7 @@ const add_booking = async (req, res) => {
     id_user,
   };
   if (data) {
-    const data_bk = await model.booking_info.create(data);
+    await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { id_user: id } });
     await model.select_type_tb.create({
       _values: _values,
@@ -61,7 +61,7 @@ const add_booking = async (req, res) => {
       })
     );
     const res_postbk = await model.booking_info.findOne({
-      include: ["department_tbs", "select_type_tbs"],
+      include: ["select_type_tbs", "department_tbs"],
       where: { id_user: id },
     });
     successCode(res, res_postbk, "Add booking success");
