@@ -9,6 +9,7 @@ const {
   update_depart,
   update_slect,
   get_department_slect,
+  update_persional,
   delete_bk,
 } = require("../controllers/bookingController");
 const upload = require("../Middlewares/upload");
@@ -25,6 +26,7 @@ bookingRoute.post("/add-select/:id", add_slect);
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
 bookingRoute.put("/update-department/:id", upload.none(), update_depart);
+bookingRoute.put("/update-persional/:id", upload.none(), update_persional);
 
 bookingRoute.delete("delete-booking/:id", delete_bk);
 module.exports = bookingRoute;

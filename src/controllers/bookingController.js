@@ -26,7 +26,7 @@ const get_department_slect = async (req, res) => {
   let { id } = req.params;
   let check_id = { id };
   if (check_id) {
-    const get_depart = await model.persionality.findByPk(id);
+    const get_depart = await model.department.findByPk(id);
     const get_slect = await model.select_type.findByPk(id);
     successCode(res, { get_depart, get_slect }, "Get successfull");
   }
@@ -36,7 +36,6 @@ const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start, end, detail, _values } = req.body;
-
   let data = {
     start,
     end,
@@ -59,7 +58,7 @@ const add_depart = async (req, res) => {
   let data = { array, id_user };
   console.log(data);
   if (data) {
-    const data_bk = await model.persionality.create(data);
+    const data_bk = await model.department.create(data);
     successCode(res, data_bk, "Add department success");
   }
 };
@@ -99,10 +98,29 @@ const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
     let data = req.body;
-    await model.persionality.destroy({ where: { id_user: id } });
+    await model.department.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
-        await model.persionality.create({
+        await model.department.create({
+          label: ele.label,
+          _name: ele.label,
+          id_user: ele.id_user,
+        });
+      });
+    });
+    successCode(res, "", "Update success selection");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
+  }
+};
+const update_persional = async (req, res) => {
+  try {
+    let { id } = req.params; //id user
+    let data = req.body;
+    await model.department.destroy({ where: { id_user: id } });
+    Promise.all(data).then((values) => {
+      values.map(async (ele) => {
+        await model.department.create({
           label: ele.label,
           _name: ele.label,
           id_user: ele.id_user,
@@ -149,5 +167,6 @@ module.exports = {
   update_slect,
   update_depart,
   get_department_slect,
+  update_persional,
   delete_bk,
 };
