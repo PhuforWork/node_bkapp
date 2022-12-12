@@ -37,9 +37,7 @@ const add_booking = async (req, res) => {
   let id_user = id;
   let { start, end, detail } = req.body;
   let _values = req.body.service._values;
-  console.log(req.body.service._values);
   let arr_bk = req.body.personality;
-  console.log(arr_bk);
   let data = {
     start,
     end,
@@ -52,6 +50,9 @@ const add_booking = async (req, res) => {
     await model.select_type_tb.create({
       _values: _values,
       id_booking: idbk.id_booking,
+    });
+    await model.department_tb.destroy({
+      where: { id_booking: idbk.id_booking },
     });
     Promise.all(
       arr_bk.map((values) => {
@@ -137,8 +138,8 @@ const update_depart = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end_time, detail } = req.body;
-  let { _values } = req.body.service;
+  let { start, end, detail } = req.body;
+  let _values = req.body.service._values;
   let arr_depart = req.body.personality;
   let data_bk = {
     start,
@@ -147,11 +148,16 @@ const update_booking = async (req, res) => {
     id_user,
   };
   if (data_bk) {
-    await model.booking_info.update(data_bk);
+    await model.booking_info.update(data_bk, { where: { id_user: id } });
     const idbk = await model.booking_info.findAll({ where: { id_user: id } });
-    await model.select_type_tb.update({
-      _values: _values,
-      id_booking: idbk.id_booking,
+    await model.select_type_tb.update(
+      {
+        _values: _values,
+      },
+      { where: { id_booking: idbk.id_booking } }
+    );
+    await model.department_tb.destroy({
+      where: { id_booking: idbk.id_booking },
     });
     Promise.all(
       arr_depart.map((values) => {

@@ -25,10 +25,5 @@ bookingRoute.post("/add-select/:id", add_slect);
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
 bookingRoute.put("/update-department/:id", upload.none(), update_depart);
-// bookingRoute.put(
-//   "/update-booking/department/:id",
-//   upload.none(),
-//   update_depart_tb
-// );
 
 module.exports = bookingRoute;
