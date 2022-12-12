@@ -35,41 +35,18 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end, detail } = req.body;
-  let _values = req.body.service._values;
-  let arr_bk = req.body.personality;
-  let id_selection = Math.random();
+  let { start, end, detail, _values } = req.body;
+
   let data = {
     start,
     end,
     detail,
     id_user,
-    id_selection,
-    _values
+    _values,
   };
   if (data) {
     await model.booking_info.create(data);
-    const idbk = await model.booking_info.findOne({ where: { end: end } });
-    // await model.select_type_tb.create({
-    //   _values: _values,
-    //   id_booking: idbk.id_booking,
-    // });
-    await model.department_tb.destroy({
-      where: { id_booking: idbk.id_booking },
-    });
-    Promise.all(
-      arr_bk.map((values) => {
-        model.department_tb.create({
-          label: values.label,
-          id_booking: idbk.id_booking,
-        });
-      })
-    );
-    const res_postbk = await model.booking_info.findOne({
-      include: ["select_type_tbs", "department_tbs"],
-      where: { id_user: id },
-    });
-    successCode(res, res_postbk, "Add booking success");
+    successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
   }
@@ -141,40 +118,17 @@ const update_depart = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end, detail } = req.body;
-  let _values = req.body.service._values;
-  let arr_depart = req.body.personality;
-  let data_bk = {
+  let { start, end, detail, _values } = req.body;
+  let data = {
     start,
     end,
     detail,
     id_user,
+    _values,
   };
-  if (data_bk) {
-    await model.booking_info.update(data_bk, { where: { id_user: id } });
-    const idbk = await model.booking_info.findAll({ where: { end: end } });
-    await model.select_type_tb.update(
-      {
-        _values: _values,
-      },
-      { where: { id_booking: idbk.id_booking } }
-    );
-    await model.department_tb.destroy({
-      where: { id_booking: idbk.id_booking },
-    });
-    Promise.all(
-      arr_depart.map((values) => {
-        model.department_tb.create({
-          label: values.label,
-          id_booking: idbk.id_booking,
-        });
-      })
-    );
-    let res_upbk = await model.booking_info.findAll({
-      include: ["department_tbs", "select_type_tbs"],
-      where: { id_user: id },
-    });
-    successCode(res, res_upbk, "Success update booking");
+  if (data) {
+    await model.booking_info.update(data, { where: { id_user: id } });
+    successCode(res, "", "Success update booking");
   } else {
     failCode(res, "", "Update booking failed");
   }
