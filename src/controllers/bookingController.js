@@ -47,7 +47,6 @@ const add_booking = async (req, res) => {
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
-    console.log(idbk.id_booking);
     await model.select_type_tb.create({
       _values: _values,
       id_booking: idbk.id_booking,
@@ -150,7 +149,7 @@ const update_booking = async (req, res) => {
   };
   if (data_bk) {
     await model.booking_info.update(data_bk, { where: { id_user: id } });
-    const idbk = await model.booking_info.findAll({ where: { id_user: id } });
+    const idbk = await model.booking_info.findAll({ where: { end: end } });
     await model.select_type_tb.update(
       {
         _values: _values,
