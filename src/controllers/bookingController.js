@@ -34,20 +34,20 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start_time, end_time, _date, details } = req.body;
-  let data = {
-    start_time,
-    end_time,
-    _date,
-    details,
-    id_user,
-  };
-  if (data) {
-    const data_bk = await model.booking_info.create(data);
-    successCode(res, data_bk, "Add booking success");
-  } else {
-    failCode(res, "", "Missing fields booking");
-  }
+  console.log(req.body);
+  // let { start, end, detail } = req.body;
+  // let data = {
+  //   start,
+  //   end,
+  //   detail,
+  //   id_user,
+  // };
+  // if (data) {
+  //   const data_bk = await model.booking_info.create(data);
+  //   successCode(res, data_bk, "Add booking success");
+  // } else {
+  //   failCode(res, "", "Missing fields booking");
+  // }
 };
 const add_depart = async (req, res) => {
   let { id } = req.params; //id user
