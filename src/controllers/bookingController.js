@@ -14,7 +14,7 @@ const booking_userid = async (req, res) => {
   let check_id = { id }; //id user
   if (check_id) {
     const check_bkUser = await model.booking_info.findAll({
-      include: ["department_tbs", "select_type_tbs"],
+      include: ["department_tbs", "persionality_tbs"],
       where: {
         id_user: id,
       },
@@ -36,6 +36,8 @@ const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start, end, detail, _values } = req.body;
+  let personality = req.body.personality;
+  let department = req.body.department;
   let data = {
     start,
     end,
@@ -45,6 +47,24 @@ const add_booking = async (req, res) => {
   };
   if (data) {
     await model.booking_info.create(data);
+    await model.persionality_tb.destroy({ where: { id_user: id } });
+    Promise.all(
+      personality.map((values) => {
+        model.persionality_tb.create({
+          label: values.label,
+          id_user: id,
+        });
+      })
+    );
+    await model.department_tb.destroy({ where: { id_user: id } });
+    Promise.all(
+      department.map((values) => {
+        model.department_tb.create({
+          label: values.label,
+          id_user: id,
+        });
+      })
+    );
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
@@ -137,6 +157,8 @@ const update_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
   let { start, end, detail, _values } = req.body;
+  let personality = req.body.personality;
+  let department = req.body.department;
   let data = {
     start,
     end,
@@ -146,15 +168,34 @@ const update_booking = async (req, res) => {
   };
   if (data) {
     await model.booking_info.update(data, { where: { id_user: id } });
-    successCode(res, "", "Success update booking");
+    await model.persionality_tb.destroy({ where: { id_user: id } });
+    Promise.all(
+      personality.map((values) => {
+        model.persionality_tb.create({
+          label: values.label,
+          id_user: id,
+        });
+      })
+    );
+    await model.department_tb.destroy({ where: { id_user: id } });
+    Promise.all(
+      department.map((values) => {
+        model.department_tb.create({
+          label: values.label,
+          id_user: id,
+        });
+      })
+    );
+    successCode(res, "", "Add booking success");
   } else {
-    failCode(res, "", "Update booking failed");
+    failCode(res, "", "Missing fields booking");
   }
 };
 
 const delete_bk = async (req, res) => {
   let { id } = req.params;
   await model.booking_info.destroy({ where: { id_booking: id } });
+  res.send("success delete");
 };
 
 module.exports = {
