@@ -60,7 +60,7 @@ const add_booking = async (req, res) => {
       })
     );
     const res_postbk = await model.booking_info.findOne({
-      include: ["department_tbs"],
+      include: ["department_tbs", "select_type_tbs"],
       where: { id_user: id },
     });
     successCode(res, res_postbk, "Add booking success");
