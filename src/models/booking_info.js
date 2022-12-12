@@ -31,10 +31,6 @@ class booking_info extends Sequelize.Model {
         model: 'users',
         key: 'id_user'
       }
-    },
-    _values: {
-      type: DataTypes.STRING(255),
-      allowNull: true
     }
   }, {
     sequelize,
