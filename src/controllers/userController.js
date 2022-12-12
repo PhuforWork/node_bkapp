@@ -27,7 +27,7 @@ const getUserId = async (req, res) => {
   let email = data.email;
   let persionalities = data.persionalities;
   let select_types = data.select_types;
-  data_bk = { select_type_tbs: data_bk.select_type_tbs[0] };
+
   res.send({
     user_name,
     _password,
