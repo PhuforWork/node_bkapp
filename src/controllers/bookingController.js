@@ -47,12 +47,13 @@ const add_booking = async (req, res) => {
   };
   if (data) {
     await model.booking_info.create(data);
+    const idbk = await model.booking_info.findOne({ where: { end: end } });
     await model.persionality_tb.destroy({ where: { id_user: id } });
     Promise.all(
       personality.map((values) => {
         model.persionality_tb.create({
           label: values.label,
-          id_user: id,
+          id_booking: idbk.id_booking,
         });
       })
     );
@@ -61,7 +62,7 @@ const add_booking = async (req, res) => {
       department.map((values) => {
         model.department_tb.create({
           label: values.label,
-          id_user: id,
+          id_booking: idbk.id_booking,
         });
       })
     );
@@ -168,12 +169,13 @@ const update_booking = async (req, res) => {
   };
   if (data) {
     await model.booking_info.update(data, { where: { id_user: id } });
+    const idbk = await model.booking_info.findOne({ where: { end: end } });
     await model.persionality_tb.destroy({ where: { id_user: id } });
     Promise.all(
       personality.map((values) => {
         model.persionality_tb.create({
           label: values.label,
-          id_user: id,
+          id_booking: idbk.id_booking,
         });
       })
     );
@@ -182,7 +184,7 @@ const update_booking = async (req, res) => {
       department.map((values) => {
         model.department_tb.create({
           label: values.label,
-          id_user: id,
+          id_booking: idbk.id_booking,
         });
       })
     );
