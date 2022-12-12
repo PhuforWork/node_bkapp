@@ -47,6 +47,7 @@ const add_booking = async (req, res) => {
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { id_user: id } });
+    console.log(idbk.id_booking);
     await model.select_type_tb.create({
       _values: _values,
       id_booking: idbk.id_booking,
@@ -192,5 +193,5 @@ module.exports = {
   update_slect,
   update_depart,
   get_department_slect,
-  delete_bk
+  delete_bk,
 };
