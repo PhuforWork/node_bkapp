@@ -41,7 +41,7 @@ const add_booking = async (req, res) => {
   let  id_selection  = req.body.service.id_selection;
   // console.log(req.body.id_selection);
   let value = req.body.department.value;
-  console.log(req.body.department.value);
+  console.log(value);
   let label = req.body.department.label;
 
   let personality = req.body.personality;
