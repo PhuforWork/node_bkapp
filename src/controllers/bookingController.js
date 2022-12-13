@@ -35,17 +35,23 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end, detail, department } = req.body;
+  let { start, end, detail } = req.body;
 
-  let _values = req.body.service._values;
+  let  _values  = req.body.service._values;
+  let  id_selection  = req.body.service.id_selection;
+  let value = req.body.department.value;
+  let label = req.body.department.label;
+
   let personality = req.body.personality;
-  // let departments = req.body.department;
   let data = {
     start,
     end,
     detail,
     id_user,
     _values,
+    id_selection,
+    value,
+    label
   };
   if (data) {
     await model.booking_info.create(data);
@@ -156,16 +162,22 @@ const update_persional = async (req, res) => {
 // booking calender
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
-  let { start, end, detail, department } = req.body;
-  let _values = req.body.service._values;
+  let { start, end, detail } = req.body;
+  let  _values  = req.body.service._values;
+  let  id_selection  = req.body.service.id_selection;
+  let value = req.body.department.value;
+  let label = req.body.department.label;
+
   let personality = req.body.personality;
-  // let departments = req.body.department;
   let data = {
     start,
     end,
     detail,
+    id_user,
     _values,
-    department
+    id_selection,
+    value,
+    label
   };
   if (data) {
     await model.booking_info.update(data, { where: { id_booking: id } });
@@ -181,17 +193,6 @@ const update_booking = async (req, res) => {
         });
       })
     );
-    // await model.department_tb.destroy({
-    //   where: { id_booking: idbk.id_booking },
-    // });
-    // Promise.all(
-    //   departments.map((values) => {
-    //     model.department_tb.create({
-    //       label: values.label,
-    //       id_booking: idbk.id_booking,
-    //     });
-    //   })
-    // );
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
