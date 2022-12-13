@@ -19,7 +19,7 @@ const getUserId = async (req, res) => {
     },
   });
   let data_booking = await model.booking_info.findAll({
-    include: ["persionality_tbs"],
+    include: ["persionality_tbs","department_tbs"],
     where: { id_user: id },
   });
   let {
@@ -42,11 +42,6 @@ const getUserId = async (req, res) => {
   };
   let department = { value: data_booking.value, label: data_booking.label };
   let booking_info = {
-    id_booking,
-    start,
-    end,
-    detail,
-    id_users,
     service,
     department,
   };
@@ -58,6 +53,7 @@ const getUserId = async (req, res) => {
     select_types,
     persionalities,
     departments,
+    data_booking,
     booking_info,
   });
 };
