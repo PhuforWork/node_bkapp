@@ -37,10 +37,9 @@ const add_booking = async (req, res) => {
   let id_user = id;
   let { start, end, detail } = req.body;
 
-  let  _values  = req.body.service._values;
-  let  id_selection  = req.body.service.id_selection;
-  let value = req.body.department.value;
+  let _values = req.body.service._values;
   let label = req.body.department.label;
+
   let personality = req.body.personality;
   let data = {
     start,
@@ -50,9 +49,9 @@ const add_booking = async (req, res) => {
     _values,
     id_selection,
     value,
-    label
+    label,
   };
-  console.log(data.value);
+
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
@@ -64,14 +63,14 @@ const add_booking = async (req, res) => {
         });
       })
     );
-    // Promise.all(
-    //   departments.map((values) => {
-    //     model.department_tb.create({
-    //       label: values.label,
-    //       id_booking: idbk.id_booking,
-    //     });
-    //   })
-    // );
+    await model.select_type_tb.create({
+      _values: _values,
+      id_booking: idbk.id_booking,
+    });
+    await model.department_tb.create({
+      label: label,
+      id_booking: idbk.id_booking,
+    });
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
@@ -163,8 +162,8 @@ const update_persional = async (req, res) => {
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
   let { start, end, detail } = req.body;
-  let  _values  = req.body.service._values;
-  let  id_selection  = req.body.service.id_selection;
+  let _values = req.body.service._values;
+  let id_selection = req.body.service.id_selection;
   let value = req.body.department.value;
   let label = req.body.department.label;
 
@@ -177,7 +176,7 @@ const update_booking = async (req, res) => {
     _values,
     id_selection,
     value,
-    label
+    label,
   };
   if (data) {
     await model.booking_info.update(data, { where: { id_booking: id } });
@@ -192,6 +191,18 @@ const update_booking = async (req, res) => {
           id_booking: idbk.id_booking,
         });
       })
+    );
+    await model.select_type_tb.create(
+      {
+        _values: _values,
+      },
+      { where: { id_booking: idbk.id_booking } }
+    );
+    await model.department_tb.create(
+      {
+        label: label,
+      },
+      { where: { id_booking: idbk.id_booking } }
     );
     successCode(res, "", "Add booking success");
   } else {

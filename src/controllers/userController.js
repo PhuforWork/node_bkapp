@@ -33,15 +33,6 @@ const getUserId = async (req, res) => {
     departments,
   } = data;
 
-  let service = {
-    id_selection: data_booking.id_selection,
-    _values: data_booking._values,
-  };
-  let department = { value: data_booking.value, label: data_booking.label };
-  let booking_info = {
-    service,
-    department,
-  };
   res.send({
     id_user,
     user_name,
@@ -51,7 +42,6 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
     data_booking,
-    booking_info,
   });
 };
 // Login user
