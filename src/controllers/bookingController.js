@@ -211,6 +211,7 @@ const delete_bk = async (req, res) => {
   if (check) {
     await model.department_tb.destroy({ where: { id_booking: id } });
     await model.persionality_tb.destroy({ where: { id_booking: id } });
+    await model.select_type_tb.destroy({ where: { id_booking: id } });
     await model.booking_info.destroy({ where: { id_booking: id } });
     successCode(res, "", "Success delete");
   }
