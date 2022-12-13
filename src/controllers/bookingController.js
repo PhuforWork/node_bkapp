@@ -35,11 +35,11 @@ const get_department_slect = async (req, res) => {
 const add_booking = async (req, res) => {
   let { id } = req.params; // id user
   let id_user = id;
-  let { start, end, detail} = req.body;
+  let { start, end, detail, department } = req.body;
 
   let _values = req.body.service._values;
   let personality = req.body.personality;
-  let department = req.body.department;
+  let departments = req.body.department;
   let data = {
     start,
     end,
@@ -59,7 +59,7 @@ const add_booking = async (req, res) => {
       })
     );
     Promise.all(
-      department.map((values) => {
+      departments.map((values) => {
         model.department_tb.create({
           label: values.label,
           id_booking: idbk.id_booking,
@@ -156,10 +156,10 @@ const update_persional = async (req, res) => {
 // booking calender
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
-  let { start, end, detail } = req.body;
+  let { start, end, detail, department } = req.body;
   let _values = req.body.service._values;
   let personality = req.body.personality;
-  let department = req.body.department;
+  let departments = req.body.department;
   let data = {
     start,
     end,
@@ -184,7 +184,7 @@ const update_booking = async (req, res) => {
       where: { id_booking: idbk.id_booking },
     });
     Promise.all(
-      department.map((values) => {
+      departments.map((values) => {
         model.department_tb.create({
           label: values.label,
           id_booking: idbk.id_booking,
