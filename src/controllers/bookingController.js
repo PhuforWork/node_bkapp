@@ -39,7 +39,7 @@ const add_booking = async (req, res) => {
 
   let _values = req.body.service._values;
   let personality = req.body.personality;
-  let departments = req.body.department;
+  // let departments = req.body.department;
   let data = {
     start,
     end,
@@ -58,14 +58,14 @@ const add_booking = async (req, res) => {
         });
       })
     );
-    Promise.all(
-      departments.map((values) => {
-        model.department_tb.create({
-          label: values.label,
-          id_booking: idbk.id_booking,
-        });
-      })
-    );
+    // Promise.all(
+    //   departments.map((values) => {
+    //     model.department_tb.create({
+    //       label: values.label,
+    //       id_booking: idbk.id_booking,
+    //     });
+    //   })
+    // );
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
@@ -159,12 +159,13 @@ const update_booking = async (req, res) => {
   let { start, end, detail, department } = req.body;
   let _values = req.body.service._values;
   let personality = req.body.personality;
-  let departments = req.body.department;
+  // let departments = req.body.department;
   let data = {
     start,
     end,
     detail,
     _values,
+    department
   };
   if (data) {
     await model.booking_info.update(data, { where: { id_booking: id } });
@@ -180,17 +181,17 @@ const update_booking = async (req, res) => {
         });
       })
     );
-    await model.department_tb.destroy({
-      where: { id_booking: idbk.id_booking },
-    });
-    Promise.all(
-      departments.map((values) => {
-        model.department_tb.create({
-          label: values.label,
-          id_booking: idbk.id_booking,
-        });
-      })
-    );
+    // await model.department_tb.destroy({
+    //   where: { id_booking: idbk.id_booking },
+    // });
+    // Promise.all(
+    //   departments.map((values) => {
+    //     model.department_tb.create({
+    //       label: values.label,
+    //       id_booking: idbk.id_booking,
+    //     });
+    //   })
+    // );
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
