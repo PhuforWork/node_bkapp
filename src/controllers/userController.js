@@ -19,7 +19,7 @@ const getUserId = async (req, res) => {
     },
   });
   let data_booking = await model.booking_info.findAll({
-    include: ["persionality_tbs","department_tbs"],
+    include: ["persionality_tbs","department_tbs","select_type_tbs"],
     where: { id_user: id },
   });
   console.log(data_booking._values);
