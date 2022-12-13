@@ -43,6 +43,7 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
     data_booking,
+    dt
   });
 };
 // Login user
