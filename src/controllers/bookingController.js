@@ -171,6 +171,7 @@ const update_booking = async (req, res) => {
     _values,
     label,
   };
+  console.log(data.detail);
   if (data) {
     await model.booking_info.update(data, { where: { id_booking: id } });
     const idbk = await model.booking_info.findOne({ where: { end: end } });
