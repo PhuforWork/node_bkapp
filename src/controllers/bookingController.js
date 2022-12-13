@@ -39,11 +39,8 @@ const add_booking = async (req, res) => {
 
   let  _values  = req.body.service._values;
   let  id_selection  = req.body.service.id_selection;
-  // console.log(req.body.id_selection);
   let value = req.body.department.value;
-  console.log(value);
   let label = req.body.department.label;
-
   let personality = req.body.personality;
   let data = {
     start,
@@ -55,6 +52,7 @@ const add_booking = async (req, res) => {
     value,
     label
   };
+  console.log(data.value);
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
