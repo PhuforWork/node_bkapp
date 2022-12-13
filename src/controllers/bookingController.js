@@ -205,7 +205,7 @@ const update_booking = async (req, res) => {
 };
 
 const delete_bk = async (req, res) => {
-  let { id } = req.params;
+  let { id } = req.params; //id booking
   const check = await model.booking_info.findByPk(id);
 
   if (check) {
