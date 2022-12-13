@@ -186,13 +186,13 @@ const update_booking = async (req, res) => {
         });
       })
     );
-    await model.select_type_tb.create(
+    await model.select_type_tb.update(
       {
         _values: _values,
       },
       { where: { id_booking: idbk.id_booking } }
     );
-    await model.department_tb.create(
+    await model.department_tb.update(
       {
         label: label,
       },
