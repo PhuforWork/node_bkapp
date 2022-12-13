@@ -22,6 +22,7 @@ const getUserId = async (req, res) => {
     include: ["persionality_tbs","department_tbs"],
     where: { id_user: id },
   });
+  console.log(data_booking._values);
   let {
     id_user,
     user_name,
@@ -31,11 +32,7 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
   } = data;
-  // let id_booking = data_booking.id_booking;
-  // let start = data_booking.start;
-  // let end = data_booking.end;
-  // let detail = data_booking.detail;
-  // let id_users = data_booking.id_user;
+
   let service = {
     id_selection: data_booking.id_selection,
     _values: data_booking._values,
