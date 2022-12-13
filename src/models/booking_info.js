@@ -35,6 +35,10 @@ class booking_info extends Sequelize.Model {
     _values: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    department: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
