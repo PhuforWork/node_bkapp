@@ -32,8 +32,6 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
   } = data;
-  let dt = data_booking.department_tbs;
-  console.log(dt);
   res.send({
     id_user,
     user_name,
@@ -43,7 +41,6 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
     data_booking,
-    dt
   });
 };
 // Login user
