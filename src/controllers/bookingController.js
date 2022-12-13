@@ -168,7 +168,6 @@ const update_booking = async (req, res) => {
     start,
     end,
     detail,
-    id_user,
     _values,
     label,
   };
