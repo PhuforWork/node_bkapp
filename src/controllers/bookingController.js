@@ -47,8 +47,6 @@ const add_booking = async (req, res) => {
     detail,
     id_user,
     _values,
-    id_selection,
-    value,
     label,
   };
 
@@ -163,8 +161,6 @@ const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
   let { start, end, detail } = req.body;
   let _values = req.body.service._values;
-  let id_selection = req.body.service.id_selection;
-  let value = req.body.department.value;
   let label = req.body.department.label;
 
   let personality = req.body.personality;
@@ -174,8 +170,6 @@ const update_booking = async (req, res) => {
     detail,
     id_user,
     _values,
-    id_selection,
-    value,
     label,
   };
   if (data) {
