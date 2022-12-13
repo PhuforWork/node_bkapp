@@ -33,6 +33,7 @@ const getUserId = async (req, res) => {
     departments,
   } = data;
   let dt = data_booking.department_tbs;
+  console.log(dt);
   res.send({
     id_user,
     user_name,
