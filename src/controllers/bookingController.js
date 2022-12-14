@@ -60,6 +60,7 @@ const add_booking = async (req, res) => {
     Promise.all(
       personality.map((values) => {
         model.persionality_tb.create({
+          id_per: idbk.id_booking,
           value: values.value,
           label: values.label,
           id_booking: idbk.id_booking,
