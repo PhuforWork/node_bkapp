@@ -87,8 +87,7 @@ const sigUp = async (req, res) => {
     } else {
       await model.users.create(data);
       successCode(res, data, "Sig up successfully");
-      // await model.users.create(dataUser);
-      // successCode(res, "", "Sig up successfully");
+
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
