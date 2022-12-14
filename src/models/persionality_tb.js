@@ -7,6 +7,7 @@ class persionality_tb extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
     id_per: {
+      autoIncrement: true,
       type: DataTypes.DOUBLE,
       allowNull: false,
       primaryKey: true
