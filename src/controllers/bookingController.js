@@ -43,43 +43,43 @@ const add_booking = async (req, res) => {
   let value = req.body.department.value;
   console.log(id);
   console.log(req.body);
+  res.send("success");
+  // let personality = req.body.personality;
+  // let data = {
+  //   start,
+  //   end,
+  //   detail,
+  //   id_user,
+  //   _values,
+  //   label,
+  // };
 
-  let personality = req.body.personality;
-  let data = {
-    start,
-    end,
-    detail,
-    id_user,
-    _values,
-    label,
-  };
-
-  if (data) {
-    await model.booking_info.create(data);
-    const idbk = await model.booking_info.findOne({ where: { end: end } });
-    Promise.all(
-      personality.map((values) => {
-        model.persionality_tb.create({
-          value: values.value,
-          label: values.label,
-          id_booking: idbk.id_booking,
-        });
-      })
-    );
-    await model.select_type_tb.create({
-      id_selection: id_selection,
-      _values: _values,
-      id_booking: idbk.id_booking,
-    });
-    await model.department_tb.create({
-      value: value,
-      label: label,
-      id_booking: idbk.id_booking,
-    });
-    successCode(res, "", "Add booking success");
-  } else {
-    failCode(res, "", "Missing fields booking");
-  }
+  // if (data) {
+  //   await model.booking_info.create(data);
+  //   const idbk = await model.booking_info.findOne({ where: { end: end } });
+  //   Promise.all(
+  //     personality.map((values) => {
+  //       model.persionality_tb.create({
+  //         value: values.value,
+  //         label: values.label,
+  //         id_booking: idbk.id_booking,
+  //       });
+  //     })
+  //   );
+  //   await model.select_type_tb.create({
+  //     id_selection: id_selection,
+  //     _values: _values,
+  //     id_booking: idbk.id_booking,
+  //   });
+  //   await model.department_tb.create({
+  //     value: value,
+  //     label: label,
+  //     id_booking: idbk.id_booking,
+  //   });
+  //   successCode(res, "", "Add booking success");
+  // } else {
+  //   failCode(res, "", "Missing fields booking");
+  // }
 };
 
 const add_depart = async (req, res) => {
