@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 class department extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    value: {
+    id_derp: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,9 +24,9 @@ class department extends Sequelize.Model {
         key: 'id_user'
       }
     },
-    _name: {
-      type: DataTypes.STRING(255),
-      allowNull: true
+    value: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
@@ -38,7 +38,7 @@ class department extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "value" },
+          { name: "id_derp" },
         ]
       },
       {

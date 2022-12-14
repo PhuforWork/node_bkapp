@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 class select_type extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    id_selection: {
+    id_sl: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -23,6 +23,10 @@ class select_type extends Sequelize.Model {
         model: 'users',
         key: 'id_user'
       }
+    },
+    id_selection: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
@@ -34,7 +38,7 @@ class select_type extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_selection" },
+          { name: "id_sl" },
         ]
       },
       {
