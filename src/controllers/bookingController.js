@@ -38,7 +38,9 @@ const add_booking = async (req, res) => {
   let { start, end, detail } = req.body;
 
   let _values = req.body.service._values;
+  let id_selection = req.body.service.id_selection;
   let label = req.body.department.label;
+  let value = req.body.department.value;
 
   let personality = req.body.personality;
   let data = {
@@ -63,10 +65,12 @@ const add_booking = async (req, res) => {
       })
     );
     await model.select_type_tb.create({
+      id_selection: id_selection,
       _values: _values,
       id_booking: idbk.id_booking,
     });
     await model.department_tb.create({
+      value: value,
       label: label,
       id_booking: idbk.id_booking,
     });
@@ -108,7 +112,7 @@ const update_slect = async (req, res) => {
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
         await model.select_type.create({
-          id_selection:ele.id_selection,
+          id_selection: ele.id_selection,
           _values: ele._values,
           id_user: ele.id_user,
         });
