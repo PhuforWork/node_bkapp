@@ -108,6 +108,7 @@ const update_slect = async (req, res) => {
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
         await model.select_type.create({
+          id_selection:ele.id_selection,
           _values: ele._values,
           id_user: ele.id_user,
         });
@@ -128,7 +129,7 @@ const update_depart = async (req, res) => {
       values.map(async (ele) => {
         await model.department.create({
           label: ele.label,
-          _name: ele.label,
+          value: ele.value,
           id_user: ele.id_user,
         });
       });
@@ -147,7 +148,7 @@ const update_persional = async (req, res) => {
       values.map(async (ele) => {
         await model.persionality.create({
           label: ele.label,
-          _name: ele.label,
+          value: ele.value,
           id_user: ele.id_user,
         });
       });
