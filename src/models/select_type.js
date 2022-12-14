@@ -25,7 +25,7 @@ class select_type extends Sequelize.Model {
       }
     },
     id_selection: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DOUBLE,
       allowNull: false
     }
   }, {
