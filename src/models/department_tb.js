@@ -8,7 +8,7 @@ class department_tb extends Sequelize.Model {
   return super.init({
     id_derp: {
       autoIncrement: true,
-      type: DataTypes.DOUBLE,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
