@@ -25,7 +25,7 @@ class persionality_tb extends Sequelize.Model {
       }
     },
     value: {
-      type: DataTypes.DOUBLE,
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
