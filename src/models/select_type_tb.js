@@ -8,7 +8,7 @@ class select_type_tb extends Sequelize.Model {
   return super.init({
     id_sl: {
       autoIncrement: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: false,
       primaryKey: true
     },
