@@ -18,7 +18,7 @@ class department_tb extends Sequelize.Model {
     },
     id_booking: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'booking_info',
         key: 'id_booking'

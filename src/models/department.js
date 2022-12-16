@@ -18,7 +18,7 @@ class department extends Sequelize.Model {
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'users',
         key: 'id_user'
