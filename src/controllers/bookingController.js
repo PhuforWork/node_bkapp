@@ -61,7 +61,7 @@ const add_booking = async (req, res) => {
       if (personality) {
         Promise.all(
           personality.map((values) => {
-            console.log("123", personality);
+            console.log("123", values);
             model.persionality_tb.create({
               value: values.value,
               label: values.label,
