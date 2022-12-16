@@ -56,7 +56,6 @@ const add_booking = async (req, res) => {
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
-    if (personality) {
       Promise.all(
         personality.map((values) => {
           console.log("values",values);
@@ -67,28 +66,16 @@ const add_booking = async (req, res) => {
           });
         })
       );
-    } else {
-      failCode(res, "No data persionality", "No data persionality");
-    }
-    if (req.body.service) {
       await model.select_type_tb.create({
         id_selection: id_selection,
         _values: _values,
         id_booking: idbk.id_booking,
       });
-    } else {
-      failCode(res, "No data service type", "No data service type");
-    }
-
-    if (req.body.department) {
       await model.department_tb.create({
         value: value,
         label: label,
         id_booking: idbk.id_booking,
       });
-    } else {
-      failCode(res, "No data department", "No data department");
-    }
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
