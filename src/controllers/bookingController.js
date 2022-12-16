@@ -60,13 +60,13 @@ const add_booking = async (req, res) => {
       console.log("id_bk", { ids: idbk.id_booking });
       if (personality) {
         Promise.all(
-          personality.map((values) => {
-            console.log("123", values);
-            model.persionality_tb.create({
+          personality.map(async (values) => {
+            await model.persionality_tb.create({
               value: values.value,
               label: values.label,
               id_booking: idbk.id_booking,
             });
+            await model.persionality_tb.findByPk(idbk.id_booking);
           })
         );
       } else {
