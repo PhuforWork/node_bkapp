@@ -41,8 +41,8 @@ const add_booking = async (req, res) => {
   let label = req.body.department.label;
   let value = req.body.department.value;
 
-  console.log("payload",req.body);
-  
+  console.log("payload", req.body);
+
   let personality = req.body.personality;
   let data = {
     start,
@@ -56,10 +56,11 @@ const add_booking = async (req, res) => {
   if (data) {
     await model.booking_info.create(data);
     const idbk = await model.booking_info.findOne({ where: { end: end } });
+    console.log("id_bk", { ids: idbk.id_booking });
     if (personality) {
       Promise.all(
         personality.map((values) => {
-          console.log("123",personality);
+          console.log("123", personality);
           model.persionality_tb.create({
             value: values.value,
             label: values.label,
@@ -71,7 +72,7 @@ const add_booking = async (req, res) => {
       failCode(res, "No data persionality", "No data persionality");
     }
     if (req.body.service) {
-      console.log("456",_values);
+      console.log("456", _values);
       await model.select_type_tb.create({
         id_selection: id_selection,
         _values: _values,
@@ -82,7 +83,7 @@ const add_booking = async (req, res) => {
     }
 
     if (req.body.department) {
-      console.log("789",label);
+      console.log("789", label);
       await model.department_tb.create({
         value: value,
         label: label,
