@@ -26,11 +26,15 @@ class booking_info extends Sequelize.Model {
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'users',
         key: 'id_user'
       }
+    },
+    checkbk: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
     }
   }, {
     sequelize,
