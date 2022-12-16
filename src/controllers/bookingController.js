@@ -58,42 +58,34 @@ const add_booking = async (req, res) => {
       await model.booking_info.create(data);
       const idbk = await model.booking_info.findOne({ where: { end: end } });
       console.log("id_bk", { ids: idbk.id_booking });
-      if (personality) {
-        Promise.all(
-          personality.map(async (values) => {
-            await model.persionality_tb.create({
-              value: values.value,
-              label: values.label,
-              id_booking: idbk.id_booking,
-            });
-            const a = await model.persionality_tb.findOne({where:{id_booking:idbk.id_booking}});
-            console.log("123", a);
-          })
-        );
-      } else {
-        failCode(res, "No data persionality", "No data persionality");
-      }
-      if (req.body.service) {
-        console.log("456", _values);
-        await model.select_type_tb.create({
-          id_selection: id_selection,
-          _values: _values,
-          id_booking: idbk.id_booking,
-        });
-      } else {
-        failCode(res, "No data service type", "No data service type");
-      }
+      Promise.all(
+        personality.map(async (values) => {
+          await model.persionality_tb.create({
+            value: values.value,
+            label: values.label,
+            id_booking: idbk.id_booking,
+          });
+          const a = await model.persionality_tb.findOne({
+            where: { id_booking: idbk.id_booking },
+          });
+          console.log("123", a);
+        })
+      );
 
-      if (req.body.department) {
-        console.log("789", label);
-        await model.department_tb.create({
-          value: value,
-          label: label,
-          id_booking: idbk.id_booking,
-        });
-      } else {
-        failCode(res, "No data department", "No data department");
-      }
+      console.log("456", _values);
+      await model.select_type_tb.create({
+        id_selection: id_selection,
+        _values: _values,
+        id_booking: idbk.id_booking,
+      });
+
+      console.log("789", label);
+      await model.department_tb.create({
+        value: value,
+        label: label,
+        id_booking: idbk.id_booking,
+      });
+
       successCode(res, "", "Add booking success");
     } else {
       failCode(res, "", "Missing fields booking");
