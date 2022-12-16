@@ -68,14 +68,11 @@ const add_booking = async (req, res) => {
         })
       );
 
-      console.log("456", _values);
       await model.select_type_tb.create({
         id_selection: id_selection,
         _values: _values,
         id_booking: idbk.id_booking,
       });
-
-      console.log("789", label);
       await model.department_tb.create({
         value: value,
         label: label,
