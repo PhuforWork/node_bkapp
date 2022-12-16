@@ -65,10 +65,6 @@ const add_booking = async (req, res) => {
             label: values.label,
             id_booking: idbk.id_booking,
           });
-          const a = await model.persionality_tb.findOne({
-            where: { id_booking: idbk.id_booking },
-          });
-          console.log("123", a);
         })
       );
 
@@ -86,7 +82,16 @@ const add_booking = async (req, res) => {
         id_booking: idbk.id_booking,
       });
 
-      successCode(res, "", "Add booking success");
+      const a = await model.persionality_tb.findOne({
+        where: { id_booking: idbk.id_booking },
+      });
+      const b = await model.select_type_tb.findOne({
+        where: { id_booking: idbk.id_booking },
+      });
+      const c = await model.department_tb.findOne({
+        where: { id_booking: idbk.id_booking },
+      });
+      successCode(res, {a,b,c}, "Add booking success");
     } else {
       failCode(res, "", "Missing fields booking");
     }
