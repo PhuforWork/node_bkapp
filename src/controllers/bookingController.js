@@ -82,13 +82,13 @@ const add_booking = async (req, res) => {
         id_booking: idbk.id_booking,
       });
 
-      const a = await model.persionality_tb.findOne({
+      const a = await model.persionality_tb.findAll({
         where: { id_booking: idbk.id_booking },
       });
-      const b = await model.select_type_tb.findOne({
+      const b = await model.select_type_tb.findAll({
         where: { id_booking: idbk.id_booking },
       });
-      const c = await model.department_tb.findOne({
+      const c = await model.department_tb.findAll({
         where: { id_booking: idbk.id_booking },
       });
       successCode(res, {a,b,c}, "Add booking success");
