@@ -66,7 +66,8 @@ const add_booking = async (req, res) => {
               label: values.label,
               id_booking: idbk.id_booking,
             });
-            await model.persionality_tb.findByPk(idbk.id_booking);
+            const a = await model.persionality_tb.findByPk(idbk.id_booking);
+            console.log("123", a);
           })
         );
       } else {
