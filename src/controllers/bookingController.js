@@ -32,69 +32,74 @@ const get_department_slect = async (req, res) => {
 };
 // post
 const add_booking = async (req, res) => {
-  let { id } = req.params; // id user
-  let id_user = id;
-  let { start, end, detail } = req.body;
+  try {
+    let { id } = req.params; // id user
+    let id_user = id;
+    let { start, end, detail } = req.body;
 
-  let _values = req.body.service._values;
-  let id_selection = req.body.service.id_selection;
-  let label = req.body.department.label;
-  let value = req.body.department.value;
+    let _values = req.body.service._values;
+    let id_selection = req.body.service.id_selection;
+    let label = req.body.department.label;
+    let value = req.body.department.value;
 
-  console.log("payload", req.body);
+    console.log("payload", req.body);
 
-  let personality = req.body.personality;
-  let data = {
-    start,
-    end,
-    detail,
-    id_user,
-    _values,
-    label,
-  };
+    let personality = req.body.personality;
+    let data = {
+      start,
+      end,
+      detail,
+      id_user,
+      _values,
+      label,
+    };
 
-  if (data) {
-    await model.booking_info.create(data);
-    const idbk = await model.booking_info.findOne({ where: { end: end } });
-    console.log("id_bk", { ids: idbk.id_booking });
-    if (personality) {
-      Promise.all(
-        personality.map((values) => {
-          console.log("123", personality);
-          model.persionality_tb.create({
-            value: values.value,
-            label: values.label,
-            id_booking: idbk.id_booking,
-          });
-        })
-      );
+    if (data) {
+      await model.booking_info.create(data);
+      const idbk = await model.booking_info.findOne({ where: { end: end } });
+      console.log("id_bk", { ids: idbk.id_booking });
+      if (personality) {
+        Promise.all(
+          personality.map((values) => {
+            console.log("123", personality);
+            model.persionality_tb.create({
+              value: values.value,
+              label: values.label,
+              id_booking: idbk.id_booking,
+            });
+          })
+        );
+      } else {
+        failCode(res, "No data persionality", "No data persionality");
+      }
+      if (req.body.service) {
+        console.log("456", _values);
+        await model.select_type_tb.create({
+          id_selection: id_selection,
+          _values: _values,
+          id_booking: idbk.id_booking,
+        });
+      } else {
+        failCode(res, "No data service type", "No data service type");
+      }
+
+      if (req.body.department) {
+        console.log("789", label);
+        await model.department_tb.create({
+          value: value,
+          label: label,
+          id_booking: idbk.id_booking,
+        });
+      } else {
+        failCode(res, "No data department", "No data department");
+      }
+      successCode(res, "", "Add booking success");
     } else {
-      failCode(res, "No data persionality", "No data persionality");
+      failCode(res, "", "Missing fields booking");
     }
-    if (req.body.service) {
-      console.log("456", _values);
-      await model.select_type_tb.create({
-        id_selection: id_selection,
-        _values: _values,
-        id_booking: idbk.id_booking,
-      });
-    } else {
-      failCode(res, "No data service type", "No data service type");
-    }
-
-    if (req.body.department) {
-      console.log("789", label);
-      await model.department_tb.create({
-        value: value,
-        label: label,
-        id_booking: idbk.id_booking,
-      });
-    } else {
-      failCode(res, "No data department", "No data department");
-    }
-    successCode(res, "", "Add booking success");
-  } else {
-    failCode(res, "", "Missing fields booking");
+  } catch (error) {
+    console.log("err", error);
+    errorCode(res, "", "Error 500");
   }
 };
 
