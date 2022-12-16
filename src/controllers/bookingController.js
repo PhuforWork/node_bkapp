@@ -152,7 +152,7 @@ const update_depart = async (req, res) => {
         });
       });
     });
-    successCode(res, "", "Update success selection");
+    successCode(res, "", "Update success department");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
   }
@@ -172,7 +172,7 @@ const update_persional = async (req, res) => {
         });
       });
     });
-    successCode(res, "", "Update success selection");
+    successCode(res, "", "Update success persional");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
   }
