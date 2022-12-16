@@ -190,19 +190,19 @@ const update_booking = async (req, res) => {
   let { start, end, detail } = req.body;
   let _values = req.body.service._values;
   let label = req.body.department.label;
-
+  let checkbk = req.body.id;
   let personality = req.body.personality;
   let data = {
     start,
     end,
     detail,
-    _values,
+    checkbk,
     label,
   };
   console.log(data.detail);
   if (data) {
     await model.booking_info.update(data, { where: { id_booking: id } });
-    const idbk = await model.booking_info.findOne({ where: { end: end } });
+    const idbk = await model.booking_info.findOne({ where: { checkbk: checkbk } });
     await model.persionality_tb.destroy({
       where: { id_booking: idbk.id_booking },
     });
