@@ -6,7 +6,7 @@ const fs = require("fs");
 const { log } = require("console");
 //Read all user
 const getuser = async (req, res) => {
-  let data = await model.users.findAll();
+  let data = await model.users.findAll({include:["departments"]});
   res.send(data);
 };
 // Read user by id
