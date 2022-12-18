@@ -24,6 +24,11 @@ const getUserId = async (req, res) => {
     raw: false,
   });
 
+  let data_guest = await model.guest_booking.findAll({
+    include: ["service_guests"],
+    where: { id_user: id },
+  });
+
   let {
     id_user,
     user_name,
@@ -42,6 +47,7 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
     data_booking,
+    data_guest
   });
 };
 // Login user
@@ -87,7 +93,6 @@ const sigUp = async (req, res) => {
     } else {
       await model.users.create(data);
       successCode(res, data, "Sig up successfully");
-
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");

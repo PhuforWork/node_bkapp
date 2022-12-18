@@ -12,6 +12,7 @@ const {
   update_persional,
   delete_bk,
 } = require("../controllers/bookingController");
+const { guest_booking } = require("../controllers/guestController");
 const upload = require("../Middlewares/upload");
 const bookingRoute = express.Router();
 
@@ -27,6 +28,8 @@ bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
 bookingRoute.put("/update-department/:id", upload.none(), update_depart);
 bookingRoute.put("/update-persional/:id", upload.none(), update_persional);
+
+bookingRoute.post("/add-guest/:id", upload.none(), guest_booking);
 
 bookingRoute.delete("/delete-booking/:id", delete_bk);
 module.exports = bookingRoute;

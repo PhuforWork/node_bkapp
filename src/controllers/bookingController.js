@@ -37,13 +37,10 @@ const add_booking = async (req, res) => {
     let id_user = id;
     let { start, end, detail } = req.body;
     let checkbk = req.body.id;
-    console.log(checkbk);
     let _values = req.body.service._values;
     let id_selection = req.body.service.id_selection;
     let label = req.body.department.label;
     let value = req.body.department.value;
-
-    console.log("payload", req.body);
 
     let personality = req.body.personality;
     let data = {
@@ -60,7 +57,6 @@ const add_booking = async (req, res) => {
       const idbk = await model.booking_info.findOne({
         where: { checkbk: checkbk },
       });
-      console.log("id_bk", { ids: idbk.id_booking });
       Promise.all(
         personality.map(async (values) => {
           await model.persionality_tb.create({
@@ -81,17 +77,7 @@ const add_booking = async (req, res) => {
         label: label,
         id_booking: idbk.id_booking,
       });
-
-      const a = await model.persionality_tb.findAll({
-        where: { id_booking: idbk.id_booking },
-      });
-      const b = await model.select_type_tb.findAll({
-        where: { id_booking: idbk.id_booking },
-      });
-      const c = await model.department_tb.findAll({
-        where: { id_booking: idbk.id_booking },
-      });
-      successCode(res, { a, b, c }, "Add booking success");
+      successCode(res, "", "Add booking success");
     } else {
       failCode(res, "", "Missing fields booking");
     }
