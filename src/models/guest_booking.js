@@ -31,6 +31,10 @@ class guest_booking extends Sequelize.Model {
         model: 'users',
         key: 'id_user'
       }
+    },
+    checkguest: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
     }
   }, {
     sequelize,
