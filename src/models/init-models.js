@@ -34,6 +34,8 @@ function initModels(sequelize) {
   users.hasMany(booking_info, { as: "booking_infos", foreignKey: "id_user"});
   department.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
   users.hasMany(department, { as: "departments", foreignKey: "id_user"});
+  guest_booking.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
+  users.hasMany(guest_booking, { as: "guest_bookings", foreignKey: "id_user"});
   persionality.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
   users.hasMany(persionality, { as: "persionalities", foreignKey: "id_user"});
   select_type.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});

@@ -23,6 +23,14 @@ class guest_booking extends Sequelize.Model {
     detail: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    id_user: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id_user'
+      }
     }
   }, {
     sequelize,
@@ -35,6 +43,13 @@ class guest_booking extends Sequelize.Model {
         using: "BTREE",
         fields: [
           { name: "id_guest" },
+        ]
+      },
+      {
+        name: "id_user",
+        using: "BTREE",
+        fields: [
+          { name: "id_user" },
         ]
       },
     ]
