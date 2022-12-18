@@ -4,5 +4,7 @@ const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 
 const guest_booking = async (req, res) => {
-    
+    let {id} = req.params;
+    let {start} = req.body;
+
 };
