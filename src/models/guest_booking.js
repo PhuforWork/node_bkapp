@@ -12,11 +12,11 @@ class guest_booking extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    start_time: {
+    start: {
       type: DataTypes.DATE,
       allowNull: true
     },
-    end_time: {
+    end: {
       type: DataTypes.DATE,
       allowNull: true
     },
