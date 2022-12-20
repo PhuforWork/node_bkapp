@@ -11,7 +11,7 @@ const booking_user = async (req, res) => {
 
 const get_depart = async (req, res) => {
   const getdepart = await model.department.findAll();
-  successCode(res, "", "Get department success");
+  successCode(res, getdepart, "Get department success");
 };
 
 const booking_userid = async (req, res) => {
