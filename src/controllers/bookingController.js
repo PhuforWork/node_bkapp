@@ -19,7 +19,7 @@ const booking_userid = async (req, res) => {
   let check_id = { id }; //id user
   if (check_id) {
     const check_bkUser = await model.booking_info.findAll({
-      include: ["department_tbs", "persionality_tbs"],
+      include: ["department_tbs", "persionality_tbs","select_type_tbs"],
       where: {
         id_user: id,
       },
