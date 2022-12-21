@@ -69,7 +69,7 @@ const add_booking = async (req, res) => {
           await model.persionality_tb.create({
             value: values.value,
             label: values.label,
-            id_booking: id_user,
+            id_booking: idbk.id_booking,
           });
         })
       );
@@ -77,12 +77,12 @@ const add_booking = async (req, res) => {
       await model.select_type_tb.create({
         id_selection: id_selection,
         _values: _values,
-        id_booking: id_user,
+        id_booking: idbk.id_booking,
       });
       await model.department_tb.create({
         value: value,
         label: label,
-        id_booking: id_user,
+        id_booking: idbk.id_booking,
       });
 
       successCode(res, "", "Add booking success");
