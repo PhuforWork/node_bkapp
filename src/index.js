@@ -1,13 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const rootRoute = require("../src/routes/index");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+// const { createServer } = require("http");
+// const { Server } = require("socket.io");
 
 // const mysql = require("mysql2");
 const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer);
+// const httpServer = createServer(app);
+// const io = new Server(httpServer);
 
 // io.on("connection", () => {
 //   console.log("client connected");
