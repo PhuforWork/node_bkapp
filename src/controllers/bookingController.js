@@ -236,18 +236,19 @@ const delete_bk = async (req, res) => {
   let { id } = req.params; //id booking
   const check = await model.booking_info.findByPk(id);
   console.log(check.id_check_delete);
+  const dlt = await model.booking_info.findAll({where:{id_check_delete:check.id_check_delete}})
   if (check) {
     await model.department_tb.destroy({
-      where: { id_check_delete: check.id_check_delete },
+      where: { id_booking: dlt.id_booking },
     });
     await model.persionality_tb.destroy({
-      where: { id_check_delete: check.id_check_delete },
+      where: { id_booking: dlt.id_booking },
     });
     await model.select_type_tb.destroy({
-      where: { id_check_delete: check.id_check_delete },
+      where: { id_booking: dlt.id_booking },
     });
     await model.booking_info.destroy({
-      where: { id_check_delete: check.id_check_delete },
+      where: { id_booking: dlt.id_booking },
     });
     successCode(res, "", "Success delete");
   } else {
