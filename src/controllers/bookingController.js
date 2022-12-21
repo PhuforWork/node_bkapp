@@ -47,7 +47,7 @@ const add_booking = async (req, res) => {
     let id_selection = req.body.service.id_selection;
     let label = req.body.department.label;
     let value = req.body.department.value;
-    let id_check_delete = checkbk_n;
+
     let checkbk = Math.floor(Math.random() * checkbk_n) + 1;
     let personality = req.body.personality;
     let data = {
@@ -58,7 +58,7 @@ const add_booking = async (req, res) => {
       label,
       checkbk,
       id_orther_user,
-      id_check_delete
+      id_check_delete: checkbk_n,
     };
 
     if (data) {
@@ -236,10 +236,18 @@ const delete_bk = async (req, res) => {
   let { id } = req.params; //id booking
   const check = await model.booking_info.findAll({ where: { id_booking: id } });
   if (check) {
-    await model.department_tb.destroy({ where: { id_check_delete: check.id_check_delete } });
-    await model.persionality_tb.destroy({ where: { id_check_delete: check.id_check_delete } });
-    await model.select_type_tb.destroy({ where: { id_check_delete: check.id_check_delete } });
-    await model.booking_info.destroy({ where: { id_check_delete: check.id_check_delete } });
+    await model.department_tb.destroy({
+      where: { id_check_delete: check.id_check_delete },
+    });
+    await model.persionality_tb.destroy({
+      where: { id_check_delete: check.id_check_delete },
+    });
+    await model.select_type_tb.destroy({
+      where: { id_check_delete: check.id_check_delete },
+    });
+    await model.booking_info.destroy({
+      where: { id_check_delete: check.id_check_delete },
+    });
     successCode(res, "", "Success delete");
   } else {
     failCode(res, "", "Delete fail");
