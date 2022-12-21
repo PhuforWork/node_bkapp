@@ -84,13 +84,13 @@ const add_booking = async (req, res) => {
         label: label,
         id_booking: idbk.id_booking,
       });
-      const a = model.department_tb.findAll({
+      const a = await model.department_tb.findAll({
         where: { id_booking: idbk.id_booking },
       });
-      const b = model.persionality_tb.findAll({
+      const b = await model.persionality_tb.findAll({
         where: { id_booking: idbk.id_booking },
       });
-      const c = model.select_type_tb.findAll({
+      const c = await model.select_type_tb.findAll({
         where: { id_booking: idbk.id_booking },
       });
       console.log({ a, b, c });
