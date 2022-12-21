@@ -234,7 +234,7 @@ const delete_bk = async (req, res) => {
   let { end } = req.params; //id booking
   // const check = await model.booking_info.findByPk(id);
   console.log(end);
-  successCode("success Delete");
+  successCode(res,"","success Delete");
   // if (check) {
   //   await model.department_tb.destroy({ where: { id_booking: id } });
   //   await model.persionality_tb.destroy({ where: { id_booking: id } });
