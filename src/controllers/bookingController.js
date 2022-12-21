@@ -233,13 +233,13 @@ const update_booking = async (req, res) => {
 const delete_bk = async (req, res) => {
   let { end } = req.params; //id booking
   date = new Date(end).toISOString().slice(0, 19).replace("T", " ");
-  const check = await model.booking_info.findAll({ where: { end: date } });
-  
+  const check = await model.booking_info.findAll({ where: { end: end } });
+
   if (check) {
-    await model.department_tb.destroy({ where: { end: date } });
-    await model.persionality_tb.destroy({ where: { end: date } });
-    await model.select_type_tb.destroy({ where: { end: date } });
-    await model.booking_info.destroy({ where: { end: date } });
+    await model.department_tb.destroy({ where: { end: end } });
+    await model.persionality_tb.destroy({ where: { end: end } });
+    await model.select_type_tb.destroy({ where: { end: end } });
+    await model.booking_info.destroy({ where: { end: end } });
     successCode(res, "", "Success delete");
   } else {
     failCode(res, "", "Delete fail");
