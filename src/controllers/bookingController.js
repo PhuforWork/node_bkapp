@@ -236,7 +236,12 @@ const delete_bk = async (req, res) => {
   let { id } = req.params; //id booking
   const check = await model.booking_info.findByPk(id);
   const dlt = await model.booking_info.findAll({where:{id_check_delete:check.id_check_delete}})
-  console.log(dlt.id_booking);
+  Promise.all(
+    dlt.map((values) => {
+      console.log(values);
+      
+    })
+  );
   if (check) {
     await model.department_tb.destroy({
       where: { id_booking: dlt.id_booking },
