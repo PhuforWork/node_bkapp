@@ -39,6 +39,10 @@ class booking_info extends Sequelize.Model {
     id_orther_user: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    id_check_delete: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
     }
   }, {
     sequelize,
