@@ -42,12 +42,12 @@ const add_booking = async (req, res) => {
     let { id } = req.params; // id user
     let id_user = id;
     let { start, end, detail, id_orther_user } = req.body;
-    let checkbk = req.body.id;
+    let checkbk_n = req.body.id;
     let _values = req.body.service._values;
     let id_selection = req.body.service.id_selection;
     let label = req.body.department.label;
     let value = req.body.department.value;
-    checkbk += 1;
+    let checkbk = Math.floor(Math.random() * checkbk_n) + 1;
     let personality = req.body.personality;
     let data = {
       start,
