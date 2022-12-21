@@ -235,6 +235,7 @@ const update_booking = async (req, res) => {
 const delete_bk = async (req, res) => {
   let { id } = req.params; //id booking
   const check = await model.booking_info.findAll({ where: { id_booking: id } });
+  console.log(check.id_check_delete);
   if (check) {
     await model.department_tb.destroy({
       where: { id_check_delete: check.id_check_delete },
