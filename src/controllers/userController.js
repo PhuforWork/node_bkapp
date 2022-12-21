@@ -6,7 +6,7 @@ const fs = require("fs");
 const { log } = require("console");
 //Read all user
 const getuser = async (req, res) => {
-  let data = await model.users.findAll({include:["departments"]});
+  let data = await model.users.findAll({ include: ["departments"] });
   res.send(data);
 };
 // Read user by id
@@ -23,7 +23,9 @@ const getUserId = async (req, res) => {
     where: { id_user: id },
     raw: false,
   });
-
+  let data_orther_user = await model.booking_info.findAll({
+    where: { id_orther_user: data_booking.id_orther_user },
+  });
   let data_guest = await model.guest_booking.findAll({
     include: ["service_guests"],
     where: { id_user: id },
@@ -47,7 +49,8 @@ const getUserId = async (req, res) => {
     persionalities,
     departments,
     data_booking,
-    data_guest
+    data_guest,
+    data_orther_user
   });
 };
 // Login user
