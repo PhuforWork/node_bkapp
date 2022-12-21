@@ -62,7 +62,7 @@ const add_booking = async (req, res) => {
     if (data) {
       await model.booking_info.create(data);
       const idbk = await model.booking_info.findOne({
-        where: { checkbk: checkbk + 1},
+        where: { checkbk: checkbk },
       });
       Promise.all(
         personality.map(async (values) => {
