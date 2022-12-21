@@ -19,7 +19,7 @@ const booking_userid = async (req, res) => {
   let check_id = { id }; //id user
   if (check_id) {
     const check_bkUser = await model.booking_info.findAll({
-      include: ["department_tbs", "persionality_tbs","select_type_tbs"],
+      include: ["department_tbs", "persionality_tbs", "select_type_tbs"],
       where: {
         id_user: id,
       },
@@ -56,7 +56,7 @@ const add_booking = async (req, res) => {
       id_user,
       label,
       checkbk,
-      id_orther_user
+      id_orther_user,
     };
 
     if (data) {
@@ -84,6 +84,16 @@ const add_booking = async (req, res) => {
         label: label,
         id_booking: idbk.id_booking,
       });
+      const a = model.department_tb.findAll({
+        where: { id_booking: idbk.id_booking },
+      });
+      const b = model.persionality_tb.findAll({
+        where: { id_booking: idbk.id_booking },
+      });
+      const c = model.select_type_tb.findAll({
+        where: { id_booking: idbk.id_booking },
+      });
+      console.log({ a, b, c });
       successCode(res, "", "Add booking success");
     } else {
       failCode(res, "", "Missing fields booking");
@@ -253,5 +263,5 @@ module.exports = {
   get_department_slect,
   update_persional,
   delete_bk,
-  get_depart
+  get_depart,
 };

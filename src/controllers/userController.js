@@ -23,9 +23,7 @@ const getUserId = async (req, res) => {
     where: { id_user: id },
     raw: false,
   });
-  // let data_orther_user = await model.booking_info.findAll({
-  //   where: { id_orther_user: data_booking.id_orther_user },
-  // });
+
   let data_guest = await model.guest_booking.findAll({
     include: ["service_guests"],
     where: { id_user: id },
