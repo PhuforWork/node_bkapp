@@ -58,13 +58,13 @@ const add_booking = async (req, res) => {
       checkbk,
       id_orther_user,
     };
-    
+
     if (data) {
       await model.booking_info.create(data);
       const idbk = await model.booking_info.findOne({
-        where: { checkbk: checkbk },
+        where: { id_user },
       });
-      console.log("test",idbk.id_booking);
+      console.log("test", idbk.id_booking);
       Promise.all(
         personality.map(async (values) => {
           await model.persionality_tb.create({
