@@ -33,5 +33,5 @@ bookingRoute.put("/update-persional/:id", upload.none(), update_persional);
 
 bookingRoute.post("/add-guest/:id", upload.none(), guest_booking);
 
-bookingRoute.delete("/delete-booking/:end", delete_bk);
+bookingRoute.delete("/delete-booking/:id", delete_bk);
 module.exports = bookingRoute;
