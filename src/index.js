@@ -3,7 +3,7 @@ const cors = require("cors");
 const rootRoute = require("../src/routes/index");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const { log } = require("console");
+
 // const mysql = require("mysql2");
 const app = express();
 const httpServer = createServer(app);
