@@ -69,7 +69,7 @@ const add_booking = async (req, res) => {
           await model.persionality_tb.create({
             value: values.value,
             label: values.label,
-            id_booking: idbk.id_booking,
+            id_booking: id_user,
           });
         })
       );
@@ -77,23 +77,14 @@ const add_booking = async (req, res) => {
       await model.select_type_tb.create({
         id_selection: id_selection,
         _values: _values,
-        id_booking: idbk.id_booking,
+        id_booking: id_user,
       });
       await model.department_tb.create({
         value: value,
         label: label,
-        id_booking: idbk.id_booking,
+        id_booking: id_user,
       });
-      const a = await model.department_tb.findAll({
-        where: { id_booking: idbk.id_booking },
-      });
-      const b = await model.persionality_tb.findAll({
-        where: { id_booking: idbk.id_booking },
-      });
-      const c = await model.select_type_tb.findAll({
-        where: { id_booking: idbk.id_booking },
-      });
-      console.log({ a, b, c });
+
       successCode(res, "", "Add booking success");
     } else {
       failCode(res, "", "Missing fields booking");
