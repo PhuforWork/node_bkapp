@@ -56,7 +56,7 @@ const add_booking = async (req, res) => {
       id_user,
       label,
       checkbk,
-      id_orther_user,
+      id_orther_user: checkbk_n,
     };
 
     if (data) {
