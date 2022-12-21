@@ -64,7 +64,7 @@ const add_booking = async (req, res) => {
       const idbk = await model.booking_info.findOne({
         where: { checkbk: checkbk },
       });
-      console.log("test",idbk.id_booking);
+      console.log("test", idbk.id_booking);
       Promise.all(
         personality.map(async (values) => {
           await model.persionality_tb.create({
@@ -231,16 +231,19 @@ const update_booking = async (req, res) => {
 };
 
 const delete_bk = async (req, res) => {
-  let { id } = req.params; //id booking
-  const check = await model.booking_info.findByPk(id);
-
-  if (check) {
-    await model.department_tb.destroy({ where: { id_booking: id } });
-    await model.persionality_tb.destroy({ where: { id_booking: id } });
-    await model.select_type_tb.destroy({ where: { id_booking: id } });
-    await model.booking_info.destroy({ where: { id_booking: id } });
-    successCode(res, "", "Success delete");
-  }
+  let { end } = req.params; //id booking
+  // const check = await model.booking_info.findByPk(id);
+  console.log(end);
+  successCode("success Delete");
+  // if (check) {
+  //   await model.department_tb.destroy({ where: { id_booking: id } });
+  //   await model.persionality_tb.destroy({ where: { id_booking: id } });
+  //   await model.select_type_tb.destroy({ where: { id_booking: id } });
+  //   await model.booking_info.destroy({ where: { id_booking: id } });
+  //   successCode(res, "", "Success delete");
+  // }else{
+  //   failCode(res,"","Delete fail")
+  // }
 };
 
 module.exports = {
