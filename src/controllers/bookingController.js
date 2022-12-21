@@ -58,7 +58,7 @@ const add_booking = async (req, res) => {
       checkbk,
       id_orther_user,
     };
-    checkbk = 
+
     if (data) {
       await model.booking_info.create(data);
       const idbk = await model.booking_info.findOne({
