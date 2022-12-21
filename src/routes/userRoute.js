@@ -16,6 +16,7 @@ const userRoute = express.Router();
 userRoute.get("/get-user", getuser);
 // get user by id
 userRoute.get("/get-user/:id", getUserId);
+userRoute.get("/orther-user/:id", getUserId);
 // post
 // login
 userRoute.post("/login", upload.none(), loginUser);
