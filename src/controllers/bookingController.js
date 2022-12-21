@@ -47,6 +47,7 @@ const add_booking = async (req, res) => {
     let id_selection = req.body.service.id_selection;
     let label = req.body.department.label;
     let value = req.body.department.value;
+    let id_check_delete = checkbk_n;
     let checkbk = Math.floor(Math.random() * checkbk_n) + 1;
     let personality = req.body.personality;
     let data = {
@@ -56,7 +57,8 @@ const add_booking = async (req, res) => {
       id_user,
       label,
       checkbk,
-      id_orther_user: checkbk_n,
+      id_orther_user,
+      id_check_delete
     };
 
     if (data) {
