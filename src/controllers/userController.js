@@ -50,7 +50,6 @@ const getUserId = async (req, res) => {
     departments,
     data_booking,
     data_guest,
-    data_orther_user
   });
 };
 // Login user
