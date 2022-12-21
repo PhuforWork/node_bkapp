@@ -235,26 +235,27 @@ const update_booking = async (req, res) => {
 const delete_bk = async (req, res) => {
   let { id } = req.params; //id booking
   const check = await model.booking_info.findByPk(id);
-  const dlt = await model.booking_info.findAll({where:{id_check_delete:check.id_check_delete}})
-  Promise.all(
-    dlt.map((values) => {
-      console.log(values);
-      
-    })
-  );
+  const dlt = await model.booking_info.findAll({
+    where: { id_check_delete: check.id_check_delete },
+  });
   if (check) {
-    await model.department_tb.destroy({
-      where: { id_booking: dlt.id_booking },
-    });
-    await model.persionality_tb.destroy({
-      where: { id_booking: dlt.id_booking },
-    });
-    await model.select_type_tb.destroy({
-      where: { id_booking: dlt.id_booking },
-    });
-    await model.booking_info.destroy({
-      where: { id_booking: dlt.id_booking },
-    });
+    Promise.all(
+      dlt.map(async (values) => {
+        console.log(values);
+        await model.department_tb.destroy({
+          where: { id_booking: values.id_booking },
+        });
+        await model.persionality_tb.destroy({
+          where: { id_booking: values.id_booking },
+        });
+        await model.select_type_tb.destroy({
+          where: { id_booking: values.id_booking },
+        });
+        await model.booking_info.destroy({
+          where: { id_booking: values.id_booking },
+        });
+      })
+    );
     successCode(res, "", "Success delete");
   } else {
     failCode(res, "", "Delete fail");
