@@ -9,9 +9,9 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
-io.on("connection", () => {
-  console.log("client connected");
-});
+// io.on("connection", () => {
+//   console.log("client connected");
+// });
 
 app.use(express.json());
 app.use(cors());
