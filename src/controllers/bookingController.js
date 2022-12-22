@@ -13,6 +13,13 @@ const get_depart = async (req, res) => {
   const getdepart = await model.department.findAll();
   successCode(res, getdepart, "Get department success");
 };
+const get_persional_id = async (req, res) => {
+  let { id } = req.params;//id user
+  const get_persional = await model.persionality.findAll({
+    where: { id_user: id },
+  });
+  successCode(res, get_persional, "Get persional success");
+};
 
 const booking_userid = async (req, res) => {
   let { id } = req.params;
@@ -184,7 +191,7 @@ const update_persional = async (req, res) => {
 // booking calender
 const update_booking = async (req, res) => {
   let { id } = req.params; // id booking
-  let { start, end, detail } = req.body;
+  let { start, end, detail, id_orther_user } = req.body;
   let _values = req.body.service._values;
   let label = req.body.department.label;
   let checkbk = req.body.id;
@@ -195,37 +202,48 @@ const update_booking = async (req, res) => {
     detail,
     checkbk,
     label,
+    id_orther_user,
   };
-  console.log(data.detail);
+  let check1 = await model.booking_info.findOne({ where: { id_booking: id } });
+  let check2 = await model.booking_info.findAll({
+    where: { id_check_delete: check1.id_check_delete },
+  });
   if (data) {
-    await model.booking_info.update(data, { where: { id_booking: id } });
-    const idbk = await model.booking_info.findOne({
-      where: { checkbk: checkbk },
-    });
-    await model.persionality_tb.destroy({
-      where: { id_booking: idbk.id_booking },
-    });
     Promise.all(
-      personality.map((values) => {
-        model.persionality_tb.create({
-          value: values.value,
-          label: values.label,
-          id_booking: idbk.id_booking,
+      check2.map(async (ele) => {
+        await model.booking_info.update(data, {
+          where: { checkbk: values.checkbk },
         });
+        await model.persionality_tb.destroy({
+          where: { checkbk: ele.checkbk },
+        });
+        Promise.all(
+          personality.map((values) => {
+            model.persionality_tb.create({
+              value: values.value,
+              label: values.label,
+              id_booking: ele.id_booking,
+            });
+          })
+        );
+        await model.select_type_tb.update(
+          {
+            _values: _values,
+          },
+          { where: { id_booking: ele.id_booking } }
+        );
+        await model.department_tb.update(
+          {
+            label: label,
+          },
+          { where: { id_booking: ele.id_booking } }
+        );
       })
     );
-    await model.select_type_tb.update(
-      {
-        _values: _values,
-      },
-      { where: { id_booking: idbk.id_booking } }
-    );
-    await model.department_tb.update(
-      {
-        label: label,
-      },
-      { where: { id_booking: idbk.id_booking } }
-    );
+    // const idbk = await model.booking_info.findOne({
+    //   where: { checkbk: checkbk },
+    // });
+
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
@@ -275,4 +293,5 @@ module.exports = {
   update_persional,
   delete_bk,
   get_depart,
+  get_persional_id
 };

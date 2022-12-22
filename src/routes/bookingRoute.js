@@ -12,6 +12,7 @@ const {
   update_persional,
   delete_bk,
   get_depart,
+  get_persional_id
 } = require("../controllers/bookingController");
 const { guest_booking } = require("../controllers/guestController");
 const upload = require("../Middlewares/upload");
@@ -21,6 +22,7 @@ bookingRoute.get("/get-booking", booking_user);
 bookingRoute.get("/get-booking/:id", booking_userid);
 bookingRoute.get("/get-service/:id", get_department_slect);
 bookingRoute.get("/get-department", get_depart);
+bookingRoute.get("/get-personality/:id", get_persional_id);
 
 bookingRoute.post("/add-booking/:id", upload.any(), add_booking);
 bookingRoute.post("/add-depart/:id", upload.any(), add_depart);
