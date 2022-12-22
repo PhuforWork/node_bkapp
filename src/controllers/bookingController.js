@@ -14,7 +14,7 @@ const get_depart = async (req, res) => {
   successCode(res, getdepart, "Get department success");
 };
 const get_persional_id = async (req, res) => {
-  let { id } = req.params;//id user
+  let { id } = req.params; //id user
   const get_persional = await model.persionality.findAll({
     where: { id_user: id },
   });
@@ -206,7 +206,12 @@ const update_booking = async (req, res) => {
   let check2 = await model.booking_info.findAll({
     where: { id_check_delete: check1.id_check_delete },
   });
-  console.log("check2",check2.id_check_delete);
+  Promise.all(
+    check2.map((values) => {
+      console.log(values.checkbk);
+    })
+  );
+  console.log("check2", check2.id_check_delete);
   if (data) {
     Promise.all(
       check2.map(async (ele) => {
@@ -288,5 +293,5 @@ module.exports = {
   update_persional,
   delete_bk,
   get_depart,
-  get_persional_id
+  get_persional_id,
 };
