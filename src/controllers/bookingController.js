@@ -206,12 +206,8 @@ const update_booking = async (req, res) => {
   let check2 = await model.booking_info.findAll({
     where: { id_check_delete: check1.id_check_delete },
   });
-  Promise.all(
-    check2.map((values) => {
-      console.log(values.checkbk);
-    })
-  );
-  console.log("check2", check2.id_check_delete);
+
+
   if (data) {
     Promise.all(
       check2.map(async (ele) => {
@@ -219,7 +215,7 @@ const update_booking = async (req, res) => {
           where: { checkbk: ele.checkbk },
         });
         await model.persionality_tb.destroy({
-          where: { checkbk: ele.checkbk },
+          where: { id_booking: ele.id_booking },
         });
         Promise.all(
           personality.map((values) => {
