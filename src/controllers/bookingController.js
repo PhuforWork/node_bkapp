@@ -206,7 +206,7 @@ const update_booking = async (req, res) => {
   let check2 = await model.booking_info.findAll({
     where: { id_check_delete: check1.id_check_delete },
   });
-  console.log(check2.checkbk);
+  console.log("check2",check2.checkbk);
   if (data) {
     Promise.all(
       check2.map(async (ele) => {
