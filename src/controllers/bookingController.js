@@ -194,13 +194,11 @@ const update_booking = async (req, res) => {
   let { start, end, detail, id_orther_user } = req.body;
   let _values = req.body.service._values;
   let label = req.body.department.label;
-  let checkbk = req.body.id;
   let personality = req.body.personality;
   let data = {
     start,
     end,
     detail,
-    checkbk,
     label,
     id_orther_user,
   };
@@ -212,7 +210,7 @@ const update_booking = async (req, res) => {
     Promise.all(
       check2.map(async (ele) => {
         await model.booking_info.update(data, {
-          where: { checkbk: values.checkbk },
+          where: { checkbk: ele.checkbk },
         });
         await model.persionality_tb.destroy({
           where: { checkbk: ele.checkbk },
@@ -240,10 +238,6 @@ const update_booking = async (req, res) => {
         );
       })
     );
-    // const idbk = await model.booking_info.findOne({
-    //   where: { checkbk: checkbk },
-    // });
-
     successCode(res, "", "Add booking success");
   } else {
     failCode(res, "", "Missing fields booking");
