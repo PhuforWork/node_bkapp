@@ -84,7 +84,7 @@ const sigUp = async (req, res) => {
     let data = {
       user_name,
       email,
-      _password: bcrypt.hashSync(_password, 10),
+      _password
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
@@ -108,7 +108,7 @@ const updateUser = async (req, res) => {
     let { id } = req.params;
     let { user_name, email, _password } = req.body;
     // check data user
-    console.log({ user_name, email, _password });
+
     let checkUser = model.users.findByPk(id);
     if (checkUser) {
       await model.users.update(
