@@ -2,6 +2,7 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
+const bcrypt = require("bcrypt");
 const fs = require("fs");
 //Read all user
 const getuser = async (req, res) => {
@@ -65,7 +66,7 @@ const loginUser = async (req, res) => {
     });
     if (checkUser) {
       if (checkUser._password === _password) {
-        successCode(res,"", "Login successfully");
+        successCode(res, "", "Login successfully");
       } else {
         failCode(res, "Login fail", "Password not correct");
       }
@@ -80,7 +81,11 @@ const loginUser = async (req, res) => {
 const sigUp = async (req, res) => {
   try {
     let { user_name, email, _password } = req.body;
-    let data = { user_name, email, _password };
+    let data = {
+      user_name,
+      email,
+      _password: bcrypt.hashSync(_password, 10),
+    };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
       where: {
