@@ -3,7 +3,6 @@ const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const fs = require("fs");
-const { log } = require("console");
 //Read all user
 const getuser = async (req, res) => {
   let data = await model.users.findAll({ include: ["departments"] });
