@@ -36,6 +36,8 @@ const getUserId = async (req, res) => {
     select_types,
     persionalities,
     departments,
+    maxtime,
+    mintime,
   } = data;
   res.send({
     id_user,
@@ -45,6 +47,8 @@ const getUserId = async (req, res) => {
     select_types,
     persionalities,
     departments,
+    maxtime,
+    mintime,
     data_booking,
     data_guest,
   });
@@ -183,13 +187,13 @@ const change_pass = async (req, res) => {
 const put_max = async (req, res) => {
   let { id } = req.params; // id user
   let { maxtime } = req.body;
-  let data = { maxtime};
+  let data = { maxtime };
   await model.users.update(data, { where: { id_user: id } });
 };
 const put_min = async (req, res) => {
   let { id } = req.params; // id user
   let { mintime } = req.body;
-  let data = { mintime};
+  let data = { mintime };
   await model.users.update(data, { where: { id_user: id } });
 };
 module.exports = {
