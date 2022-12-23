@@ -32,7 +32,7 @@ userRoute.post("/change-pass", upload.none(), change_pass);
 userRoute.put("/update-user/:id", upload.none(), updateUser);
 userRoute.put("/maxmin-time/:id", upload.none(), put_max_min);
 
-userRoute.post("/upimg/:id", upload.single("image_url"), update_img);
+userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 // delete
 
 module.exports = userRoute;
