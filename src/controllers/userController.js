@@ -69,7 +69,7 @@ const loginUser = async (req, res) => {
     };
     if (checkUser) {
       if (checkUser._password === _password) {
-        successCode(res, resdata, "Login successfully");
+        successCode(res, "", "Login successfully");
       } else {
         failCode(res, "Login fail", "Password not correct");
       }
@@ -95,7 +95,7 @@ const sigUp = async (req, res) => {
       failCode(res, status, "User name already used");
     } else {
       await model.users.create(data);
-      successCode(res, data, "Sig up successfully");
+      successCode(res, "", "Sig up successfully");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
