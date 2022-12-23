@@ -186,9 +186,9 @@ const change_pass = async (req, res) => {
 
 const put_max = async (req, res) => {
   let { id } = req.params; // id user
-  let maxtime = req.body;
-  console.log("body",req.query);
-  // await model.users.update(maxtime, { where: { id_user: id } });
+  let {maxtime} = req.query;
+  let data = {maxtime}
+  await model.users.update(data, { where: { id_user: id } });
   successCode(res,"","Success");
 };
 const put_min = async (req, res) => {
