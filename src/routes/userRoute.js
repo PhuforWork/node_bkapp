@@ -31,8 +31,8 @@ userRoute.post("/change-pass", upload.none(), change_pass);
 // put
 // update user
 userRoute.put("/update-user/:id", upload.none(), updateUser);
-userRoute.put("/max-time/:id", upload.none(), put_max);
-userRoute.put("/min-time/:id", upload.none(), put_min);
+userRoute.put("/max-time/:id", upload.any(), put_max);
+userRoute.put("/min-time/:id", upload.any(), put_min);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 // delete
