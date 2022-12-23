@@ -28,6 +28,14 @@ class users extends Sequelize.Model {
     image_url: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    maxtime: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    mintime: {
+      type: DataTypes.DATE,
+      allowNull: false
     }
   }, {
     sequelize,
