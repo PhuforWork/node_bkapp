@@ -179,6 +179,13 @@ const change_pass = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+
+const put_max_min = async (req, res) => {
+  let { id } = req.params; // id user
+  let { maxtime, mintime } = req.body;
+  let data = { maxtime, mintime };
+  await model.users.update(data, { where: { id_user: id } });
+};
 module.exports = {
   getuser,
   loginUser,
@@ -188,4 +195,5 @@ module.exports = {
   update_img,
   forgot_password,
   change_pass,
+  put_max_min,
 };
