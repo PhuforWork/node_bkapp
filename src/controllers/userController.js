@@ -1,6 +1,7 @@
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
+var md5 = require("md5");
 const model = init_models(sequelize);
 const fs = require("fs");
 //Read all user
@@ -57,6 +58,7 @@ const getUserId = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     let { user_name, _password } = req.body;
+    _password = md5(_password);
     const checkUser = await model.users.findOne({
       where: {
         user_name,
@@ -84,7 +86,8 @@ const loginUser = async (req, res) => {
 const sigUp = async (req, res) => {
   try {
     let { user_name, email, _password } = req.body;
-    let data = { user_name, email, _password };
+    let _passwords = md5(_password);
+    let data = { user_name, email, _password: _passwords };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
       where: {
