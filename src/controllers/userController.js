@@ -180,10 +180,16 @@ const change_pass = async (req, res) => {
   }
 };
 
-const put_max_min = async (req, res) => {
+const put_max = async (req, res) => {
   let { id } = req.params; // id user
-  let { maxtime, mintime } = req.body;
-  let data = { maxtime, mintime };
+  let { maxtime } = req.body;
+  let data = { maxtime};
+  await model.users.update(data, { where: { id_user: id } });
+};
+const put_min = async (req, res) => {
+  let { id } = req.params; // id user
+  let { mintime } = req.body;
+  let data = { mintime};
   await model.users.update(data, { where: { id_user: id } });
 };
 module.exports = {
@@ -195,5 +201,6 @@ module.exports = {
   update_img,
   forgot_password,
   change_pass,
-  put_max_min,
+  put_max,
+  put_min,
 };
