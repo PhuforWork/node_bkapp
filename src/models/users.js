@@ -31,11 +31,11 @@ class users extends Sequelize.Model {
     },
     maxtime: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     },
     mintime: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
