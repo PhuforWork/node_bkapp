@@ -109,7 +109,7 @@ const updateUser = async (req, res) => {
     // check data user
 
     const checkUser = model.users.findByPk(id);
-    
+
     if (checkUser._password === current_password) {
       await model.users.update(
         { user_name, email, _password },
@@ -117,7 +117,11 @@ const updateUser = async (req, res) => {
       );
       successCode(res, "Update successfully", "Update successfully");
     } else {
-      failCode(res, "", "Update failed");
+      failCode(
+        res,
+        "Current password does not match",
+        "Current password does not match"
+      );
     }
   } catch (error) {
     errorCode(res, "Error BackEnd");
