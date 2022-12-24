@@ -114,7 +114,11 @@ const updateUser = async (req, res) => {
     let { user_name, email, current_password, _password } = req.body;
     // check data user
     const checkUser = await model.users.findByPk(id);
-    if (checkUser._password === current_password) {
+    const checkpass = await bcrypt.compareSync(
+      current_password,
+      checkUser._password
+    );
+    if (checkpass) {
       await model.users.update(
         { user_name, email, _password },
         { where: { id_user: id } }
