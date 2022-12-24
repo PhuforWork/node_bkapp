@@ -6,8 +6,10 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 //Read all user
 const getuser = async (req, res) => {
-  let data = await model.users.findAll({ include: ["departments"] });
-  res.send(data);
+  let data = await model.users.findAll();
+  let departments = await model.department.findAll();
+  let { id_user, user_name } = data;
+  res.send({ id_user, user_name,departments});
 };
 // Read user by id
 const getUserId = async (req, res) => {
@@ -63,7 +65,10 @@ const loginUser = async (req, res) => {
     });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     if (checkUser) {
-      const checkpass = await bcrypt.compareSync(_password, checkUser._password);
+      const checkpass = await bcrypt.compareSync(
+        _password,
+        checkUser._password
+      );
       if (checkpass) {
         successCode(res, data, "Login successfully");
       } else {
