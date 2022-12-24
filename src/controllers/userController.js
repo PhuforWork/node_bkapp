@@ -33,7 +33,6 @@ const getUserId = async (req, res) => {
     id_user,
     user_name,
     email,
-    _password,
     select_types,
     persionalities,
     departments,
@@ -44,7 +43,6 @@ const getUserId = async (req, res) => {
     id_user,
     user_name,
     email,
-    _password,
     select_types,
     persionalities,
     departments,
@@ -107,16 +105,17 @@ const sigUp = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let { id } = req.params;
-    let { user_name, email, _password } = req.body;
+    let { user_name, email, current_password, _password } = req.body;
     // check data user
 
-    let checkUser = model.users.findByPk(id);
-    if (checkUser) {
+    const checkUser = model.users.findByPk(id);
+    
+    if (checkUser._password === current_password) {
       await model.users.update(
         { user_name, email, _password },
         { where: { id_user: id } }
       );
-      successCode(res, { user_name, email, _password }, "Update successfully");
+      successCode(res, "Update successfully", "Update successfully");
     } else {
       failCode(res, "", "Update failed");
     }
