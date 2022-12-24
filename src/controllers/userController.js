@@ -4,6 +4,7 @@ const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 // const bcrypt = require("bcrypt");
 const fs = require("fs");
+// const { log } = require("console");
 //Read all user
 const getuser = async (req, res) => {
   let data = await model.users.findAll({ include: ["departments"] });
@@ -107,9 +108,8 @@ const updateUser = async (req, res) => {
     let { id } = req.params;
     let { user_name, email, current_password, _password } = req.body;
     // check data user
-
     const checkUser = model.users.findByPk(id);
-
+    console.log(checkUser._password);
     if (checkUser._password === current_password) {
       await model.users.update(
         { user_name, email, _password },
