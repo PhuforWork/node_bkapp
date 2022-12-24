@@ -64,9 +64,10 @@ const loginUser = async (req, res) => {
         user_name,
       },
     });
+    let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     if (checkUser) {
       if (checkUser._password === _password) {
-        successCode(res, "", "Login successfully");
+        successCode(res, data, "Login successfully");
       } else {
         failCode(res, "Login fail", "Password not correct");
       }
@@ -84,7 +85,7 @@ const sigUp = async (req, res) => {
     let data = {
       user_name,
       email,
-      _password
+      _password,
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
