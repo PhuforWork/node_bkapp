@@ -56,7 +56,6 @@ const getUserId = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     let { user_name, _password } = req.body;
-    console.log(req.body);
     const checkUser = await model.users.findOne({
       where: {
         user_name,
@@ -108,7 +107,6 @@ const updateUser = async (req, res) => {
     let { user_name, email, current_password, _password } = req.body;
     // check data user
     const checkUser = await model.users.findByPk(id);
-    console.log(checkUser._password);
     if (checkUser._password === current_password) {
       await model.users.update(
         { user_name, email, _password },
