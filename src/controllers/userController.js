@@ -109,7 +109,7 @@ const updateUser = async (req, res) => {
     let { user_name, email, current_password, _password } = req.body;
     // check data user
     const checkUser = model.users.findByPk(id);
-    console.log(checkUser);
+    console.log(id);
     if (checkUser._password === current_password) {
       await model.users.update(
         { user_name, email, _password },
