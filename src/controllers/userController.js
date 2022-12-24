@@ -6,10 +6,11 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 //Read all user
 const getuser = async (req, res) => {
-  let datas = await model.users.findAll();
-  let departments = await model.department.findAll();
-  let data = { id_user: datas.id_user, user_name: datas.user_name };
-  res.send({ datas, departments });
+  let data = await model.users.findAll({
+    include: ["departments"],
+    attributes: { exclude: ["_password"] },
+  });
+  res.send(data);
 };
 // Read user by id
 const getUserId = async (req, res) => {
