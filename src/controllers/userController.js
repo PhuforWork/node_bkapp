@@ -8,7 +8,7 @@ const fs = require("fs");
 const getuser = async (req, res) => {
   let data = await model.users.findAll({
     include: ["departments"],
-    attributes: { exclude: ["_password"] },
+    attributes: { exclude: ["_password","email",] },
   });
   res.send(data);
 };
