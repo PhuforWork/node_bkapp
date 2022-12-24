@@ -9,7 +9,7 @@ const getuser = async (req, res) => {
   let datas = await model.users.findAll();
   let departments = await model.department.findAll();
   let data = { id_user: datas.id_user, user_name: datas.user_name };
-  res.send(data, departments );
+  res.send({ datas, departments });
 };
 // Read user by id
 const getUserId = async (req, res) => {
