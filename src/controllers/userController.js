@@ -2,9 +2,8 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const fs = require("fs");
-// const { log } = require("console");
 //Read all user
 const getuser = async (req, res) => {
   let data = await model.users.findAll({ include: ["departments"] });
@@ -84,7 +83,7 @@ const sigUp = async (req, res) => {
     let data = {
       user_name,
       email,
-      _password,
+      _password: bcrypt.hashSync(_password,10),
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
@@ -96,10 +95,10 @@ const sigUp = async (req, res) => {
       failCode(res, status, "User name already used");
     } else {
       await model.users.create(data);
-      successCode(res, data, "Sig up successfully");
+      successCode(res, "Sig up successfully", "Sig up successfully");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, "Error 500", "Error 500");
   }
 };
 
