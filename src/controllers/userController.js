@@ -63,13 +63,14 @@ const loginUser = async (req, res) => {
     });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     if (checkUser) {
-      if (checkUser._password === _password) {
+      const checkpass = await bcrypt.compareSync(_password, checkUser._password);
+      if (checkpass) {
         successCode(res, data, "Login successfully");
       } else {
-        failCode(res, "Login fail", "Password not correct");
+        failCode(res, "Password not correct", "Password not correct");
       }
     } else {
-      failCode(res, "Login fail", "User not correct");
+      failCode(res, "Login fail", "Login fail");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -82,7 +83,7 @@ const sigUp = async (req, res) => {
     let data = {
       user_name,
       email,
-      _password: bcrypt.hashSync(_password,10),
+      _password: bcrypt.hashSync(_password, 10),
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
