@@ -2,7 +2,7 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const fs = require("fs");
 //Read all user
 const getuser = async (req, res) => {
