@@ -175,20 +175,14 @@ const forgot_password = async (req, res) => {
 const change_pass = async (req, res) => {
   try {
     let { email, _password } = req.body;
-    data_review = { email, _password };
     const check_email = await model.users.findOne({
       where: {
         email,
       },
     });
     if (check_email) {
-      await model.users.update({ _password }, { where: { email: email } });
-      const check_new_email = await model.users.findOne({
-        where: {
-          email,
-        },
-      });
-      successCode(res, check_new_email, "Change password successfully");
+      await model.users.update({ _password:bcrypt.hashSync(_password) }, { where: { email: email } });
+      successCode(res, "", "Change password successfully");
     } else {
       failCode(res, "", "Change password failed");
     }
