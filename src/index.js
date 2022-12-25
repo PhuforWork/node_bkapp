@@ -11,6 +11,8 @@ app.use(express.static("."));
 app.listen(8081);
 
 app.get("/test", (req, res) => {
+  let test = req.query;
+  console.log(test);
   res.send("Hello");
 });
 
