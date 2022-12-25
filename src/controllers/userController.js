@@ -66,11 +66,11 @@ const loginUser = async (req, res) => {
     });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     if (checkUser) {
-      const checkpass = await bcrypt.compareSync(
-        _password,
-        checkUser._password
-      );
-      if (checkpass) {
+      // const checkpass = await bcrypt.compareSync(
+      //   _password,
+      //   checkUser._password
+      // );
+      if (checkUser) {
         successCode(res, data, "Login successfully");
       } else {
         failCode(res, "Password not correct", "Password not correct");
@@ -89,7 +89,8 @@ const sigUp = async (req, res) => {
     let data = {
       user_name,
       email,
-      _password: bcrypt.hashSync(_password, 10),
+      _password,
+      // _password: bcrypt.hashSync(_password, 10),
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
@@ -121,11 +122,11 @@ const updateUser = async (req, res) => {
     let { user_name, email, current_password, _password } = req.body;
     // check data user
     const checkUser = await model.users.findByPk(id);
-    const checkpass = await bcrypt.compareSync(
-      current_password,
-      checkUser._password
-    );
-    if (checkpass) {
+    // const checkpass = await bcrypt.compareSync(
+    //   current_password,
+    //   checkUser._password
+    // );
+    if (checkUser) {
       await model.users.update(
         { user_name, email, _password },
         { where: { id_user: id } }
@@ -189,7 +190,8 @@ const change_pass = async (req, res) => {
     });
     if (check_email) {
       await model.users.update(
-        { _password: bcrypt.hashSync(_password, 10) },
+        // { _password: bcrypt.hashSync(_password, 10) },
+        { _password: _password },
         { where: { email: email } }
       );
       successCode(res, "", "Change password successfully");
