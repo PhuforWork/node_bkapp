@@ -8,7 +8,7 @@ const fs = require("fs");
 const getuser = async (req, res) => {
   let data = await model.users.findAll({
     include: ["departments"],
-    attributes: { exclude: ["_password","email","image_url"] },
+    attributes: { exclude: ["_password", "email", "image_url"] },
   });
   res.send(data);
 };
@@ -181,7 +181,10 @@ const change_pass = async (req, res) => {
       },
     });
     if (check_email) {
-      await model.users.update({ _password:bcrypt.hashSync(_password) }, { where: { email: email } });
+      await model.users.update(
+        { _password: bcrypt.hashSync(_password, 10) },
+        { where: { email: email } }
+      );
       successCode(res, "", "Change password successfully");
     } else {
       failCode(res, "", "Change password failed");
