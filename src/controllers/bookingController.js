@@ -74,7 +74,6 @@ const add_booking = async (req, res) => {
       const idbk = await model.booking_info.findOne({
         where: { checkbk: checkbk },
       });
-      console.log("test", idbk.id_booking);
       if (personality) {
         Promise.all(
           personality.map(async (values) => {
@@ -112,7 +111,6 @@ const add_depart = async (req, res) => {
   let id_user = id;
   let { array } = req.body;
   let data = { array, id_user };
-  console.log(data);
   if (data) {
     const data_bk = await model.department.create(data);
     successCode(res, data_bk, "Add department success");
@@ -123,7 +121,6 @@ const add_slect = async (req, res) => {
   let id_user = id;
   let { data } = req.body;
   let dta = { data, id_user };
-  console.log(data);
   if (dta) {
     const data_bk = await model.select_type.create(dta);
     successCode(res, data_bk, "Add department success");
@@ -177,7 +174,6 @@ const update_persional = async (req, res) => {
     await model.persionality.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
-        console.log(ele.value);
         await model.persionality.create({
           label: ele.label,
           value: ele.value,
@@ -256,7 +252,6 @@ const delete_bk = async (req, res) => {
   if (check) {
     Promise.all(
       dlt.map(async (values) => {
-        console.log(values);
         await model.department_tb.destroy({
           where: { id_booking: values.id_booking },
         });
