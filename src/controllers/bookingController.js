@@ -48,7 +48,7 @@ const add_booking = async (req, res) => {
   try {
     let { id } = req.params; // id user
     let id_user = id;
-    let { start, end, detail, id_orther_user } = req.body;
+    let { start, end, detail, id_orther_user, isCheck } = req.body;
     let checkbk_n = req.body.id;
     let _values = req.body.service._values;
     let id_selection = req.body.service.id_selection;
@@ -65,6 +65,7 @@ const add_booking = async (req, res) => {
       label,
       checkbk,
       id_orther_user,
+      isCheck,
       id_check_delete: checkbk_n,
     };
 
@@ -74,16 +75,17 @@ const add_booking = async (req, res) => {
         where: { checkbk: checkbk },
       });
       console.log("test", idbk.id_booking);
-      Promise.all(
-        personality.map(async (values) => {
-          await model.persionality_tb.create({
-            value: values.value,
-            label: values.label,
-            id_booking: idbk.id_booking,
-          });
-        })
-      );
-
+      if (personality) {
+        Promise.all(
+          personality.map(async (values) => {
+            await model.persionality_tb.create({
+              value: values.value,
+              label: values.label,
+              id_booking: idbk.id_booking,
+            });
+          })
+        );
+      }
       await model.select_type_tb.create({
         id_selection: id_selection,
         _values: _values,
@@ -206,7 +208,6 @@ const update_booking = async (req, res) => {
   let check2 = await model.booking_info.findAll({
     where: { id_check_delete: check1.id_check_delete },
   });
-
 
   if (data) {
     Promise.all(
