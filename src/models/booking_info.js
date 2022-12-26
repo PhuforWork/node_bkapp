@@ -43,6 +43,10 @@ class booking_info extends Sequelize.Model {
     id_check_delete: {
       type: DataTypes.DOUBLE,
       allowNull: false
+    },
+    isCheck: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     sequelize,
