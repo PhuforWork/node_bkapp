@@ -90,6 +90,8 @@ const sigUp = async (req, res) => {
       user_name,
       email,
       _password: bcrypt.hashSync(_password, 10),
+      maxtime:21,
+      mintime:9
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
