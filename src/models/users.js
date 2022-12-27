@@ -36,6 +36,10 @@ class users extends Sequelize.Model {
     mintime: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    isShow: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     sequelize,
