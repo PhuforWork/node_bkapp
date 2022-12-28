@@ -147,13 +147,22 @@ const updateUser = async (req, res) => {
       );
     }
   } catch (error) {
-    errorCode(res, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const update_isShow = async (req, res) => {
-  let { id } = req.params;
-  let { isShow } = req.body;
-  await model.users.update(isShow, { where: { id_user: id } });
+  try {
+    let { id } = req.params;
+    let { isShow } = req.body;
+    if (isShow) {
+      await model.users.update(isShow, { where: { id_user: id } });
+      successCode(res, "", "Success skip");
+    } else {
+      failCode(res, "", "Fail skip");
+    }
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
+  }
 };
 // up img
 const update_img = async (req, res) => {
@@ -239,5 +248,5 @@ module.exports = {
   change_pass,
   put_max,
   put_min,
-  update_isShow
+  update_isShow,
 };
