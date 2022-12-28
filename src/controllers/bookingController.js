@@ -70,6 +70,13 @@ const add_booking = async (req, res) => {
     };
 
     if (data) {
+      const duplicate_booking = await model.booking_info.findAll();
+      Promise.all(
+        duplicate_booking.map(async (values) => {
+          let change_start = start.getTime(); 
+          console.log(change_start);
+        })
+      );
       await model.booking_info.create(data);
       const idbk = await model.booking_info.findOne({
         where: { checkbk: checkbk },
