@@ -168,7 +168,7 @@ const update_isShow = async (req, res) => {
 // up img
 const update_img = async (req, res) => {
   let { id } = req.params;
- fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
+  fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
     let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
       data
     ).toString("base64")}`;
@@ -179,9 +179,28 @@ const update_img = async (req, res) => {
     fs.unlinkSync(process.cwd() + "/" + req.file.path);
     successCode(res, "", "Update successfully");
   });
-    // const result = await compress_images()
 };
 
+const update_img_test = async (req, res) => {
+  const result = await compress_images(
+    `${process.cwd()}/public/img_compress/${req.file.filename}`,
+    { compress_force: false, statistic: true, autoupdate: true },
+    false,
+    { jpg: { engine: "mozjpeg", command: ["-quality", "25"] } },
+    { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+    { svg: { engine: "svgo", command: "--multipass" } },
+    {
+      gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] },
+    },
+    function (error, completed, statistic) {
+      if (completed) {
+        fs.unlinkSync(statistic.input);
+        res.send(statistic.path_out_newÏ);
+      }
+    }
+  );
+  console.log(result);
+};
 // forgot password
 const forgot_password = async (req, res) => {
   try {
@@ -251,4 +270,5 @@ module.exports = {
   put_max,
   put_min,
   update_isShow,
+  update_img_test
 };

@@ -10,7 +10,8 @@ const {
   forgot_password,
   put_max,
   put_min,
-  update_isShow
+  update_isShow,
+  update_img_test
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -37,6 +38,7 @@ userRoute.put("/min-time/:id", put_min);
 userRoute.put("/skip-show/:id", update_isShow);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
+userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
 // delete
 
 module.exports = userRoute;
