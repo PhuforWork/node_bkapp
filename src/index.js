@@ -20,6 +20,16 @@ app.get("/test", (req, res) => {
   res.send("Hello");
 });
 
+io.on("connection", (socket) => {
+  io.emit("user-connect", socket.id);
+  socket.on("disconnecting", (reason) => {
+    io.emit("user-disconnect", socket.id);
+  });
+  socket.on("user-chat", (data) => {
+    io.emit("content-chat", { id: socket.id, data });
+  });
+});
+
 app.use("/api", rootRoute);
 
 httpServer.listen(8081);
