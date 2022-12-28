@@ -184,7 +184,7 @@ const update_img = async (req, res) => {
 
 const update_img_test = async (req, res) => {
   const result = await compress_images(
-    `${process.cwd()}/public/img_compress/${req.file.filename}`,
+    `${process.cwd()}/public/img_compress/${req.file.filename}`,`./public/img/`,
     { compress_force: false, statistic: true, autoupdate: true },
     false,
     { jpg: { engine: "mozjpeg", command: ["-quality", "25"] } },
