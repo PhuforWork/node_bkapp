@@ -125,6 +125,8 @@ const add_booking = async (req, res) => {
           ) {
             flag = false;
             failCode(res, "", "Duplicat booking");
+          } else {
+            flag = true;
           }
         })
       );
