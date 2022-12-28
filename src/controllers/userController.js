@@ -182,7 +182,7 @@ const update_img = async (req, res) => {
 // forgot password
 const forgot_password = async (req, res) => {
   try {
-    let { email } = req.body;
+    let { email } = req.body; 
     let status = { status: true };
     console.log({ email });
     const check_email = await model.users.findOne({
