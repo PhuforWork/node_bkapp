@@ -167,13 +167,13 @@ const update_isShow = async (req, res) => {
 // up img
 const update_img = async (req, res) => {
   let { id } = req.params;
-  console.log("id",id);
-  let { image_url } = req.body;
+  console.log("id", id);
   await fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
+    let { image_url } = req.body;
     image_url = `data:${req.file.mimetype};base64,${Buffer.from(data).toString(
       "base64"
     )}`;
-    await model.users.update({ image_url }, { where: { id_user: id } });
+    await model.users.update(image_url, { where: { id_user: id } });
     fs.unlinkSync(process.cwd() + "/" + req.file.path);
     successCode(res, image_url, "Update successfully");
   });
@@ -182,7 +182,7 @@ const update_img = async (req, res) => {
 // forgot password
 const forgot_password = async (req, res) => {
   try {
-    let { email } = req.body; 
+    let { email } = req.body;
     let status = { status: true };
     console.log({ email });
     const check_email = await model.users.findOne({
