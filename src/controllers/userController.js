@@ -17,6 +17,7 @@ const getUserId = async (req, res) => {
   let { id } = req.params;
   let data = await model.users.findOne({
     include: ["select_types", "persionalities", "departments"],
+    attributes: { exclude: ["_password"] },
     where: {
       id_user: id,
     },
@@ -41,16 +42,10 @@ const getUserId = async (req, res) => {
     departments,
     maxtime,
     mintime,
+    isShow,
   } = data;
   res.send({
-    id_user,
-    user_name,
-    email,
-    select_types,
-    persionalities,
-    departments,
-    maxtime,
-    mintime,
+    data,
     data_booking,
     data_guest,
   });
