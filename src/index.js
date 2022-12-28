@@ -13,6 +13,7 @@ const io = new Server(httpServer, { cors: { origin: "*" } });
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
+httpServer.listen(8081);
 
 app.get("/test", (req, res) => {
   let test = req.query;
@@ -32,4 +33,3 @@ io.on("connection", (socket) => {
 
 app.use("/api", rootRoute);
 
-httpServer.listen(8081);
