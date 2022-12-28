@@ -71,14 +71,54 @@ const add_booking = async (req, res) => {
 
     if (data) {
       const duplicate_booking = await model.booking_info.findAll();
-      let change_start = new Date(start).getTime();
-      let change_end = new Date(end).getTime();
+      let change_start = new Date(start).getTime(); //time
+      let change_end = new Date(end).getTime(); //time
+      let get_month = new Date(end).getMonth(); // get mounth
+      let get_date = new Date(end).getDate(); // get mounth
       console.log(change_start);
       Promise.all(
         duplicate_booking.map(async (values) => {
           let map_start = new Date(values.start).getTime();
           let map_end = new Date(values.end).getTime();
+          let map_month = new Date(values.end).getMonth();
+          let map_date = new Date(values.end).getDate();
           if (change_start === map_start && change_end === map_end) {
+            failCode(res, "", "Duplicat booking");
+          } else if (
+            (change_start === map_start &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_end > map_end) ||
+            (change_start === map_start &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_end < map_end)
+          ) {
+            failCode(res, "", "Duplicat booking");
+          } else if (
+            (change_end === map_end &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_start > map_start) ||
+            (change_end === map_end &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_start < map_start)
+          ) {
+            failCode(res, "", "Duplicat booking");
+          } else if (
+            get_month === map_month &&
+            get_date === map_date &&
+            change_start > map_start &&
+            change_end > map_end
+          ) {
+            failCode(res, "", "Duplicat booking");
+          } else if (
+            get_month === map_month &&
+            get_date === map_date &&
+            change_start < map_start &&
+            change_end < map_end
+          ) {
             failCode(res, "", "Duplicat booking");
           }
         })
