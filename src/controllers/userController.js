@@ -168,7 +168,6 @@ const update_isShow = async (req, res) => {
 // up img
 const update_img = async (req, res) => {
   let { id } = req.params;
-  console.log("id", id);
  fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
     let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
       data
@@ -180,6 +179,7 @@ const update_img = async (req, res) => {
     fs.unlinkSync(process.cwd() + "/" + req.file.path);
     successCode(res, "", "Update successfully");
   });
+    // const result = await compress_images()
 };
 
 // forgot password
