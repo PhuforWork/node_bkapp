@@ -121,35 +121,36 @@ const add_booking = async (req, res) => {
           ) {
             failCode(res, "", "Duplicat booking");
           } else {
-            await model.booking_info.create(data);
-            const idbk = await model.booking_info.findOne({
-              where: { checkbk: checkbk },
-            });
-            if (personality) {
-              Promise.all(
-                personality.map(async (values) => {
-                  await model.persionality_tb.create({
-                    value: values.value,
-                    label: values.label,
-                    id_booking: idbk.id_booking,
-                  });
-                })
-              );
-            }
-            await model.select_type_tb.create({
-              id_selection: id_selection,
-              _values: _values,
-              id_booking: idbk.id_booking,
-            });
-            await model.department_tb.create({
-              value: value,
-              label: label,
-              id_booking: idbk.id_booking,
-            });
-            successCode(res, "", "Add booking success");
           }
         })
       );
+      //put code here
+      await model.booking_info.create(data);
+      const idbk = await model.booking_info.findOne({
+        where: { checkbk: checkbk },
+      });
+      if (personality) {
+        Promise.all(
+          personality.map(async (values) => {
+            await model.persionality_tb.create({
+              value: values.value,
+              label: values.label,
+              id_booking: idbk.id_booking,
+            });
+          })
+        );
+      }
+      await model.select_type_tb.create({
+        id_selection: id_selection,
+        _values: _values,
+        id_booking: idbk.id_booking,
+      });
+      await model.department_tb.create({
+        value: value,
+        label: label,
+        id_booking: idbk.id_booking,
+      });
+      successCode(res, "", "Add booking success");
     } else {
       failCode(res, "", "Missing fields booking");
     }
