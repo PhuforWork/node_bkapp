@@ -154,6 +154,7 @@ const update_isShow = async (req, res) => {
   try {
     let { id } = req.params;
     let { isShow } = req.body;
+    console.log(isShow);
     if (isShow) {
       await model.users.update(isShow, { where: { id_user: id } });
       successCode(res, "", "Success skip");
@@ -169,13 +170,16 @@ const update_img = async (req, res) => {
   let { id } = req.params;
   console.log("id", id);
   await fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
-    let image_url = `data:${req.file.mimetype};base64,${Buffer.from(data).toString(
-      "base64"
-    )}`;
+    let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+      data
+    ).toString("base64")}`;
     fs.unlinkSync(process.cwd() + "/" + req.file.path);
-    await model.users.update( {image_url:image_url} , { where: { id_user: id } });
+    await model.users.update(
+      { image_url: image_url },
+      { where: { id_user: id } }
+    );
     successCode(res, image_url, "Update successfully");
-});
+  });
 };
 
 // forgot password
