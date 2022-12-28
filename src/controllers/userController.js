@@ -154,9 +154,9 @@ const update_isShow = async (req, res) => {
   try {
     let { id } = req.params;
     let { isShow } = req.body;
-    console.log("show",isShow);
+    console.log("show", isShow);
     if (isShow) {
-      await model.users.update(isShow, { where: { id_user: id } });
+      await model.users.update({ isShow }, { where: { id_user: id } });
       successCode(res, "", "Success skip");
     } else {
       failCode(res, "", "Fail skip");
