@@ -36,7 +36,7 @@ userRoute.put("/max-time/:id", put_max);
 userRoute.put("/min-time/:id", put_min);
 userRoute.put("/skip-show/:id", update_isShow);
 
-userRoute.post("/upimg/:id", upload.single("image_url"), update_img);
+userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 // delete
 
 module.exports = userRoute;
