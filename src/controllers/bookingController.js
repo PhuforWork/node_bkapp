@@ -73,7 +73,7 @@ const add_booking = async (req, res) => {
       const duplicate_booking = await model.booking_info.findAll();
       Promise.all(
         duplicate_booking.map(async (values) => {
-          let change_start = start.getTime(); 
+          let change_start = new Date(start).getTime(); 
           console.log(change_start);
         })
       );
