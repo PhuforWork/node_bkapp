@@ -82,23 +82,24 @@ const add_booking = async (req, res) => {
           let map_end = new Date(values.end).getTime();
           let map_month = new Date(values.end).getMonth();
           let map_date = new Date(values.end).getDate();
-          // if (change_start === map_start && change_end === map_end) {
-          //   flag = false;
-          //   failCode(res, "", "Duplicat booking");
-          // } else
-          if (
-            (change_start === map_start &&
-              get_month === map_month &&
-              get_date === map_date &&
-              change_end > map_end) ||
-            (change_start === map_start &&
-              get_month === map_month &&
-              get_date === map_date &&
-              change_end < map_end)
-          ) {
+          if (change_start === map_start && change_end === map_end) {
             flag = false;
             failCode(res, "", "Duplicat booking");
-          } else if (
+          } 
+          // else if (
+          //   (change_start === map_start &&
+          //     get_month === map_month &&
+          //     get_date === map_date &&
+          //     change_end > map_end) ||
+          //   (change_start === map_start &&
+          //     get_month === map_month &&
+          //     get_date === map_date &&
+          //     change_end < map_end)
+          // ) {
+          //   flag = false;
+          //   failCode(res, "", "Duplicat booking");
+          // } 
+          else if (
             (change_end === map_end &&
               get_month === map_month &&
               get_date === map_date &&
