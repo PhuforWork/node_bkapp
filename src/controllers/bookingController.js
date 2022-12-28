@@ -113,7 +113,7 @@ const add_booking = async (req, res) => {
             get_month === map_month &&
             get_date === map_date &&
             change_start > map_start &&
-            change_end > map_end
+            change_end < map_end
           ) {
             flag = false;
             failCode(res, "4", "Duplicat booking");
