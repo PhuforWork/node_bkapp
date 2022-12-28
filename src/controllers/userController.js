@@ -167,11 +167,8 @@ const update_isShow = async (req, res) => {
 // up img
 const update_img = async (req, res) => {
   let { id } = req.params;
-  // let checkUser = model.users.findByPk(id);
-  console.log(req.body);
-  console.log(process.cwd() + "/" + req.file.path);
+  let { image_url } = req.body;
   await fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
-    let { image_url } = req.body;
     image_url = `data:${req.file.mimetype};base64,${Buffer.from(data).toString(
       "base64"
     )}`;
