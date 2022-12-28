@@ -72,12 +72,14 @@ const add_booking = async (req, res) => {
     if (data) {
       const duplicate_booking = await model.booking_info.findAll();
       let change_start = new Date(start).getTime();
+      let change_end = new Date(end).getTime();
       console.log(change_start);
       Promise.all(
         duplicate_booking.map(async (values) => {
           let map_start = new Date(values.start).getTime();
-          if (change_start === map_start) {
-            console.log(123);
+          let map_end = new Date(values.end).getTime();
+          if (change_start === map_start && change_end === map_end) {
+            failCode(res, "", "Duplicat booking");
           }
         })
       );
