@@ -173,7 +173,7 @@ const update_img = async (req, res) => {
       "base64"
     )}`;
     fs.unlinkSync(process.cwd() + "/" + req.file.path);
-    await model.users.update( {image_url} , { where: { id_user: id } });
+    await model.users.update( {image_url:image_url} , { where: { id_user: id } });
     successCode(res, image_url, "Update successfully");
 });
 };
