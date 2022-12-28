@@ -195,7 +195,7 @@ const update_img_test = async (req, res) => {
     function (error, completed, statistic) {
       if (completed) {
         fs.unlinkSync(statistic.input);
-        res.send(statistic.path_out_newÏ);
+        res.send(statistic.path_out_new);
       }
     }
   );
