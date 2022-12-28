@@ -125,7 +125,17 @@ const add_booking = async (req, res) => {
           ) {
             flag = false;
             failCode(res, "", "Duplicat booking");
-          } else {
+          } else if (
+            change_start === map_end &&
+            get_month === map_month &&
+            get_date === map_date
+          ) {
+            flag = true;
+          } else if (
+            change_end === map_start &&
+            get_month === map_month &&
+            get_date === map_date
+          ) {
             flag = true;
           }
         })
