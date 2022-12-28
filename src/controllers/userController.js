@@ -178,7 +178,7 @@ const update_img = async (req, res) => {
       { image_url: image_url },
       { where: { id_user: id } }
     );
-    successCode(res, image_url, "Update successfully");
+    successCode(res, "", "Update successfully");
   });
 };
 
