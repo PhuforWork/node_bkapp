@@ -145,7 +145,7 @@ const updateUser = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
-// testing not use for FE
+// up img
 const update_img = async (req, res) => {
   let { id } = req.params;
   // let checkUser = model.users.findByPk(id);
