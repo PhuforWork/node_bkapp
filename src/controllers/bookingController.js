@@ -157,7 +157,7 @@ const add_booking = async (req, res) => {
         });
         successCode(res, "", "Add booking success");
       } else {
-        failCode(res, "", "Missing fields booking");
+        failCode(res, "", "Duplicate booking");
       }
     } else {
       failCode(res, "", "Missing fields booking");
@@ -250,58 +250,126 @@ const update_persional = async (req, res) => {
 };
 // booking calender
 const update_booking = async (req, res) => {
-  let { id } = req.params; // id booking
-  let { start, end, detail, id_orther_user } = req.body;
-  let _values = req.body.service._values;
-  let label = req.body.department.label;
-  let personality = req.body.personality;
-  let data = {
-    start,
-    end,
-    detail,
-    label,
-    id_orther_user,
-  };
-  let check1 = await model.booking_info.findOne({ where: { id_booking: id } });
-  let check2 = await model.booking_info.findAll({
-    where: { id_check_delete: check1.id_check_delete },
-  });
-
-  if (data) {
-    Promise.all(
-      check2.map(async (ele) => {
-        await model.booking_info.update(data, {
-          where: { checkbk: ele.checkbk },
-        });
-        await model.persionality_tb.destroy({
-          where: { id_booking: ele.id_booking },
-        });
+  try {
+    let { id } = req.params; // id booking
+    let { start, end, detail, id_orther_user } = req.body;
+    let _values = req.body.service._values;
+    let label = req.body.department.label;
+    let personality = req.body.personality;
+    let data = {
+      start,
+      end,
+      detail,
+      label,
+      id_orther_user,
+    };
+    let check1 = await model.booking_info.findOne({
+      where: { id_booking: id },
+    });
+    let check2 = await model.booking_info.findAll({
+      where: { id_check_delete: check1.id_check_delete },
+    });
+    let flag = true;
+    if (data) {
+      const duplicate_booking = await model.booking_info.findAll();
+      let change_start = new Date(start).getTime(); //time
+      let change_end = new Date(end).getTime(); //time
+      let get_month = new Date(end).getMonth(); // get mounth
+      let get_date = new Date(end).getDate(); // get mounth
+      Promise.all(
+        duplicate_booking.map(async (values) => {
+          let map_start = new Date(values.start).getTime();
+          let map_end = new Date(values.end).getTime();
+          let map_month = new Date(values.end).getMonth();
+          let map_date = new Date(values.end).getDate();
+          if (change_start === map_start && change_end === map_end) {
+            flag = false;
+            failCode(res, "1", "Duplicat booking");
+          } else if (
+            (change_start === map_start &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_end > map_end) ||
+            (change_start === map_start &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_end < map_end)
+          ) {
+            flag = false;
+            failCode(res, "2", "Duplicat booking");
+          } else if (
+            (change_end === map_end &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_start > map_start) ||
+            (change_end === map_end &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_start < map_start)
+          ) {
+            flag = false;
+            failCode(res, "3", "Duplicat booking");
+          } else if (
+            get_month === map_month &&
+            get_date === map_date &&
+            change_start > map_start &&
+            change_end < map_end
+          ) {
+            flag = false;
+            failCode(res, "4", "Duplicat booking");
+          } else if (
+            get_month === map_month &&
+            get_date === map_date &&
+            change_start < map_start &&
+            change_end > map_end
+          ) {
+            flag = false;
+            failCode(res, "5", "Duplicat booking");
+          }
+        })
+      );
+      //
+      if (flag) {
         Promise.all(
-          personality.map((values) => {
-            model.persionality_tb.create({
-              value: values.value,
-              label: values.label,
-              id_booking: ele.id_booking,
+          check2.map(async (ele) => {
+            await model.booking_info.update(data, {
+              where: { checkbk: ele.checkbk },
             });
+            await model.persionality_tb.destroy({
+              where: { id_booking: ele.id_booking },
+            });
+            Promise.all(
+              personality.map((values) => {
+                model.persionality_tb.create({
+                  value: values.value,
+                  label: values.label,
+                  id_booking: ele.id_booking,
+                });
+              })
+            );
+            await model.select_type_tb.update(
+              {
+                _values: _values,
+              },
+              { where: { id_booking: ele.id_booking } }
+            );
+            await model.department_tb.update(
+              {
+                label: label,
+              },
+              { where: { id_booking: ele.id_booking } }
+            );
           })
         );
-        await model.select_type_tb.update(
-          {
-            _values: _values,
-          },
-          { where: { id_booking: ele.id_booking } }
-        );
-        await model.department_tb.update(
-          {
-            label: label,
-          },
-          { where: { id_booking: ele.id_booking } }
-        );
-      })
-    );
-    successCode(res, "", "Add booking success");
-  } else {
-    failCode(res, "", "Missing fields booking");
+        successCode(res, "", "Add booking success");
+      } else {
+        failCode(res, "", "Duplicate booking");
+      }
+    } else {
+      failCode(res, "", "Missing fields booking");
+    }
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
