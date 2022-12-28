@@ -10,6 +10,7 @@ const {
   forgot_password,
   put_max,
   put_min,
+  update_isShow
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -33,6 +34,7 @@ userRoute.post("/change-pass", upload.none(), change_pass);
 userRoute.put("/update-user/:id", upload.none(), updateUser);
 userRoute.put("/max-time/:id", put_max);
 userRoute.put("/min-time/:id", put_min);
+userRoute.put("/skip-show/:id", update_isShow);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 // delete

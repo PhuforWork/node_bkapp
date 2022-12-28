@@ -150,6 +150,11 @@ const updateUser = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
+const update_isShow = async (req, res) => {
+  let { id } = req.params;
+  let { isShow } = req.body;
+  await model.users.update(isShow, { where: { id_user: id } });
+};
 // up img
 const update_img = async (req, res) => {
   let { id } = req.params;
@@ -235,4 +240,5 @@ module.exports = {
   change_pass,
   put_max,
   put_min,
+  update_isShow
 };
