@@ -45,7 +45,15 @@ const getUserId = async (req, res) => {
     isShow,
   } = data;
   res.send({
-    data,
+    id_user,
+    user_name,
+    email,
+    select_types,
+    persionalities,
+    departments,
+    maxtime,
+    mintime,
+    isShow,
     data_booking,
     data_guest,
   });
