@@ -87,7 +87,8 @@ const loginUser = async (req, res) => {
       failCode(res, { code: 100 }, "Password not correct");
     }
   } catch (error) {
-    failCode(res, { code: 200 }, "User not correct");
+    // failCode(res, { code: 200 }, "User not correct");
+    res.send({ code: 200 });
   }
 };
 // register
@@ -180,7 +181,7 @@ const update_img = async (req, res) => {
       successCode(res, "", "Update successfully");
     });
   } catch (error) {
-    errorCode(res,"", "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -266,7 +267,7 @@ const put_min = async (req, res) => {
     await model.users.update(data, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
-    errorCode(res,"", "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
