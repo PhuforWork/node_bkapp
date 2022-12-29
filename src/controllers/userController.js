@@ -299,6 +299,7 @@ const test_send_email = async (req, res) => {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  successCode(res, "", "Success");
 };
 
 module.exports = {
@@ -314,5 +315,5 @@ module.exports = {
   put_min,
   update_isShow,
   update_img_test,
-  test_send_email
+  test_send_email,
 };
