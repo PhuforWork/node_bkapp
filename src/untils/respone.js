@@ -9,7 +9,7 @@ const failCode = (res, data, message) => {
   res.status(401).json({
     message,
     data,
-  }).end();
+  });
 };
 
 const errorCode = (res, message) => {
