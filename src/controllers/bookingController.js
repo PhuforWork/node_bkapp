@@ -9,7 +9,7 @@ const booking_user = async (req, res) => {
     const check_bkUser = await model.booking_info.findAll();
     successCode(res, check_bkUser, "Get success booking of user");
   } catch (error) {
-    errorCode(res,"", "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -185,6 +185,7 @@ const add_booking = async (req, res) => {
   } catch (error) {
     errorCode(res, "", "Error 500");
   }
+
 };
 
 const add_depart = async (req, res) => {
@@ -225,7 +226,7 @@ const update_slect = async (req, res) => {
     });
     successCode(res, "", "Update success selection");
   } catch (error) {
-    errorCode(res,"", "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 // setting user
@@ -264,7 +265,7 @@ const update_persional = async (req, res) => {
     });
     successCode(res, "", "Update success persional");
   } catch (error) {
-    errorCode(res,"", "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 // booking calender
