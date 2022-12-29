@@ -87,7 +87,7 @@ const loginUser = async (req, res) => {
       failCode(res, { code: 100 }, "Password not correct");
     }
   } catch (error) {
-    failCode(res, code = 200 );
+    failCode(res, { code: 200 }, "User not correct");
   }
 };
 // register

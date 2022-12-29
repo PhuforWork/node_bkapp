@@ -6,7 +6,10 @@ const successCode = (res, data, message) => {
 };
 
 const failCode = (res, data, message) => {
-  res.status(400).json(data);
+  res.status(400).json({
+    message,
+    data,
+  });
 };
 
 const errorCode = (res, message) => {
