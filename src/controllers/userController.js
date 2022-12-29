@@ -84,10 +84,10 @@ const loginUser = async (req, res) => {
     if (checkpass) {
       successCode(res, data, "Login successfully");
     } else {
-      failCode(res, { code: 100 }, "Password not correct");
+      failCode(res, { code: 001 }, "Password not correct");
     }
   } catch (error) {
-    failCode(res, { code: 200 }, "User not correct");
+    failCode(res, { code: 002 }, "User not correct");
   }
 };
 // register
@@ -114,9 +114,9 @@ const sigUp = async (req, res) => {
       },
     });
     if (checkUsername) {
-      failCode(res, { code: 300 }, "Username already exists");
+      failCode(res, { code: 003 }, "Username already exists");
     } else if (checkEmail) {
-      failCode(res, { code: 250 }, "Email already exists");
+      failCode(res, { code: 004 }, "Email already exists");
     } else {
       await model.users.create(data);
       successCode(res, "Sig up successfully", "Sig up successfully");
@@ -143,7 +143,7 @@ const updateUser = async (req, res) => {
       );
       successCode(res, "Update successfully", "Update successfully");
     } else {
-      failCode(res, { code: 600 }, "Current password does not match");
+      failCode(res, { code: 005 }, "Current password does not match");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -158,7 +158,7 @@ const update_isShow = async (req, res) => {
       await model.users.update({ isShow }, { where: { id_user: id } });
       successCode(res, "", "Success skip");
     } else {
-      failCode(res, { code: 700 }, "Fail skip");
+      failCode(res, { code: 006 }, "Fail skip");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -219,7 +219,7 @@ const forgot_password = async (req, res) => {
     if (check_email) {
       successCode(res, { check_email, status }, "Check email successful");
     } else {
-      failCode(res, { code: 255 }, "Email is not correct");
+      failCode(res, { code: 007 }, "Email is not correct");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -240,7 +240,7 @@ const change_pass = async (req, res) => {
       );
       successCode(res, "", "Change password successfully");
     } else {
-      failCode(res, { code: 650 }, "Change password failed");
+      failCode(res, { code: 010 }, "Email is not correct");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
