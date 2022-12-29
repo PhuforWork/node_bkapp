@@ -104,7 +104,7 @@ const add_booking = async (req, res) => {
           let map_date = new Date(values.end).getDate();
           if (change_start === map_start && change_end === map_end) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 1");
           } else if (
             (change_start === map_start &&
               get_month === map_month &&
@@ -116,7 +116,7 @@ const add_booking = async (req, res) => {
               change_end < map_end)
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 2");
           } else if (
             (change_end === map_end &&
               get_month === map_month &&
@@ -128,7 +128,7 @@ const add_booking = async (req, res) => {
               change_start < map_start)
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 3");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -136,7 +136,7 @@ const add_booking = async (req, res) => {
             change_end < map_end
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 4");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -144,7 +144,7 @@ const add_booking = async (req, res) => {
             change_end > map_end
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 5");
           }
         })
       );
@@ -177,7 +177,7 @@ const add_booking = async (req, res) => {
         });
         successCode(res, "", "Add booking success");
       } else {
-        failCode(res, { code: 011 }, "Duplicate booking");
+        failCode(res, { code: 011 }, "Duplicate booking 6");
       }
     } else {
       failCode(res, { code: 012 }, "Missing fields booking");
@@ -315,7 +315,7 @@ const update_booking = async (req, res) => {
               change_end < map_end)
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 7");
           } else if (
             (change_end === map_end &&
               get_month === map_month &&
@@ -327,7 +327,7 @@ const update_booking = async (req, res) => {
               change_start < map_start)
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 8");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -335,7 +335,7 @@ const update_booking = async (req, res) => {
             change_end < map_end
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 9");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -343,7 +343,7 @@ const update_booking = async (req, res) => {
             change_end > map_end
           ) {
             flag = false;
-            failCode(res, { code: 011 }, "Duplicat booking");
+            failCode(res, { code: 011 }, "Duplicat booking 10");
           }
         })
       );
@@ -382,7 +382,7 @@ const update_booking = async (req, res) => {
         );
         successCode(res, "", "Add booking success");
       } else {
-        failCode(res, { code: 011 }, "Duplicate booking");
+        failCode(res, { code: 011 }, "Duplicate booking 11");
       }
     } else {
       failCode(res, { code: 012 }, "Missing fields booking");
