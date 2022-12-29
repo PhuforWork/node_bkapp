@@ -98,7 +98,7 @@ const loginUser = async (req, res) => {
       failCode(res, { code: 200 }, "User not correct");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res,"", "Error BackEnd");
   }
 };
 // register
