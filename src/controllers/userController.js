@@ -276,7 +276,7 @@ const test_send_email = async (req, res) => {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     service: "gmail",
-    host: "smtp.gmail.email",
+    // host: "smtp.gmail.email",
     port: 465, //587
     secure: true, // true for 465, false for other ports
     auth: {
@@ -285,7 +285,7 @@ const test_send_email = async (req, res) => {
     },
   });
   const msg = {
-    from: '"My test" <foo@example.com>', // sender address
+    from: 'miniuadm@gmail.com', // sender address
     to: `${email}`, // list of receivers
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
