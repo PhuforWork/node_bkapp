@@ -281,7 +281,7 @@ const test_send_email = async (req, res) => {
     secure: true, // true for 465, false for other ports
     auth: {
       user: "miniuadm@gmail.com", // generated ethereal user
-      pass: "Samsung1997", // generated ethereal password
+      pass: "qezhngzzqpgdzpia", // generated ethereal password
     },
   });
   const msg = {
