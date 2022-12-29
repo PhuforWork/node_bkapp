@@ -308,10 +308,14 @@ const test_send_email = async (req, res) => {
 };
 
 const verify_mail = async (req, res) => {
-  console.log("test", req.query);
-  successCode(res, "", "Success");
+  let verifies = bcrypt.compareSync(req.query.email, req.query.token);
+  if (verifies) {
+    res.redirect(`${process.env.APP_URL}/get-verify`);
+  }
 };
-
+const get_verifies = async (req, res) => {
+  successCode(res, "", "");
+};
 module.exports = {
   getuser,
   loginUser,
@@ -327,4 +331,5 @@ module.exports = {
   update_img_test,
   test_send_email,
   verify_mail,
+  get_verifies
 };
