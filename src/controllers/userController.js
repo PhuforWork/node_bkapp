@@ -84,7 +84,7 @@ const loginUser = async (req, res) => {
       },
     });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
-    if (checkUser.user_name === user_name) {
+    if (checkUser) {
       const checkpass = await bcrypt.compareSync(
         _password,
         checkUser._password
@@ -94,11 +94,12 @@ const loginUser = async (req, res) => {
       } else {
         failCode(res, { code: 100 }, "Password not correct");
       }
-    } else {
-      failCode(res, { code: 200 }, "User not correct");
+      if (checkUser.user_name !== user_name) {
+        failCode(res, { code: 200 }, "User not correct");
+      }
     }
   } catch (error) {
-    errorCode(res,"", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // register
