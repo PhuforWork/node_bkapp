@@ -314,7 +314,8 @@ const verify_mail = async (req, res) => {
   }
 };
 const get_verifies = async (req, res) => {
-  successCode(res, "", "");
+  console.log("success");
+  successCode(res, "", "success");
 };
 module.exports = {
   getuser,
@@ -331,5 +332,5 @@ module.exports = {
   update_img_test,
   test_send_email,
   verify_mail,
-  get_verifies
+  get_verifies,
 };
