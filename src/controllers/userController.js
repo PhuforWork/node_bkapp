@@ -20,27 +20,40 @@ const getuser = async (req, res) => {
 };
 // Read user by id
 const getUserId = async (req, res) => {
-  try {
-    let { id } = req.params;
-    let data = await model.users.findOne({
-      include: ["select_types", "persionalities", "departments"],
-      attributes: { exclude: ["_password"] },
-      where: {
-        id_user: id,
-      },
-    });
-    let data_booking = await model.booking_info.findAll({
-      include: ["persionality_tbs", "department_tbs", "select_type_tbs"],
-      where: { id_user: id },
-      raw: false,
-    });
+  let { id } = req.params;
+  let data = await model.users.findOne({
+    include: ["select_types", "persionalities", "departments"],
+    attributes: { exclude: ["_password"] },
+    where: {
+      id_user: id,
+    },
+  });
+  let data_booking = await model.booking_info.findAll({
+    include: ["persionality_tbs", "department_tbs", "select_type_tbs"],
+    where: { id_user: id },
+    raw: false,
+  });
 
-    let data_guest = await model.guest_booking.findAll({
-      include: ["service_guests"],
-      where: { id_user: id },
-    });
+  let data_guest = await model.guest_booking.findAll({
+    include: ["service_guests"],
+    where: { id_user: id },
+  });
 
-    let {
+  let {
+    id_user,
+    user_name,
+    email,
+    select_types,
+    persionalities,
+    departments,
+    image_url,
+    maxtime,
+    mintime,
+    isShow,
+  } = data;
+  successCode(
+    res,
+    {
       id_user,
       user_name,
       email,
@@ -51,28 +64,11 @@ const getUserId = async (req, res) => {
       maxtime,
       mintime,
       isShow,
-    } = data;
-    successCode(
-      res,
-      {
-        id_user,
-        user_name,
-        email,
-        select_types,
-        persionalities,
-        departments,
-        image_url,
-        maxtime,
-        mintime,
-        isShow,
-        data_booking,
-        data_guest,
-      },
-      "Success"
-    );
-  } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
-  }
+      data_booking,
+      data_guest,
+    },
+    "Success"
+  );
 };
 // Login user
 const loginUser = async (req, res) => {
