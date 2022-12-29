@@ -15,7 +15,7 @@ const getuser = async (req, res) => {
     // res.send(data);
     successCode(res, data, "Get Success");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 // Read user by id
@@ -88,7 +88,6 @@ const loginUser = async (req, res) => {
     }
   } catch (error) {
     failCode(res, { code: 200 }, "User not correct");
-    // errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // register
@@ -123,7 +122,7 @@ const sigUp = async (req, res) => {
       successCode(res, "Sig up successfully", "Sig up successfully");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -147,7 +146,7 @@ const updateUser = async (req, res) => {
       failCode(res, { code: 600 }, "Current password does not match");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const update_isShow = async (req, res) => {
@@ -162,7 +161,7 @@ const update_isShow = async (req, res) => {
       failCode(res, { code: 700 }, "Fail skip");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 // up img
@@ -181,7 +180,7 @@ const update_img = async (req, res) => {
       successCode(res, "", "Update successfully");
     });
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res,"", "Error BackEnd");
   }
 };
 
@@ -223,7 +222,7 @@ const forgot_password = async (req, res) => {
       failCode(res, { code: 255 }, "Email is not correct");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const change_pass = async (req, res) => {
@@ -244,7 +243,7 @@ const change_pass = async (req, res) => {
       failCode(res, { code: 650 }, "Change password failed");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -256,7 +255,7 @@ const put_max = async (req, res) => {
     await model.users.update(data, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const put_min = async (req, res) => {
@@ -267,7 +266,7 @@ const put_min = async (req, res) => {
     await model.users.update(data, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res,"", "Error BackEnd");
   }
 };
 
