@@ -308,10 +308,17 @@ const test_send_email = async (req, res) => {
 };
 
 const verify_mail = async (req, res) => {
-  let verifies = bcrypt.compareSync(req.query.email, req.query.token);
-  if (verifies) {
-    res.redirect(`${process.env.APP_URL}/get-verify`);
-  }
+  let verifies = bcrypt.compare(
+    req.query.email,
+    req.query.token,
+    (err, result) => {
+      if (!err) {
+        failCode(res, "", "fails");
+      } else {
+        res.redirect(`${process.env.APP_URL}/get-verify`);
+      }
+    }
+  );
 };
 const get_verifies = async (req, res) => {
   console.log("success");
