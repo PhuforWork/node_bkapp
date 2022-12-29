@@ -76,30 +76,24 @@ const getUserId = async (req, res) => {
 };
 // Login user
 const loginUser = async (req, res) => {
-  let { user_name, _password } = req.body;
-  const checkUser = await model.users.findOne({
-    where: {
-      user_name,
-    },
-  });
-//   try {
+  try {
+    let { user_name, _password } = req.body;
+    const checkUser = await model.users.findOne({
+      where: {
+        user_name,
+      },
+    });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
-    if (checkUser) {
-      const checkpass = await bcrypt.compareSync(
-        _password,
-        checkUser._password
-      );
-      if (checkpass) {
-        successCode(res, data, "Login successfully");
-      } else {
-        failCode(res, { code: 100 }, "Password not correct");
-      }
+    const checkpass = await bcrypt.compareSync(_password, checkUser._password);
+    if (checkpass) {
+      successCode(res, data, "Login successfully");
     } else {
-      failCode(res, { code: 200 }, "User not correct");
+      failCode(res, { code: 100 }, "Password not correct");
     }
-//   } catch (error) {
-//     errorCode(res, { code: 500 }, "Error BackEnd");
-//   }
+} catch (error) {
+      failCode(res, { code: 200 }, "User not correct");
+    // errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 // register
 const sigUp = async (req, res) => {
