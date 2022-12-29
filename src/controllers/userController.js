@@ -88,7 +88,7 @@ const loginUser = async (req, res) => {
     }
   } catch (error) {
     // failCode(res, { code: 200 }, "User not correct");
-    res.send({ code: 200 });
+    res.badRequest({ code: 200 });
   }
 };
 // register
