@@ -3,9 +3,11 @@ const init_models = require("../models/init-models");
 const compress_images = require("compress-images");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
+const { verify } = require("crypto");
 //Read all user
 const getuser = async (req, res) => {
   try {
@@ -285,11 +287,13 @@ const test_send_email = async (req, res) => {
     },
   });
   const msg = {
-    from: 'miniuadm@gmail.com', // sender address
+    from: "miniuadm@gmail.com", // sender address
     to: `${email}`, // list of receivers
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
-    html: `<a href="http://10.150.0.133:3000/invitee/3">Link</a>`, // html body
+    html: `<a href="${
+      process.env.APP_URL
+    }/verify?email=${email}&token=${bcrypt.hashSync(email, 10)}}">Link</a>`, // html body
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
@@ -300,7 +304,11 @@ const test_send_email = async (req, res) => {
       console.log("email send");
     }
   });
+  successCode(res, "", "Success");
+};
 
+const verify_mail = async (req, res) => {
+  console.log("test", req.query);
   successCode(res, "", "Success");
 };
 
@@ -318,4 +326,5 @@ module.exports = {
   update_isShow,
   update_img_test,
   test_send_email,
+  verify_mail,
 };
