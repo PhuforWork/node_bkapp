@@ -90,8 +90,8 @@ const loginUser = async (req, res) => {
     } else {
       failCode(res, { code: 100 }, "Password not correct");
     }
-} catch (error) {
-      failCode(res, { code: 200 }, "User not correct");
+  } catch (error) {
+    failCode(res, { code: 200 }, "User not correct");
     // errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
