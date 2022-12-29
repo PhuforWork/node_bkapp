@@ -4,6 +4,7 @@ const compress_images = require("compress-images");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
 const fs = require("fs");
 //Read all user
 const getuser = async (req, res) => {
@@ -268,6 +269,36 @@ const put_min = async (req, res) => {
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
   }
+};
+
+const test_send_email = async (req, res) => {
+  let { email } = req.body;
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "jeanette67@ethereal.email", // generated ethereal user
+      pass: "9ZCjt14VATH27HFgGr", // generated ethereal password
+    },
+  });
+  const msg = {
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "bar@example.com, baz@example.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  };
+  // send mail with defined transport object
+  let info = await transporter.sendMail();
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 };
 
 module.exports = {
