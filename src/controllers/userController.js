@@ -94,9 +94,8 @@ const loginUser = async (req, res) => {
       } else {
         failCode(res, { code: 100 }, "Password not correct");
       }
-    //   if (checkUser.user_name !== user_name) {
-    //     failCode(res, { code: 200 }, "User not correct");
-    //   }
+    } else {
+      failCode(res, { code: 200 }, "User not correct");
     }
   } catch (error) {
     errorCode(res, { code: 500 }, "Error BackEnd");
