@@ -279,8 +279,8 @@ const test_send_email = async (req, res) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "jeanette67@ethereal.email", // generated ethereal user
-      pass: "9ZCjt14VATH27HFgGr", // generated ethereal password
+      user: "miniuadm@gmail.com", // generated ethereal user
+      pass: "Samsung1997", // generated ethereal password
     },
   });
   const msg = {
