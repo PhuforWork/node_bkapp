@@ -7,59 +7,72 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 //Read all user
 const getuser = async (req, res) => {
-  let data = await model.users.findAll({
-    include: ["departments"],
-    attributes: { exclude: ["_password", "email", "image_url"] },
-  });
-  res.send(data);
+  try {
+    let data = await model.users.findAll({
+      include: ["departments"],
+      attributes: { exclude: ["_password", "email", "image_url"] },
+    });
+    // res.send(data);
+    successCode(res, data, "Get Success");
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 // Read user by id
 const getUserId = async (req, res) => {
-  let { id } = req.params;
-  let data = await model.users.findOne({
-    include: ["select_types", "persionalities", "departments"],
-    attributes: { exclude: ["_password"] },
-    where: {
-      id_user: id,
-    },
-  });
-  let data_booking = await model.booking_info.findAll({
-    include: ["persionality_tbs", "department_tbs", "select_type_tbs"],
-    where: { id_user: id },
-    raw: false,
-  });
+  try {
+    let { id } = req.params;
+    let data = await model.users.findOne({
+      include: ["select_types", "persionalities", "departments"],
+      attributes: { exclude: ["_password"] },
+      where: {
+        id_user: id,
+      },
+    });
+    let data_booking = await model.booking_info.findAll({
+      include: ["persionality_tbs", "department_tbs", "select_type_tbs"],
+      where: { id_user: id },
+      raw: false,
+    });
 
-  let data_guest = await model.guest_booking.findAll({
-    include: ["service_guests"],
-    where: { id_user: id },
-  });
+    let data_guest = await model.guest_booking.findAll({
+      include: ["service_guests"],
+      where: { id_user: id },
+    });
 
-  let {
-    id_user,
-    user_name,
-    email,
-    select_types,
-    persionalities,
-    departments,
-    image_url,
-    maxtime,
-    mintime,
-    isShow,
-  } = data;
-  res.send({
-    id_user,
-    user_name,
-    email,
-    select_types,
-    persionalities,
-    departments,
-    image_url,
-    maxtime,
-    mintime,
-    isShow,
-    data_booking,
-    data_guest,
-  });
+    let {
+      id_user,
+      user_name,
+      email,
+      select_types,
+      persionalities,
+      departments,
+      image_url,
+      maxtime,
+      mintime,
+      isShow,
+    } = data;
+    successCode(
+      res,
+      {
+        id_user,
+        user_name,
+        email,
+        select_types,
+        persionalities,
+        departments,
+        image_url,
+        maxtime,
+        mintime,
+        isShow,
+        data_booking,
+        data_guest,
+      },
+      "Success"
+    );
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 // Login user
 const loginUser = async (req, res) => {
@@ -71,7 +84,7 @@ const loginUser = async (req, res) => {
       },
     });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
-    if (checkUser) {
+    if (checkUser.user_name === user_name) {
       const checkpass = await bcrypt.compareSync(
         _password,
         checkUser._password
@@ -79,13 +92,13 @@ const loginUser = async (req, res) => {
       if (checkpass) {
         successCode(res, data, "Login successfully");
       } else {
-        failCode(res, "Password not correct", "Password not correct");
+        failCode(res, { code: 100 }, "Password not correct");
       }
     } else {
-      failCode(res, "Login fail", "Login fail");
+      failCode(res, { code: 200 }, "User not correct");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // register
@@ -112,15 +125,15 @@ const sigUp = async (req, res) => {
       },
     });
     if (checkUsername) {
-      failCode(res, status, "Username already exists");
+      failCode(res, { code: 300 }, "Username already exists");
     } else if (checkEmail) {
-      failCode(res, "Email already exists", "Email already exists");
+      failCode(res, { code: 250 }, "Email already exists");
     } else {
       await model.users.create(data);
       successCode(res, "Sig up successfully", "Sig up successfully");
     }
   } catch (error) {
-    errorCode(res, "Error 500", "Error 500");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 
@@ -141,14 +154,10 @@ const updateUser = async (req, res) => {
       );
       successCode(res, "Update successfully", "Update successfully");
     } else {
-      failCode(
-        res,
-        "Current password does not match",
-        "Current password does not match"
-      );
+      failCode(res, { code: 600 }, "Current password does not match");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 const update_isShow = async (req, res) => {
@@ -160,31 +169,36 @@ const update_isShow = async (req, res) => {
       await model.users.update({ isShow }, { where: { id_user: id } });
       successCode(res, "", "Success skip");
     } else {
-      failCode(res, "", "Fail skip");
+      failCode(res, { code: 700 }, "Fail skip");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // up img
 const update_img = async (req, res) => {
-  let { id } = req.params;
-  fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
-    let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
-      data
-    ).toString("base64")}`;
-    await model.users.update(
-      { image_url: image_url },
-      { where: { id_user: id } }
-    );
-    fs.unlinkSync(process.cwd() + "/" + req.file.path);
-    successCode(res, "", "Update successfully");
-  });
+  try {
+    let { id } = req.params;
+    fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
+      let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+        data
+      ).toString("base64")}`;
+      await model.users.update(
+        { image_url: image_url },
+        { where: { id_user: id } }
+      );
+      fs.unlinkSync(process.cwd() + "/" + req.file.path);
+      successCode(res, "", "Update successfully");
+    });
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 
 const update_img_test = async (req, res) => {
   const result = await compress_images(
-    `${process.cwd()}/public/img_compress/${req.file.filename}`,`./public/img/`,
+    `${process.cwd()}/public/img_compress/${req.file.filename}`,
+    `./public/img/`,
     { compress_force: false, statistic: true, autoupdate: true },
     false,
     { jpg: { engine: "mozjpeg", command: ["-quality", "25"] } },
@@ -216,10 +230,10 @@ const forgot_password = async (req, res) => {
     if (check_email) {
       successCode(res, { check_email, status }, "Check email successful");
     } else {
-      failCode(res, "", "Email is not correct");
+      failCode(res, { code: 255 }, "Email is not correct");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 const change_pass = async (req, res) => {
@@ -237,26 +251,34 @@ const change_pass = async (req, res) => {
       );
       successCode(res, "", "Change password successfully");
     } else {
-      failCode(res, "", "Change password failed");
+      failCode(res, { code: 650 }, "Change password failed");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 
 const put_max = async (req, res) => {
-  let { id } = req.params; // id user
-  let { maxtime } = req.query;
-  let data = { maxtime };
-  await model.users.update(data, { where: { id_user: id } });
-  successCode(res, "", "Success");
+  try {
+    let { id } = req.params; // id user
+    let { maxtime } = req.query;
+    let data = { maxtime };
+    await model.users.update(data, { where: { id_user: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 const put_min = async (req, res) => {
-  let { id } = req.params; // id user
-  let { mintime } = req.query;
-  let data = { mintime };
-  await model.users.update(data, { where: { id_user: id } });
-  successCode(res, "", "Success");
+  try {
+    let { id } = req.params; // id user
+    let { mintime } = req.query;
+    let data = { mintime };
+    await model.users.update(data, { where: { id_user: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 
 module.exports = {
@@ -271,5 +293,5 @@ module.exports = {
   put_max,
   put_min,
   update_isShow,
-  update_img_test
+  update_img_test,
 };

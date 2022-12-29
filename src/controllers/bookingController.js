@@ -5,42 +5,62 @@ const model = init_models(sequelize);
 
 // get
 const booking_user = async (req, res) => {
-  const check_bkUser = await model.booking_info.findAll();
-  successCode(res, check_bkUser, "Get success booking of user");
+  try {
+    const check_bkUser = await model.booking_info.findAll();
+    successCode(res, check_bkUser, "Get success booking of user");
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 
 const get_depart = async (req, res) => {
-  const getdepart = await model.department.findAll();
-  successCode(res, getdepart, "Get department success");
+  try {
+    const getdepart = await model.department.findAll();
+    successCode(res, getdepart, "Get department success");
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 const get_persional_id = async (req, res) => {
-  let { id } = req.params; //id user
-  const get_persional = await model.persionality.findAll({
-    where: { id_user: id },
-  });
-  successCode(res, get_persional, "Get persional success");
+  try {
+    let { id } = req.params; //id user
+    const get_persional = await model.persionality.findAll({
+      where: { id_user: id },
+    });
+    successCode(res, get_persional, "Get persional success");
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
+  }
 };
 
 const booking_userid = async (req, res) => {
-  let { id } = req.params;
-  let check_id = { id }; //id user
-  if (check_id) {
-    const check_bkUser = await model.booking_info.findAll({
-      include: ["department_tbs", "persionality_tbs", "select_type_tbs"],
-      where: {
-        id_user: id,
-      },
-    });
-    successCode(res, check_bkUser, "Get success booking of user");
+  try {
+    let { id } = req.params;
+    let check_id = { id }; //id user
+    if (check_id) {
+      const check_bkUser = await model.booking_info.findAll({
+        include: ["department_tbs", "persionality_tbs", "select_type_tbs"],
+        where: {
+          id_user: id,
+        },
+      });
+      successCode(res, check_bkUser, "Get success booking of user");
+    }
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 const get_department_slect = async (req, res) => {
-  let { id } = req.params;
-  let check_id = { id };
-  if (check_id) {
-    const get_depart = await model.department.findByPk(id);
-    const get_slect = await model.select_type.findByPk(id);
-    successCode(res, { get_depart, get_slect }, "Get successfull");
+  try {
+    let { id } = req.params;
+    let check_id = { id };
+    if (check_id) {
+      const get_depart = await model.department.findByPk(id);
+      const get_slect = await model.select_type.findByPk(id);
+      successCode(res, { get_depart, get_slect }, "Get successfull");
+    }
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // post
@@ -84,7 +104,7 @@ const add_booking = async (req, res) => {
           let map_date = new Date(values.end).getDate();
           if (change_start === map_start && change_end === map_end) {
             flag = false;
-            failCode(res, "1", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             (change_start === map_start &&
               get_month === map_month &&
@@ -96,7 +116,7 @@ const add_booking = async (req, res) => {
               change_end < map_end)
           ) {
             flag = false;
-            failCode(res, "2", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             (change_end === map_end &&
               get_month === map_month &&
@@ -108,7 +128,7 @@ const add_booking = async (req, res) => {
               change_start < map_start)
           ) {
             flag = false;
-            failCode(res, "3", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -116,7 +136,7 @@ const add_booking = async (req, res) => {
             change_end < map_end
           ) {
             flag = false;
-            failCode(res, "4", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -124,7 +144,7 @@ const add_booking = async (req, res) => {
             change_end > map_end
           ) {
             flag = false;
-            failCode(res, "5", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           }
         })
       );
@@ -157,14 +177,13 @@ const add_booking = async (req, res) => {
         });
         successCode(res, "", "Add booking success");
       } else {
-        failCode(res, "", "Duplicate booking");
+        failCode(res, { code: 10 }, "Duplicate booking");
       }
     } else {
-      failCode(res, "", "Missing fields booking");
+      failCode(res, { code: 20 }, "Missing fields booking");
     }
   } catch (error) {
-    console.log("err", error);
-    errorCode(res, "", "Error 500");
+    errorCode(res, { code: 500 }, "Error 500");
   }
 };
 
@@ -206,7 +225,7 @@ const update_slect = async (req, res) => {
     });
     successCode(res, "", "Update success selection");
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // setting user
@@ -226,7 +245,7 @@ const update_depart = async (req, res) => {
     });
     successCode(res, "", "Update success department");
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 const update_persional = async (req, res) => {
@@ -245,7 +264,7 @@ const update_persional = async (req, res) => {
     });
     successCode(res, "", "Update success persional");
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 // booking calender
@@ -284,7 +303,7 @@ const update_booking = async (req, res) => {
           let map_date = new Date(values.end).getDate();
           if (change_start === map_start && change_end === map_end) {
             flag = false;
-            failCode(res, "1", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             (change_start === map_start &&
               get_month === map_month &&
@@ -296,7 +315,7 @@ const update_booking = async (req, res) => {
               change_end < map_end)
           ) {
             flag = false;
-            failCode(res, "2", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             (change_end === map_end &&
               get_month === map_month &&
@@ -308,7 +327,7 @@ const update_booking = async (req, res) => {
               change_start < map_start)
           ) {
             flag = false;
-            failCode(res, "3", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -316,7 +335,7 @@ const update_booking = async (req, res) => {
             change_end < map_end
           ) {
             flag = false;
-            failCode(res, "4", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           } else if (
             get_month === map_month &&
             get_date === map_date &&
@@ -324,7 +343,7 @@ const update_booking = async (req, res) => {
             change_end > map_end
           ) {
             flag = false;
-            failCode(res, "5", "Duplicat booking");
+            failCode(res, { code: 10 }, "Duplicat booking");
           }
         })
       );
@@ -363,42 +382,46 @@ const update_booking = async (req, res) => {
         );
         successCode(res, "", "Add booking success");
       } else {
-        failCode(res, "", "Duplicate booking");
+        failCode(res, { code: 10 }, "Duplicate booking");
       }
     } else {
-      failCode(res, "", "Missing fields booking");
+      failCode(res, { code: 20 }, "Missing fields booking");
     }
   } catch (error) {
-    errorCode(res, "", "Error BackEnd");
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 
 const delete_bk = async (req, res) => {
-  let { id } = req.params; //id booking
-  const check = await model.booking_info.findByPk(id);
-  const dlt = await model.booking_info.findAll({
-    where: { id_check_delete: check.id_check_delete },
-  });
-  if (check) {
-    Promise.all(
-      dlt.map(async (values) => {
-        await model.department_tb.destroy({
-          where: { id_booking: values.id_booking },
-        });
-        await model.persionality_tb.destroy({
-          where: { id_booking: values.id_booking },
-        });
-        await model.select_type_tb.destroy({
-          where: { id_booking: values.id_booking },
-        });
-        await model.booking_info.destroy({
-          where: { id_booking: values.id_booking },
-        });
-      })
-    );
-    successCode(res, "", "Success delete");
-  } else {
-    failCode(res, "", "Delete fail");
+  try {
+    let { id } = req.params; //id booking
+    const check = await model.booking_info.findByPk(id);
+    const dlt = await model.booking_info.findAll({
+      where: { id_check_delete: check.id_check_delete },
+    });
+    if (check) {
+      Promise.all(
+        dlt.map(async (values) => {
+          await model.department_tb.destroy({
+            where: { id_booking: values.id_booking },
+          });
+          await model.persionality_tb.destroy({
+            where: { id_booking: values.id_booking },
+          });
+          await model.select_type_tb.destroy({
+            where: { id_booking: values.id_booking },
+          });
+          await model.booking_info.destroy({
+            where: { id_booking: values.id_booking },
+          });
+        })
+      );
+      successCode(res, "", "Success delete");
+    } else {
+      failCode(res, { code: 30 }, "Delete fail");
+    }
+  } catch (error) {
+    errorCode(res, { code: 500 }, "Error BackEnd");
   }
 };
 
