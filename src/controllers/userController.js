@@ -276,12 +276,12 @@ const test_send_email = async (req, res) => {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     service: "gmail",
-    // host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: "smtp.gmail.email",
+    port: 465, //587
+    secure: true, // true for 465, false for other ports
     auth: {
-      user: "hoyt.kuhic43@ethereal.email", // generated ethereal user
-      pass: "	tryd3MxaMCXwThsHuP", // generated ethereal password
+      user: "miniuadm@gmail.com", // generated ethereal user
+      pass: "Samsung1997", // generated ethereal password
     },
   });
   const msg = {
