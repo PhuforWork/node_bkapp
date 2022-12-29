@@ -9,7 +9,7 @@ const booking_user = async (req, res) => {
     const check_bkUser = await model.booking_info.findAll();
     successCode(res, check_bkUser, "Get success booking of user");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res,"", "Error BackEnd");
   }
 };
 
@@ -18,7 +18,7 @@ const get_depart = async (req, res) => {
     const getdepart = await model.department.findAll();
     successCode(res, getdepart, "Get department success");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const get_persional_id = async (req, res) => {
@@ -29,7 +29,7 @@ const get_persional_id = async (req, res) => {
     });
     successCode(res, get_persional, "Get persional success");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -47,7 +47,7 @@ const booking_userid = async (req, res) => {
       successCode(res, check_bkUser, "Get success booking of user");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const get_department_slect = async (req, res) => {
@@ -60,7 +60,7 @@ const get_department_slect = async (req, res) => {
       successCode(res, { get_depart, get_slect }, "Get successfull");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 // post
@@ -183,7 +183,7 @@ const add_booking = async (req, res) => {
       failCode(res, { code: 20 }, "Missing fields booking");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error 500");
+    errorCode(res, "", "Error 500");
   }
 };
 
@@ -225,7 +225,7 @@ const update_slect = async (req, res) => {
     });
     successCode(res, "", "Update success selection");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res,"", "Error BackEnd");
   }
 };
 // setting user
@@ -245,7 +245,7 @@ const update_depart = async (req, res) => {
     });
     successCode(res, "", "Update success department");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 const update_persional = async (req, res) => {
@@ -264,7 +264,7 @@ const update_persional = async (req, res) => {
     });
     successCode(res, "", "Update success persional");
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res,"", "Error BackEnd");
   }
 };
 // booking calender
@@ -388,7 +388,7 @@ const update_booking = async (req, res) => {
       failCode(res, { code: 20 }, "Missing fields booking");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
@@ -421,7 +421,7 @@ const delete_bk = async (req, res) => {
       failCode(res, { code: 30 }, "Delete fail");
     }
   } catch (error) {
-    errorCode(res, { code: 500 }, "Error BackEnd");
+    errorCode(res, "", "Error BackEnd");
   }
 };
 
