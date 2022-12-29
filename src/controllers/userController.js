@@ -313,9 +313,9 @@ const verify_mail = async (req, res) => {
     req.query.token,
     (err, result) => {
       if (!err) {
-        failCode(res, "", "fails");
-      } else {
         res.redirect(`${process.env.APP_URL}/get-verify`);
+      } else {
+        failCode(res, "", "fails");
       }
     }
   );
