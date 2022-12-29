@@ -284,14 +284,14 @@ const test_send_email = async (req, res) => {
     },
   });
   const msg = {
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "bar@example.com, baz@example.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    from: '"My test" <foo@example.com>', // sender address
+    to: `${email}`, // list of receivers
+    subject: "Verify password ✔", // Subject line
+    text: "Link here?", // plain text body
+    html: "<a>Link</a>", // html body
   };
   // send mail with defined transport object
-  let info = await transporter.sendMail();
+  const info = await transporter.sendMail(msg);
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
@@ -314,4 +314,5 @@ module.exports = {
   put_min,
   update_isShow,
   update_img_test,
+  test_send_email
 };

@@ -11,7 +11,8 @@ const {
   put_max,
   put_min,
   update_isShow,
-  update_img_test
+  update_img_test,
+  test_send_email,
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -30,6 +31,7 @@ userRoute.post("/sigup-user", upload.none(), sigUp);
 userRoute.post("/forgot-pass", upload.none(), forgot_password);
 // change_pass
 userRoute.post("/change-pass", upload.none(), change_pass);
+userRoute.post("/test-send-email", upload.none(), test_send_email);
 // put
 // update user
 userRoute.put("/update-user/:id", upload.none(), updateUser);
