@@ -289,11 +289,11 @@ const test_send_email = async (req, res) => {
     to: `${email}`, // list of receivers
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
-    html: "<a>Link</a>", // html body
+    html: `<a href="http://10.150.0.133:3000/invitee/3">Link</a>`, // html body
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
-  transporter.sendMail(msg, (err) => {
+  await transporter.sendMail(msg, (err) => {
     if (err) {
       console.log("it has error", err);
     } else {
