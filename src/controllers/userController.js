@@ -76,13 +76,13 @@ const getUserId = async (req, res) => {
 };
 // Login user
 const loginUser = async (req, res) => {
+  let { user_name, _password } = req.body;
+  const checkUser = await model.users.findOne({
+    where: {
+      user_name,
+    },
+  });
   try {
-    let { user_name, _password } = req.body;
-    const checkUser = await model.users.findOne({
-      where: {
-        user_name,
-      },
-    });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     if (checkUser) {
       const checkpass = await bcrypt.compareSync(
