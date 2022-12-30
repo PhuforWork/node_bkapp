@@ -392,7 +392,7 @@ const test_send_email = async (req, res) => {
                 >
               </p>
               <img
-                src="../img/computer.png"
+                src="http://110.35.173.82:8081/public/img/computer.png"
                 alt=""
                 style="width: 209.99px; height: 139.77px"
               />
