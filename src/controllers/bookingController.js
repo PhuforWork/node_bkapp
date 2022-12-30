@@ -292,62 +292,65 @@ const update_booking = async (req, res) => {
     });
     let flag = true;
     if (data) {
-      const duplicate_booking = await model.booking_info.findAll({
-        where: { id_user: check1.id_user },
-      });
-      let change_start = new Date(start).getTime(); //time
-      let change_end = new Date(end).getTime(); //time
-      let get_month = new Date(end).getMonth(); // get mounth
-      let get_date = new Date(end).getDate(); // get mounth
-      Promise.all(
-        duplicate_booking.map(async (values) => {
-          let map_start = new Date(values.start).getTime();
-          let map_end = new Date(values.end).getTime();
-          let map_month = new Date(values.end).getMonth();
-          let map_date = new Date(values.end).getDate();
-          if (
-            (change_start === map_start &&
-              get_month === map_month &&
-              get_date === map_date &&
-              change_end > map_end) ||
-            (change_start === map_start &&
-              get_month === map_month &&
-              get_date === map_date &&
-              change_end < map_end)
-          ) {
-            flag = false;
-            failCode(res, { code: 09 }, "Duplicat booking 7");
-          } else if (
-            (change_end === map_end &&
-              get_month === map_month &&
-              get_date === map_date &&
-              change_start > map_start) ||
-            (change_end === map_end &&
-              get_month === map_month &&
-              get_date === map_date &&
-              change_start < map_start)
-          ) {
-            flag = false;
-            failCode(res, { code: 09 }, "Duplicat booking 8");
-          } else if (
-            get_month === map_month &&
-            get_date === map_date &&
-            change_start > map_start &&
-            change_end < map_end
-          ) {
-            flag = false;
-            failCode(res, { code: 09 }, "Duplicat booking 9");
-          } else if (
-            get_month === map_month &&
-            get_date === map_date &&
-            change_start < map_start &&
-            change_end > map_end
-          ) {
-            flag = false;
-            failCode(res, { code: 09 }, "Duplicat booking 10");
-          }
-        })
-      );
+      // const duplicate_booking = await model.booking_info.findAll({
+      //   where: { id_user: check1.id_user },
+      // });
+      // let change_start = new Date(start).getTime(); //time
+      // let change_end = new Date(end).getTime(); //time
+      // let get_month = new Date(end).getMonth(); // get mounth
+      // let get_date = new Date(end).getDate(); // get mounth
+      // Promise.all(
+      //   duplicate_booking.map(async (values) => {
+      //     let map_start = new Date(values.start).getTime();
+      //     let map_end = new Date(values.end).getTime();
+      //     let map_month = new Date(values.end).getMonth();
+      //     let map_date = new Date(values.end).getDate();
+      //     if (change_start === map_start && change_end === map_end) {
+      //       flag = false;
+      //       failCode(res, { code: 09 }, "Duplicat booking");
+      //     } else if (
+      //       (change_start === map_start &&
+      //         get_month === map_month &&
+      //         get_date === map_date &&
+      //         change_end > map_end) ||
+      //       (change_start === map_start &&
+      //         get_month === map_month &&
+      //         get_date === map_date &&
+      //         change_end < map_end)
+      //     ) {
+      //       flag = false;
+      //       failCode(res, { code: 09 }, "Duplicat booking 7");
+      //     } else if (
+      //       (change_end === map_end &&
+      //         get_month === map_month &&
+      //         get_date === map_date &&
+      //         change_start > map_start) ||
+      //       (change_end === map_end &&
+      //         get_month === map_month &&
+      //         get_date === map_date &&
+      //         change_start < map_start)
+      //     ) {
+      //       flag = false;
+      //       failCode(res, { code: 09 }, "Duplicat booking 8");
+      //     } else if (
+      //       get_month === map_month &&
+      //       get_date === map_date &&
+      //       change_start > map_start &&
+      //       change_end < map_end
+      //     ) {
+      //       flag = false;
+      //       failCode(res, { code: 09 }, "Duplicat booking 9");
+      //     } else if (
+      //       get_month === map_month &&
+      //       get_date === map_date &&
+      //       change_start < map_start &&
+      //       change_end > map_end
+      //     ) {
+      //       flag = false;
+      //       failCode(res, { code: 09 }, "Duplicat booking 10");
+      //     }
+      //   })
+      // );
       //
       if (flag) {
         Promise.all(
