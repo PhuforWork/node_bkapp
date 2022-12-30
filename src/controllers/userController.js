@@ -315,7 +315,7 @@ const test_send_email = async (req, res) => {
                 <p class="title_line2 typography" style="color: #323232; font-weight: 400; font-size: 18px; line-height: 30px;">To complete the registration process, please click Confirm below to go to the Login page.</p>
                 <div class="content_btn" style="display: flex;">
                     <div style="display: flex; align-items: center; padding: 12px 28px;max-width: 158px;max-height: 40px ;background: #1976D2; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 8px; cursor: pointer;">
-                        <a href="http://110.35.173.82/authen/forgot/confirm" style="text-align: center; color: #FFFFFF; text-transform: uppercase; font-weight: 700; font-size: 14px; line-height: 21px; text-decoration: none; cursor: pointer;">Confirm</a>
+                        <a href="http://10.150.0.132:3000/authen/forgot/confirm" style="text-align: center; color: #FFFFFF; text-transform: uppercase; font-weight: 700; font-size: 14px; line-height: 21px; text-decoration: none; cursor: pointer;">Confirm</a>
                     </div>
                 </div>
                 <p class="title_line2 typography" style="color: #323232; font-weight: 400; font-size: 14px; line-height: 21px;">Upon logging in, you are able to use our Booking Management Service to make your booking, delete or change information.<br /><br />Thanks!</p>
