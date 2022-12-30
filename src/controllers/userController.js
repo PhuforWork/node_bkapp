@@ -447,8 +447,8 @@ const test_send_email = async (req, res) => {
     `, // html body
     attachments: [
       {
-        filename: "",
-        path: __dirname + "header.png",
+        filename: "header.png",
+        path: __dirname + "/header.png",
         cid: "header",
       },
     ],
