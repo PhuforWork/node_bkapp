@@ -372,6 +372,7 @@ const test_send_email = async (req, res) => {
                     inset 0px 4px 4px rgba(0, 0, 0, 0.25);
                   border-radius: 8px;
                   cursor: pointer;
+                  max-width: 123px;max-height: 45px 
                 "
               >
                 <a
