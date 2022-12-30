@@ -12,121 +12,139 @@
     />
   </head>
 
-  <body>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans:wght@100;200;400;500;600;700&display=swap");
-
-      body {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: "Noto Sans", sans-serif;
-      }
-
-      .wrapper {
+  <body
+    style="
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Noto Sans', sans-serif;
+    "
+  >
+    <div
+      class="wrapper"
+      style="
         width: 600px;
-        height: 755px;
+        height: 730px;
         overflow: hidden;
         box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
-      }
-
-      .header {
-        width: 100%;
-        height: 232px;
-      }
-
-      .header img {
-        width: 100%;
-        height: 100%;
-      }
-
-      .content {
-        padding: 20px 40px 30px;
-      }
-
-      .content .content_btn {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
-
-      .content .content_btn p {
-        padding: 12px 28px;
-        background: #1976d2;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25),
-          inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 8px;
-        cursor: pointer;
-      }
-
-      .content .content_btn p > a {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #ffffff;
-        text-transform: uppercase;
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 21px;
-        text-decoration: none;
-      }
-
-      .typography {
-        color: #323232;
-      }
-
-      .title_line1 {
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 30px;
-      }
-
-      .title_line2 {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 21px;
-      }
-
-      .footer {
-        width: 100%;
-        background: #6ea5db;
-        padding: 12px 40px;
-      }
-
-      .footer .title_line3 {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        color: #ffffff;
-        margin: 0;
-      }
-    </style>
-    <div class="wrapper">
-      <div class="header">
-        <img src="../../public/img/header.png" alt="" />
+      "
+    >
+      <div class="header" style="width: 100%; height: 232px">
+        <img
+          src="../img/header.png"
+          alt=""
+          style="width: 100%; height: 232px"
+        />
       </div>
-      <div class="content">
-        <p class="title_line1 typography">
+      <div class="content" style="padding: 20px 40px 30px">
+        <p
+          class="title_line1 typography"
+          style="
+            color: #323232;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 30px;
+          "
+        >
           Hello [User ID], this is a verification email.
         </p>
-        <p class="title_line2 typography">
+        <p
+          class="title_line2 typography"
+          style="
+            color: #323232;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 30px;
+          "
+        >
           To complete the registration process, please click Confirm below to go
           to the Login page.
         </p>
-        <div class="content_btn">
-          <p><a href="">Confirm</a></p>
-          <img src="../../public/img/computer.png" alt="" />
+        <div
+          class="content_btn"
+          style="
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+          "
+        >
+          <p
+            style="
+              padding: 12px 28px;
+              background: #1976d2;
+              box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25),
+                inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            <a
+              href=""
+              style="
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #ffffff;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 21px;
+                text-decoration: none;
+              "
+              >Confirm</a
+            >
+          </p>
+          <img
+            src="../img/computer.png"
+            alt=""
+            style="width: 209.99px; height: 139.77px"
+          />
         </div>
-        <p class="title_line2 typography">
+        <p
+          class="title_line2 typography"
+          style="
+            color: #323232;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+          "
+        >
           Upon logging in, you are able to use our Booking Management Service to
           make your booking, delete or change information.<br /><br />Thanks!
         </p>
       </div>
-      <div class="footer">
-        <p class="title_line3">Ho Chi Minh Global Department</p>
-        <p class="title_line3">Contact: +82 (0)10 7379 7901</p>
+      <div
+        class="footer"
+        style="width: 100%; background: #6ea5db; padding: 12px 40px"
+      >
+        <p
+          class="title_line3"
+          style="
+            color: #323232;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            color: #ffffff;
+            margin: 0;
+          "
+        >
+          Ho Chi Minh Global Department
+        </p>
+        <p
+          class="title_line3"
+          style="
+            color: #323232;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            color: #ffffff;
+            margin: 0;
+          "
+        >
+          Contact: +82 (0)10 7379 7901
+        </p>
       </div>
     </div>
   </body>
