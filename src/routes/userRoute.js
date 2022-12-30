@@ -24,7 +24,7 @@ userRoute.get("/get-user", getuser);
 // get user by id
 userRoute.get("/get-user/:id", getUserId);
 userRoute.get("/orther-user/:id", getUserId);
-userRoute.post("/verify", verify_mail);
+userRoute.get("/verify", verify_mail);
 userRoute.get("/get-verify", get_verifies);
 // post
 // login
