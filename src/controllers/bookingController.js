@@ -91,7 +91,9 @@ const add_booking = async (req, res) => {
 
     let flag = true;
     if (data) {
-      const duplicate_booking = await model.booking_info.findAll();
+      const duplicate_booking = await model.booking_info.findAll({
+        where: { id_user: id },
+      });
       let change_start = new Date(start).getTime(); //time
       let change_end = new Date(end).getTime(); //time
       let get_month = new Date(end).getMonth(); // get mounth
