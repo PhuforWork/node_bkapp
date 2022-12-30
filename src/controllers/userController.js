@@ -294,155 +294,39 @@ const test_send_email = async (req, res) => {
     html: `
     <!DOCTYPE html>
     <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans:wght@100;200;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-
-      <body
-        style="
-          width: 100vw;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: 'Noto Sans', sans-serif;
-        "
-      >
-        <div
-          class="wrapper"
-          style="
-            width: 600px;
-            height: 730px;
-            overflow: hidden;
-            box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
-          "
-        >
-          <div class="header" style="width: 100%; height: 232px">
-            <img
-              src="http://110.35.173.82:8081/public/img/header.png"
-              alt=""
-              style="width: 100%; height: 232px"
-            />
-          </div>
-          <div class="content" style="padding: 20px 40px 30px">
-            <p
-              class="title_line1 typography"
-              style="
-                color: #323232;
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 30px;
-              "
-            >
-              Hello [User ID], this is a verification email.
-            </p>
-            <p
-              class="title_line2 typography"
-              style="
-                color: #323232;
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 30px;
-              "
-            >
-              To complete the registration process, please click Confirm below to go
-              to the Login page.
-            </p>
-            <div
-              class="content_btn"
-              style="
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-              "
-            >
-              <p
-                style="
-                  padding: 12px 28px;
-                  background: #1976d2;
-                  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25),
-                    inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-                  border-radius: 8px;
-                  cursor: pointer;
-                  max-width: 123px;max-height: 45px 
-                "
-              >
-                <a
-                  href=""
-                  style="
-                    display: flex;
-                    align-items: center;
-                    text-align: center;
-                    color: #ffffff;
-                    text-transform: uppercase;
-                    font-weight: 700;
-                    font-size: 14px;
-                    line-height: 21px;
-                    text-decoration: none;
-                  "
-                  >Confirm</a
-                >
-                <img
-                src="../img/computer.png"
-                alt=""
-                style="width: 209.99px; height: 139.77px"
-              />
-              </p>
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans:wght@100;200;400;500;600;700&display=swap"
+            rel="stylesheet">
+    </head>
+    
+    <body style="display: flex; justify-content: center; align-items: center; font-family: 'Noto Sans', sans-serif; background-color: #c9c9c941;padding: 40px 0px;">
+        <div class="wrapper" style="width: 600px; height: 730px; overflow: hidden; box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;">
+            <div class="header" style="width: 100%; height: 232px;">
+                <img src="http://110.35.173.82:8081/public/img/header.png" alt="" style="width: 100%; height: 232px;" />
             </div>
-            <p
-              class="title_line2 typography"
-              style="
-                color: #323232;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 21px;
-              "
-            >
-              Upon logging in, you are able to use our Booking Management Service to
-              make your booking, delete or change information.<br /><br />Thanks!
-            </p>
-          </div>
-          <div
-            class="footer"
-            style="width: 100%; background: #6ea5db; padding: 12px 40px"
-          >
-            <p
-              class="title_line3"
-              style="
-                color: #323232;
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 14px;
-                color: #ffffff;
-                margin: 0;
-              "
-            >
-              Ho Chi Minh Global Department
-            </p>
-            <p
-              class="title_line3"
-              style="
-                color: #323232;
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 14px;
-                color: #ffffff;
-                margin: 0;
-              "
-            >
-              Contact: +82 (0)10 7379 7901
-            </p>
-          </div>
+            <div class="content" style="padding: 20px 40px 30px;background-color: #FFFFFF;">
+                <p class="title_line1 typography" style="color: #323232; font-weight: 400; font-size: 18px; line-height: 30px;">Hello [User ID], this is a verification email.</p>
+                <p class="title_line2 typography" style="color: #323232; font-weight: 400; font-size: 18px; line-height: 30px;">To complete the registration process, please click Confirm below to go to the Login page.</p>
+                <div class="content_btn" style="display: flex; justify-content: space-around; align-items: center;">
+                    <div style="display: flex; align-items: center; padding: 12px 28px;max-width: 158px;max-height: 40px ;background: #1976D2; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 8px; cursor: pointer;">
+                        <a href="" style="text-align: center; color: #FFFFFF; text-transform: uppercase; font-weight: 700; font-size: 14px; line-height: 21px; text-decoration: none; cursor: pointer;">Confirm</a>
+                    </div>
+                    <img src="http://110.35.173.82:8081/public/img/computer.png" alt="" style="width: 209.99px; height: 139.77px;"/>
+                </div>
+                <p class="title_line2 typography" style="color: #323232; font-weight: 400; font-size: 14px; line-height: 21px;">Upon logging in, you are able to use our Booking Management Service to make your booking, delete or change information.<br /><br />Thanks!</p>
+            </div>
+            <div class="footer" style=" width: 100%; background: #6EA5DB; padding: 12px 40px;">
+                <p class="title_line3" style="color: #323232; font-weight: 400; font-size: 12px; line-height: 14px; color: #FFFFFF; margin: 0;">Ho Chi Minh Global Department</p>
+                <p class="title_line3" style="color: #323232; font-weight: 400; font-size: 12px; line-height: 14px; color: #FFFFFF; margin: 0;">Contact: +82 (0)10 7379 7901</p>
+            </div>
         </div>
-      </body>
+    </body>
     </html>
     `, // html body
   };
