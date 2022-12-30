@@ -8,7 +8,6 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { verify } = require("crypto");
-const index = require("../views/index.html");
 //Read all user
 const getuser = async (req, res) => {
   try {
@@ -292,7 +291,30 @@ const test_send_email = async (req, res) => {
     to: `${email}`, // list of receivers
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
-    html: `${index}`, // html body
+    html: `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mail</title>
+      </head>
+      <body>
+        <div>
+          <h1>
+            Hello
+            <a
+              href="${
+                process.env.APP_URL
+              }/verify?email=${email}&token=${bcrypt.hashSync(email, 10)}}"
+              >Link</a
+            >
+          </h1>
+        </div>
+      </body>
+    </html>
+    `, // html body
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
