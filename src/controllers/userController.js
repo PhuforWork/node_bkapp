@@ -291,9 +291,14 @@ const test_send_email = async (req, res) => {
     to: `${email}`, // list of receivers
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
-    html: `<a href="${
+    html: `
+    <div>
+    Hello
+    <a href="${
       process.env.APP_URL
-    }/verify?email=${email}&token=${bcrypt.hashSync(email, 10)}}">Link</a>`, // html body
+    }/verify?email=${email}&token=${bcrypt.hashSync(email, 10)}}">Link</a>
+    </div>
+    `, // html body
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
