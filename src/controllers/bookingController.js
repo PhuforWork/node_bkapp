@@ -292,98 +292,104 @@ const update_booking = async (req, res) => {
     });
     let flag = true;
     if (data) {
-      // const duplicate_booking = await model.booking_info.findAll();
-      // let change_start = new Date(start).getTime(); //time
-      // let change_end = new Date(end).getTime(); //time
-      // let get_month = new Date(end).getMonth(); // get mounth
-      // let get_date = new Date(end).getDate(); // get mounth
-      // Promise.all(
-      //   duplicate_booking.map(async (values) => {
-      //     let map_start = new Date(values.start).getTime();
-      //     let map_end = new Date(values.end).getTime();
-      //     let map_month = new Date(values.end).getMonth();
-      //     let map_date = new Date(values.end).getDate();
-      //     if (change_start === map_start && change_end === map_end) {
-      //       flag = false;
-      //       failCode(res, { code: 09 }, "Duplicat booking");
-      //     } else if (
-      //       (change_start === map_start &&
-      //         get_month === map_month &&
-      //         get_date === map_date &&
-      //         change_end > map_end) ||
-      //       (change_start === map_start &&
-      //         get_month === map_month &&
-      //         get_date === map_date &&
-      //         change_end < map_end)
-      //     ) {
-      //       flag = false;
-      //       failCode(res, { code: 09 }, "Duplicat booking 7");
-      //     } else if (
-      //       (change_end === map_end &&
-      //         get_month === map_month &&
-      //         get_date === map_date &&
-      //         change_start > map_start) ||
-      //       (change_end === map_end &&
-      //         get_month === map_month &&
-      //         get_date === map_date &&
-      //         change_start < map_start)
-      //     ) {
-      //       flag = false;
-      //       failCode(res, { code: 09 }, "Duplicat booking 8");
-      //     } else if (
-      //       get_month === map_month &&
-      //       get_date === map_date &&
-      //       change_start > map_start &&
-      //       change_end < map_end
-      //     ) {
-      //       flag = false;
-      //       failCode(res, { code: 09 }, "Duplicat booking 9");
-      //     } else if (
-      //       get_month === map_month &&
-      //       get_date === map_date &&
-      //       change_start < map_start &&
-      //       change_end > map_end
-      //     ) {
-      //       flag = false;
-      //       failCode(res, { code: 09 }, "Duplicat booking 10");
-      //     }
-      //   })
-      // );
-      //
+      const duplicate_booking = await model.booking_info.findAll({
+        where: { id_user: check1.id_user },
+      });
+      let change_start = new Date(start).getTime(); //time
+      let change_end = new Date(end).getTime(); //time
+      let get_month = new Date(end).getMonth(); // get mounth
+      let get_date = new Date(end).getDate(); // get mounth
       Promise.all(
-        check2.map(async (ele) => {
-          await model.booking_info.update(data, {
-            where: { checkbk: ele.checkbk },
-          });
-          await model.persionality_tb.destroy({
-            where: { id_booking: ele.id_booking },
-          });
-          Promise.all(
-            personality.map((values) => {
-              model.persionality_tb.create({
-                value: values.value,
-                label: values.label,
-                id_booking: ele.id_booking,
-              });
-            })
-          );
-          await model.select_type_tb.update(
-            {
-              _values: _values,
-            },
-            { where: { id_booking: ele.id_booking } }
-          );
-          await model.department_tb.update(
-            {
-              label: label,
-            },
-            { where: { id_booking: ele.id_booking } }
-          );
+        duplicate_booking.map(async (values) => {
+          let map_start = new Date(values.start).getTime();
+          let map_end = new Date(values.end).getTime();
+          let map_month = new Date(values.end).getMonth();
+          let map_date = new Date(values.end).getDate();
+          if (change_start === map_start && change_end === map_end) {
+            flag = false;
+            failCode(res, { code: 09 }, "Duplicat booking");
+          } else if (
+            (change_start === map_start &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_end > map_end) ||
+            (change_start === map_start &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_end < map_end)
+          ) {
+            flag = false;
+            failCode(res, { code: 09 }, "Duplicat booking 7");
+          } else if (
+            (change_end === map_end &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_start > map_start) ||
+            (change_end === map_end &&
+              get_month === map_month &&
+              get_date === map_date &&
+              change_start < map_start)
+          ) {
+            flag = false;
+            failCode(res, { code: 09 }, "Duplicat booking 8");
+          } else if (
+            get_month === map_month &&
+            get_date === map_date &&
+            change_start > map_start &&
+            change_end < map_end
+          ) {
+            flag = false;
+            failCode(res, { code: 09 }, "Duplicat booking 9");
+          } else if (
+            get_month === map_month &&
+            get_date === map_date &&
+            change_start < map_start &&
+            change_end > map_end
+          ) {
+            flag = false;
+            failCode(res, { code: 09 }, "Duplicat booking 10");
+          }
         })
       );
-      successCode(res, "", "Add booking success");
+      //
+      if (flag) {
+        Promise.all(
+          check2.map(async (ele) => {
+            await model.booking_info.update(data, {
+              where: { checkbk: ele.checkbk },
+            });
+            await model.persionality_tb.destroy({
+              where: { id_booking: ele.id_booking },
+            });
+            Promise.all(
+              personality.map((values) => {
+                model.persionality_tb.create({
+                  value: values.value,
+                  label: values.label,
+                  id_booking: ele.id_booking,
+                });
+              })
+            );
+            await model.select_type_tb.update(
+              {
+                _values: _values,
+              },
+              { where: { id_booking: ele.id_booking } }
+            );
+            await model.department_tb.update(
+              {
+                label: label,
+              },
+              { where: { id_booking: ele.id_booking } }
+            );
+          })
+        );
+        successCode(res, "", "Add booking success");
+      } else {
+        failCode(res, { code: 09 }, "Duplicate booking 11");
+      }
     } else {
-      failCode(res, { code: 09 }, "Duplicate booking 11");
+      failCode(res, { code: 012 }, "Missing fields booking");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
