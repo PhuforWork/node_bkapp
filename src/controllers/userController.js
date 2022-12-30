@@ -448,7 +448,7 @@ const test_send_email = async (req, res) => {
     attachments: [
       {
         filename: "header.png",
-        path: __dirname + "/header.png",
+        path: "/var/www/src_be_booking/node_bkapp/public/img/header.png",
         cid: "header",
       },
     ],
