@@ -290,11 +290,11 @@ const update_booking = async (req, res) => {
     });
     let flag = true;
     if (data) {
-      const duplicate_booking = await model.booking_info.findAll();
-      let change_start = new Date(start).getTime(); //time
-      let change_end = new Date(end).getTime(); //time
-      let get_month = new Date(end).getMonth(); // get mounth
-      let get_date = new Date(end).getDate(); // get mounth
+      // const duplicate_booking = await model.booking_info.findAll();
+      // let change_start = new Date(start).getTime(); //time
+      // let change_end = new Date(end).getTime(); //time
+      // let get_month = new Date(end).getMonth(); // get mounth
+      // let get_date = new Date(end).getDate(); // get mounth
       // Promise.all(
       //   duplicate_booking.map(async (values) => {
       //     let map_start = new Date(values.start).getTime();
