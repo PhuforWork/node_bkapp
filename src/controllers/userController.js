@@ -292,7 +292,7 @@ const test_send_email = async (req, res) => {
     to: `${email}`, // list of receivers
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
-    html: index, // html body
+    html: `${index}`, // html body
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
