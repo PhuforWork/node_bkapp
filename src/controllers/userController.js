@@ -327,7 +327,7 @@ const test_send_email = async (req, res) => {
         >
           <div class="header" style="width: 100%; height: 232px">
             <img
-              src="../img/header.png"
+              src="cid:header"
               alt=""
               style="width: 100%; height: 232px"
             />
@@ -445,6 +445,13 @@ const test_send_email = async (req, res) => {
       </body>
     </html>
     `, // html body
+    attachments: [
+      {
+        filename: "",
+        path: __dirname + "header.png",
+        cid: "header",
+      },
+    ],
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
