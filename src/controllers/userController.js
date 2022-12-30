@@ -292,12 +292,28 @@ const test_send_email = async (req, res) => {
     subject: "Verify password ✔", // Subject line
     text: "Link here?", // plain text body
     html: `
-    <div>
-    Hello
-    <a href="${
-      process.env.APP_URL
-    }/verify?email=${email}&token=${bcrypt.hashSync(email, 10)}}">Link</a>
-    </div>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mail</title>
+      </head>
+      <body>
+        <div>
+          <h1>
+            Hello
+            <a
+              href="${
+                process.env.APP_URL
+              }/verify?email=${email}&token=${bcrypt.hashSync(email, 10)}}"
+              >Link</a
+            >
+          </h1>
+        </div>
+      </body>
+    </html>
     `, // html body
   };
   // send mail with defined transport object
