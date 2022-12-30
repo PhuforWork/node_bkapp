@@ -338,7 +338,12 @@ const test_send_email = async (req, res) => {
       console.log("email send");
     }
   });
-  successCode(res, "", "Success");
+  res.redirect(
+    `${process.env.APP_URL}/verify?email=${email}?token=${bcrypt.hashSync(
+      email,
+      10
+    )}`
+  );
 };
 
 const verify_mail = async (req, res) => {
@@ -347,7 +352,8 @@ const verify_mail = async (req, res) => {
     req.query.token,
     (err, result) => {
       if (!err) {
-        res.redirect(`${process.env.APP_URL}/get-verify`);
+        console.log("Success");
+        successCode(res, "", "Success");
       } else {
         failCode(res, "", "fails");
       }
