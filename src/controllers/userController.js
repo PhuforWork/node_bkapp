@@ -327,7 +327,7 @@ const test_send_email = async (req, res) => {
         >
           <div class="header" style="width: 100%; height: 232px">
             <img
-              src="cid:header"
+              src="http://110.35.173.82:8081/public/img/header.png"
               alt=""
               style="width: 100%; height: 232px"
             />
@@ -445,13 +445,6 @@ const test_send_email = async (req, res) => {
       </body>
     </html>
     `, // html body
-    attachments: [
-      {
-        filename: "header.png",
-        path: "/var/www/src_be_booking/node_bkapp/public/img/header.png",
-        cid: "header",
-      },
-    ],
   };
   // send mail with defined transport object
   // const info = await transporter.sendMail(msg);
