@@ -336,14 +336,14 @@ const test_send_email = async (req, res) => {
       console.log("it has error", err);
     } else {
       console.log("email send");
+      res.redirect(
+        `${process.env.APP_URL}/verify?email=${email}?token=${bcrypt.hashSync(
+          email,
+          10
+        )}`
+      );
     }
   });
-  res.redirect(
-    `${process.env.APP_URL}/verify?email=${email}?token=${bcrypt.hashSync(
-      email,
-      10
-    )}`
-  );
 };
 
 const verify_mail = async (req, res) => {
