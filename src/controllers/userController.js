@@ -390,6 +390,11 @@ const test_send_email = async (req, res) => {
                   "
                   >Confirm</a
                 >
+                <img
+                src="../img/computer.png"
+                alt=""
+                style="width: 209.99px; height: 139.77px"
+              />
               </p>
             </div>
             <p
