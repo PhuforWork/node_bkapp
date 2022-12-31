@@ -7,7 +7,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
-const { encodeTokenEmail } = require("../Middlewares/auth");
+const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
 
 //Read all user
 const getuser = async (req, res) => {
@@ -221,7 +221,186 @@ const forgot_password = async (req, res) => {
       },
     });
     if (check_email) {
-      successCode(res, { check_email, status }, "Check email successful");
+      // create reusable transporter object using the default SMTP transport
+      // hash token
+      let token = encodeTokenEmail(email);
+      //
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        // host: "smtp.gmail.email",
+        port: 465, //587
+        secure: true, // true for 465, false for other ports
+        auth: {
+          user: "miniuadm@gmail.com", // generated ethereal user
+          pass: "qezhngzzqpgdzpia", // generated ethereal password
+        },
+      });
+      const msg = {
+        from: "miniuadm@gmail.com", // sender address
+        to: `${email}`, // list of receivers
+        subject: "Verify password ✔", // Subject line
+        text: "Link here?", // plain text body
+        html: `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <link rel="preconnect" href="https://fonts.googleapis.com" />
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+              <link
+                href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans:wght@100;200;400;500;600;700&display=swap"
+                rel="stylesheet"
+              />
+            </head>
+          
+            <body
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Noto Sans', sans-serif;
+                background-color: #e7e5e5;
+                padding: 40px 0px;
+              "
+            >
+              <div
+                class="wrapper"
+                style="
+                  width: 600px;
+                  height: 730px;
+                  overflow: hidden;
+                  box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
+                  margin: auto;
+                "
+              >
+                <div class="header" style="width: 100%; height: 232px">
+                  <img
+                    src="http://110.35.173.82:8081/public/img/header.png"
+                    alt=""
+                    style="width: 100%; height: 232px"
+                  />
+                </div>
+                <div
+                  class="content"
+                  style="padding: 20px 40px 30px; background-color: #ffffff"
+                >
+                  <p
+                    class="title_line1 typography"
+                    style="
+                      color: #323232;
+                      font-weight: 400;
+                      font-size: 18px;
+                      line-height: 30px;
+                    "
+                  >
+                    Hello [User ID], this is a verification email. Please copy and paste this code into the input box on the password change page.
+                    <h3>${token}</h3> 
+                  </p>
+                  <p
+                    class="title_line2 typography"
+                    style="
+                      color: #323232;
+                      font-weight: 400;
+                      font-size: 18px;
+                      line-height: 30px;
+                    "
+                  >
+                    To complete the registration process, please click "Verify your password" below to go
+                    to the Change password page.
+                  </p>
+                  <div class="content_btn" style="display: flex">
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        padding: 12px 28px;
+                        max-height: 40px;
+                        background: #1976d2;
+                        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25),
+                          inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+                        border-radius: 8px;
+                        cursor: pointer;
+                        margin: auto;
+                      "
+                    >
+                      <a
+                        href="http://192.168.1.17:3000/authen/reset"
+                        style="
+                          text-align: center;
+                          color: #ffffff;
+                          text-transform: uppercase;
+                          font-weight: 700;
+                          font-size: 14px;
+                          line-height: 21px;
+                          text-decoration: none;
+                          cursor: pointer;
+                        "
+                        >Verify your password</a
+                      >
+                    </div>
+                  </div>
+                  <p
+                    class="title_line2 typography"
+                    style="
+                      color: #323232;
+                      font-weight: 400;
+                      font-size: 14px;
+                      line-height: 21px;
+                    "
+                  >
+                    Upon logging in, you are able to use our Booking Management Service to
+                    make your booking, delete or change information.<br /><br />Thanks!
+                  </p>
+                </div>
+                <div
+                  class="footer"
+                  style="width: 100%; background: #6ea5db; padding: 12px 40px"
+                >
+                  <p
+                    class="title_line3"
+                    style="
+                      color: #323232;
+                      font-weight: 400;
+                      font-size: 12px;
+                      line-height: 14px;
+                      color: #ffffff;
+                      margin: 0;
+                    "
+                  >
+                    Ho Chi Minh Global Department
+                  </p>
+                  <p
+                    class="title_line3"
+                    style="
+                      color: #323232;
+                      font-weight: 400;
+                      font-size: 12px;
+                      line-height: 14px;
+                      color: #ffffff;
+                      margin: 0;
+                    "
+                  >
+                    Contact: +82 (0)10 7379 7901
+                  </p>
+                </div>
+              </div>
+            </body>
+          </html>
+          
+          `, // html body
+      };
+      // send mail with defined transport object
+      // const info = await transporter.sendMail(msg);
+      await transporter.sendMail(msg, (err) => {
+        if (err) {
+          console.log("it has error", err);
+        } else {
+          console.log("email send");
+        }
+      });
+      successCode(res, { status }, "Check email successful");
     } else {
       failCode(res, { code: 007 }, "Email is not correct");
     }
@@ -231,13 +410,9 @@ const forgot_password = async (req, res) => {
 };
 const change_pass = async (req, res) => {
   try {
-    let { email, _password } = req.body;
-    const check_email = await model.users.findOne({
-      where: {
-        email,
-      },
-    });
-    if (check_email) {
+    let { code_verify, _password } = req.body;
+    let checkToken = compareToken(code_verify);
+    if (checkToken) {
       await model.users.update(
         { _password: bcrypt.hashSync(_password, 10) },
         { where: { email: email } }
@@ -458,23 +633,7 @@ const test_send_email = async (req, res) => {
   successCode(res, "", "Success");
 };
 
-const verify_mail = async (req, res) => {
-  let verifies = bcrypt.compare(
-    req.query.email,
-    req.query.token,
-    (err, result) => {
-      if (!err) {
-        res.redirect(`${process.env.APP_URL}/get-verify`);
-      } else {
-        failCode(res, "", "fails");
-      }
-    }
-  );
-};
-const get_verifies = async (req, res) => {
-  console.log("success");
-  successCode(res, "", "success");
-};
+
 module.exports = {
   getuser,
   loginUser,
@@ -489,6 +648,5 @@ module.exports = {
   update_isShow,
   update_img_test,
   test_send_email,
-  verify_mail,
-  get_verifies,
+
 };

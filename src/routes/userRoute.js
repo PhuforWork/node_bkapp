@@ -13,8 +13,7 @@ const {
   update_isShow,
   update_img_test,
   test_send_email,
-  verify_mail,
-  get_verifies,
+
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -24,8 +23,6 @@ userRoute.get("/get-user", getuser);
 // get user by id
 userRoute.get("/get-user/:id", getUserId);
 userRoute.get("/orther-user/:id", getUserId);
-userRoute.get("/verify", verify_mail);
-userRoute.get("/get-verify", get_verifies);
 // post
 // login
 userRoute.post("/login", upload.none(), loginUser);
