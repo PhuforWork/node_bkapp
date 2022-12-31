@@ -278,7 +278,7 @@ const test_send_email = async (req, res) => {
   let { email } = req.body;
   // create reusable transporter object using the default SMTP transport
   // hash token
-  let token = encodeTokenEmail(email);
+  // let token = encodeTokenEmail(email);
   //
   let transporter = nodemailer.createTransport({
     service: "gmail",
