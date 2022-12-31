@@ -413,6 +413,7 @@ const change_pass = async (req, res) => {
     let { _password } = req.body;
     let token = req.body.code_verify;
     console.log(token);
+    console.log(compareToken(token));
     if (compareToken(token)) {
       await model.users.update(
         { _password: bcrypt.hashSync(_password, 10) },
