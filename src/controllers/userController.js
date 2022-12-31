@@ -410,9 +410,10 @@ const forgot_password = async (req, res) => {
 };
 const change_pass = async (req, res) => {
   try {
-    let { code_verify, _password } = req.body;
-    console.log(req.body);
-    if (compareToken(code_verify)) {
+    let { _password } = req.body;
+    let token = req.body.code_verify;
+    console.log(token);
+    if (compareToken(token)) {
       await model.users.update(
         { _password: bcrypt.hashSync(_password, 10) },
         { where: { email: email } }

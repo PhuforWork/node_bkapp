@@ -3,8 +3,8 @@ require("dotenv").config();
 
 //ma hoa du lieu
 const encodeTokenEmail = (data) => {
-  let token = jwt.sign({ data:data }, process.env.ENDCODE_EMAIL, {
-    expiresIn: 300000,
+  let token = jwt.sign({ data: data }, process.env.ENDCODE_EMAIL, {
+    expiresIn: "5m",
   });
   return token;
 };
