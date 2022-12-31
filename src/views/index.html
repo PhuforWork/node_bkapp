@@ -14,12 +14,12 @@
 
   <body
     style="
-      width: 100vw;
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Noto Sans', sans-serif;
+      background-color: #e7e5e5;
+      padding: 40px 0px;
     "
   >
     <div
@@ -29,16 +29,20 @@
         height: 730px;
         overflow: hidden;
         box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
+        margin: auto;
       "
     >
       <div class="header" style="width: 100%; height: 232px">
         <img
-          src="../img/header.png"
+          src="http://110.35.173.82:8081/public/img/header.png"
           alt=""
           style="width: 100%; height: 232px"
         />
       </div>
-      <div class="content" style="padding: 20px 40px 30px">
+      <div
+        class="content"
+        style="padding: 20px 40px 30px; background-color: #ffffff"
+      >
         <p
           class="title_line1 typography"
           style="
@@ -49,6 +53,7 @@
           "
         >
           Hello [User ID], this is a verification email.
+          <h3>${}</h3> 
         </p>
         <p
           class="title_line2 typography"
@@ -59,20 +64,17 @@
             line-height: 30px;
           "
         >
-          To complete the registration process, please click Confirm below to go
-          to the Login page.
+          To complete the registration process, please click "Verify your password" below to go
+          to the Change password page.
         </p>
-        <div
-          class="content_btn"
-          style="
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-          "
-        >
-          <p
+        <div class="content_btn" style="display: flex">
+          <div
             style="
+              display: flex;
+              align-items: center;
               padding: 12px 28px;
+              max-width: 158px;
+              max-height: 40px;
               background: #1976d2;
               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25),
                 inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -81,10 +83,8 @@
             "
           >
             <a
-              href=""
+              href="http://10.150.0.132:3000/authen/forgot/confirm"
               style="
-                display: flex;
-                align-items: center;
                 text-align: center;
                 color: #ffffff;
                 text-transform: uppercase;
@@ -92,15 +92,11 @@
                 font-size: 14px;
                 line-height: 21px;
                 text-decoration: none;
+                cursor: pointer;
               "
-              >Confirm</a
+              >Verify your password</a
             >
-          </p>
-          <img
-            src="../img/computer.png"
-            alt=""
-            style="width: 209.99px; height: 139.77px"
-          />
+          </div>
         </div>
         <p
           class="title_line2 typography"
