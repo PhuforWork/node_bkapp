@@ -421,7 +421,7 @@ const change_pass = async (req, res) => {
       );
       successCode(res, "", "Change password successfully");
     } else {
-      failCode(res, { code: 010 }, "Email is not correct");
+      failCode(res, { code: 010 }, "Token not correct");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
