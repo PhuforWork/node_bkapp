@@ -142,7 +142,7 @@ const updateUser = async (req, res) => {
     );
     if (checkpass) {
       await model.users.update(
-        { user_name, email, _password },
+        { user_name, email, _password: bcrypt.hashSync(_password, 10) },
         { where: { id_user: id } }
       );
       successCode(res, "Update successfully", "Update successfully");
@@ -410,7 +410,7 @@ const forgot_password = async (req, res) => {
 };
 const change_pass = async (req, res) => {
   try {
-    let { email,_password } = req.body;
+    let { email, _password } = req.body;
     let token = req.body.code_verify;
     console.log(token);
     console.log(compareToken(token));
