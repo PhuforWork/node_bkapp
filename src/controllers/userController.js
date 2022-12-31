@@ -275,28 +275,27 @@ const put_min = async (req, res) => {
 };
 
 const test_send_email = async (req, res) => {
-  try {
-    let { email } = req.body;
-    // create reusable transporter object using the default SMTP transport
-    // hash token
-    let token = encodeTokenEmail(email);
-    //
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      // host: "smtp.gmail.email",
-      port: 465, //587
-      secure: true, // true for 465, false for other ports
-      auth: {
-        user: "miniuadm@gmail.com", // generated ethereal user
-        pass: "qezhngzzqpgdzpia", // generated ethereal password
-      },
-    });
-    const msg = {
-      from: "miniuadm@gmail.com", // sender address
-      to: `${email}`, // list of receivers
-      subject: "Verify password ✔", // Subject line
-      text: "Link here?", // plain text body
-      html: `
+  let { email } = req.body;
+  // create reusable transporter object using the default SMTP transport
+  // hash token
+  let token = encodeTokenEmail(email);
+  //
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    // host: "smtp.gmail.email",
+    port: 465, //587
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: "miniuadm@gmail.com", // generated ethereal user
+      pass: "qezhngzzqpgdzpia", // generated ethereal password
+    },
+  });
+  const msg = {
+    from: "miniuadm@gmail.com", // sender address
+    to: `${email}`, // list of receivers
+    subject: "Verify password ✔", // Subject line
+    text: "Link here?", // plain text body
+    html: `
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -446,20 +445,17 @@ const test_send_email = async (req, res) => {
       </html>
       
       `, // html body
-    };
-    // send mail with defined transport object
-    // const info = await transporter.sendMail(msg);
-    await transporter.sendMail(msg, (err) => {
-      if (err) {
-        console.log("it has error", err);
-      } else {
-        console.log("email send");
-      }
-    });
-    successCode(res, "", "Success");
-  } catch (error) {
-    errorCode(res, "Error BackEnd");
-  }
+  };
+  // send mail with defined transport object
+  // const info = await transporter.sendMail(msg);
+  await transporter.sendMail(msg, (err) => {
+    if (err) {
+      console.log("it has error", err);
+    } else {
+      console.log("email send");
+    }
+  });
+  successCode(res, "", "Success");
 };
 
 const verify_mail = async (req, res) => {
