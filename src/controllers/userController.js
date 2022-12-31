@@ -295,7 +295,7 @@ const forgot_password = async (req, res) => {
                       line-height: 30px;
                     "
                   >
-                    Hello [User ID], this is a verification email. Please copy and paste this code into the input box on the password change page.
+                    Hello ${check_email.user_name}, this is a verification email. Please copy and paste this code into the input box on the password change page.
                     <h3>${token}</h3> 
                   </p>
                   <p
