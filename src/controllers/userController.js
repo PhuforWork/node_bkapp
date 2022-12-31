@@ -411,8 +411,8 @@ const forgot_password = async (req, res) => {
 const change_pass = async (req, res) => {
   try {
     let { code_verify, _password } = req.body;
-    let checkToken = compareToken(code_verify);
-    if (checkToken) {
+    console.log(req.body);
+    if (compareToken(code_verify)) {
       await model.users.update(
         { _password: bcrypt.hashSync(_password, 10) },
         { where: { email: email } }
@@ -633,7 +633,6 @@ const test_send_email = async (req, res) => {
   successCode(res, "", "Success");
 };
 
-
 module.exports = {
   getuser,
   loginUser,
@@ -648,5 +647,4 @@ module.exports = {
   update_isShow,
   update_img_test,
   test_send_email,
-
 };
