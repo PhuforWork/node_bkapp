@@ -410,7 +410,7 @@ const forgot_password = async (req, res) => {
 };
 const change_pass = async (req, res) => {
   try {
-    let { _password } = req.body;
+    let { email,_password } = req.body;
     let token = req.body.code_verify;
     console.log(token);
     console.log(compareToken(token));
