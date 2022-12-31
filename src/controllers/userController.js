@@ -370,13 +370,14 @@ const test_send_email = async (req, res) => {
                   style="
                     display: flex;
                     align-items: center;
+                    padding: 12px 28px;
                     max-height: 40px;
                     background: #1976d2;
                     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25),
                       inset 0px 4px 4px rgba(0, 0, 0, 0.25);
                     border-radius: 8px;
-                    margin: auto;
                     cursor: pointer;
+                    margin: auto;
                   "
                 >
                   <a
