@@ -275,7 +275,7 @@ const forgot_password = async (req, res) => {
                   margin: auto;
                 "
               >
-              <div class="header" style="width: 100%; height: 232px; background-image: url(../../public/img/header.png);">
+              <div class="header" style="width: 100%; height: 232px; background-image: url(../public/img/header.png);">
                 <img
                   src="http://110.35.173.82:8081/public/img/header.png"
                   alt=""
