@@ -414,14 +414,16 @@ const change_pass = async (req, res) => {
     let token = req.body.code_verify;
     console.log(token);
     console.log(compareToken(token));
-    if (compareToken(token)) {
-      await model.users.update(
-        { _password: bcrypt.hashSync(_password, 10) },
-        { where: { email: email } }
-      );
-      successCode(res, "", "Change password successfully");
-    } else {
-      failCode(res, { code: 010 }, "Token not correct");
+    if (email) {
+      if (compareToken(token)) {
+        await model.users.update(
+          { _password: bcrypt.hashSync(_password, 10) },
+          { where: { email: email } }
+        );
+        successCode(res, "", "Change password successfully");
+      } else {
+        failCode(res, { code: 010 }, "Token not correct");
+      }
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
