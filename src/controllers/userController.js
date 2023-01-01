@@ -326,7 +326,7 @@ const forgot_password = async (req, res) => {
                       "
                     >
                       <a
-                        href="http://http://110.35.173.82/authen/reset"
+                        href="http://110.35.173.82/authen/reset"
                         style="
                           text-align: center;
                           color: #ffffff;
