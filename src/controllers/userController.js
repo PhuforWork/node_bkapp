@@ -424,6 +424,8 @@ const change_pass = async (req, res) => {
       } else {
         failCode(res, { code: 010 }, "Token not correct");
       }
+    }else{
+      failCode(res,"","Missing email");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
