@@ -261,7 +261,7 @@ const forgot_password = async (req, res) => {
                 justify-content: center;
                 align-items: center;
                 font-family: 'Noto Sans', sans-serif;
-                background-color: #e7e5e5;
+                background-color: #F2DADA;
                 padding: 40px 0px;
               "
             >
