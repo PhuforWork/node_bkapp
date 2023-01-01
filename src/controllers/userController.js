@@ -275,13 +275,13 @@ const forgot_password = async (req, res) => {
                   margin: auto;
                 "
               >
-                <div class="header" style="width: 100%; height: 232px">
-                  <img
-                    src="http://110.35.173.82:8081/public/img/header.png"
-                    alt=""
-                    style="width: 100%; height: 232px"
-                  />
-                </div>
+              <div class="header" style="width: 100%; height: 232px; background-image: url(../../public/img/header.png);">
+                <img
+                  src="http://110.35.173.82:8081/public/img/header.png"
+                  alt=""
+                  style="width: 100%; height: 232px; display: none;"
+                />
+              </div>
                 <div
                   class="content"
                   style="padding: 20px 40px 30px; background-color: #ffffff"
@@ -424,8 +424,8 @@ const change_pass = async (req, res) => {
       } else {
         failCode(res, { code: 010 }, "Token not correct or expires");
       }
-    }else{
-      failCode(res,"","Missing email");
+    } else {
+      failCode(res, "", "Missing email");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
