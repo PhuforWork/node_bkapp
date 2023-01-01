@@ -422,7 +422,7 @@ const change_pass = async (req, res) => {
         );
         successCode(res, "", "Change password successfully");
       } else {
-        failCode(res, { code: 010 }, "Token not correct");
+        failCode(res, { code: 010 }, "Token not correct or expires");
       }
     }else{
       failCode(res,"","Missing email");
