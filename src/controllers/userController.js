@@ -284,7 +284,7 @@ const forgot_password = async (req, res) => {
                 </div>
                 <div
                   class="content"
-                  style="padding: 20px 40px 30px; background-color: #ffffff"
+                  style="padding: 15px 20px; background-color: #ffffff"
                 >
                   <p
                     class="title_line1 typography"
