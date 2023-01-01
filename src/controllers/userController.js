@@ -326,7 +326,7 @@ const forgot_password = async (req, res) => {
                       "
                     >
                       <a
-                        href="http://110.35.173.82/authen/reset"
+                        href="http://castis.world/authen/reset"
                         style="
                           text-align: center;
                           color: #ffffff;
