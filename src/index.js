@@ -23,13 +23,11 @@ app.get("/test", (req, res) => {
 
 io.on("connection", (socket) => {
   io.emit("user-connect", socket.id);
+
+  // disconnect
   socket.on("disconnect", (reason) => {
     io.emit("user-disconnect", socket.id);
-  });
-  socket.on("user-chat", (data) => {
-    io.sockets.emit("content-chat", { id: socket.id, data });
   });
 });
 
 app.use("/api", rootRoute);
-
