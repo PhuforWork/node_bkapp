@@ -3,6 +3,8 @@ const init_models = require("../models/init-models");
 const compress_images = require("compress-images");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
+const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
@@ -17,6 +19,16 @@ const getuser = async (req, res) => {
       attributes: { exclude: ["_password", "email", "image_url"] },
     });
     // res.send(data);
+    successCode(res, data, "Get Success");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
+  }
+};
+const get_search_user = async (req, res) => {
+  try {
+    let data = await model.department.findAll({
+      where: { label: { [Op.like]: "%" + req.body.query + "%" } },
+    });
     successCode(res, data, "Get Success");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -424,8 +436,8 @@ const change_pass = async (req, res) => {
       } else {
         failCode(res, { code: 010 }, "Token not correct or expires");
       }
-    }else{
-      failCode(res,"","Missing email");
+    } else {
+      failCode(res, "", "Missing email");
     }
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -653,4 +665,5 @@ module.exports = {
   update_isShow,
   update_img_test,
   test_send_email,
+  get_search_user,
 };
