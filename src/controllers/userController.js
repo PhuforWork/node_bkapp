@@ -25,10 +25,10 @@ const getuser = async (req, res) => {
   }
 };
 const get_search_user = async (req, res) => {
-  console.log(req.query);
+  let { search } = req.query;
   try {
     let data = await model.department.findAll({
-      where: { label: { [Op.like]: "%" + req.query + "%" } },
+      where: { label: { [Op.like]: "%" + search + "%" } },
     });
     successCode(res, data, "Get Success");
   } catch (error) {
