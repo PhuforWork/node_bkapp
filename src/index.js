@@ -22,6 +22,7 @@ app.get("/test", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  console.log("user-connect", socket);
   io.emit("user-connect", socket.id);
 
   // disconnect
