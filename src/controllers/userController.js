@@ -25,6 +25,7 @@ const getuser = async (req, res) => {
   }
 };
 const get_search_user = async (req, res) => {
+  console.log(req.body.query);
   try {
     let data = await model.department.findAll({
       where: { label: { [Op.like]: "%" + req.body.query + "%" } },
