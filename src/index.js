@@ -13,7 +13,7 @@ const io = new Server(httpServer, { cors: { origin: "*" } });
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
-app.listen(8081);
+httpServer.listen(8081);
 
 app.get("/test", (req, res) => {
   let test = req.query;
@@ -23,11 +23,11 @@ app.get("/test", (req, res) => {
 
 io.on("connection", (socket) => {
   io.emit("user-connect", socket.id);
-  socket.on("disconnecting", (reason) => {
+  socket.on("disconnect", (reason) => {
     io.emit("user-disconnect", socket.id);
   });
   socket.on("user-chat", (data) => {
-    io.emit("content-chat", { id: socket.id, data });
+    io.sockets.emit("content-chat", { id: socket.id, data });
   });
 });
 
