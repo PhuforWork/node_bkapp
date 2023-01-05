@@ -23,9 +23,11 @@ app.get("/test", (req, res) => {
 
 let onlineUser = [];
 const addNewUser = async (user_name, socketId) => {
-  !onlineUser.some((user) => user.user_name === user_name) &&
-    onlineUser.push({ user_name, socketId });
-  await console.log("test",onlineUser);
+  if (user_name !== null) {
+    !onlineUser.some((user) => user.user_name === user_name) &&
+      onlineUser.push({ user_name, socketId });
+    await console.log("test", onlineUser);
+  }
 };
 
 const removeUser = (socketId) => {
