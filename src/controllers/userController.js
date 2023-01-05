@@ -62,6 +62,7 @@ const getUserId = async (req, res) => {
     maxtime,
     mintime,
     isShow,
+    indexRow,
   } = data;
   successCode(
     res,
@@ -76,6 +77,7 @@ const getUserId = async (req, res) => {
       maxtime,
       mintime,
       isShow,
+      indexRow,
       data_booking,
     },
     "Success"
@@ -112,7 +114,7 @@ const sigUp = async (req, res) => {
       maxtime: 19,
       mintime: 9,
       isShow: false,
-      indexRow: 5
+      indexRow: 5,
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
@@ -717,5 +719,5 @@ module.exports = {
   note_put,
   note_detele,
   note_get_id,
-  update_row
+  update_row,
 };
