@@ -51,10 +51,6 @@ const getUserId = async (req, res) => {
     raw: false,
   });
 
-  let data_guest = await model.guest_booking.findAll({
-    include: ["service_guests"],
-    where: { id_user: id },
-  });
 
   let {
     id_user,
@@ -82,7 +78,6 @@ const getUserId = async (req, res) => {
       mintime,
       isShow,
       data_booking,
-      data_guest,
     },
     "Success"
   );
