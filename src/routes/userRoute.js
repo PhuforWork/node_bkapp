@@ -13,7 +13,11 @@ const {
   update_isShow,
   update_img_test,
   test_send_email,
-  get_search_user
+  get_search_user,
+  note_post,
+  note_put,
+  note_detele,
+  note_get_id,
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -24,6 +28,7 @@ userRoute.get("/get-user", getuser);
 userRoute.get("/get-user/:id", getUserId);
 userRoute.get("/orther-user/:id", getUserId);
 userRoute.get("/search-department", get_search_user);
+userRoute.get("/get-note/:id", note_get_id);
 // post
 // login
 userRoute.post("/login", upload.none(), loginUser);
@@ -34,6 +39,7 @@ userRoute.post("/forgot-pass", upload.none(), forgot_password);
 // change_pass
 userRoute.post("/change-pass", upload.none(), change_pass);
 userRoute.post("/test-send-email", upload.none(), test_send_email);
+userRoute.post("/create-note", upload.none(), note_post);
 // put
 // update user
 userRoute.put("/update-user/:id", upload.none(), updateUser);
@@ -43,6 +49,8 @@ userRoute.put("/skip-show/:id", update_isShow);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
+userRoute.put("/update-note/:id", upload.none(), note_put);
 // delete
+userRoute.delete("/delete-note/:id", upload.none(), note_detele);
 
 module.exports = userRoute;

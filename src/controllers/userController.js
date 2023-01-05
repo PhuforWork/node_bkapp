@@ -51,7 +51,6 @@ const getUserId = async (req, res) => {
     raw: false,
   });
 
-
   let {
     id_user,
     user_name,
@@ -440,6 +439,48 @@ const change_pass = async (req, res) => {
   }
 };
 
+//note
+const note_get_id = async (req, res) => {
+  try {
+    let { id } = req.params;
+    let note_res = await model.note_item.findAll({ where: { id_user: id } });
+    successCode(res, note_res, "Success get note");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+const note_post = async (req, res) => {
+  try {
+    let { id } = req.params; //id user
+    let { indexRow, date, title, user_name, department } = req.body;
+    let data = { indexRow, date, title, user_name, department, id_user: id };
+    await model.note_item.create(data);
+    successCode(res, "", "Success create note");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+const note_put = async (req, res) => {
+  try {
+    let { id } = req.params; //id user
+    let { indexRow, date, title, user_name, department } = req.body;
+    let data = { indexRow, date, title, user_name, department };
+    await model.note_item.update(data, { where: { id_user: id } });
+    successCode(res, "", "Success update note");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+const note_detele = async (req, res) => {
+  try {
+    let { id } = req.params; //id user
+    await model.note_item.destroy({ where: { id_user: id } });
+    successCode(res, "", "Success update note");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+
 const put_max = async (req, res) => {
   try {
     let { id } = req.params; // id user
@@ -662,4 +703,8 @@ module.exports = {
   update_img_test,
   test_send_email,
   get_search_user,
+  note_post,
+  note_put,
+  note_detele,
+  note_get_id
 };
