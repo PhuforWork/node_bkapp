@@ -56,6 +56,7 @@ io.on("connection", (socket) => {
       io.to(receiver.socketId).emit("getNotification", {
         senderName,
         type,
+        status,
       });
       notification({ receiverName, status, id_user });
     }

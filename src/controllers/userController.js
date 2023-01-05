@@ -707,11 +707,19 @@ const notification = async (data) => {
     console.log(error);
   }
 };
+const notification_get = async (req, res) => {
+  try {
+    let { id } = req.params;
+    const notifi_get = await model.notifications.findAll({ where: { id_user: id } });
+    successCode(res,notifi_get,"Success get notify");
+  } catch (error) {
+    console.log(error);
+  }
+};
 const notification_update = async (req, res) => {
   try {
     let { id } = params;
-    let { status } = req.body;
-    let data = { status };
+    let data = { status: true };
     await model.notifications.update(data, { where: { id_user: id } });
     successCode(res, "", "Success update notification");
   } catch (error) {
@@ -728,6 +736,7 @@ const notification_delete = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+
 module.exports = {
   getuser,
   loginUser,
@@ -750,5 +759,6 @@ module.exports = {
   update_row,
   notification,
   notification_update,
-  notification_delete
+  notification_delete,
+  notification_get
 };

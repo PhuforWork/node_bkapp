@@ -20,7 +20,8 @@ const {
   note_get_id,
   update_row,
   notification_update,
-  notification_delete
+  notification_delete,
+  notification_get
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -32,6 +33,7 @@ userRoute.get("/get-user/:id", getUserId);
 userRoute.get("/orther-user/:id", getUserId);
 userRoute.get("/search-department", get_search_user);
 userRoute.get("/get-note/:id", note_get_id);
+userRoute.get("/get-notify/:id", notification_get);
 // post
 // login
 userRoute.post("/login", upload.none(), loginUser);
