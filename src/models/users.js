@@ -40,6 +40,10 @@ class users extends Sequelize.Model {
     isShow: {
       type: DataTypes.BOOLEAN,
       allowNull: true
+    },
+    indexRow: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
