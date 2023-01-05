@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
         type,
         status,
       });
-      notification({ receiverName, status, id_user });
+      notification({ senderName, status, id_user });
     }
   );
   // socket.on("sendNotification", (data) => {
