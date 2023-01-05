@@ -22,6 +22,7 @@ app.get("/test", (req, res) => {
 });
 
 let onlineUser = [];
+console.log(onlineUser);
 const addNewUser = (user_name, socketId) => {
   !onlineUser.some((user) => user.user_name === user_name) &&
     onlineUser.push({ user_name, socketId });
@@ -45,13 +46,10 @@ io.on("connection", (socket) => {
   //send notification
   // socket.on("sendNotification", ({ senderName, receiverName, type }) => {
   //   const receiver = getUser(receiverName);
-  //   setTimeout(
   //     io.to(receiver.socketId).emit("getNotification", {
   //       senderName,
   //       type,
-  //     }),
-  //     2000
-  //   );
+  //     });
   // });
   socket.on("sendNotification", (data) => {
     socket.emit("getNotification", data);
