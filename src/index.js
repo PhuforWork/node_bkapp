@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
   //   );
   // });
   socket.on("sendNotification", (data) => {
-    setTimeout(socket.emit("getNotification", data), 2000);
+    setTimeout(socket.emit("getNotification", data), 1000);
   });
 
   // disconnect
