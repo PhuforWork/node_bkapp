@@ -37,7 +37,7 @@ const getUser = (user_name) => {
 
 io.on("connection", (socket) => {
   // add user
-  io.emit("client-connect",socket.id);
+  io.emit("client-connect", socket.id);
   socket.on("newUser", (user_name) => {
     addNewUser(user_name, socket.id);
   });
@@ -45,10 +45,13 @@ io.on("connection", (socket) => {
   //send notification
   socket.on("sendNotification", ({ senderName, receiverName, type }) => {
     const receiver = getUser(receiverName);
-    io.to(receiver.socketId).emit("getNotification", {
-      senderName,
-      type,
-    });
+    setTimeout(
+      io.to(receiver.socketId).emit("getNotification", {
+        senderName,
+        type,
+      }),
+      2000
+    );
   });
 
   // disconnect
