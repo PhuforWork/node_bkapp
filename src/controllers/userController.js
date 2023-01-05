@@ -112,6 +112,7 @@ const sigUp = async (req, res) => {
       maxtime: 19,
       mintime: 9,
       isShow: false,
+      indexRow: 5
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
