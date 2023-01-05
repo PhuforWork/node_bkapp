@@ -12,7 +12,7 @@ class notifications extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    receiverName: {
+    senderName: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
