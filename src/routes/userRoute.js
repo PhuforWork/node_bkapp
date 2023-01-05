@@ -19,6 +19,8 @@ const {
   note_detele,
   note_get_id,
   update_row,
+  notification_update,
+  notification_delete
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -52,7 +54,9 @@ userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
 userRoute.put("/update-note/:id", upload.none(), note_put);
 userRoute.put("/update-row/:id", upload.none(), update_row);
+userRoute.put("/notification-update/:id", upload.none(), notification_update);
 // delete
 userRoute.delete("/delete-note/:id", upload.none(), note_detele);
+userRoute.delete("/delete-notify/:id", upload.none(), notification_delete);
 
 module.exports = userRoute;

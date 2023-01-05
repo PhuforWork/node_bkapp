@@ -707,7 +707,27 @@ const notification = async (data) => {
     console.log(error);
   }
 };
+const notification_update = async (req, res) => {
+  try {
+    let { id } = params;
+    let { status } = req.body;
+    let data = { status };
+    await model.notifications.update(data, { where: { id_user: id } });
+    successCode(res, "", "Success update notification");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
 
+const notification_delete = async (req, res) => {
+  try {
+    let { id } = req.params; // id notifi
+    await model.notifications.destroy({ where: { id_user: id } });
+    successCode(res, "", "Success delete");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
+  }
+};
 module.exports = {
   getuser,
   loginUser,
@@ -729,4 +749,6 @@ module.exports = {
   note_get_id,
   update_row,
   notification,
+  notification_update,
+  notification_delete
 };
