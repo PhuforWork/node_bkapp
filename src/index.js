@@ -46,16 +46,16 @@ io.on("connection", (socket) => {
   });
 
   //send notification
-  // socket.on("sendNotification", ({ senderName, receiverName, type }) => {
-  //   const receiver = getUser(receiverName);
-  //     io.to(receiver.socketId).emit("getNotification", {
-  //       senderName,
-  //       type,
-  //     });
-  // });
-  socket.on("sendNotification", (data) => {
-    socket.emit("getNotification", data);
+  socket.on("sendNotification", ({ senderName, receiverName, type, status }) => {
+    const receiver = getUser(receiverName);
+      io.to(receiver.socketId).emit("getNotification", {
+        senderName,
+        type,
+      });
   });
+  // socket.on("sendNotification", (data) => {
+  //   socket.emit("getNotification", data);
+  // });
 
   // disconnect
   socket.on("disconnect", (reason) => {
