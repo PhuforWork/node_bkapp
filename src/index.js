@@ -40,6 +40,8 @@ io.on("connection", (socket) => {
   io.emit("client-connect", socket.id);
   socket.on("newUser", (user_name) => {
     console.log(onlineUser);
+    console.log(user_name);
+    console.log(123);
     addNewUser(user_name, socket.id);
   });
 
