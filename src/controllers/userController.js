@@ -700,6 +700,14 @@ const test_send_email = async (req, res) => {
   successCode(res, "", "Success");
 };
 
+const notification = async (data) => {
+  try {
+    await model.notifications.create(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getuser,
   loginUser,
@@ -720,4 +728,5 @@ module.exports = {
   note_detele,
   note_get_id,
   update_row,
+  notification,
 };

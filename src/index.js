@@ -3,7 +3,7 @@ const cors = require("cors");
 const rootRoute = require("../src/routes/index");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-
+const { notification } = require("./controllers/userController");
 const app = express();
 
 const httpServer = createServer(app);
@@ -46,13 +46,17 @@ io.on("connection", (socket) => {
   });
 
   //send notification
-  socket.on("sendNotification", ({ senderName, receiverName, type, status }) => {
-    const receiver = getUser(receiverName);
+  socket.on(
+    "sendNotification",
+    ({ senderName, receiverName, type, status, id_user }) => {
+      const receiver = getUser(receiverName);
       io.to(receiver.socketId).emit("getNotification", {
         senderName,
         type,
       });
-  });
+      notification({ receiverName, status, id_user });
+    }
+  );
   // socket.on("sendNotification", (data) => {
   //   socket.emit("getNotification", data);
   // });
