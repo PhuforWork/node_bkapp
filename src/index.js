@@ -25,6 +25,7 @@ let onlineUser = [];
 const addNewUser = (user_name, socketId) => {
   !onlineUser.some((user) => user.user_name === user_name) &&
     onlineUser.push({ user_name, socketId });
+  console.log(onlineUser);
 };
 
 const removeUser = (socketId) => {
@@ -39,9 +40,6 @@ io.on("connection", (socket) => {
   // add user
   io.emit("client-connect", socket.id);
   socket.on("newUser", (user_name) => {
-    console.log(onlineUser);
-    console.log(user_name);
-    console.log(123);
     addNewUser(user_name, socket.id);
   });
 
