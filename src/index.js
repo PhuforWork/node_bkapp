@@ -43,15 +43,18 @@ io.on("connection", (socket) => {
   });
 
   //send notification
-  socket.on("sendNotification", ({ senderName, receiverName, type }) => {
-    const receiver = getUser(receiverName);
-    setTimeout(
-      io.to(receiver.socketId).emit("getNotification", {
-        senderName,
-        type,
-      }),
-      2000
-    );
+  // socket.on("sendNotification", ({ senderName, receiverName, type }) => {
+  //   const receiver = getUser(receiverName);
+  //   setTimeout(
+  //     io.to(receiver.socketId).emit("getNotification", {
+  //       senderName,
+  //       type,
+  //     }),
+  //     2000
+  //   );
+  // });
+  socket.on("sendNotification", (data) => {
+    setTimeout(socket.emit("getNotification", data), 2000);
   });
 
   // disconnect
