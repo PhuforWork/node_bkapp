@@ -502,7 +502,17 @@ const put_min = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
-
+const update_row = async (req, res) => {
+  try {
+    let { id } = req.params;
+    let { indexRow } = req.body;
+    let data = { indexRow };
+    await model.users.update(data, { where: { id_user: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
 const test_send_email = async (req, res) => {
   let { email } = req.body;
   // create reusable transporter object using the default SMTP transport
@@ -706,4 +716,5 @@ module.exports = {
   note_put,
   note_detele,
   note_get_id,
+  update_row
 };
