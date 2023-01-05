@@ -451,9 +451,8 @@ const note_get_id = async (req, res) => {
 };
 const note_post = async (req, res) => {
   try {
-    let { id } = req.params; //id user
-    let { indexRow, date, title, user_name, department } = req.body;
-    let data = { indexRow, date, title, user_name, department, id_user: id };
+    let { indexRow, date, title, user_name, department, id_user } = req.body;
+    let data = { indexRow, date, title, user_name, department, id_user };
     await model.note_item.create(data);
     successCode(res, "", "Success create note");
   } catch (error) {
@@ -706,5 +705,5 @@ module.exports = {
   note_post,
   note_put,
   note_detele,
-  note_get_id
+  note_get_id,
 };
