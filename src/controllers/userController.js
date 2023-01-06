@@ -193,7 +193,7 @@ const update_img = async (req, res) => {
     //   );
     //   successCode(res, "", "Update successfully");
     // });
-    let image_url = __dirname + "/" + req.file.path;
+    let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
     console.log("test3" + image_url);
     successCode(res, "", "Update successfully");
   } catch (error) {
