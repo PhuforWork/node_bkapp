@@ -35,6 +35,10 @@ class notifications extends Sequelize.Model {
     end: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    today: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     sequelize,
