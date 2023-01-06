@@ -43,6 +43,10 @@ class notifications extends Sequelize.Model {
     department: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    type: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
