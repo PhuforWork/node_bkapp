@@ -51,14 +51,21 @@ io.on("connection", (socket) => {
   //send notification
   socket.on(
     "sendNotification",
-    ({ senderName, receiverName, type, status, id_user }) => {
+    ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       io.to(receiver.socketId).emit("getNotification", {
         senderName,
         type,
         status,
+        data,
       });
-      notification({ senderName, status, id_user });
+      notification({
+        senderName,
+        status,
+        id_user,
+        start: data.start,
+        end: data.end,
+      });
     }
   );
   // socket.on("sendNotification", (data) => {
