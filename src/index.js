@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
         type,
         status,
         data,
-        today
+        today,
       });
       notification({
         senderName,
@@ -67,7 +67,9 @@ io.on("connection", (socket) => {
         id_user,
         start: data.start,
         end: data.end,
-        today
+        department: data.department,
+        personality: data.personality,
+        today,
       });
     }
   );
