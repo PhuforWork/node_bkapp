@@ -734,7 +734,6 @@ const notification_get = async (req, res) => {
   try {
     let { id } = req.params;
     const notifi_get = await model.notifications.findAll({
-      include: ["persionality_notifies"],
       where: { id_user: id },
     });
     successCode(res, notifi_get, "Success get notify");
