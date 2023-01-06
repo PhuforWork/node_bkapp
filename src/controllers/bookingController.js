@@ -151,7 +151,7 @@ const add_booking = async (req, res) => {
         })
       );
       //put code here
-      let res_per;
+      let res_per = [];
       if (flag) {
         const res_bk = await model.booking_info.create(data); // trả dử liệu để notify
         const idbk = await model.booking_info.findOne({
@@ -160,7 +160,12 @@ const add_booking = async (req, res) => {
         if (personality) {
           Promise.all(
             personality.map(async (values) => {
-              res_per = await model.persionality_tb.create({
+              await model.persionality_tb.create({
+                value: values.value,
+                label: values.label,
+                id_booking: idbk.id_booking,
+              });
+              await res_per.push({
                 value: values.value,
                 label: values.label,
                 id_booking: idbk.id_booking,
