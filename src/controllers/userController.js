@@ -464,10 +464,10 @@ const note_post = async (req, res) => {
 };
 const note_put = async (req, res) => {
   try {
-    let { id } = req.params; //id user
+    let { id } = req.params; //id note
     let { indexRow, date, title, user_name, department } = req.body;
     let data = { indexRow, date, title, user_name, department };
-    await model.note_item.update(data, { where: { id_user: id } });
+    await model.note_item.update(data, { where: { id_note: id } });
     successCode(res, "", "Success update note");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -476,7 +476,7 @@ const note_put = async (req, res) => {
 const note_detele = async (req, res) => {
   try {
     let { id } = req.params; //id user
-    await model.note_item.destroy({ where: { id_user: id } });
+    await model.note_item.destroy({ where: { id_note: id } });
     successCode(res, "", "Success update note");
   } catch (error) {
     errorCode(res, "Error BackEnd");
