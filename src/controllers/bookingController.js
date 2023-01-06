@@ -177,7 +177,7 @@ const add_booking = async (req, res) => {
           label: label,
           id_booking: idbk.id_booking,
         });
-        successCode(res, { res_bk, res_per }, "Add booking success");
+        successCode(res, res_bk , "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
