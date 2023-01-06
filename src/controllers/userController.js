@@ -701,8 +701,20 @@ const test_send_email = async (req, res) => {
 };
 
 const notification = async (data) => {
+  let { senderName, status, id_user, start, end, department, today } = data;
+  let data1 = { senderName, status, id_user, start, end, department, today };
+  let data2 = data.persionality;
   try {
-    await model.notifications.create(data);
+    let idNotify = await model.notifications.create(data1);
+    Promise.all(
+      data2.map(async (ele) => {
+        await model.persionality_notify.create({
+          label: ele.label,
+          id_notify: idNotify.id_notify,
+          value: ele.value,
+        });
+      })
+    );
   } catch (error) {
     console.log(error);
   }
@@ -711,6 +723,7 @@ const notification_get = async (req, res) => {
   try {
     let { id } = req.params;
     const notifi_get = await model.notifications.findAll({
+      include:["persionality_notify"],
       where: { id_user: id },
     });
     successCode(res, notifi_get, "Success get notify");

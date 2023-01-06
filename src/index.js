@@ -67,8 +67,8 @@ io.on("connection", (socket) => {
         id_user,
         start: data.start,
         end: data.end,
-        department: data.department,
-        personality: data.personality,
+        department: data.department_tbs,
+        personality: data.persionality_tbs,
         today,
       });
     }
