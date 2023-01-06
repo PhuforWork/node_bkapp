@@ -703,7 +703,7 @@ const test_send_email = async (req, res) => {
 const notification = async (data) => {
   let { senderName, status, id_user, start, end, department, today } = data;
   let data1 = { senderName, status, id_user, start, end, department, today };
-  let data2 = data.persionality;
+  let data2 = data.personality;
   console.log("abc",data2);
   try {
     let idNotify = await model.notifications.create(data1);
