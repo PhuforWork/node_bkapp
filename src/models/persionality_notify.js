@@ -1,52 +1,36 @@
 const Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  return notifications.init(sequelize, DataTypes);
+  return persionality_notify.init(sequelize, DataTypes);
 }
 
-class notifications extends Sequelize.Model {
+class persionality_notify extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    id_notify: {
+    id_per_notify: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    senderName: {
+    label: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    id_user: {
+    id_notify: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'users',
-        key: 'id_user'
+        model: 'notifications',
+        key: 'id_notify'
       }
     },
-    status: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true
-    },
-    start: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    end: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    today: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    department: {
-      type: DataTypes.STRING(255),
+    value: {
+      type: DataTypes.DOUBLE,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'notifications',
+    tableName: 'persionality_notify',
     timestamps: false,
     indexes: [
       {
@@ -54,14 +38,14 @@ class notifications extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_notify" },
+          { name: "id_per_notify" },
         ]
       },
       {
-        name: "id_user",
+        name: "id_notify",
         using: "BTREE",
         fields: [
-          { name: "id_user" },
+          { name: "id_notify" },
         ]
       },
     ]
