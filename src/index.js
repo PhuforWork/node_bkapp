@@ -53,13 +53,15 @@ io.on("connection", (socket) => {
       const receiver = getUser(receiverName);
       console.log(data);
       let today = new Date();
-      io.to(receiver.socketId).emit("getNotification", {
-        senderName,
-        type,
-        status,
-        data,
-        today,
-      });
+      if (receiver.socketId !== null) {
+        io.to(receiver.socketId).emit("getNotification", {
+          senderName,
+          type,
+          status,
+          data,
+          today,
+        });
+      }
       notification({
         senderName,
         status,
