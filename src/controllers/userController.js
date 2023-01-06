@@ -182,6 +182,7 @@ const update_isShow = async (req, res) => {
 const update_img = async (req, res) => {
   try {
     let { id } = req.params;
+    console.log(req.file);
     fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
       let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
         data
