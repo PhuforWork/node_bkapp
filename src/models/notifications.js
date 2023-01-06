@@ -27,6 +27,14 @@ class notifications extends Sequelize.Model {
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: true
+    },
+    start: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    end: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     sequelize,
