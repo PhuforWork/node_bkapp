@@ -71,6 +71,7 @@ io.on("connection", (socket) => {
         department: data.res_der.label,
         personality: data.res_per,
         today,
+        type,
       });
     }
   );

@@ -702,9 +702,18 @@ const test_send_email = async (req, res) => {
 
 const notification = async (data) => {
   let { senderName, status, id_user, start, end, department, today } = data;
-  let data1 = { senderName, status, id_user, start, end, department, today };
+  let data1 = {
+    senderName,
+    status,
+    id_user,
+    start,
+    end,
+    department,
+    today,
+    type,
+  };
   let data2 = data.personality;
-  console.log("abc",data2);
+  console.log("abc", data2);
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
@@ -724,7 +733,7 @@ const notification_get = async (req, res) => {
   try {
     let { id } = req.params;
     const notifi_get = await model.notifications.findAll({
-      include:["persionality_notifies"],
+      include: ["persionality_notifies"],
       where: { id_user: id },
     });
     successCode(res, notifi_get, "Success get notify");
