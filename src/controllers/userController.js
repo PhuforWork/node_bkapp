@@ -39,7 +39,7 @@ const get_search_user = async (req, res) => {
 const getUserId = async (req, res) => {
   let { id } = req.params;
   let data = await model.users.findOne({
-    include: ["select_types", "persionalities", "departments"],
+    include: ["select_types", "persionalities", "departments", "notifications"],
     attributes: { exclude: ["_password"] },
     where: {
       id_user: id,
