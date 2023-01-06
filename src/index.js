@@ -53,6 +53,7 @@ io.on("connection", (socket) => {
     "sendNotification",
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
+      console.log(data);
       let today = new Date();
       io.to(receiver.socketId).emit("getNotification", {
         senderName,
