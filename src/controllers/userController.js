@@ -183,8 +183,9 @@ const update_img = async (req, res) => {
   try {
     let { id } = req.params;
     console.log("test1",req.file);
-    console.log("test2",fs.readFile(process.cwd() + "/" + req.file.path));
+    
     fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
+      console.log("test2",data);
       let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
         data
       ).toString("base64")}`;
