@@ -66,10 +66,10 @@ io.on("connection", (socket) => {
         senderName,
         status,
         id_user,
-        start: data.start,
-        end: data.end,
-        department: data.department_tbs,
-        personality: data.persionality_tbs,
+        start: data.res_bk.start,
+        end: data.res_bk.end,
+        department: data.res_der,
+        personality: data.res_per,
         today,
       });
     }
