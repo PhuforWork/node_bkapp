@@ -194,7 +194,10 @@ const update_img = async (req, res) => {
     //   successCode(res, "", "Update successfully");
     // });
     let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
-    console.log("test3" + image_url);
+    await model.users.update(
+      { image_url: image_url },
+      { where: { id_user: id } }
+    );
     successCode(res, "", "Update successfully");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
