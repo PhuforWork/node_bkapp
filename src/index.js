@@ -53,11 +53,13 @@ io.on("connection", (socket) => {
     "sendNotification",
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
+      let today = new Date();
       io.to(receiver.socketId).emit("getNotification", {
         senderName,
         type,
         status,
         data,
+        today
       });
       notification({
         senderName,
@@ -65,6 +67,7 @@ io.on("connection", (socket) => {
         id_user,
         start: data.start,
         end: data.end,
+        today
       });
     }
   );
