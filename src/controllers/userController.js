@@ -186,11 +186,11 @@ const update_img = async (req, res) => {
       let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
         data
       ).toString("base64")}`;
+      fs.unlinkSync(process.cwd() + "/" + req.file.path);
       await model.users.update(
         { image_url: image_url },
         { where: { id_user: id } }
       );
-      fs.unlinkSync(process.cwd() + "/" + req.file.path);
       successCode(res, "", "Update successfully");
     });
   } catch (error) {
@@ -710,8 +710,10 @@ const notification = async (data) => {
 const notification_get = async (req, res) => {
   try {
     let { id } = req.params;
-    const notifi_get = await model.notifications.findAll({ where: { id_user: id } });
-    successCode(res,notifi_get,"Success get notify");
+    const notifi_get = await model.notifications.findAll({
+      where: { id_user: id },
+    });
+    successCode(res, notifi_get, "Success get notify");
   } catch (error) {
     console.log(error);
   }
@@ -760,5 +762,5 @@ module.exports = {
   notification,
   notification_update,
   notification_delete,
-  notification_get
+  notification_get,
 };

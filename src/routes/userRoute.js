@@ -53,7 +53,7 @@ userRoute.put("/min-time/:id", put_min);
 userRoute.put("/skip-show/:id", update_isShow);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
-userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
+// userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
 userRoute.put("/update-note/:id", upload.none(), note_put);
 userRoute.put("/update-row/:id", upload.none(), update_row);
 userRoute.put("/notification-update/:id", upload.none(), notification_update);
