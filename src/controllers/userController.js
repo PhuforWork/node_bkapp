@@ -701,7 +701,8 @@ const test_send_email = async (req, res) => {
 };
 
 const notification = async (data) => {
-  let { senderName, status, id_user, start, end, department, today } = data;
+  let { senderName, status, id_user, start, end, department, today, type } =
+    data;
   let data1 = {
     senderName,
     status,
