@@ -151,6 +151,7 @@ const add_booking = async (req, res) => {
         })
       );
       //put code here
+      let res_per;
       if (flag) {
         const res_bk = await model.booking_info.create(data); // trả dử liệu để notify
         const idbk = await model.booking_info.findOne({
@@ -159,7 +160,7 @@ const add_booking = async (req, res) => {
         if (personality) {
           Promise.all(
             personality.map(async (values) => {
-              let res_per = await model.persionality_tb.create({
+              res_per = await model.persionality_tb.create({
                 value: values.value,
                 label: values.label,
                 id_booking: idbk.id_booking,
@@ -172,12 +173,12 @@ const add_booking = async (req, res) => {
           _values: _values,
           id_booking: idbk.id_booking,
         });
-        await model.department_tb.create({
+        let res_der = await model.department_tb.create({
           value: value,
           label: label,
           id_booking: idbk.id_booking,
         });
-        successCode(res, res_bk , "Add booking success");
+        successCode(res, { res_bk, res_per, res_der }, "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
