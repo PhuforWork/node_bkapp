@@ -152,14 +152,14 @@ const add_booking = async (req, res) => {
       );
       //put code here
       if (flag) {
-        const res_bk = await model.booking_info.create(data);
+        const res_bk = await model.booking_info.create(data); // trả dử liệu để notify
         const idbk = await model.booking_info.findOne({
           where: { checkbk: checkbk },
         });
         if (personality) {
           Promise.all(
             personality.map(async (values) => {
-              await model.persionality_tb.create({
+              let res_per = await model.persionality_tb.create({
                 value: values.value,
                 label: values.label,
                 id_booking: idbk.id_booking,
@@ -177,7 +177,7 @@ const add_booking = async (req, res) => {
           label: label,
           id_booking: idbk.id_booking,
         });
-        successCode(res, res_bk, "Add booking success");
+        successCode(res, { res_bk, res_per }, "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
