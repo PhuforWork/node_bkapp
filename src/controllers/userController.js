@@ -182,20 +182,20 @@ const update_isShow = async (req, res) => {
 const update_img = async (req, res) => {
   try {
     let { id } = req.params;
-    console.log("test1",req.file);
-    
-    fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
-      console.log("test2",data);
-      let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
-        data
-      ).toString("base64")}`;
-      fs.unlinkSync(process.cwd() + "/" + req.file.path);
-      await model.users.update(
-        { image_url: image_url },
-        { where: { id_user: id } }
-      );
-      successCode(res, "", "Update successfully");
-    });
+    // fs.readFile(process.cwd() + "/" + req.file.path, async (err, data) => {
+    //   let image_url = `data:${req.file.mimetype};base64,${Buffer.from(
+    //     data
+    //   ).toString("base64")}`;
+    //   fs.unlinkSync(process.cwd() + "/" + req.file.path);
+    //   await model.users.update(
+    //     { image_url: image_url },
+    //     { where: { id_user: id } }
+    //   );
+    //   successCode(res, "", "Update successfully");
+    // });
+    let image_url = __dirname + "/" + req.file.path;
+    console.log("test3" + image_url);
+    successCode(res, "", "Update successfully");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
   }
