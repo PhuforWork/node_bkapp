@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
 
-
 httpServer.listen(8081);
 
 app.get("/test", (req, res) => {
@@ -67,7 +66,7 @@ io.on("connection", (socket) => {
         id_user,
         start: data.res_bk.start,
         end: data.res_bk.end,
-        department: data.res_der,
+        department: data.res_der.label,
         personality: data.res_per,
         today,
       });
