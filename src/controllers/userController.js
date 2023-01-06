@@ -704,6 +704,7 @@ const notification = async (data) => {
   let { senderName, status, id_user, start, end, department, today } = data;
   let data1 = { senderName, status, id_user, start, end, department, today };
   let data2 = data.persionality;
+  console.log(data2);
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
