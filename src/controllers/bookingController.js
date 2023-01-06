@@ -152,7 +152,7 @@ const add_booking = async (req, res) => {
       );
       //put code here
       if (flag) {
-        await model.booking_info.create(data);
+        const res_bk = await model.booking_info.create(data);
         const idbk = await model.booking_info.findOne({
           where: { checkbk: checkbk },
         });
@@ -177,7 +177,7 @@ const add_booking = async (req, res) => {
           label: label,
           id_booking: idbk.id_booking,
         });
-        successCode(res, "", "Add booking success");
+        successCode(res, res_bk, "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
