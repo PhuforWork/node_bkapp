@@ -720,7 +720,7 @@ const notification_get = async (req, res) => {
 };
 const notification_update = async (req, res) => {
   try {
-    let { id } = params;
+    let { id } = req.params;
     let data = { status: true };
     await model.notifications.update(data, { where: { id_user: id } });
     successCode(res, "", "Success update notification");
