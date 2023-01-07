@@ -10,7 +10,8 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
-const cron = require("node-cron");
+// const cron = require("node-cron");
+const schedule = require("node-schedule");
 const moment = require("moment");
 
 //Read all user
@@ -779,17 +780,13 @@ const alarm_immediately = async (data) => {
 
   let DD = new Date(datetime).getDate();
   let MM = new Date(datetime).getMonth();
-  console.log(MM);
   let hh = new Date(datetime).getHours();
   let mm = new Date(datetime).getMinutes();
   let ss = new Date(datetime).getSeconds();
 
-  await cron.schedule(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
-    console.log(123);
+  await schedule.scheduleJob(datetime, () => {
+    console.log(123333333333333333);
   });
-  // await cron.schedule("* * * * * *", () => {
-  //   console.log(123);
-  // });
 };
 
 module.exports = {
