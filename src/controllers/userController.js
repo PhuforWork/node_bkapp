@@ -783,7 +783,10 @@ const alarm_immediately = async (data) => {
   let hh = new Date(datetime).getHours();
   let mm = new Date(datetime).getMinutes();
   let ss = new Date(datetime).getSeconds();
-  console.log("MM",MM);
+  let YYYY = new Date(datetime).getFullYear();
+  console.log(DD,MM,hh,mm,ss);
+
+  const date_new = new Date(YYYY,MM)
   await schedule.scheduleJob(datetime, () => {
     console.log(123333333333333333);
   });
