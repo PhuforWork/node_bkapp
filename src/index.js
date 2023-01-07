@@ -75,9 +75,6 @@ io.on("connection", (socket) => {
       });
     }
   );
-  // socket.on("sendNotification", (data) => {
-  //   socket.emit("getNotification", data);
-  // });
 
   // disconnect
   socket.on("disconnect", (reason) => {
