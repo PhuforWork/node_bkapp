@@ -774,11 +774,17 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  let test = moment(data.date);
-  let test1 = new Date(test).getDate();
-  console.log("test", test1);
+  let datetime = moment(data.date);
+  let DD = new Date(datetime).getDate();
+  let MM = new Date(datetime).getMonth();
+  let YYYY = new Date(datetime).getFullYear();
+  let hh = new Date(datetime).getHours();
+  let mm = new Date(datetime).getMinutes();
+  let ss = new Date(datetime).getSeconds();
 
-  cron.schedule("* * * * *", () => {});
+  cron.schedule(`${ss} ${mm} ${hh} ${DD} ${MM}`, () => {
+    console.log(123);
+  });
 };
 
 module.exports = {
