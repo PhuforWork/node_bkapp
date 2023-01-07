@@ -776,7 +776,7 @@ const notification_delete = async (req, res) => {
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
   // let datetimeUTC = moment.utc(data.date).format();
-  let datetimeLocal = moment(data.date).utcOffset("+09");
+  let datetimeLocal = moment(data.date).utcOffset("+0900");
 
   // console.log(datetimeUTC);
   console.log(datetimeLocal);
