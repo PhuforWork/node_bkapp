@@ -10,6 +10,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
+const cron = require("node-cron");
 
 //Read all user
 const getuser = async (req, res) => {
@@ -771,9 +772,10 @@ const notification_delete = async (req, res) => {
 };
 
 //báo thuc khi lich toi hen
-setTimeout(()=>{
-  console.log(123);
-},1000);
+const alarm_immediately = async (data) => {
+  console.log(data);
+  cron.schedule("* * * * *", () => {});
+};
 
 module.exports = {
   getuser,
@@ -799,4 +801,5 @@ module.exports = {
   notification_update,
   notification_delete,
   notification_get,
+  alarm_immediately,
 };

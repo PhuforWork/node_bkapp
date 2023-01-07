@@ -3,7 +3,10 @@ const cors = require("cors");
 const rootRoute = require("../src/routes/index");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const { notification } = require("./controllers/userController");
+const {
+  notification,
+  alarm_immediately,
+} = require("./controllers/userController");
 const app = express();
 
 const httpServer = createServer(app);
@@ -73,6 +76,7 @@ io.on("connection", (socket) => {
         today,
         type,
       });
+      alarm_immediately({ date: data.res_bk.start });
     }
   );
 
