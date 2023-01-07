@@ -785,7 +785,7 @@ const alarm_immediately = async (data) => {
   // await cron.schedule(`${ss} ${mm} ${hh} ${DD} ${MM}`, () => {
   //   console.log(123);
   // });
-  await cron.schedule(`0 11 15`, () => {
+  await cron.schedule(`0 15 15`, () => {
     console.log(123);
   });
 };
