@@ -771,7 +771,7 @@ const notification_delete = async (req, res) => {
 };
 
 //báo thuc khi lich toi hen
-setTimeout(console.log(123),1000);
+// setTimeout(console.log(123),1000);
 
 module.exports = {
   getuser,
