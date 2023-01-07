@@ -775,9 +775,7 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  let datetimeLocal = moment(data.date)
-    .format("YYYY-MM-DD hh:mm:ss")
-    .tz("Asia/Ho_Chi_Minh");
+  let datetimeLocal = moment(data.date).locale('vn');
 
   console.log(data.date);
   console.log(datetimeLocal);
