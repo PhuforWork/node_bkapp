@@ -11,6 +11,7 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
 const cron = require("node-cron");
+const moment = require("moment");
 
 //Read all user
 const getuser = async (req, res) => {
@@ -773,8 +774,8 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  let test = new Date(data).getDate();
-  console.log("test",test);
+  let test = moment(data);
+  console.log("test", test);
 
   cron.schedule("* * * * *", () => {});
 };
