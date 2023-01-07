@@ -779,7 +779,7 @@ const alarm_immediately = async (data) => {
   console.log(datetime);
 
   let DD = new Date(datetime).getDate();
-  let MM = new Date(datetime).getMonth();
+  let MM = new Date(datetime).getMonth()+1;
   let hh = new Date(datetime).getHours();
   let mm = new Date(datetime).getMinutes();
   let ss = new Date(datetime).getSeconds();
