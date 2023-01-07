@@ -448,7 +448,7 @@ const change_pass = async (req, res) => {
   }
 };
 
-//note
+//ghi chú của user
 const note_get_id = async (req, res) => {
   try {
     let { id } = req.params;
@@ -489,6 +489,7 @@ const note_detele = async (req, res) => {
   }
 };
 
+//
 const put_max = async (req, res) => {
   try {
     let { id } = req.params; // id user
@@ -706,6 +707,7 @@ const test_send_email = async (req, res) => {
   successCode(res, "", "Success");
 };
 
+// thong bao khi dat lich
 const notification = async (data) => {
   let { senderName, status, id_user, start, end, department, today, type } =
     data;
@@ -758,7 +760,6 @@ const notification_update = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
-
 const notification_delete = async (req, res) => {
   try {
     let { id } = req.params; // id notifi
@@ -768,6 +769,9 @@ const notification_delete = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+
+//báo thuc khi lich toi hen
+setTimeout(console.log(123),1000);
 
 module.exports = {
   getuser,

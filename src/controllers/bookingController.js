@@ -401,7 +401,6 @@ const update_booking = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
-
 const delete_bk = async (req, res) => {
   try {
     let { id } = req.params; //id booking
