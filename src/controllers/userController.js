@@ -773,7 +773,9 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  console.log(data);
+  let test = new Date(data).getDate();
+  console.log("test",test);
+
   cron.schedule("* * * * *", () => {});
 };
 
