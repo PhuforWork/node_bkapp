@@ -45,14 +45,14 @@ const getUser = (user_name) => {
 io.on("connection", (socket) => {
   // add user
   io.emit("client-connect", socket.id);
-  socket.on("newUser", (user_name) => {
-    addNewUser(user_name, socket.id);
+  socket.on("newUser", async(user_name) => {
+    await addNewUser(user_name, socket.id);
   });
 
   //send notification
   socket.on(
     "sendNotification",
-    ({ senderName, receiverName, type, status, id_user, data }) => {
+    async ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       console.log(data);
       let today = new Date();
@@ -65,7 +65,7 @@ io.on("connection", (socket) => {
           today,
         });
       }
-      notification({
+      await notification({
         senderName,
         status,
         id_user,
@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
         today,
         type,
       });
-      alarm_immediately({ date: data.res_bk.start });
+      await alarm_immediately({ date: data.res_bk.start });
     }
   );
 
