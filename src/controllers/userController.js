@@ -782,12 +782,12 @@ const alarm_immediately = async (data) => {
   let mm = new Date(datetime).getMinutes();
   let ss = new Date(datetime).getSeconds();
 
-  // await cron.schedule(`${ss} ${mm} ${hh} ${DD} ${MM}`, () => {
-  //   console.log(123);
-  // });
-  await cron.schedule("* * * * * *", () => {
+  await cron.schedule(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
     console.log(123);
   });
+  // await cron.schedule("* * * * * *", () => {
+  //   console.log(123);
+  // });
 };
 
 module.exports = {
