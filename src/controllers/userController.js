@@ -775,8 +775,10 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  let datetime = moment(data.date).local();
-  console.log(datetime);
+  let datetimeUTC = moment(data.date).utc();
+  let datetimeLocal = moment(data.date).local();
+  console.log(datetimeUTC);
+  console.log(datetimeLocal);
 
   let DD = new Date(datetime).getDate();
   let MM = new Date(datetime).getMonth()+1;
