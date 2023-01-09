@@ -797,7 +797,7 @@ const alarm_immediately = async (data) => {
   rule.minute = 14;
   rule.second = 1;
   console.log(rule);
-  await schedule.scheduleJob("* 38 9 9 1 *", () => {
+  await schedule.scheduleJob("* 40 9 9 1 *", () => {
     console.log("testoooooo", 12341);
   });
 
