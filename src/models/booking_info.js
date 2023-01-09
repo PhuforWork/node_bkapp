@@ -47,6 +47,10 @@ class booking_info extends Sequelize.Model {
     isCheck: {
       type: DataTypes.BOOLEAN,
       allowNull: true
+    },
+    utcOffset: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
