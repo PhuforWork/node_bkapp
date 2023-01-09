@@ -783,16 +783,21 @@ const alarm_immediately = async (data) => {
   console.log(datetest);
   console.log("loggggggggggg", datetimeLocal);
 
-  rule.year = datetest.year();
-  rule.month = datetest.month() + 1;
-  rule.date = datetest.date();
-  rule.hour = datetest.hours();
-  rule.minute = datetest.minutes() + 1;
-  rule.second = datetest.second() * 0;
-  rule.dayOfWeek = '*';
-
-  console.log(rule);
-  await schedule.scheduleJob(rule, () => {
+  // rule.year = datetest.year();
+  // rule.month = datetest.month() + 1;
+  // rule.date = datetest.date();
+  // rule.hour = datetest.hours();
+  // rule.minute = datetest.minutes() + 1;
+  // rule.second = datetest.second() * 0;
+  // rule.dayOfWeek = '*';
+  // console.log(rule);
+  let YYYY = datetest.year();
+  let MM = datetest.month() + 1;
+  let DD = datetest.date();
+  let hh = datetest.hours();
+  let mm = datetest.minutes() + 1;
+  let ss = datetest.second() * 0 + 1;
+  await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
     console.log("testoooooo", 12341);
   });
 };
