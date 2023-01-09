@@ -783,12 +783,12 @@ const alarm_immediately = async (data) => {
   console.log(datetest);
   console.log("loggggggggggg", datetimeLocal);
 
-  rule.year = datetimeLocal.year();
-  rule.month = datetimeLocal.month() + 1;
-  rule.date = datetimeLocal.date();
-  rule.hour = datetimeLocal.hours();
-  rule.minute = datetimeLocal.minutes();
-  rule.second = datetimeLocal.second();
+  rule.year = datetest.year();
+  rule.month = datetest.month() + 1;
+  rule.date = datetest.date();
+  rule.hour = datetest.hours();
+  rule.minute = datetest.minutes() + 1;
+  rule.second = datetest.second();
 
 
   console.log(rule);
