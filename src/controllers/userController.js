@@ -779,7 +779,7 @@ const alarm_immediately = async (data) => {
   let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
   // let test = moment().format("Z");
   // console.log(test);
-  console.log(datetimeLocal);
+  console.log("loggggggggggg",datetimeLocal);
 
   // let DD = new Date(datetime).getDate();
   // let MM = new Date(datetime).getMonth()+1;
