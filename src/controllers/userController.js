@@ -789,7 +789,7 @@ const alarm_immediately = async (data) => {
   let YYYY = datetimeLocal.year();
   let ss = datetimeLocal.seconds();
   // rule.year = datetimeLocal.year();
-  rule.mounth = datetimeLocal.month() + 1;
+  rule.month = datetimeLocal.month() + 1;
   rule.date = datetimeLocal.date();
   rule.hour = datetimeLocal.hours();
   rule.minute = datetimeLocal.minutes();
