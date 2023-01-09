@@ -789,13 +789,11 @@ const alarm_immediately = async (data) => {
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
   let date = new Date(YYYY, MM, DD, hh, mm, ss);
-  alarm_notify('2 * * * * *');
 };
-const alarm_notify = (date) => {
-  schedule.scheduleJob(date, () => {
-    console.log("testssss", 123333333333333333);
-  });
-};
+
+schedule.scheduleJob('2 * * * * *', () => {
+  console.log("testssss", 123333333333333333);
+});
 
 module.exports = {
   getuser,
