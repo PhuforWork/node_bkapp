@@ -113,7 +113,7 @@ io.on("connection", (socket) => {
         let mm = datetimeLocal.minutes();
         let YYYY = datetimeLocal.year();
         let ss = datetimeLocal.seconds();
-        cron.schedule("* 10 15 9 1 *", () => {
+        cron.schedule("* 11 15 9 1 *", () => {
           console.log("testoooooo", 12341);
         });
       }
