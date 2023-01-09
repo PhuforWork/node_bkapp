@@ -11,7 +11,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
-// const cron = require("node-cron");
+const cron = require("node-cron");
 const schedule = require("node-schedule");
 const moment = require("moment");
 
@@ -789,11 +789,14 @@ const alarm_immediately = async (data) => {
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
   let date = new Date(YYYY, MM, DD, hh, mm, ss);
+  // schedule.scheduleJob('2 * * * * *', () => {
+  //   console.log("testssss", 123333333333333333);
+  // });
+  cron.schedule('2 * * * * *', () => {
+    console.log("testssss", 123333333333333333);
+  });
 };
 
-schedule.scheduleJob('2 * * * * *', () => {
-  console.log("testssss", 123333333333333333);
-});
 
 module.exports = {
   getuser,
