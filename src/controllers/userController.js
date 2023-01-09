@@ -798,6 +798,7 @@ const alarm_immediately = async (data) => {
   schedule.scheduleJob(`* ${mm} ${hh} ${DD} ${MM} *`, () => {
     console.log("testssss", date);
   });
+  console.log("testssss", date);
 };
 
 module.exports = {
