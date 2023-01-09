@@ -11,7 +11,8 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
-
+const cron = require("node-cron");
+const schedule = require("node-schedule");
 const moment = require("moment");
 
 //Read all user
@@ -774,7 +775,23 @@ const notification_delete = async (req, res) => {
 };
 
 //báo thuc khi lich toi hen
+const alarm_immediately = async (data) => {
+  let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
+  // let test = moment().format("Z");
+  // console.log(test);
+  console.log("loggggggggggg", datetimeLocal);
 
+  let DD = datetimeLocal.date();
+  let MM = datetimeLocal.month() + 1;
+  let hh = datetimeLocal.hours();
+  let mm = datetimeLocal.minutes();
+  let YYYY = datetimeLocal.year();
+  let ss = datetimeLocal.seconds();
+  console.log(DD, MM, YYYY, hh, mm);
+cron.schedule("* 54 14 9 1 *", () => {
+    console.log("testoooooo", 12341);
+  });
+};
 
 module.exports = {
   getuser,
