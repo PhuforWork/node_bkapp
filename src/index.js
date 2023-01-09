@@ -5,7 +5,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const {
   notification,
-  alarm_immediately,
 } = require("./controllers/userController");
 const cron = require("node-cron");
 const schedule = require("node-schedule");
