@@ -791,12 +791,12 @@ const alarm_immediately = async (data) => {
   // rule.second = datetest.second() * 0;
   // rule.dayOfWeek = '*';
   // console.log(rule);
-  let YYYY = datetest.year();
-  let MM = datetest.month() + 1;
-  let DD = datetest.date();
-  let hh = datetest.hours();
-  let mm = datetest.minutes();
-  let ss = datetest.second() * 0 + 1;
+  let YYYY = datetimeLocal.year();
+  let MM = datetimeLocal.month() + 1;
+  let DD = datetimeLocal.date();
+  let hh = datetimeLocal.hours();
+  let mm = datetimeLocal.minutes();
+  let ss = datetimeLocal.second() * 0 + 1;
   console.log(hh,mm,ss,DD,MM);
   await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
     console.log("testoooooo", 12341);
