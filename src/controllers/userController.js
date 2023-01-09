@@ -784,7 +784,7 @@ const alarm_immediately = async (data) => {
   let DD = new Date(datetimeLocal).getDate();
   let MM = new Date(datetimeLocal).getMonth()+1;
   let hh = new Date(datetimeLocal).getUTCHours();
-  let mm = new Date(datetimeLocal).getMinutes();
+  let mm = new Date(datetimeLocal).getUTCMinutes();
   let ss = new Date(datetimeLocal).getSeconds();
   let YYYY = new Date(datetimeLocal).getFullYear();
   console.log(DD,MM,hh,mm,ss);
