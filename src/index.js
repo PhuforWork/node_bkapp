@@ -64,22 +64,38 @@ io.on("connection", (socket) => {
           data,
           today,
         });
+        await notification({
+          senderName,
+          status,
+          id_user,
+          start: data.res_bk.start,
+          end: data.res_bk.end,
+          department: data.res_der.label,
+          personality: data.res_per,
+          today,
+          type,
+        });
+        await alarm_immediately({
+          date: data.res_bk.start,
+          utcOffset: data.res_bk.utcOffset,
+        });
+      } else {
+        await notification({
+          senderName,
+          status,
+          id_user,
+          start: data.res_bk.start,
+          end: data.res_bk.end,
+          department: data.res_der.label,
+          personality: data.res_per,
+          today,
+          type,
+        });
+        await alarm_immediately({
+          date: data.res_bk.start,
+          utcOffset: data.res_bk.utcOffset,
+        });
       }
-      await notification({
-        senderName,
-        status,
-        id_user,
-        start: data.res_bk.start,
-        end: data.res_bk.end,
-        department: data.res_der.label,
-        personality: data.res_per,
-        today,
-        type,
-      });
-      await alarm_immediately({
-        date: data.res_bk.start,
-        utcOffset: data.res_bk.utcOffset,
-      });
     }
   );
 
