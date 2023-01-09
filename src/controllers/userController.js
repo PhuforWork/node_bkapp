@@ -789,7 +789,7 @@ const alarm_immediately = async (data) => {
   // let ss = datetimeLocal.seconds();
   // console.log(DD, MM, YYYY, hh, mm);
   let DD = "9";
-  let MM = "1";
+  let MM = "0";
   let hh = "14";
   let mm = "09";
   let YYYY = "2023";
