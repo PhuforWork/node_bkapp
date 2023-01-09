@@ -788,15 +788,15 @@ const alarm_immediately = async (data) => {
   // let YYYY = datetimeLocal.year();
   // let ss = datetimeLocal.seconds();
   // console.log(DD, MM, YYYY, hh, mm);
-  // let date = new Date(YYYY, MM, DD, hh, mm, ss);
   let DD = "9";
   let MM = "1";
   let hh = "13";
   let mm = "54";
-  let YYYY = "";
-  let ss = "";
+  let YYYY = "2023";
+  let ss = "0";
+  let date = new Date(YYYY, MM, DD, hh, mm, ss);
   schedule.scheduleJob(`* ${mm} ${hh} ${DD} ${MM} *`, () => {
-    console.log("testssss", 123333333333333333);
+    console.log("testssss", date);
   });
 };
 
