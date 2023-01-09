@@ -796,8 +796,10 @@ const alarm_immediately = async (data) => {
   let ss = "0";
   let date = new Date(YYYY, MM, DD, hh, mm, ss);
   schedule.scheduleJob(`* ${mm} ${hh} ${DD} ${MM} *`, () => {
-    console.log("testssss", date);
+
+    console.log("testoooooo", date);
   });
+  console.log(DD, MM, YYYY, hh, mm);
   console.log("testssss", date);
 };
 
