@@ -781,13 +781,13 @@ const alarm_immediately = async (data) => {
   // console.log(test);
   console.log("loggggggggggg",datetimeLocal);
 
-  // let DD = new Date(datetime).getDate();
-  // let MM = new Date(datetime).getMonth()+1;
-  // let hh = new Date(datetime).getHours();
-  // let mm = new Date(datetime).getMinutes();
-  // let ss = new Date(datetime).getSeconds();
-  // let YYYY = new Date(datetime).getFullYear();
-  // console.log(DD,MM,hh,mm,ss);
+  let DD = new Date(datetimeLocal).getDate();
+  let MM = new Date(datetimeLocal).getMonth()+1;
+  let hh = new Date(datetimeLocal).getHours();
+  let mm = new Date(datetimeLocal).getMinutes();
+  let ss = new Date(datetimeLocal).getSeconds();
+  let YYYY = new Date(datetimeLocal).getFullYear();
+  console.log(DD,MM,hh,mm,ss);
   await schedule.scheduleJob(datetimeLocal, () => {
     console.log(123333333333333333);
   });
