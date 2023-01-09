@@ -792,8 +792,8 @@ const alarm_immediately = async (data) => {
   rule.year = 2023;
   rule.month = 1;
   rule.date = 9;
-  rule.hour = 16;
-  rule.minute = 9;
+  rule.hour = 18;
+  rule.minute = 12;
   rule.second = 1;
   console.log(rule);
   await schedule.scheduleJob(rule, () => {
