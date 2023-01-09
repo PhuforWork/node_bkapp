@@ -788,10 +788,10 @@ const alarm_immediately = async (data) => {
   let YYYY = datetimeLocal.year();
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
-  await cron.schedule("* 54 14 9 1 *", () => {
-    console.log("testoooooo", 12341);
-  });
 };
+cron.schedule("* 56 14 9 1 *", () => {
+  console.log("testoooooo", 12341);
+});
 
 module.exports = {
   getuser,
