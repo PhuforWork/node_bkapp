@@ -104,15 +104,6 @@ io.on("connection", (socket) => {
           date: data.res_bk.start,
           utcOffset: data.res_bk.utcOffset,
         });
-        let datetimeLocal = moment(data.res_bk.start).utcOffset(
-          `${data.res_bk.utcOffset}`
-        );
-        let DD = datetimeLocal.date();
-        let MM = datetimeLocal.month() + 1;
-        let hh = datetimeLocal.hours();
-        let mm = datetimeLocal.minutes();
-        let YYYY = datetimeLocal.year();
-        let ss = datetimeLocal.seconds();
       }
     }
   );
@@ -123,10 +114,4 @@ io.on("connection", (socket) => {
   });
 });
 
-const test = () => {
-  cron.schedule("* 19 15 9 1 *", () => {
-    console.log("testoooooo", 12341);
-  });
-};
-test();
 app.use("/api", rootRoute);

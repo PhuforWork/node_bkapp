@@ -788,7 +788,7 @@ const alarm_immediately = async (data) => {
   let YYYY = datetimeLocal.year();
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
-  cron.schedule("* 54 14 9 1 *", () => {
+  cron.schedule(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
     console.log("testoooooo", 12341);
   });
 };
