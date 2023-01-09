@@ -775,32 +775,28 @@ const notification_delete = async (req, res) => {
 };
 
 //báo thuc khi lich toi hen
+let arlamBooking = [];
 const alarm_immediately = async (data) => {
   let datetimeLocal = moment(data.date);
-  const rule = new schedule.RecurrenceRule();
-  let datetest = moment();
   // let test = moment().format("Z");
-  console.log(datetest);
+  await arlamBooking.push(datetimeLocal);
+  console.log("1",arlamBooking);
   console.log("loggggggggggg", datetimeLocal);
-
-  // rule.year = datetest.year();
-  // rule.month = datetest.month() + 1;
-  // rule.date = datetest.date();
-  // rule.hour = datetest.hours();
-  // rule.minute = datetest.minutes() + 1;
-  // rule.second = datetest.second() * 0;
-  // rule.dayOfWeek = '*';
-  // console.log(rule);
-  let YYYY = datetimeLocal.year();
-  let MM = datetimeLocal.month() + 1;
-  let DD = datetimeLocal.date();
-  let hh = datetimeLocal.hours();
-  let mm = datetimeLocal.minutes();
-  let ss = datetimeLocal.second() * 0 + 1;
-  console.log(hh,mm,ss,DD,MM);
-  await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
-    console.log("testoooooo", 12341);
-  });
+  Promise.all(
+    arlamBooking.map(async (ele) => {
+      let MM = (await ele.month()) + 1;
+      let DD = await ele.date();
+      let hh = await ele.hours();
+      let mm = await ele.minutes();
+      let ss = (await ele.second()) * 0 + 1;
+      console.log(hh, mm, ss, DD, MM);
+      await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
+        console.log("testoooooo", 12341);
+        arlamBooking = arlamBooking.filter((ele1)=>ele1 !== ele );
+        console.log("2",arlamBooking);
+      });
+    })
+  );
 };
 
 module.exports = {
