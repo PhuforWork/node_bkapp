@@ -11,8 +11,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
-const cron = require("node-cron");
-const schedule = require("node-schedule");
+
 const moment = require("moment");
 
 //Read all user
