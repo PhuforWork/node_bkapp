@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
   //send notification
   socket.on(
     "sendNotification",
-    async ({ senderName, receiverName, type, status, id_user, data }) => {
+    ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       console.log(data);
       let today = new Date();
@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
           data,
           today,
         });
-        await notification({
+        notification({
           senderName,
           status,
           id_user,
@@ -75,12 +75,12 @@ io.on("connection", (socket) => {
           today,
           type,
         });
-        await alarm_immediately({
+        alarm_immediately({
           date: data.res_bk.start,
           utcOffset: data.res_bk.utcOffset,
         });
       } else {
-        await notification({
+        notification({
           senderName,
           status,
           id_user,
@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
           today,
           type,
         });
-        await alarm_immediately({
+        alarm_immediately({
           date: data.res_bk.start,
           utcOffset: data.res_bk.utcOffset,
         });
