@@ -789,7 +789,7 @@ const alarm_immediately = async (data) => {
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
   let date = new Date(YYYY, MM, DD, hh, mm, ss);
-  await schedule.scheduleJob("2 * * * * *", () => {
+  schedule.scheduleJob("2 * * * * *", () => {
     console.log("testssss",123333333333333333);
   });
 };
