@@ -791,7 +791,7 @@ const alarm_immediately = async (data) => {
   let DD = "9";
   let MM = "1";
   let hh = "14";
-  let mm = "0";
+  let mm = "09";
   let YYYY = "2023";
   let ss = "0";
   let date = new Date(YYYY, MM, DD, hh, mm, ss);
