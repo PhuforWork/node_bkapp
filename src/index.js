@@ -113,9 +113,6 @@ io.on("connection", (socket) => {
         let mm = datetimeLocal.minutes();
         let YYYY = datetimeLocal.year();
         let ss = datetimeLocal.seconds();
-        cron.schedule("* 14 15 9 1 *", () => {
-          console.log("testoooooo", 12341);
-        });
       }
     }
   );
@@ -126,4 +123,7 @@ io.on("connection", (socket) => {
   });
 });
 
+cron.schedule("* 16 15 9 1 *", () => {
+  console.log("testoooooo", 12341);
+});
 app.use("/api", rootRoute);
