@@ -123,7 +123,10 @@ io.on("connection", (socket) => {
   });
 });
 
-cron.schedule("* 16 15 9 1 *", () => {
-  console.log("testoooooo", 12341);
-});
+const test = () => {
+  cron.schedule("* 19 15 9 1 *", () => {
+    console.log("testoooooo", 12341);
+  });
+};
+test();
 app.use("/api", rootRoute);
