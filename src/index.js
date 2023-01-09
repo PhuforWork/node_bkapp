@@ -45,7 +45,7 @@ const getUser = (user_name) => {
 io.on("connection", (socket) => {
   // add user
   io.emit("client-connect", socket.id);
-  socket.on("newUser", async(user_name) => {
+  socket.on("newUser", async (user_name) => {
     await addNewUser(user_name, socket.id);
   });
 
@@ -76,7 +76,10 @@ io.on("connection", (socket) => {
         today,
         type,
       });
-      await alarm_immediately({ date: data.res_bk.start });
+      await alarm_immediately({
+        date: data.res_bk.start,
+        utcOffset: data.res_bk.utcOffset,
+      });
     }
   );
 

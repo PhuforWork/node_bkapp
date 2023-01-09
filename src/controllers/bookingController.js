@@ -68,7 +68,7 @@ const add_booking = async (req, res) => {
   try {
     let { id } = req.params; // id user
     let id_user = id;
-    let { start, end, detail, id_orther_user, isCheck } = req.body;
+    let { start, end, detail, id_orther_user, isCheck, utcOffset } = req.body;
     let checkbk_n = req.body.id;
     let _values = req.body.service._values;
     let id_selection = req.body.service.id_selection;
@@ -86,6 +86,7 @@ const add_booking = async (req, res) => {
       checkbk,
       id_orther_user,
       isCheck,
+      utcOffset,
       id_check_delete: checkbk_n,
     };
 

@@ -776,9 +776,9 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  let datetimeLocal = moment(data.date).utcOffset("+07:00");
-  let test = moment().format("Z");
-  console.log(test);
+  let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
+  // let test = moment().format("Z");
+  // console.log(test);
   console.log(datetimeLocal);
 
   // let DD = new Date(datetime).getDate();
@@ -788,11 +788,9 @@ const alarm_immediately = async (data) => {
   // let ss = new Date(datetime).getSeconds();
   // let YYYY = new Date(datetime).getFullYear();
   // console.log(DD,MM,hh,mm,ss);
-
-  // const date_new = new Date(YYYY,MM)
-  // await schedule.scheduleJob(datetime, () => {
-  //   console.log(123333333333333333);
-  // });
+  await schedule.scheduleJob(datetimeLocal, () => {
+    console.log(123333333333333333);
+  });
 };
 
 module.exports = {
