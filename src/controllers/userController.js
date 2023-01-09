@@ -788,7 +788,7 @@ const alarm_immediately = async (data) => {
   let YYYY = datetimeLocal.year();
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
-  schedule.scheduleJob(`* 45 14 9 1 *`, () => {
+  schedule.scheduleJob(`* 47 14 9 1 *`, () => {
     console.log("testoooooo", 12341);
   });
 };
