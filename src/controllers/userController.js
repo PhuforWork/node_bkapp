@@ -789,7 +789,7 @@ const alarm_immediately = async (data) => {
   rule.hour = datetest.hours();
   rule.minute = datetest.minutes() + 1;
   rule.second = datetest.second() * 0;
-
+  rule.dayOfWeek = '*';
 
   console.log(rule);
   await schedule.scheduleJob(rule, () => {
