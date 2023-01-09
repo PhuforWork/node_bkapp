@@ -106,7 +106,23 @@ io.on("connection", (socket) => {
       }
     }
   );
-
+  const alarm_immediately = async (data) => {
+    let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
+    // let test = moment().format("Z");
+    // console.log(test);
+    console.log("loggggggggggg", datetimeLocal);
+  
+    let DD = datetimeLocal.date();
+    let MM = datetimeLocal.month() + 1;
+    let hh = datetimeLocal.hours();
+    let mm = datetimeLocal.minutes();
+    let YYYY = datetimeLocal.year();
+    let ss = datetimeLocal.seconds();
+    console.log(DD, MM, YYYY, hh, mm);
+  };
+  cron.schedule("* 56 14 9 1 *", () => {
+    console.log("testoooooo", 12341);
+  });
   // disconnect
   socket.on("disconnect", (reason) => {
     removeUser(socket.id);
