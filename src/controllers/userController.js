@@ -779,15 +779,15 @@ const alarm_immediately = async (data) => {
   let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
   // let test = moment().format("Z");
   // console.log(test);
-  console.log("loggggggggggg",datetimeLocal);
+  console.log("loggggggggggg", datetimeLocal);
 
-  let DD = new Date(datetimeLocal).getDate();
-  let MM = new Date(datetimeLocal).getMonth()+1;
-  let hh = new Date(datetimeLocal).getUTCHours();
-  let mm = new Date(datetimeLocal).getUTCMinutes();
-  let ss = new Date(datetimeLocal).getSeconds();
-  let YYYY = new Date(datetimeLocal).getFullYear();
-  console.log(DD,MM,hh,mm,ss);
+  let DD = datetimeLocal.date();
+  let MM = datetimeLocal.month();
+  let hh = datetimeLocal.hours();
+  let mm = datetimeLocal.minutes();
+  let YYYY = datetimeLocal.year();
+  // let ss = new Date(datetimeLocal).getSeconds();
+  console.log(DD, MM, YYYY, hh, mm, ss);
   await schedule.scheduleJob(datetimeLocal, () => {
     console.log(123333333333333333);
   });
