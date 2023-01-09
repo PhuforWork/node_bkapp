@@ -778,8 +778,9 @@ const notification_delete = async (req, res) => {
 const alarm_immediately = async (data) => {
   let datetimeLocal = moment(data.date);
   const rule = new schedule.RecurrenceRule();
-
+  let datetest = moment();
   // let test = moment().format("Z");
+  console.log(datetest);
   console.log("loggggggggggg", datetimeLocal);
 
   rule.year = datetimeLocal.year();
@@ -788,6 +789,7 @@ const alarm_immediately = async (data) => {
   rule.hour = datetimeLocal.hours();
   rule.minute = datetimeLocal.minutes();
   rule.second = datetimeLocal.second();
+
 
   console.log(rule);
   await schedule.scheduleJob(rule, () => {
