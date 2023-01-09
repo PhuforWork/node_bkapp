@@ -782,20 +782,20 @@ const alarm_immediately = async (data) => {
   // console.log(test);
   console.log("loggggggggggg", datetimeLocal);
 
-  let DD = datetimeLocal.date();
-  let MM = datetimeLocal.month() + 1;
-  let hh = datetimeLocal.hours();
-  let mm = datetimeLocal.minutes();
-  let YYYY = datetimeLocal.year();
-  let ss = datetimeLocal.seconds();
   // rule.year = datetimeLocal.year();
-  rule.month = datetimeLocal.month() + 1;
-  rule.date = datetimeLocal.date();
-  rule.hour = datetimeLocal.hours();
-  rule.minute = datetimeLocal.minutes();
-  rule.second = datetimeLocal.second();
+  // rule.month = datetimeLocal.month() + 1;
+  // rule.date = datetimeLocal.date();
+  // rule.hour = datetimeLocal.hours();
+  // rule.minute = datetimeLocal.minutes();
+  // rule.second = datetimeLocal.second();
+
+  rule.year = 2023;
+  rule.month = 1;
+  rule.date = 9;
+  rule.hour = 16;
+  rule.minute = 5;
+  rule.second = 0;
   console.log(rule);
-  console.log(DD, MM, YYYY, hh, mm);
   await schedule.scheduleJob(rule, () => {
     console.log("testoooooo", 12341);
   });
