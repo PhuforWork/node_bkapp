@@ -54,6 +54,7 @@ io.on("connection", (socket) => {
     "sendNotification",
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
+      const senderr = getUser(senderName);
       console.log(data);
       let today = new Date();
       if (receiver.socketId !== undefined) {
@@ -80,6 +81,13 @@ io.on("connection", (socket) => {
           utcOffset: data.res_bk.utcOffset,
         });
       } else {
+        io.to(senderr.socketId).emit("getNotification", {
+          senderName,
+          type,
+          status,
+          data,
+          today,
+        });
         notification({
           senderName,
           status,
