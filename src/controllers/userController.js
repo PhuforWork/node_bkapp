@@ -20,7 +20,7 @@ const getuser = async (req, res) => {
   try {
     let data = await model.users.findAll({
       include: ["departments"],
-      attributes: { exclude: ["_password", "email", "image_url"] },
+      attributes: { exclude: ["_password", "email"] },
     });
     // res.send(data);
     successCode(res, data, "Get Success");
