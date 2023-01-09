@@ -780,7 +780,6 @@ const alarm_immediately = async (data) => {
   const rule = new schedule.RecurrenceRule();
 
   // let test = moment().format("Z");
-  console.log(datetest);
   console.log("loggggggggggg", datetimeLocal);
 
   rule.year = datetimeLocal.year();
