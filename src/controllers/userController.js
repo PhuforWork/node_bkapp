@@ -793,8 +793,8 @@ const alarm_immediately = async (data) => {
   rule.month = 1;
   rule.date = 9;
   rule.hour = 16;
-  rule.minute = 5;
-  rule.second = 0;
+  rule.minute = 7;
+  rule.second = 1;
   console.log(rule);
   await schedule.scheduleJob(rule, () => {
     console.log("testoooooo", 12341);
