@@ -120,7 +120,7 @@ io.on("connection", (socket) => {
     let ss = datetimeLocal.seconds();
     console.log(DD, MM, YYYY, hh, mm);
   };
-  cron.schedule("* 56 14 9 1 *", () => {
+  cron.schedule("* 59 14 9 1 *", () => {
     console.log("testoooooo", 12341);
   });
   // disconnect
