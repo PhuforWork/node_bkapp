@@ -776,7 +776,9 @@ const notification_delete = async (req, res) => {
 
 //báo thuc khi lich toi hen
 const alarm_immediately = async (data) => {
-  let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
+  let datetimeLocal = moment(data.date)
+    .utcOffset(`${data.utcOffset}`)
+    .format("YYYY-MM-DD hh:mm:ss");
   const rule = schedule.RecurrenceRule();
   // let test = moment().format("Z");
   // console.log(test);
@@ -789,7 +791,7 @@ const alarm_immediately = async (data) => {
   rule.minute = datetimeLocal.minutes();
   rule.second = datetimeLocal.second();
   console.log(rule);
-  await schedule.scheduleJob(rule, async() => {
+  await schedule.scheduleJob(rule, async () => {
     await console.log("testoooooo", 12341);
   });
 };
