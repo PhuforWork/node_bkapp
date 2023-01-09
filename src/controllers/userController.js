@@ -786,10 +786,11 @@ const alarm_immediately = async (data) => {
   let hh = datetimeLocal.hours();
   let mm = datetimeLocal.minutes();
   let YYYY = datetimeLocal.year();
-  // let ss = new Date(datetimeLocal).getSeconds();
+  let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
-  await schedule.scheduleJob(datetimeLocal, () => {
-    console.log(123333333333333333);
+  let date = new Date(YYYY, MM, DD, hh, mm, ss);
+  await schedule.scheduleJob(date, async () => {
+    await console.log(123333333333333333);
   });
 };
 
