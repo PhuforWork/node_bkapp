@@ -782,7 +782,7 @@ const alarm_immediately = async (data) => {
   console.log("loggggggggggg", datetimeLocal);
 
   let DD = datetimeLocal.date();
-  let MM = datetimeLocal.month();
+  let MM = datetimeLocal.month() + 1;
   let hh = datetimeLocal.hours();
   let mm = datetimeLocal.minutes();
   let YYYY = datetimeLocal.year();
