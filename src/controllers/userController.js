@@ -795,8 +795,9 @@ const alarm_immediately = async (data) => {
   let MM = datetest.month() + 1;
   let DD = datetest.date();
   let hh = datetest.hours();
-  let mm = datetest.minutes() + 1;
+  let mm = datetest.minutes();
   let ss = datetest.second() * 0 + 1;
+  console.log(hh,mm,ss,DD,MM);
   await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
     console.log("testoooooo", 12341);
   });
