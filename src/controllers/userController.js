@@ -778,7 +778,7 @@ const notification_delete = async (req, res) => {
 const alarm_immediately = async (data) => {
   let datetimeLocal = moment(data.date).utcOffset(`${data.utcOffset}`);
   const rule = new schedule.RecurrenceRule();
-  let datetest = new Date();
+  let datetest = moment();
   // let test = moment().format("Z");
   console.log(datetest);
   console.log("loggggggggggg", datetimeLocal);
