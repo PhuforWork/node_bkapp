@@ -788,7 +788,10 @@ const alarm_immediately = async (data) => {
   let YYYY = datetimeLocal.year();
   let ss = datetimeLocal.seconds();
   console.log(DD, MM, YYYY, hh, mm);
-  schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
+  // await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
+  //   console.log("testoooooo", 12341);
+  // });
+  await schedule.scheduleJob(`0 36 15 9 1 *`, () => {
     console.log("testoooooo", 12341);
   });
 };
