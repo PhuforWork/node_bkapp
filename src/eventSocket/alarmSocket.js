@@ -13,6 +13,7 @@ module.exports = (io) => {
     let today;
     today = moment();
     schedule.scheduleJob("* * * * * *", () => {
+        console.log(123);
     });
     console.log("today", today);
     Promise.all(
