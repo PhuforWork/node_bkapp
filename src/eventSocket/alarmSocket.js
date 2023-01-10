@@ -18,7 +18,7 @@ module.exports = (io) => {
         let hh = await (ele.start.minutes() === 0
           ? ele.start.hours() - 1
           : ele.start.hours());
-        let mm = await (ele.start.minutes() === 0 ? 55 : ele.minutes() - 5);
+        let mm = await (ele.start.minutes() === 0 ? 55 : ele.start.minutes() - 5);
         let ss = (await ele.start.second()) * 0 + 1;
         //
         // let MM = 1;
