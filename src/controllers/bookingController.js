@@ -1,4 +1,4 @@
-const { alarm_immediately } = require("..");
+const { alarm_immediately } = require("../eventSocket/alarmSocket");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
