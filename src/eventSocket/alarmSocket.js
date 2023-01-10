@@ -14,26 +14,26 @@ module.exports = (io) => {
 
     Promise.all(
       alarmBooking.map(async (ele) => {
-        let MM = (await ele.date_early_5.month()) + 1;
-        let DD = await ele.date_early_5.date();
-        let hh = await ele.date_early_5.hours();
-        let mm = await ele.date_early_5.minutes();
-        let ss = (await ele.date_early_5.second()) * 0 + 1;
+        // let MM = (await ele.date_early_5.month()) + 1;
+        // let DD = await ele.date_early_5.date();
+        // let hh = await ele.date_early_5.hours();
+        // let mm = await ele.date_early_5.minutes();
+        // let ss = (await ele.date_early_5.second()) * 0 + 1;
         //
-        // let MM = 1;
-        // let DD = 10;
-        // let hh = 16;
-        // let mm = 5;
-        // let ss = 1;
+        let MM = 1;
+        let DD = 10;
+        let hh = 0;
+        let mm = 35;
+        let ss = 1;
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let today = moment();
-            let early_day = moment().subtract(aft_five_minute);
+            let early_day = moment().subtract(aft_five_minute).format("YYYY-MM-DD hh:mm");
             let data1 = alarmBooking.find(
-              (ele2) => moment(ele2.date_early_5) === early_day
+              (ele2) => moment(ele2.date_early_5).format("YYYY-MM-DD hh:mm") === early_day
             );
             console.log("data1",data1);
             await io.emit("sendAlarm", { ...data1, today: today });
