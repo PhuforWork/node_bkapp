@@ -5,15 +5,16 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const {
-  notification,
-  alarm_immediately,
+  notification
 } = require("./controllers/userController");
+const {alarm_immediately} = require("./eventSocket/alarmSocket")(io);
+
 const app = express();
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
-require("./controllers/arlamControler")(io);
+
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));

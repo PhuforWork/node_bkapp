@@ -1,5 +1,5 @@
-//báo thuc khi lich toi hen
-module.exports = function (io) {
+module.exports = (io) => {
+  //báo thuc khi lich toi hen
   let arlamBooking = [];
   const alarm_immediately = async (data) => {
     let datetimeLocal = moment(data.start);
@@ -17,8 +17,8 @@ module.exports = function (io) {
         //
         let MM = 1;
         let DD = 10;
-        let hh = 12;
-        let mm = 43;
+        let hh = 13;
+        let mm = 48;
         let ss = 1;
 
         console.log(hh, mm, ss, DD, MM);
@@ -33,5 +33,8 @@ module.exports = function (io) {
         );
       })
     );
+  };
+  return {
+    alarm_immediately,
   };
 };
