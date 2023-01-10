@@ -7,7 +7,7 @@ const cron = require("node-cron");
 const {
   notification
 } = require("./controllers/userController");
-const {alarm_immediately} = require("./eventSocket/alarmSocket")(io);
+// const {alarm_immediately} = require("./eventSocket/alarmSocket")(io);
 
 const app = express();
 
