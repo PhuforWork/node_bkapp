@@ -18,7 +18,9 @@ module.exports = (io) => {
         let hh = await (ele.start.minutes() === 0
           ? ele.start.hours() - 1
           : ele.start.hours());
-        let mm = await (ele.start.minutes() === 0 ? 55 : ele.start.minutes() - 5);
+        let mm = await (ele.start.minutes() === 0
+          ? 55
+          : ele.start.minutes() - 5);
         let ss = (await ele.start.second()) * 0 + 1;
         //
         // let MM = 1;
@@ -32,7 +34,9 @@ module.exports = (io) => {
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let today = moment();
-            let data1 = alarmBooking.find((ele2) => ele2.start === today);
+            let data1 = alarmBooking.find(
+              (ele2) => moment(ele2.start).minutes() === today.minutes() + 5
+            );
             await io.emit("sendAlarm", { ...data1, today: today });
             // console.log("testSend", 123);
             notification_alarm({ ...data, today: today });
