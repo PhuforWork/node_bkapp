@@ -186,21 +186,21 @@ const add_booking = async (req, res) => {
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
-      // alarm_immediately({
-      //   senderName,
-      //   status: false,
-      //   id_user: id_orther_user,
-      //   start: start,
-      //   end: end,
-      //   department: label,
-      //   personality: res_per,
-      //   type: 2,
-      // });
+      notification({
+        senderName,
+        status: false,
+        id_user: id_orther_user,
+        start: start,
+        end: end,
+        department: label,
+        personality: res_per,
+        type: 2,
+      });
     } else {
       failCode(res, { code: 012 }, "Missing fields booking");
     }
   } catch (error) {
-    errorCode(res,"Error 500");
+    errorCode(res, "Error 500");
   }
 };
 
@@ -442,6 +442,35 @@ const delete_bk = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+const notification = async (data) => {
+  let { senderName, status, id_user, start, end, department, today, type } =
+    data;
+  let data1 = {
+    senderName,
+    status,
+    id_user,
+    start,
+    end,
+    department,
+    today,
+    type,
+  };
+  let data2 = data.personality;
+  try {
+    let idNotify = await model.notifications.create(data1);
+    Promise.all(
+      data2.map(async (ele) => {
+        await model.persionality_notify.create({
+          label: ele.label,
+          id_notify: idNotify.id_notify,
+          value: ele.value,
+        });
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
   booking_user,
@@ -457,4 +486,5 @@ module.exports = {
   delete_bk,
   get_depart,
   get_persional_id,
+  notification
 };
