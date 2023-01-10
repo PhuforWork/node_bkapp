@@ -184,7 +184,7 @@ const add_booking = async (req, res) => {
         });
         await notification({
           status: false,
-          id_user: id_orther_user,
+          id_user: id_user,
           start: start,
           end: end,
           department: label,
