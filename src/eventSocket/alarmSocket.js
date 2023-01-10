@@ -13,17 +13,17 @@ module.exports = (io) => {
     // console.log("loggggggggggg", datetimeLocal);
     Promise.all(
       arlamBooking.map(async (ele) => {
-        // let MM = (await ele.start.month()) + 1;
-        // let DD = await ele.start.date();
-        // let hh = await ele.start.hours();
-        // let mm = await ele.start.minutes();
-        // let ss = (await ele.start.second()) * 0 + 1;
+        let MM = (await ele.start.month()) + 1;
+        let DD = await ele.start.date();
+        let hh = await ele.start.hours();
+        let mm = (await ele.start.minutes()) - 5;
+        let ss = (await ele.start.second()) * 0 + 1;
         //
-        let MM = 1;
-        let DD = 10;
-        let hh = 16;
-        let mm = 5;
-        let ss = 1;
+        // let MM = 1;
+        // let DD = 10;
+        // let hh = 16;
+        // let mm = 5;
+        // let ss = 1;
 
         console.log(hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
