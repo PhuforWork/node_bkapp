@@ -182,20 +182,19 @@ const add_booking = async (req, res) => {
           label: label,
           id_booking: idbk.id_booking,
         });
+        await notification({
+          status: false,
+          id_user: id_orther_user,
+          start: start,
+          end: end,
+          department: label,
+          personality: res_per,
+          type: 2,
+        });
         successCode(res, { res_bk, res_per, res_der }, "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
-      notification({
-        senderName,
-        status: false,
-        id_user: id_orther_user,
-        start: start,
-        end: end,
-        department: label,
-        personality: res_per,
-        type: 2,
-      });
     } else {
       failCode(res, { code: 012 }, "Missing fields booking");
     }
