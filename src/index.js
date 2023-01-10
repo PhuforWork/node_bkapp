@@ -7,13 +7,13 @@ const cron = require("node-cron");
 const {
   notification
 } = require("./controllers/userController");
-// const {alarm_immediately} = require("./eventSocket/alarmSocket")(io);
 
 const app = express();
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
+const {alarm_immediately} = require("./eventSocket/alarmSocket")(io);
 
 app.use(express.json());
 app.use(cors());
