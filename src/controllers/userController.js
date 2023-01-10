@@ -725,7 +725,6 @@ const notification = async (data) => {
     type,
   };
   let data2 = data.personality;
-  console.log("abc", data2);
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
