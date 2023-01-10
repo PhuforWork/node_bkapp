@@ -65,7 +65,6 @@ io.on("connection", (socket) => {
           data,
           today,
         });
-
         alarm_immediately({
           senderName,
           status,
