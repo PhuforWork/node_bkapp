@@ -189,7 +189,7 @@ const add_booking = async (req, res) => {
           end: end,
           department: label,
           personality: res_per,
-          type: 2,
+          type: 1,
         });
         successCode(res, { res_bk, res_per, res_der }, "Add booking success");
       } else {
