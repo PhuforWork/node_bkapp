@@ -4,16 +4,14 @@ const rootRoute = require("../src/routes/index");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
-const {
-  notification
-} = require("./controllers/userController");
+const { notification } = require("./controllers/userController");
 
 const app = express();
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
-const {alarm_immediately} = require("./eventSocket/alarmSocket")(io);
+const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
 
 app.use(express.json());
 app.use(cors());
@@ -83,7 +81,7 @@ io.on("connection", (socket) => {
           utcOffset: data.res_bk.utcOffset,
           department: data.res_der.label,
           personality: data.res_per,
-          type,
+          type: 2,
         });
       }
     }
@@ -96,4 +94,3 @@ io.on("connection", (socket) => {
 });
 
 app.use("/api", rootRoute);
-
