@@ -201,7 +201,7 @@ const add_booking = async (req, res) => {
       failCode(res, { code: 012 }, "Missing fields booking");
     }
   } catch (error) {
-    errorCode(res, "", "Error 500");
+    errorCode(res,"Error 500");
   }
 };
 
