@@ -4,7 +4,7 @@ const compress_images = require("compress-images");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const { Sequelize } = require("sequelize");
-const socket = io();
+// const socket = io();
 const Op = Sequelize.Op;
 require("dotenv").config();
 const bcrypt = require("bcrypt");
