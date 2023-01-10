@@ -11,9 +11,8 @@ module.exports = (io) => {
     // console.log("1",alarmBooking);
     // console.log("loggggggggggg", datetimeLocal);
     let today;
-    today = moment();
     schedule.scheduleJob("* * * * * *", () => {
-        console.log(123);
+        today = moment();
     });
     console.log("today", today);
     Promise.all(
