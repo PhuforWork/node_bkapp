@@ -15,7 +15,9 @@ module.exports = (io) => {
       alarmBooking.map(async (ele) => {
         let MM = (await ele.start.month()) + 1;
         let DD = await ele.start.date();
-        let hh = await (ele.start.minutes() === 0 ? ele.hours() - 1 : ele.hours());
+        let hh = await (ele.start.minutes() === 0
+          ? ele.hours() - 1
+          : ele.hours());
         let mm = await (ele.start.minutes() === 0 ? 55 : ele.minutes() - 5);
         let ss = (await ele.start.second()) * 0 + 1;
         //
@@ -30,11 +32,13 @@ module.exports = (io) => {
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let today = moment();
-
-            await io.emit("sendAlarm", { ...data, today: today });
+            let data1 = alarmBooking.find((ele2) => ele2.start === today);
+            await io.emit("sendAlarm", { ...data1, today: today });
             // console.log("testSend", 123);
             notification_alarm({ ...data, today: today });
-            alarmBooking = await alarmBooking.filter((ele1) => ele1 !== ele);
+            alarmBooking = await alarmBooking.filter(
+              (ele1) => ele1.start !== ele.start
+            );
             console.log("alarm after", alarmBooking);
           }
         );
