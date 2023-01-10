@@ -14,17 +14,17 @@ module.exports = (io) => {
 
     Promise.all(
       alarmBooking.map(async (ele) => {
-        // let MM = (await ele.date_early_5.month()) + 1;
-        // let DD = await ele.date_early_5.date();
-        // let hh = await ele.date_early_5.hours();
-        // let mm = await ele.date_early_5.minutes();
-        // let ss = (await ele.date_early_5.second()) * 0 + 1;
+        let MM = (await ele.date_early_5.month()) + 1;
+        let DD = await ele.date_early_5.date();
+        let hh = await ele.date_early_5.hours();
+        let mm = await ele.date_early_5.minutes();
+        let ss = (await ele.date_early_5.second()) * 0 + 1;
         //
-        let MM = 1;
-        let DD = 10;
-        let hh = 0;
-        let mm = 41;
-        let ss = 1;
+        // let MM = 1;
+        // let DD = 10;
+        // let hh = 0;
+        // let mm = 41;
+        // let ss = 1;
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
