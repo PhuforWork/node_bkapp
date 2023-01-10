@@ -4,6 +4,7 @@ const rootRoute = require("../src/routes/index");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
+const moment = require("moment");
 const { notification } = require("./controllers/userController");
 
 const app = express();
@@ -80,7 +81,7 @@ io.on("connection", (socket) => {
           senderName,
           status,
           id_user,
-          start: data.res_bk.start,
+          start: moment(data.res_bk.start),
           end: data.res_bk.end,
           department: data.res_der.label,
           personality: data.res_per,

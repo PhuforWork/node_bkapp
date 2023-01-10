@@ -5,7 +5,7 @@ module.exports = (io) => {
   //báo thuc khi lich toi hen
   let alarmBooking = [];
   const alarm_immediately = async (data) => {
-    let datetimeLocal = moment(data.start);
+    // let datetimeLocal = moment(data.start);
     let today = new Date();
     // let test = moment().format("Z");
     await alarmBooking.push(data);
