@@ -7,19 +7,17 @@ module.exports = (io) => {
   const alarm_immediately = async (data) => {
     let datetimeLocal = moment(data.start);
     // let test = moment().format("Z");
-    await alarmBooking.push(datetimeLocal);
+    await alarmBooking.push({ ...data, start: datetimeLocal });
     // console.log("1",alarmBooking);
     // console.log("loggggggggggg", datetimeLocal);
-    let today = moment();
 
-    console.log("today", today);
     Promise.all(
       alarmBooking.map(async (ele) => {
-        let MM = (await ele.month()) + 1;
-        let DD = await ele.date();
-        let hh = await (ele.minutes() === 0 ? ele.hours() - 1 : ele.hours());
-        let mm = await (ele.minutes() === 0 ? 55 : ele.minutes() - 5);
-        let ss = (await ele.second()) * 0 + 1;
+        let MM = (await ele.start.month()) + 1;
+        let DD = await ele.start.date();
+        let hh = await (ele.start.minutes() === 0 ? ele.hours() - 1 : ele.hours());
+        let mm = await (ele.start.minutes() === 0 ? 55 : ele.minutes() - 5);
+        let ss = (await ele.start.second()) * 0 + 1;
         //
         // let MM = 1;
         // let DD = 10;
@@ -31,6 +29,8 @@ module.exports = (io) => {
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
+            let today = moment();
+
             await io.emit("sendAlarm", { ...data, today: today });
             // console.log("testSend", 123);
             notification_alarm({ ...data, today: today });
