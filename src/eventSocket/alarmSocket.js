@@ -10,8 +10,8 @@ module.exports = (io) => {
     await alarmBooking.push(datetimeLocal);
     // console.log("1",alarmBooking);
     // console.log("loggggggggggg", datetimeLocal);
-    let today;
     schedule.scheduleJob("* * * * * *", () => {
+        let today;
         today = moment();
         console.log(123);
     });
