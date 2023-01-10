@@ -4,7 +4,7 @@ const compress_images = require("compress-images");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const { Sequelize } = require("sequelize");
-
+const socket = io();
 const Op = Sequelize.Op;
 require("dotenv").config();
 const bcrypt = require("bcrypt");
@@ -777,24 +777,28 @@ const notification_delete = async (req, res) => {
 //báo thuc khi lich toi hen
 let arlamBooking = [];
 const alarm_immediately = async (data) => {
-  let datetimeLocal = moment(data.date);
+  let datetimeLocal = moment(data.start);
   // let test = moment().format("Z");
-  await arlamBooking.push(datetimeLocal);
-  console.log("1",arlamBooking);
-  console.log("loggggggggggg", datetimeLocal);
+  await arlamBooking.push(data);
+  // console.log("1",arlamBooking);
+  // console.log("loggggggggggg", datetimeLocal);
   Promise.all(
     arlamBooking.map(async (ele) => {
-      let MM = (await ele.month()) + 1;
-      let DD = await ele.date();
-      let hh = await ele.hours();
-      let mm = await ele.minutes();
-      let ss = (await ele.second()) * 0 + 1;
+      let MM = (await ele.start.month()) + 1;
+      let DD = await ele.start.date();
+      let hh = await ele.start.hours();
+      let mm = await ele.start.minutes();
+      let ss = (await ele.start.second()) * 0 + 1;
       console.log(hh, mm, ss, DD, MM);
-      await schedule.scheduleJob(`${ss} ${mm} ${hh} ${DD} ${MM} *`, () => {
-        console.log("testoooooo", 12341);
-        arlamBooking = arlamBooking.filter((ele1)=>ele1 !== ele );
-        console.log("2",arlamBooking);
-      });
+      await schedule.scheduleJob(
+        `${ss} ${mm} ${hh} ${DD} ${MM} *`,
+        async () => {
+          await socket.emit("sendArlam", data);
+          arlamBooking = await arlamBooking.filter(
+            (ele1) => ele1.start !== ele.start
+          );
+        }
+      );
     })
   );
 };

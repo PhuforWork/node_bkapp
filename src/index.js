@@ -78,31 +78,11 @@ io.on("connection", (socket) => {
           type,
         });
         alarm_immediately({
-          date: data.res_bk.start,
-          utcOffset: data.res_bk.utcOffset,
-        });
-      } else {
-        io.to(senderr.socketId).emit("getNotification", {
-          senderName,
-          type,
-          status,
-          data,
-          today,
-        });
-        notification({
-          senderName,
-          status,
-          id_user,
           start: data.res_bk.start,
-          end: data.res_bk.end,
+          utcOffset: data.res_bk.utcOffset,
           department: data.res_der.label,
           personality: data.res_per,
-          today,
           type,
-        });
-        alarm_immediately({
-          date: data.res_bk.start,
-          utcOffset: data.res_bk.utcOffset,
         });
       }
     }
