@@ -23,7 +23,7 @@ module.exports = (io) => {
         let MM = 1;
         let DD = 10;
         let hh = 0;
-        let mm = 36;
+        let mm = 38;
         let ss = 1;
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
