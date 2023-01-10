@@ -793,7 +793,7 @@ const alarm_immediately = async (data) => {
       let MM = 1;
       let DD = 10;
       let hh = 12;
-      let mm = 39;
+      let mm = 43;
       let ss = 1;
 
       console.log(hh, mm, ss, DD, MM);
