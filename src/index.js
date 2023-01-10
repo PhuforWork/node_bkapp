@@ -56,7 +56,6 @@ io.on("connection", (socket) => {
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       const senderr = getUser(senderName);
-      console.log(data);
       let today = new Date();
       if (receiver.socketId !== undefined) {
         io.to(receiver.socketId).emit("getNotification", {
