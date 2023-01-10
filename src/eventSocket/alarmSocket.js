@@ -15,8 +15,12 @@ module.exports = (io) => {
       alarmBooking.map(async (ele) => {
         let MM = (await ele.start.month()) + 1;
         let DD = await ele.start.date();
-        let hh = await ele.start.hours();
-        let mm = (await ele.start.minutes()) - 5;
+        let hh = await (ele.start.minutes() === 0
+          ? ele.start.hours() - 1
+          : ele.start.hours());
+        let mm = await (ele.start.minutes() === 0
+          ? 55
+          : ele.start.minutes() - 5);
         let ss = (await ele.start.second()) * 0 + 1;
         //
         // let MM = 1;
@@ -24,6 +28,8 @@ module.exports = (io) => {
         // let hh = 16;
         // let mm = 5;
         // let ss = 1;
+        if (mm === 0) {
+        }
         console.log("1", alarmBooking);
         console.log(hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
