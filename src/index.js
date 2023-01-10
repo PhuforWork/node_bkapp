@@ -13,7 +13,7 @@ const app = express();
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
-
+require("./controllers/arlamControler")(io);
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
@@ -96,4 +96,3 @@ io.on("connection", (socket) => {
 
 app.use("/api", rootRoute);
 
-module.exports = io ;
