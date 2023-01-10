@@ -89,7 +89,6 @@ const add_booking = async (req, res) => {
       utcOffset,
       id_check_delete: checkbk_n,
     };
-
     let flag = true;
     if (data) {
       const duplicate_booking = await model.booking_info.findAll({
@@ -188,6 +187,16 @@ const add_booking = async (req, res) => {
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
+      alarm_immediately({
+        senderName,
+        status: false,
+        id_user:id_orther_user,
+        start: start,
+        end: end,
+        department: label,
+        personality: res_per,
+        type: 2,
+      });
     } else {
       failCode(res, { code: 012 }, "Missing fields booking");
     }
