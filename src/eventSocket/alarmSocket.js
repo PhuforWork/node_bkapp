@@ -5,23 +5,20 @@ module.exports = (io) => {
   //báo thuc khi lich toi hen
   let alarmBooking = [];
   const alarm_immediately = async (data) => {
-    let datetimeLocal = moment(data.start);
+    let aft_five_minute = moment.duration("00:05:00");
+    let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
-    await alarmBooking.push({ ...data, start: datetimeLocal });
+    await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
     // console.log("1",alarmBooking);
     // console.log("loggggggggggg", datetimeLocal);
 
     Promise.all(
       alarmBooking.map(async (ele) => {
-        let MM = (await ele.start.month()) + 1;
-        let DD = await ele.start.date();
-        let hh = await (ele.start.minutes() === 0
-          ? ele.start.hours() - 1
-          : ele.start.hours());
-        let mm = await (ele.start.minutes() === 0
-          ? 55
-          : ele.start.minutes() - 5);
-        let ss = (await ele.start.second()) * 0 + 1;
+        let MM = (await ele.date_early_5.month()) + 1;
+        let DD = await ele.date_early_5.date();
+        let hh = await ele.date_early_5.hours();
+        let mm = await ele.date_early_5.minutes();
+        let ss = (await ele.date_early_5.second()) * 0 + 1;
         //
         // let MM = 1;
         // let DD = 10;
@@ -34,9 +31,11 @@ module.exports = (io) => {
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let today = moment();
+            let early_day = moment().subtract(aft_five_minute);
             let data1 = alarmBooking.find(
-              (ele2) => moment(ele2.start).minutes() === today.minutes() + 5
+              (ele2) => moment(ele2.date_early_5) === early_day
             );
+            console.log("data1",data1);
             await io.emit("sendAlarm", { ...data1, today: today });
             // console.log("testSend", 123);
             notification_alarm({ ...data, today: today });
