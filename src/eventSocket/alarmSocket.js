@@ -26,6 +26,7 @@ module.exports = (io) => {
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             await io.emit("sendArlam", data);
+            console.log("testSend",123);
             arlamBooking = await arlamBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
