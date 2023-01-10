@@ -1,4 +1,3 @@
-const { alarm_immediately } = require("../eventSocket/alarmSocket");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
@@ -187,16 +186,16 @@ const add_booking = async (req, res) => {
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
       }
-      alarm_immediately({
-        senderName,
-        status: false,
-        id_user: id_orther_user,
-        start: start,
-        end: end,
-        department: label,
-        personality: res_per,
-        type: 2,
-      });
+      // alarm_immediately({
+      //   senderName,
+      //   status: false,
+      //   id_user: id_orther_user,
+      //   start: start,
+      //   end: end,
+      //   department: label,
+      //   personality: res_per,
+      //   type: 2,
+      // });
     } else {
       failCode(res, { code: 012 }, "Missing fields booking");
     }
