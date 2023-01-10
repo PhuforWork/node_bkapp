@@ -756,10 +756,10 @@ const notification_alarm = async (data) => {
   };
   let data2 = data.personality;
   try {
-    let idNotify = await model.notifications.update(data1);
+    let idNotify = await model.notifications.create(data1);
     Promise.all(
       data2.map(async (ele) => {
-        await model.persionality_notify.update({
+        await model.persionality_notify.create({
           label: ele.label,
           id_notify: idNotify.id_notify,
           value: ele.value,

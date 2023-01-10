@@ -81,11 +81,10 @@ io.on("connection", (socket) => {
           status,
           id_user,
           start: data.res_bk.start,
-          utcOffset: data.res_bk.utcOffset,
+          end: data.res_bk.end,
           department: data.res_der.label,
           personality: data.res_per,
           type: 2,
-
         });
       }
     }
