@@ -10,11 +10,12 @@ module.exports = (io) => {
     await alarmBooking.push(datetimeLocal);
     // console.log("1",alarmBooking);
     // console.log("loggggggggggg", datetimeLocal);
-    schedule.scheduleJob("* * * * * *", () => {
-        let today;
-        today = moment();
-        console.log(123);
-    });
+    let today;
+    const test = setInterval(() => {
+      today = moment();
+      clearInterval(test);
+    }, 1000);
+
     console.log("today", today);
     Promise.all(
       alarmBooking.map(async (ele) => {
