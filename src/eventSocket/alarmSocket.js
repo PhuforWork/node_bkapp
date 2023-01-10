@@ -1,10 +1,12 @@
 const schedule = require("node-schedule");
 const moment = require("moment");
+const { notification_alarm } = require("../controllers/userController");
 module.exports = (io) => {
   //báo thuc khi lich toi hen
   let arlamBooking = [];
   const alarm_immediately = async (data) => {
     let datetimeLocal = moment(data.start);
+    let today = new Date();
     // let test = moment().format("Z");
     await arlamBooking.push(data);
     // console.log("1",arlamBooking);
@@ -20,15 +22,16 @@ module.exports = (io) => {
         let MM = 1;
         let DD = 10;
         let hh = 14;
-        let mm = 19;
+        let mm = 34;
         let ss = 1;
 
         console.log(hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
-            await io.emit("sendArlam", data);
-            console.log("testSend",123);
+            await io.emit("sendAlarm", { ...data, today: today });
+            console.log("testSend", 123);
+            notification_alarm({ ...data, today: today });
             arlamBooking = await arlamBooking.filter(
               (ele1) => ele1.start !== ele.start
             );

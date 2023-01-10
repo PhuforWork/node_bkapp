@@ -77,11 +77,15 @@ io.on("connection", (socket) => {
           type,
         });
         alarm_immediately({
+          senderName,
+          status,
+          id_user,
           start: data.res_bk.start,
           utcOffset: data.res_bk.utcOffset,
           department: data.res_der.label,
           personality: data.res_per,
           type: 2,
+
         });
       }
     }
