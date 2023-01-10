@@ -1,8 +1,8 @@
+const { alarm_immediately } = require("..");
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
-const { alarm_immediately } = require("../eventSocket/alarmSocket");
 // get
 const booking_user = async (req, res) => {
   try {

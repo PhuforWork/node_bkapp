@@ -90,7 +90,6 @@ io.on("connection", (socket) => {
       }
     }
   );
-
   // disconnect
   socket.on("disconnect", (reason) => {
     removeUser(socket.id);
@@ -98,3 +97,5 @@ io.on("connection", (socket) => {
 });
 
 app.use("/api", rootRoute);
+
+module.exports = {alarm_immediately}

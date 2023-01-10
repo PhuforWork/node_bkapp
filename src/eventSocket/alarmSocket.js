@@ -14,7 +14,7 @@ module.exports = (io) => {
     schedule.scheduleJob("* * * * * *", () => {
       today = moment();
     });
-    console.log(today);
+    console.log("today", today);
     Promise.all(
       alarmBooking.map(async (ele) => {
         if (ele === today) {
@@ -29,8 +29,8 @@ module.exports = (io) => {
           // let hh = 16;
           // let mm = 5;
           // let ss = 1;
-          console.log("1", alarmBooking);
-          console.log(hh, mm, ss, DD, MM);
+          console.log("array before", alarmBooking);
+          console.log("show datetime", hh, mm, ss, DD, MM);
           await schedule.scheduleJob(
             `${ss} ${mm} ${hh} ${DD} ${MM} *`,
             async () => {
@@ -38,7 +38,7 @@ module.exports = (io) => {
               // console.log("testSend", 123);
               notification_alarm({ ...data, today: today });
               alarmBooking = await alarmBooking.filter((ele1) => ele1 !== ele);
-              console.log("2", alarmBooking);
+              console.log("alarm after", alarmBooking);
             }
           );
         }
