@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
           senderName,
           status,
           id_user,
-          start: moment(data.res_bk.start),
+          start: data.res_bk.start,
           end: data.res_bk.end,
           department: data.res_der.label,
           personality: data.res_per,

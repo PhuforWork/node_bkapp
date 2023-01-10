@@ -5,23 +5,23 @@ module.exports = (io) => {
   //báo thuc khi lich toi hen
   let alarmBooking = [];
   const alarm_immediately = async (data) => {
-    // let datetimeLocal = moment(data.start);
+    let datetimeLocal = moment(data.start);
     let today = new Date();
     // let test = moment().format("Z");
-    await alarmBooking.push(data);
+    await alarmBooking.push(datetimeLocal);
     // console.log("1",alarmBooking);
     // console.log("loggggggggggg", datetimeLocal);
     Promise.all(
       alarmBooking.map(async (ele) => {
-        let MM = (await ele.start.month()) + 1;
-        let DD = await ele.start.date();
-        let hh = await (ele.start.minutes() === 0
-          ? ele.start.hours() - 1
-          : ele.start.hours());
-        let mm = await (ele.start.minutes() === 0
+        let MM = (await ele.month()) + 1;
+        let DD = await ele.date();
+        let hh = await (ele.minutes() === 0
+          ? ele.hours() - 1
+          : ele.hours());
+        let mm = await (ele.minutes() === 0
           ? 55
-          : ele.start.minutes() - 5);
-        let ss = (await ele.start.second()) * 0 + 1;
+          : ele.minutes() - 5);
+        let ss = (await ele.second()) * 0 + 1;
         //
         // let MM = 1;
         // let DD = 10;
@@ -39,7 +39,7 @@ module.exports = (io) => {
             // console.log("testSend", 123);
             notification_alarm({ ...data, today: today });
             alarmBooking = await alarmBooking.filter(
-              (ele1) => ele1.start !== ele.start
+              (ele1) => ele1 !== ele
             );
             console.log("2", alarmBooking);
           }
