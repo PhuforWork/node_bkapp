@@ -4,7 +4,7 @@ const compress_images = require("compress-images");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const { Sequelize } = require("sequelize");
-// const socket = io();
+const {io} = require("../index");
 const Op = Sequelize.Op;
 require("dotenv").config();
 const bcrypt = require("bcrypt");
@@ -793,7 +793,7 @@ const alarm_immediately = async (data) => {
       await schedule.scheduleJob(
         `${ss} ${mm} ${hh} ${DD} ${MM} *`,
         async () => {
-          await socket.emit("sendArlam", data);
+          await io.emit("sendArlam", data);
           arlamBooking = await arlamBooking.filter(
             (ele1) => ele1.start !== ele.start
           );
