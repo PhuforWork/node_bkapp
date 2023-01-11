@@ -394,9 +394,6 @@ const notification = async (req, res) => {
   let { senderName, status, type } = req.body;
   let { start, end } = req.body.data.res_bk;
   let department = req.body.res_der;
-  console.log("1", { start, end });
-  console.log("2", { label });
-  console.log("3", { senderName, status, type });
   let data2 = req.body.res_per;
   Promise.all(
     department.map(async (ele) => {
