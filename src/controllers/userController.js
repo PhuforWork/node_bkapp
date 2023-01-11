@@ -66,6 +66,7 @@ const getUserId = async (req, res) => {
     mintime,
     isShow,
     indexRow,
+    isNotify,
   } = data;
   successCode(
     res,
@@ -81,6 +82,7 @@ const getUserId = async (req, res) => {
       mintime,
       isShow,
       indexRow,
+      isNotify,
       data_booking,
     },
     "Success"
@@ -796,5 +798,5 @@ module.exports = {
   notification_update,
   notification_delete,
   notification_get,
-  notification_alarm
+  notification_alarm,
 };
