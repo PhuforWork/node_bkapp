@@ -47,8 +47,8 @@ io.on("connection", (socket) => {
   // add user
   chat_app(socket);
   io.emit("client-connect", socket.id);
-  socket.on("newUser", async (data) => {
-    console.log("alibaba",data);
+  socket.on("newUser", async ({data,isNotify}) => {
+    console.log("alibaba",{data,isNotify});
     // await addNewUser(user_name, socket.id);
   });
 
