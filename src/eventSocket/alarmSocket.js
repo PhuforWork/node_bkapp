@@ -32,13 +32,11 @@ module.exports = (io) => {
           async () => {
             let today = moment();
             let early_day = moment().subtract(aft_five_minute).format("YYYY-MM-DD hh:mm");
-            let data1 = alarmBooking.find(
-              (ele2) => moment(ele2.date_early_5).format("YYYY-MM-DD hh:mm") === early_day
-            );
+            let data1 = alarmBooking[0]
             console.log("data1",data1);
             await io.emit("sendAlarm", { ...data1, today: today });
             // console.log("testSend", 123);
-            notification_alarm({ ...data, today: today });
+            notification_alarm({ ...data1, today: today });
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
