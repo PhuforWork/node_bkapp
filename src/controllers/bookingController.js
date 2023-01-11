@@ -408,6 +408,7 @@ const notification = async (req, res) => {
     end,
   };
   let idNotify = await model.notifications.create(data1);
+  console.log(idNotify);
   // Promise.all(
   //   data2.map(async (ele) => {
   //     console.log(ele);
