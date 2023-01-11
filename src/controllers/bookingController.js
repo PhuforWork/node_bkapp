@@ -388,38 +388,37 @@ const delete_bk = async (req, res) => {
 };
 const notification = async (req, res) => {
   // try {
-    let today = moment();
-    console.log(req.body);
-    let id_user = req.params;
-    let { senderName, status, type } = req.body;
-    let { start, end } = req.body.data.res_bk;
-    let department = req.body.data.res_der.label;
-    console.log(department);
-    let data2 = req.body.data.res_per;
-    console.log(data2);
+  let today = moment();
+  console.log(req.body);
+  let { senderName, status, type } = req.body;
+  let { start, end } = req.body.data.res_bk;
+  let department = req.body.data.res_der.label;
+  console.log(department);
+  let data2 = req.body.data.res_per;
+  console.log(data2);
 
-    let data1 = {
-      senderName,
-      status,
-      id_user,
-      today,
-      department,
-      type,
-      start,
-      end,
-    };
-    let idNotify = await model.notifications.create(data1);
-    Promise.all(
-      data2.map(async (ele) => {
-        console.log(ele);
-        // await model.persionality_notify.create({
-        //   label: ele.label,
-        //   id_notify: idNotify.id_notify,
-        //   value: ele.value,
-        // });
-      })
-    );
-    successCode(res, "", "Success");
+  let data1 = {
+    senderName,
+    status,
+    id_user: req.body.id_user,
+    today,
+    department,
+    type,
+    start,
+    end,
+  };
+  let idNotify = await model.notifications.create(data1);
+  // Promise.all(
+  //   data2.map(async (ele) => {
+  //     console.log(ele);
+  //     // await model.persionality_notify.create({
+  //     //   label: ele.label,
+  //     //   id_notify: idNotify.id_notify,
+  //     //   value: ele.value,
+  //     // });
+  //   })
+  // );
+  successCode(res, "", "Success");
   // } catch (error) {
   //   errorCode(res, "Error Backend");
   // }
