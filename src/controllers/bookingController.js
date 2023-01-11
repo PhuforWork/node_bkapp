@@ -258,7 +258,7 @@ const update_depart = async (req, res) => {
           label: ele.label,
           value: ele.value,
           id_user: ele.id_user,
-          email_depart: ele.email,
+          email_depart: ele.email_depart,
           phoneNumber: ele.phoneNumber,
           domain: ele.domain,
         });

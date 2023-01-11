@@ -13,6 +13,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
 const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
+const { chat_app } = require("./eventSocket/chatSocket")(io);
 
 app.use(express.json());
 app.use(cors());
@@ -75,6 +76,7 @@ io.on("connection", (socket) => {
           personality: data.res_per,
           type: 2,
         });
+        chat_app()
       }
     }
   );
@@ -85,3 +87,4 @@ io.on("connection", (socket) => {
 });
 
 app.use("/api", rootRoute);
+
