@@ -389,11 +389,12 @@ const delete_bk = async (req, res) => {
 const notification = async (req, res) => {
   // try {
     let today = moment();
+    console.log(req.body);
     let id_user = req.params;
     let { senderName, status, type } = req.body;
     let { start, end } = req.body.data.res_bk;
     let department = req.body.res_der;
-    console.log(department);
+    // console.log(department);
     let data2 = req.body.res_per;
 
     let data1 = {
