@@ -38,7 +38,7 @@ module.exports = (io) => {
             console.log("data1",data1);
             await io.emit("sendAlarm", { ...data1, today: today });
             // console.log("testSend", 123);
-            notification_alarm({ ...data1, today: today });
+            notification_alarm({ ...data, today: today });
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
