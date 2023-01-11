@@ -396,6 +396,7 @@ const notification = async (req, res) => {
     let department = req.body.data.res_der.label;
     console.log(department);
     let data2 = req.body.data.res_per;
+    console.log(data2);
 
     let data1 = {
       senderName,
@@ -411,11 +412,11 @@ const notification = async (req, res) => {
     Promise.all(
       data2.map(async (ele) => {
         console.log(ele);
-        await model.persionality_notify.create({
-          label: ele.label,
-          id_notify: idNotify.id_notify,
-          value: ele.value,
-        });
+        // await model.persionality_notify.create({
+        //   label: ele.label,
+        //   id_notify: idNotify.id_notify,
+        //   value: ele.value,
+        // });
       })
     );
     successCode(res, "", "Success");
