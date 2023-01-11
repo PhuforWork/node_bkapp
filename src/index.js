@@ -48,6 +48,7 @@ io.on("connection", (socket) => {
   chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (user_name) => {
+    console.log("alibaba",user_name);
     await addNewUser(user_name, socket.id);
   });
 
