@@ -88,4 +88,4 @@ io.on("connection", (socket) => {
 
 app.use("/api", rootRoute);
 
-module.exports = { addNewUser, removeUser, getUser };
+exports = { addNewUser, removeUser, getUser };
