@@ -387,25 +387,25 @@ const delete_bk = async (req, res) => {
   }
 };
 const notification = async (req, res) => {
-  console.log("body notify", req.body);
-  let today = moment();
-  let id_user = req.params;
-  let { senderName, status, type } = req.body;
-  let { start, end } = req.body.data.res_bk;
-  let { label} = req.body.data.res_der;
-
-  let data1 = {
-    senderName,
-    status,
-    id_user,
-    today,
-    type,
-    start,
-    label,
-    end,
-  };
-  let data2 = req.body.data.res_per;
   try {
+    console.log("body notify", req.body);
+    let today = moment();
+    let id_user = req.params;
+    let { senderName, status, type } = req.body;
+    let { start, end } = req.body.data.res_bk;
+    let { label } = req.body.data.res_der;
+
+    let data1 = {
+      senderName,
+      status,
+      id_user,
+      today,
+      type,
+      start,
+      label,
+      end,
+    };
+    let data2 = req.body.data.res_per;
     let idNotify = await model.notifications.create(data1);
     Promise.all(
       data2.map(async (ele) => {
