@@ -52,7 +52,7 @@ userRoute.put("/update-user/:id", upload.none(), updateUser);
 userRoute.put("/max-time/:id", put_max);
 userRoute.put("/min-time/:id", put_min);
 userRoute.put("/skip-show/:id", update_isShow);
-userRoute.put("/update-isNotify/:id", set_notify);
+userRoute.put("/update-isNotify/:id",upload.none(), set_notify);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 // userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
