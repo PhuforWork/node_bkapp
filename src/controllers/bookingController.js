@@ -256,6 +256,8 @@ const update_depart = async (req, res) => {
           label: ele.label,
           value: ele.value,
           id_user: ele.id_user,
+          email: ele.email,
+          
         });
       });
     });
