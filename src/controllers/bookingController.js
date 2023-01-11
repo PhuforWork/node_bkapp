@@ -390,18 +390,21 @@ const notification = async (req, res) => {
   console.log("body notify", req.body);
   let today = moment();
   let id_user = req.params;
-  let { senderName, status, start, end, department, type } = req.body;
+  let { senderName, status, type } = req.body;
+  let { start, end } = req.body.data.res_bk;
+  let { label} = req.body.data.res_der;
+
   let data1 = {
     senderName,
     status,
     id_user,
-    start,
-    end,
-    department,
     today,
     type,
+    start,
+    label,
+    end,
   };
-  let data2 = req.body.personality;
+  let data2 = req.body.data.res_per;
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
