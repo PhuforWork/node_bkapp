@@ -1,4 +1,4 @@
-const {addNewUser, removeUser, getUser} = require("../index"); 
+const { getUser} = require("../index"); 
 
 module.exports = (io) => {
   const chat_app = async (socket) => {
