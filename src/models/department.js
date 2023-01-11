@@ -28,7 +28,7 @@ class department extends Sequelize.Model {
       type: DataTypes.DOUBLE,
       allowNull: false
     },
-    email: {
+    email_depart: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
