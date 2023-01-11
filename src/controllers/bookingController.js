@@ -393,7 +393,7 @@ const notification = async (req, res) => {
     let { senderName, status, type } = req.body;
     let { start, end } = req.body.data.res_bk;
     let department = req.body.res_der;
-    console.log(department.label);
+    console.log(department);
     let data2 = req.body.res_per;
 
     let data1 = {
