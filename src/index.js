@@ -51,7 +51,6 @@ io.on("connection", (socket) => {
     console.log("alibaba",user_name);
     await addNewUser(user_name, socket.id);
   });
-
   //send notification
   socket.on(
     "sendNotification",
