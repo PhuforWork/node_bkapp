@@ -405,7 +405,6 @@ const notification = async (req, res) => {
     department: department.label,
     type,
     start,
-    label,
     end,
   };
   let idNotify = await model.notifications.create(data1);
