@@ -393,16 +393,16 @@ const notification = async (req, res) => {
     let id_user = req.params;
     let { senderName, status, type } = req.body;
     let { start, end } = req.body.data.res_bk;
-    let department = req.body.res_der;
-    // console.log(department);
-    let data2 = req.body.res_per;
+    let department = req.body.data.res_der.label;
+    console.log(department);
+    let data2 = req.body.data.res_per;
 
     let data1 = {
       senderName,
       status,
       id_user,
       today,
-      // department: department.label,
+      department,
       type,
       start,
       end,
