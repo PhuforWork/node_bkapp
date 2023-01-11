@@ -402,7 +402,7 @@ const notification = async (req, res) => {
     status,
     id_user,
     today,
-    label: department.label,
+    department: department.label,
     type,
     start,
     label,
