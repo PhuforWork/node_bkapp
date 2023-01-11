@@ -27,6 +27,18 @@ class department extends Sequelize.Model {
     value: {
       type: DataTypes.DOUBLE,
       allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    phoneNumber: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    domain: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
