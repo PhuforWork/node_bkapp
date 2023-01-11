@@ -44,6 +44,10 @@ class users extends Sequelize.Model {
     indexRow: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    isNotify: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     sequelize,
