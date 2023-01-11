@@ -21,7 +21,8 @@ const {
   update_row,
   notification_update,
   notification_delete,
-  notification_get
+  notification_get,
+  set_notify,
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -51,6 +52,7 @@ userRoute.put("/update-user/:id", upload.none(), updateUser);
 userRoute.put("/max-time/:id", put_max);
 userRoute.put("/min-time/:id", put_min);
 userRoute.put("/skip-show/:id", update_isShow);
+userRoute.put("/update-isNotify/:id", set_notify);
 
 userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 // userRoute.put("/upimg-test/:id", upload.single("image_url"), update_img_test);
