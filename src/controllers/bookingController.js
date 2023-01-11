@@ -393,7 +393,7 @@ const notification = async (req, res) => {
     let id_user = req.params;
     let { senderName, status, type } = req.body;
     let { start, end } = req.body.data.res_bk;
-    let { label } = req.body.data.res_der;
+    let { label } = req.body.res_der;
     console.log("1",{ start, end });
     console.log("2",{ label });
     console.log("3",{ senderName, status, type });
@@ -407,7 +407,7 @@ const notification = async (req, res) => {
       label,
       end,
     };
-    let data2 = req.body.data.res_per;
+    let data2 = req.body.res_per;
     let idNotify = await model.notifications.create(data1);
     Promise.all(
       data2.map(async (ele) => {
