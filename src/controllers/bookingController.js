@@ -409,16 +409,15 @@ const notification = async (req, res) => {
   };
   let idNotify = await model.notifications.create(data1);
   console.log(idNotify);
-  // Promise.all(
-  //   data2.map(async (ele) => {
-  //     console.log(ele);
-  //     // await model.persionality_notify.create({
-  //     //   label: ele.label,
-  //     //   id_notify: idNotify.id_notify,
-  //     //   value: ele.value,
-  //     // });
-  //   })
-  // );
+  Promise.all(
+    data2.map(async (ele) => {
+      await model.persionality_notify.create({
+        id_notify: idNotify.id_notify,
+        label: ele.label,
+        value: ele.value,
+      });
+    })
+  );
   successCode(res, "", "Success");
   // } catch (error) {
   //   errorCode(res, "Error Backend");
