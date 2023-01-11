@@ -387,7 +387,7 @@ const delete_bk = async (req, res) => {
   }
 };
 const notification = async (req, res) => {
-  try {
+  // try {
     console.log("body notify", req.body);
     let today = moment();
     let id_user = req.params;
@@ -419,9 +419,9 @@ const notification = async (req, res) => {
       })
     );
     successCode(res, "", "Success");
-  } catch (error) {
-    errorCode(res, "Error Backend");
-  }
+  // } catch (error) {
+  //   errorCode(res, "Error Backend");
+  // }
 };
 
 module.exports = {
