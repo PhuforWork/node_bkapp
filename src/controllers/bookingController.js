@@ -393,7 +393,7 @@ const notification = async (req, res) => {
     let id_user = req.params;
     let { senderName, status, type } = req.body;
     let { start, end } = req.body.data.res_bk;
-    let { label } = req.body.res_der;
+    let  label  = req.body.res_der.label;
     console.log("1",{ start, end });
     console.log("2",{ label });
     console.log("3",{ senderName, status, type });
