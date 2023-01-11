@@ -14,6 +14,7 @@ const {
   get_depart,
   get_persional_id,
   notification,
+  update_dpt_new,
 } = require("../controllers/bookingController");
 const { guest_booking } = require("../controllers/guestController");
 const upload = require("../Middlewares/upload");
@@ -33,6 +34,7 @@ bookingRoute.post("/notification-socket/:id", upload.none(), notification);
 bookingRoute.put("/update-booking/:id", upload.none(), update_booking);
 bookingRoute.put("/update-select/:id", upload.none(), update_slect);
 bookingRoute.put("/update-department/:id", upload.none(), update_depart);
+bookingRoute.put("/update-department-new/:id", upload.none(), update_dpt_new);
 bookingRoute.put("/update-persional/:id", upload.none(), update_persional);
 
 bookingRoute.post("/add-guest/:id", upload.none(), guest_booking);

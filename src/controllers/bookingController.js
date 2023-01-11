@@ -288,6 +288,18 @@ const update_persional = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// update depart setting user
+const update_dpt_new = async (req, res) => {
+  try {
+    let { id } = req.params; // id department
+    let { label, value, id_user, email_depart, phoneNumber, domain } = req.body;
+    let data = { label, value, id_user, email_depart, phoneNumber, domain };
+    await model.department.update(data, { where: { id_derp: id } });
+    successCode(res, "", "Success Update");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
 // booking calender
 const update_booking = async (req, res) => {
   try {
@@ -439,4 +451,5 @@ module.exports = {
   get_depart,
   get_persional_id,
   notification,
+  update_dpt_new
 };
