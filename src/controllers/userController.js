@@ -93,7 +93,7 @@ const set_notify = async (req, res) => {
     let { id } = req.params;
     let isNotify = req.body;
     console.log({ isNotify, id });
-    await model.users.update({ isNotify }, { where: { id_user: id } });
+    await model.users.update( isNotify , { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
