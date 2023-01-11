@@ -395,22 +395,19 @@ const notification = async (req, res) => {
   let { start, end } = req.body.data.res_bk;
   let department = req.body.res_der;
   let data2 = req.body.res_per;
-  Promise.all(
-    department.map(async (ele) => {
-      let data1 = {
-        senderName,
-        status,
-        id_user,
-        today,
-        label: ele.label,
-        type,
-        start,
-        label,
-        end,
-      };
-      let idNotify = await model.notifications.create(data1);
-    })
-  );
+
+  let data1 = {
+    senderName,
+    status,
+    id_user,
+    today,
+    label: department.label,
+    type,
+    start,
+    label,
+    end,
+  };
+  let idNotify = await model.notifications.create(data1);
   Promise.all(
     data2.map(async (ele) => {
       await model.persionality_notify.create({
