@@ -387,7 +387,8 @@ const delete_bk = async (req, res) => {
 const notification = async (req, res) => {
   console.log("body notify", req.body);
   let today = moment();
-  let { senderName, status, , start, end, department, type } = req.body;
+  let id_user = req.params;
+  let { senderName, status, start, end, department, type } = req.body;
   let data1 = {
     senderName,
     status,
