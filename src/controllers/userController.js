@@ -91,9 +91,9 @@ const getUserId = async (req, res) => {
 const set_notify = async (req, res) => {
   try {
     let { id } = req.params;
-    let { isNotify } = req.body;
-    let data = { isNotify };
-    await model.users.update(data, { where: { id_user: id } });
+    let isNotify = req.body;
+
+    await model.users.update({ isNotify }, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -810,5 +810,5 @@ module.exports = {
   notification_delete,
   notification_get,
   notification_alarm,
-  set_notify
+  set_notify,
 };
