@@ -92,7 +92,7 @@ const set_notify = async (req, res) => {
   try {
     let { id } = req.params;
     let isNotify = req.body;
-
+    console.log(isNotify);
     await model.users.update({ isNotify }, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
