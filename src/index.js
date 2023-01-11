@@ -6,7 +6,6 @@ const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
 
-
 const app = express();
 
 const httpServer = createServer(app);
@@ -46,6 +45,7 @@ const getUser = (user_name) => {
 
 io.on("connection", (socket) => {
   // add user
+  chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (user_name) => {
     await addNewUser(user_name, socket.id);
@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
           personality: data.res_per,
           type: 2,
         });
-        chat_app()
+        chat_app();
       }
     }
   );
@@ -88,3 +88,4 @@ io.on("connection", (socket) => {
 
 app.use("/api", rootRoute);
 
+module.exports = { addNewUser, removeUser, getUser };
