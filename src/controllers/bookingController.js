@@ -182,15 +182,15 @@ const add_booking = async (req, res) => {
           label: label,
           id_booking: idbk.id_booking,
         });
-        await notification({
-          status: false,
-          id_user: id_user,
-          start: start,
-          end: end,
-          department: label,
-          personality: res_per,
-          type: 1,
-        });
+        // await notification({
+        //   status: false,
+        //   id_user: id_user,
+        //   start: start,
+        //   end: end,
+        //   department: label,
+        //   personality: res_per,
+        //   type: 1,
+        // });
         successCode(res, { res_bk, res_per, res_der }, "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 6");
@@ -382,7 +382,7 @@ const delete_bk = async (req, res) => {
   }
 };
 const notification = async (req, res) => {
-  console.log("body notify",req.body);
+  console.log("body notify", req.body);
   let { senderName, status, id_user, start, end, department, today, type } =
     req.body;
   let data1 = {
@@ -395,7 +395,7 @@ const notification = async (req, res) => {
     today,
     type,
   };
-  let data2 = data.personality;
+  let data2 = req.body.personality;
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
