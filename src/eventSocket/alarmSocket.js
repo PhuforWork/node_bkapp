@@ -25,6 +25,8 @@ module.exports = (io) => {
         // let ss = 1;
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
+        let data1 = alarmBooking[0];
+        console.log("array[0]",data1);
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
@@ -32,8 +34,6 @@ module.exports = (io) => {
             let early_day = moment()
               .subtract(aft_five_minute)
               .format("YYYY-MM-DD hh:mm");
-            let data1 = alarmBooking[0];
-            console.log(data1);
             await io.emit("sendAlarm", { ...data1, today: today });
             notification_alarm({ ...data1, today: today });
             alarmBooking = await alarmBooking.filter(
