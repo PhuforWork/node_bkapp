@@ -27,6 +27,7 @@ app.get("/test", (req, res) => {
 });
 
 let onlineUser = [];
+let isNotify = false;
 const addNewUser = async (user_name, socketId) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
@@ -48,10 +49,12 @@ io.on("connection", (socket) => {
   chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
-    if (data.user_name !== undefined) {
+    if (data.user_name) {
       await addNewUser(data.user_name, socket.id);
     }
-    console.log("alibaba", data.isNotify);
+    if (data.isNotify) {
+      isNotify = data.isNotify;
+    }
   });
   //send notification
   socket.on(
@@ -60,7 +63,7 @@ io.on("connection", (socket) => {
       const receiver = getUser(receiverName);
       const senderr = getUser(senderName);
       let today = new Date();
-      if (receiver.socketId !== undefined) {
+      if (receiver.socketId) {
         io.to(receiver.socketId).emit("getNotification", {
           senderName,
           type,
@@ -68,6 +71,9 @@ io.on("connection", (socket) => {
           data,
           today,
         });
+        if (isNotify === true) {
+          console.log("alibaba", 123456789);
+        }
         alarm_immediately({
           senderName,
           status,
