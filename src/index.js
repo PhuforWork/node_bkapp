@@ -53,6 +53,7 @@ io.on("connection", (socket) => {
     }
     if (data.isNotify) {
       isNotify = data.isNotify;
+      console.log("isNotify",isNotify);
     } else {
       isNotify = false;
     }
