@@ -31,7 +31,7 @@ const addNewUser = async (user_name, socketId) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
       onlineUser.push({ user_name, socketId });
-    await console.log("test", onlineUser);
+    await console.log("online user", onlineUser);
   }
 };
 
@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
   chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (user_name) => {
-    console.log("alibaba",user_name);
+    console.log("alibaba", user_name);
     await addNewUser(user_name, socket.id);
   });
   //send notification
