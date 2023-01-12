@@ -53,6 +53,8 @@ io.on("connection", (socket) => {
     }
     if (data.isNotify) {
       isNotify = data.isNotify;
+    } else {
+      isNotify = false;
     }
   });
   //send notification
@@ -81,7 +83,7 @@ io.on("connection", (socket) => {
             type: 2,
           });
         }
-        }
+      }
     }
   );
   // disconnect
