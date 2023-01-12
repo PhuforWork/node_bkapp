@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
-      if (data.isNotify === true) {
+      if (data.isNotify) {
         await addNewUser(data.user_name, socket.id, data.isNotify);
       }
     }
