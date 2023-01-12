@@ -29,7 +29,7 @@ let onlineUser = [];
 const addNewUser = async (user_name, socketId, isNotify) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
-      onlineUser.push({ user_name, socketId });
+      onlineUser.push({ user_name, socketId, isNotify });
     await console.log("online user", onlineUser);
   }
 };
@@ -50,7 +50,6 @@ io.on("connection", (socket) => {
     if (data.user_name) {
       if (data.isNotify === true) {
         await addNewUser(data.user_name, socket.id, data.isNotify);
-
       }
     }
   });
