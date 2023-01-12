@@ -9,8 +9,7 @@ module.exports = (io) => {
     let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
-    // console.log("1",alarmBooking);
-    // console.log("loggggggggggg", datetimeLocal);
+
 
     Promise.all(
       alarmBooking.map(async (ele) => {
@@ -34,7 +33,6 @@ module.exports = (io) => {
             let early_day = moment().subtract(aft_five_minute).format("YYYY-MM-DD hh:mm");
             let data1 = alarmBooking[0]
             await io.emit("sendAlarm", { ...data1, today: today });
-            // console.log("testSend", 123);
             notification_alarm({ ...data1, today: today });
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start

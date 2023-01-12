@@ -92,7 +92,6 @@ const set_notify = async (req, res) => {
   try {
     let { id } = req.params;
     let isNotify = req.body;
-    console.log({ isNotify, id });
     await model.users.update( isNotify , { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
@@ -183,7 +182,6 @@ const update_isShow = async (req, res) => {
   try {
     let { id } = req.params;
     let { isShow } = req.body;
-    console.log("show", isShow);
     if (isShow) {
       await model.users.update({ isShow }, { where: { id_user: id } });
       successCode(res, "", "Success skip");
@@ -239,14 +237,12 @@ const update_img_test = async (req, res) => {
       }
     }
   );
-  console.log(result);
 };
 // forgot password
 const forgot_password = async (req, res) => {
   try {
     let { email } = req.body;
     let status = { status: true };
-    console.log({ email });
     const check_email = await model.users.findOne({
       where: {
         email,
@@ -444,8 +440,6 @@ const change_pass = async (req, res) => {
   try {
     let { email, _password } = req.body;
     let token = req.body.code_verify;
-    console.log(token);
-    console.log(compareToken(token));
     if (email) {
       if (compareToken(token)) {
         await model.users.update(
@@ -763,7 +757,7 @@ const notification_get = async (req, res) => {
     });
     successCode(res, notifi_get, "Success get notify");
   } catch (error) {
-    console.log(error);
+    errorCode(res,"Error BackEnd")
   }
 };
 const notification_update = async (req, res) => {

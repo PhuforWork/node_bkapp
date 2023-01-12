@@ -22,7 +22,6 @@ httpServer.listen(8081);
 
 app.get("/test", (req, res) => {
   let test = req.query;
-  console.log(test);
   res.send("Hello");
 });
 
@@ -61,7 +60,6 @@ io.on("connection", (socket) => {
     "sendNotification",
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
-      const senderr = getUser(senderName);
       let today = new Date();
       if (receiver.socketId) {
         io.to(receiver.socketId).emit("getNotification", {
@@ -72,19 +70,18 @@ io.on("connection", (socket) => {
           today,
         });
         if (isNotify === true) {
-          console.log("alibaba", 123456789);
+          alarm_immediately({
+            senderName,
+            status,
+            id_user,
+            start: data.res_bk.start,
+            end: data.res_bk.end,
+            department: data.res_der.label,
+            personality: data.res_per,
+            type: 2,
+          });
         }
-        alarm_immediately({
-          senderName,
-          status,
-          id_user,
-          start: data.res_bk.start,
-          end: data.res_bk.end,
-          department: data.res_der.label,
-          personality: data.res_per,
-          type: 2,
-        });
-      }
+        }
     }
   );
   // disconnect
