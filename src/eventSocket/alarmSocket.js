@@ -10,6 +10,8 @@ module.exports = (io) => {
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
+    let data1 = alarmBooking[0];
+    console.log("array[0]", data1);
     Promise.all(
       alarmBooking.map(async (ele) => {
         let MM = (await ele.date_early_5.month()) + 1;
@@ -25,8 +27,6 @@ module.exports = (io) => {
         // let ss = 1;
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
-        let data1 = alarmBooking[0];
-        console.log("array[0]", data1);
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
