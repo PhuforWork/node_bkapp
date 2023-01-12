@@ -48,7 +48,9 @@ io.on("connection", (socket) => {
   chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
-    await addNewUser(data?.user_name, socket.id);
+    if (data.user_name !== undefined) {
+      await addNewUser(data.user_name, socket.id);
+    }
     console.log("alibaba", data.isNotify);
   });
   //send notification
