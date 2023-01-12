@@ -92,7 +92,7 @@ const set_notify = async (req, res) => {
   try {
     let { id } = req.params;
     let isNotify = req.body;
-    await model.users.update( isNotify , { where: { id_user: id } });
+    await model.users.update(isNotify, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -130,6 +130,7 @@ const sigUp = async (req, res) => {
       mintime: 9,
       isShow: false,
       indexRow: 5,
+      isNotify: false,
     };
     let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
@@ -757,7 +758,7 @@ const notification_get = async (req, res) => {
     });
     successCode(res, notifi_get, "Success get notify");
   } catch (error) {
-    errorCode(res,"Error BackEnd")
+    errorCode(res, "Error BackEnd");
   }
 };
 const notification_update = async (req, res) => {
