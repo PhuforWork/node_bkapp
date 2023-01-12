@@ -33,7 +33,6 @@ module.exports = (io) => {
             let today = moment();
             let early_day = moment().subtract(aft_five_minute).format("YYYY-MM-DD hh:mm");
             let data1 = alarmBooking[0]
-            console.log("data1",data1);
             await io.emit("sendAlarm", { ...data1, today: today });
             // console.log("testSend", 123);
             notification_alarm({ ...data1, today: today });
