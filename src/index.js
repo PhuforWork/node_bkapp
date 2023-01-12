@@ -26,7 +26,7 @@ app.get("/test", (req, res) => {
 });
 
 let onlineUser = [];
-let isNotify = false;
+let isNotify;
 const addNewUser = async (user_name, socketId) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
@@ -51,11 +51,9 @@ io.on("connection", (socket) => {
     if (data.user_name) {
       await addNewUser(data.user_name, socket.id);
     }
-    if (data.isNotify) {
+    if (data.isNotify === true) {
       isNotify = data.isNotify;
-      console.log("isNotify",isNotify);
-    } else {
-      isNotify = false;
+      console.log("isNotify", isNotify);
     }
   });
   //send notification
