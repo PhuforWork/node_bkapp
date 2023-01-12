@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     await addNewUser(data, socket.id);
-    console.log("alibaba", data.user_name);
+    console.log("alibaba", {...data});
   });
   //send notification
   socket.on(
