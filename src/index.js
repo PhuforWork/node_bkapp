@@ -48,8 +48,8 @@ io.on("connection", (socket) => {
   chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
-    console.log("alibaba", data);
-    await addNewUser(data.user_name, socket.id);
+    await addNewUser(data, socket.id);
+    console.log("alibaba", data.user_name);
   });
   //send notification
   socket.on(
