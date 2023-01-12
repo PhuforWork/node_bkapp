@@ -26,7 +26,7 @@ module.exports = (io) => {
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
         let data1 = alarmBooking[0];
-        console.log("array[0]",data1);
+        console.log("array[0]", data1);
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
@@ -40,6 +40,7 @@ module.exports = (io) => {
               (ele1) => ele1.start !== ele.start
             );
             console.log("alarm after", alarmBooking);
+            console.log("array[0]", data1);
           }
         );
       })
