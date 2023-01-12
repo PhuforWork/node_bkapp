@@ -26,8 +26,7 @@ app.get("/test", (req, res) => {
 });
 
 let onlineUser = [];
-let isNotify;
-const addNewUser = async (user_name, socketId) => {
+const addNewUser = async (user_name, socketId, isNotify) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
       onlineUser.push({ user_name, socketId });
@@ -49,11 +48,10 @@ io.on("connection", (socket) => {
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
-      await addNewUser(data.user_name, socket.id);
-    }
-    if (data.isNotify === true) {
-      isNotify = data.isNotify;
-      console.log("isNotify", isNotify);
+      if (data.isNotify === true) {
+        await addNewUser(data.user_name, socket.id, data.isNotify);
+
+      }
     }
   });
   //send notification
@@ -70,7 +68,7 @@ io.on("connection", (socket) => {
           data,
           today,
         });
-        if (isNotify === true) {
+        if (receiver.isNotify === true) {
           alarm_immediately({
             senderName,
             status,
