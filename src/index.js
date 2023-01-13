@@ -58,13 +58,7 @@ io.on("connection", (socket) => {
       const receiver = getUser(receiverName);
       let today = new Date();
       if (receiver.socketId) {
-        io.to(receiver.socketId).emit("getNotification", {
-          senderName,
-          type,
-          status,
-          data,
-          today,
-        });
+        io.to(receiver.socketId).emit("getNotification");
         // if (receiver.isNotify === true) {
         //   alarm_immediately({
         //     senderName,
