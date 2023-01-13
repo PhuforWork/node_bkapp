@@ -10,9 +10,9 @@ module.exports = (io) => {
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
     let data1 = alarmBooking[0];
-    
+
     Promise.all(
-      data1.map(async (ele) => {
+      alarmBooking.map(async (ele) => {
         let MM = (await ele.date_early_5.month()) + 1;
         let DD = await ele.date_early_5.date();
         let hh = await ele.date_early_5.hours();
