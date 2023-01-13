@@ -432,7 +432,6 @@ const notification = async (req, res) => {
     );
     if (isNoti.isNotify) {
       alarm_notify({ ...data1, type: 2, personality: data2 });
-      console.log(123456);
     }
     successCode(res, "", "Success");
   } catch (error) {
@@ -482,33 +481,33 @@ const alarm_notify = async (data) => {
     })
   );
 };
-// const notification_alarm = async (data) => {
-//   try {
-//     let { senderName, status, id_user, start, end, department, today, type } =
-//       data;
-//     let data1 = {
-//       senderName,
-//       status,
-//       id_user,
-//       start,
-//       end,
-//       department,
-//       today,
-//       type,
-//     };
-//     let data2 = data.personality;
-//     let idNotify = await model.notifications.create(data1);
-//     Promise.all(
-//       data2.map(async (ele) => {
-//         await model.persionality_notify.create({
-//           label: ele.label,
-//           id_notify: idNotify.id_notify,
-//           value: ele.value,
-//         });
-//       })
-//     );
-//   } catch (error) {}
-// };
+const notification_alarm = async (data) => {
+  try {
+    let { senderName, status, id_user, start, end, department, today, type } =
+      data;
+    let data1 = {
+      senderName,
+      status,
+      id_user,
+      start,
+      end,
+      department,
+      today,
+      type,
+    };
+    let data2 = data.personality;
+    let idNotify = await model.notifications.create(data1);
+    Promise.all(
+      data2.map(async (ele) => {
+        await model.persionality_notify.create({
+          label: ele.label,
+          id_notify: idNotify.id_notify,
+          value: ele.value,
+        });
+      })
+    );
+  } catch (error) {}
+};
 module.exports = {
   booking_user,
   add_booking,
