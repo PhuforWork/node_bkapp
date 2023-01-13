@@ -508,6 +508,7 @@ const notification = async (req, res) => {
 //     );
 //   } catch (error) {}
 // };
+
 module.exports = {
   booking_user,
   add_booking,
