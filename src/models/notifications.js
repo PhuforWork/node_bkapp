@@ -47,6 +47,10 @@ class notifications extends Sequelize.Model {
     type: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    detail: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
