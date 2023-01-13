@@ -431,7 +431,7 @@ const notification = async (req, res) => {
       })
     );
     if (isNoti.isNotify) {
-       alarm_immediately({
+      alarm_notify({
           senderName,
           status,
           id_user,
@@ -450,7 +450,7 @@ const notification = async (req, res) => {
 };
 let alarmBooking = [];
 
-const alarm_immediately = async (data) => {
+const alarm_notify = async (data) => {
   console.log("data",data);
   // let aft_five_minute = moment.duration("00:05:00");
   // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
