@@ -431,17 +431,16 @@ const notification = async (req, res) => {
       })
     );
     if (isNoti.isNotify) {
-      test({ isTrue: true });
-      //  alarm_immediately({
-      //     senderName,
-      //     status,
-      //     id_user,
-      //     start,
-      //     end,
-      //     department,
-      //     type: 2,
-      //     personality: data2,
-      //   });
+       alarm_immediately({
+          senderName,
+          status,
+          id_user,
+          start,
+          end,
+          department,
+          type: 2,
+          personality: data2,
+        });
       console.log(1234567890);
     }
     successCode(res, "", "Success");
@@ -450,50 +449,48 @@ const notification = async (req, res) => {
   }
 };
 let alarmBooking = [];
-const test = (data) => {
-  console.log(data);
-};
-const alarm_immediately = async (data) => {
-  console.log(123);
-  let aft_five_minute = moment.duration("00:05:00");
-  let datetimeLocal = moment(data.start).subtract(aft_five_minute);
-  // let test = moment().format("Z");
-  await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
-  Promise.all(
-    alarmBooking.map(async (ele) => {
-      let MM = (await ele.date_early_5.month()) + 1;
-      let DD = await ele.date_early_5.date();
-      let hh = await ele.date_early_5.hours();
-      let mm = await ele.date_early_5.minutes();
-      let ss = (await ele.date_early_5.second()) * 0 + 1;
-      //
-      // let MM = 1;
-      // let DD = 10;
-      // let hh = 0;
-      // let mm = 41;
-      // let ss = 1;
-      console.log("array before", alarmBooking);
-      console.log("show datetime", hh, mm, ss, DD, MM);
-      await schedule.scheduleJob(
-        `${ss} ${mm} ${hh} ${DD} ${MM} *`,
-        async () => {
-          let today = moment();
-          let data1 = alarmBooking[0];
-          console.log("array[0]", data1);
-          // await io.emit("sendAlarm", { ...data1, today: today });
-          if (data1.start === ele.start) {
-            notification_alarm({ ...data1, today: today });
-          }
-          alarmBooking = await alarmBooking.filter(
-            (ele1) => ele1.start !== ele.start
-          );
-          console.log("alarm after", alarmBooking);
-          console.log("array[0]", data1);
-        }
-      );
-    })
-  );
+const alarm_immediately = async (data) => {
+  console.log("data",data);
+  // let aft_five_minute = moment.duration("00:05:00");
+  // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
+  // // let test = moment().format("Z");
+  // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
+
+  // Promise.all(
+  //   alarmBooking.map(async (ele) => {
+  //     let MM = (await ele.date_early_5.month()) + 1;
+  //     let DD = await ele.date_early_5.date();
+  //     let hh = await ele.date_early_5.hours();
+  //     let mm = await ele.date_early_5.minutes();
+  //     let ss = (await ele.date_early_5.second()) * 0 + 1;
+  //     //
+  //     // let MM = 1;
+  //     // let DD = 10;
+  //     // let hh = 0;
+  //     // let mm = 41;
+  //     // let ss = 1;
+  //     console.log("array before", alarmBooking);
+  //     console.log("show datetime", hh, mm, ss, DD, MM);
+  //     await schedule.scheduleJob(
+  //       `${ss} ${mm} ${hh} ${DD} ${MM} *`,
+  //       async () => {
+  //         let today = moment();
+  //         let data1 = alarmBooking[0];
+  //         console.log("array[0]", data1);
+  //         // await io.emit("sendAlarm", { ...data1, today: today });
+  //         if (data1.start === ele.start) {
+  //           notification_alarm({ ...data1, today: today });
+  //         }
+  //         alarmBooking = await alarmBooking.filter(
+  //           (ele1) => ele1.start !== ele.start
+  //         );
+  //         console.log("alarm after", alarmBooking);
+  //         console.log("array[0]", data1);
+  //       }
+  //     );
+  //   })
+  // );
 };
 const notification_alarm = async (data) => {
   try {
