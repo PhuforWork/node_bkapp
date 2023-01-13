@@ -419,7 +419,7 @@ const notification = async (req, res) => {
     let isNoti = await model.users.findOne({
       where: { id_user: req.body.id_user },
     });
-    console.log(isNoti.isNotify);
+    
     let idNotify = await model.notifications.create(data1);
     Promise.all(
       data2.map(async (ele) => {
@@ -430,7 +430,7 @@ const notification = async (req, res) => {
         });
       })
     );
-    if (isNoti.isNotify === true) {
+    if (isNoti.isNotify) {
      await alarm_immediately({
         senderName,
         status,
