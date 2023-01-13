@@ -403,7 +403,7 @@ const notification = async (req, res) => {
   try {
     let today = moment();
     let { senderName, status, type } = req.body;
-    let { start, end } = req.body.data.res_bk;
+    let { start, end, detail, isCheck } = req.body.data.res_bk;
     let department = req.body.data.res_der.label;
     let data2 = req.body.data.res_per;
     let data1 = {
@@ -415,25 +415,27 @@ const notification = async (req, res) => {
       type,
       start,
       end,
+      detail,
     };
-
-    let idNotify = await model.notifications.create(data1);
-    Promise.all(
-      data2.map(async (ele) => {
-        await model.persionality_notify.create({
-          id_notify: idNotify.id_notify,
-          label: ele.label,
-          value: ele.value,
-        });
-      })
-    );
+    if (!isCheck) {
+      let idNotify = await model.notifications.create(data1);
+      Promise.all(
+        data2.map(async (ele) => {
+          await model.persionality_notify.create({
+            id_notify: idNotify.id_notify,
+            label: ele.label,
+            value: ele.value,
+          });
+        })
+      );
+    } else {
+      await model.notifications.create({ ...data1, type: 3 });
+    }
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error Backend");
   }
 };
-
-
 
 module.exports = {
   booking_user,
