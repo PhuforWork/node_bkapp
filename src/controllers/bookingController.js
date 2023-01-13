@@ -415,6 +415,22 @@ const notification = async (req, res) => {
       start,
       end,
     };
+    let isNoti = await model.users.findOne({
+      where: { id_user: req.body.id_user },
+    });
+
+    if (isNoti.isNotify === true) {
+      alarm_immediately({
+        senderName,
+        status,
+        id_user,
+        start,
+        end,
+        department,
+        type: 2,
+        personality: data2,
+      });
+    }
     let idNotify = await model.notifications.create(data1);
     Promise.all(
       data2.map(async (ele) => {
@@ -430,7 +446,74 @@ const notification = async (req, res) => {
     errorCode(res, "Error Backend");
   }
 };
+let alarmBooking = [];
+const alarm_immediately = async (data) => {
+  let aft_five_minute = moment.duration("00:05:00");
+  let datetimeLocal = moment(data.start).subtract(aft_five_minute);
+  // let test = moment().format("Z");
+  await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
+  Promise.all(
+    alarmBooking.map(async (ele) => {
+      let MM = (await ele.date_early_5.month()) + 1;
+      let DD = await ele.date_early_5.date();
+      let hh = await ele.date_early_5.hours();
+      let mm = await ele.date_early_5.minutes();
+      let ss = (await ele.date_early_5.second()) * 0 + 1;
+      //
+      // let MM = 1;
+      // let DD = 10;
+      // let hh = 0;
+      // let mm = 41;
+      // let ss = 1;
+      console.log("array before", alarmBooking);
+      console.log("show datetime", hh, mm, ss, DD, MM);
+      await schedule.scheduleJob(
+        `${ss} ${mm} ${hh} ${DD} ${MM} *`,
+        async () => {
+          let today = moment();
+          let data1 = alarmBooking[0];
+          console.log("array[0]", data1);
+          await io.emit("sendAlarm", { ...data1, today: today });
+          if (data1.start === ele.start) {
+            notification_alarm({ ...data1, today: today });
+          }
+          alarmBooking = await alarmBooking.filter(
+            (ele1) => ele1.start !== ele.start
+          );
+          console.log("alarm after", alarmBooking);
+          console.log("array[0]", data1);
+        }
+      );
+    })
+  );
+};
+const notification_alarm = async (data) => {
+  try {
+    let { senderName, status, id_user, start, end, department, type } = data;
+    let data1 = {
+      senderName,
+      status,
+      id_user,
+      start,
+      end,
+      department,
+      today,
+      type,
+    };
+    let data2 = data.personality;
+    let idNotify = await model.notifications.create(data1);
+    Promise.all(
+      data2.map(async (ele) => {
+        await model.persionality_notify.create({
+          label: ele.label,
+          id_notify: idNotify.id_notify,
+          value: ele.value,
+        });
+      })
+    );
+  } catch (error) {}
+};
 module.exports = {
   booking_user,
   add_booking,
@@ -446,5 +529,5 @@ module.exports = {
   get_depart,
   get_persional_id,
   notification,
-  update_dpt_new
+  update_dpt_new,
 };

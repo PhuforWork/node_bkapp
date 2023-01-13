@@ -1,6 +1,6 @@
 const schedule = require("node-schedule");
 const moment = require("moment");
-const { notification_alarm } = require("../controllers/userController");
+// const { notification_alarm } = require("../controllers/userController");
 module.exports = (io) => {
   //báo thuc khi lich toi hen
   let alarmBooking = [];
@@ -33,7 +33,7 @@ module.exports = (io) => {
             console.log("array[0]", data1);
             await io.emit("sendAlarm", { ...data1, today: today });
             if (data1.start === ele.start) {
-              notification_alarm({ ...data1, today: today });
+              // notification_alarm({ ...data1, today: today });
             }
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
