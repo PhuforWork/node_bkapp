@@ -3,6 +3,7 @@ const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const moment = require("moment");
+const schedule = require("node-schedule");
 
 // get
 const booking_user = async (req, res) => {
@@ -490,7 +491,8 @@ const alarm_immediately = async (data) => {
 };
 const notification_alarm = async (data) => {
   try {
-    let { senderName, status, id_user, start, end, department, type } = data;
+    let { senderName, status, id_user, start, end, department, today, type } =
+      data;
     let data1 = {
       senderName,
       status,
