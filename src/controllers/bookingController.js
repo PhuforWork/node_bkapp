@@ -439,9 +439,9 @@ const notification = async (req, res) => {
     errorCode(res, "Error Backend");
   }
 };
-let alarmBooking = [];
 
 const alarm_notify = async (data) => {
+  let alarmBooking = [];
   let aft_five_minute = moment.duration("00:05:00");
   let datetimeLocal = moment(data.start).subtract(aft_five_minute);
   // let test = moment().format("Z");
