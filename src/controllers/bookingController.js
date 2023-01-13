@@ -419,7 +419,7 @@ const notification = async (req, res) => {
     let isNoti = await model.users.findOne({
       where: { id_user: req.body.id_user },
     });
-
+    console.log(isNoti.isNotify);
     if (isNoti.isNotify === true) {
       alarm_immediately({
         senderName,
