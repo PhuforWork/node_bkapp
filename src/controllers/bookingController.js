@@ -449,6 +449,7 @@ const notification = async (req, res) => {
 };
 let alarmBooking = [];
 const alarm_immediately = async (data) => {
+  console.log(123);
   let aft_five_minute = moment.duration("00:05:00");
   let datetimeLocal = moment(data.start).subtract(aft_five_minute);
   // let test = moment().format("Z");
