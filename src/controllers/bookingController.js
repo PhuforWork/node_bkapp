@@ -431,7 +431,7 @@ const notification = async (req, res) => {
       })
     );
     if (isNoti.isNotify) {
-      alarm_notify({ ...data1, type: 2, personality: data2 });
+      alarm_notify({ ...data1, type: 2, personality: req.body.data.res_per });
       console.log(1234567890);
     }
     successCode(res, "", "Success");
