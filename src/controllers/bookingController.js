@@ -420,6 +420,17 @@ const notification = async (req, res) => {
       where: { id_user: req.body.id_user },
     });
     console.log(isNoti.isNotify);
+    let idNotify = await model.notifications.create(data1);
+    Promise.all(
+      data2.map(async (ele) => {
+        await model.persionality_notify.create({
+          id_notify: idNotify.id_notify,
+          label: ele.label,
+          value: ele.value,
+        });
+      })
+    );
+    successCode(res, "", "Success");
     if (isNoti.isNotify === true) {
       alarm_immediately({
         senderName,
@@ -432,17 +443,6 @@ const notification = async (req, res) => {
         personality: data2,
       });
     }
-    let idNotify = await model.notifications.create(data1);
-    Promise.all(
-      data2.map(async (ele) => {
-        await model.persionality_notify.create({
-          id_notify: idNotify.id_notify,
-          label: ele.label,
-          value: ele.value,
-        });
-      })
-    );
-    successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error Backend");
   }
