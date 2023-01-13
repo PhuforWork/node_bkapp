@@ -56,23 +56,17 @@ io.on("connection", (socket) => {
     "sendNotification",
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
-      let today = new Date();
-      // if (receiver.socketId) {
-        // io.to(receiver.socketId).emit("getNotification");
-        io.emit("getNotification");
-
-          alarm_immediately({
-            senderName,
-            status,
-            id_user,
-            start: data.res_bk.start,
-            end: data.res_bk.end,
-            department: data.res_der.label,
-            personality: data.res_per,
-            type: 2,
-          });
-
-      // }
+      io.emit("getNotification");
+      alarm_immediately({
+        senderName,
+        status,
+        id_user,
+        start: data.res_bk.start,
+        end: data.res_bk.end,
+        department: data.res_der.label,
+        personality: data.res_per,
+        type: 2,
+      });
     }
   );
   // disconnect

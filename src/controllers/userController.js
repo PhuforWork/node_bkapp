@@ -132,7 +132,6 @@ const sigUp = async (req, res) => {
       indexRow: 5,
       isNotify: false,
     };
-    let status = { status: "User name already used" };
     const checkUsername = await model.users.findOne({
       where: {
         user_name,

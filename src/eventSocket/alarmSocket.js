@@ -11,7 +11,7 @@ module.exports = (io) => {
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
     Promise.all(
-      alarmBooking.map(async (ele) => {
+      alarmBooking[0].map(async (ele) => {
         let MM = (await ele.date_early_5.month()) + 1;
         let DD = await ele.date_early_5.date();
         let hh = await ele.date_early_5.hours();
@@ -23,6 +23,7 @@ module.exports = (io) => {
         // let hh = 0;
         // let mm = 41;
         // let ss = 1;
+
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
@@ -34,10 +35,10 @@ module.exports = (io) => {
             await io.emit("sendAlarm");
             if (data1.start === ele.start) {
               notification_alarm({ ...data1, today: today });
+              alarmBooking = await alarmBooking.filter(
+                (ele1) => ele1.start !== ele.start
+              );
             }
-            alarmBooking = await alarmBooking.filter(
-              (ele1) => ele1.start !== ele.start
-            );
             console.log("alarm after", alarmBooking);
             console.log("array[0]", data1);
           }
