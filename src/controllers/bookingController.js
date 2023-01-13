@@ -419,7 +419,7 @@ const notification = async (req, res) => {
     let isNoti = await model.users.findOne({
       where: { id_user: req.body.id_user },
     });
-    
+
     let idNotify = await model.notifications.create(data1);
     Promise.all(
       data2.map(async (ele) => {
@@ -431,16 +431,17 @@ const notification = async (req, res) => {
       })
     );
     if (isNoti.isNotify) {
-     await alarm_immediately({
-        senderName,
-        status,
-        id_user,
-        start,
-        end,
-        department,
-        type: 2,
-        personality: data2,
-      });
+      test({ isTrue: true });
+      //  alarm_immediately({
+      //     senderName,
+      //     status,
+      //     id_user,
+      //     start,
+      //     end,
+      //     department,
+      //     type: 2,
+      //     personality: data2,
+      //   });
       console.log(1234567890);
     }
     successCode(res, "", "Success");
@@ -449,6 +450,9 @@ const notification = async (req, res) => {
   }
 };
 let alarmBooking = [];
+const test = (data) => {
+  console.log(data);
+};
 const alarm_immediately = async (data) => {
   console.log(123);
   let aft_five_minute = moment.duration("00:05:00");
