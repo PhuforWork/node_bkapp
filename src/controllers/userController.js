@@ -719,36 +719,35 @@ const test_send_email = async (req, res) => {
 };
 
 // thong bao khi dat lich
-
-// const notification_alarm = async (data) => {
-//   let { senderName, status, id_user, start, end, department, today, type } =
-//     data;
-//   let data1 = {
-//     senderName,
-//     status,
-//     id_user,
-//     start,
-//     end,
-//     department,
-//     today,
-//     type,
-//   };
-//   let data2 = data.personality;
-//   try {
-//     let idNotify = await model.notifications.create(data1);
-//     Promise.all(
-//       data2.map(async (ele) => {
-//         await model.persionality_notify.create({
-//           label: ele.label,
-//           id_notify: idNotify.id_notify,
-//           value: ele.value,
-//         });
-//       })
-//     );
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const notification_alarm = async (data) => {
+  let { senderName, status, id_user, start, end, department, today, type } =
+    data;
+  let data1 = {
+    senderName,
+    status,
+    id_user,
+    start,
+    end,
+    department,
+    today,
+    type,
+  };
+  let data2 = data.personality;
+  try {
+    let idNotify = await model.notifications.create(data1);
+    Promise.all(
+      data2.map(async (ele) => {
+        await model.persionality_notify.create({
+          label: ele.label,
+          id_notify: idNotify.id_notify,
+          value: ele.value,
+        });
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 const notification_get = async (req, res) => {
   try {
     let { id } = req.params;
@@ -805,4 +804,5 @@ module.exports = {
   notification_delete,
   notification_get,
   set_notify,
+  notification_alarm
 };
