@@ -57,8 +57,9 @@ io.on("connection", (socket) => {
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       let today = new Date();
-      if (receiver.socketId) {
-        io.to(receiver.socketId).emit("getNotification");
+      // if (receiver.socketId) {
+        // io.to(receiver.socketId).emit("getNotification");
+        io.emit("getNotification");
         // if (receiver.isNotify === true) {
         //   alarm_immediately({
         //     senderName,
@@ -71,7 +72,7 @@ io.on("connection", (socket) => {
         //     type: 2,
         //   });
         // }
-      }
+      // }
     }
   );
   // disconnect
