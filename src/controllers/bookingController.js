@@ -477,7 +477,7 @@ const alarm_immediately = async (data) => {
           let today = moment();
           let data1 = alarmBooking[0];
           console.log("array[0]", data1);
-          await io.emit("sendAlarm", { ...data1, today: today });
+          // await io.emit("sendAlarm", { ...data1, today: today });
           if (data1.start === ele.start) {
             notification_alarm({ ...data1, today: today });
           }
