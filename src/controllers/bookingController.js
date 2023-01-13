@@ -430,9 +430,8 @@ const notification = async (req, res) => {
         });
       })
     );
-    successCode(res, "", "Success");
     if (isNoti.isNotify === true) {
-      alarm_immediately({
+     await alarm_immediately({
         senderName,
         status,
         id_user,
@@ -444,6 +443,7 @@ const notification = async (req, res) => {
       });
       console.log(1234567890);
     }
+    successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error Backend");
   }
