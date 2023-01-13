@@ -60,18 +60,18 @@ io.on("connection", (socket) => {
       // if (receiver.socketId) {
         // io.to(receiver.socketId).emit("getNotification");
         io.emit("getNotification");
-        // if (receiver.isNotify === true) {
-        //   alarm_immediately({
-        //     senderName,
-        //     status,
-        //     id_user,
-        //     start: data.res_bk.start,
-        //     end: data.res_bk.end,
-        //     department: data.res_der.label,
-        //     personality: data.res_per,
-        //     type: 2,
-        //   });
-        // }
+
+          alarm_immediately({
+            senderName,
+            status,
+            id_user,
+            start: data.res_bk.start,
+            end: data.res_bk.end,
+            department: data.res_der.label,
+            personality: data.res_per,
+            type: 2,
+          });
+
       // }
     }
   );
