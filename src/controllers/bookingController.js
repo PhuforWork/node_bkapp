@@ -442,6 +442,7 @@ const notification = async (req, res) => {
         type: 2,
         personality: data2,
       });
+      console.log(1234567890);
     }
   } catch (error) {
     errorCode(res, "Error Backend");
