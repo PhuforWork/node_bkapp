@@ -431,17 +431,7 @@ const notification = async (req, res) => {
       })
     );
     if (isNoti.isNotify) {
-      // {
-      //   senderName,
-      //   status,
-      //   id_user,
-      //   start,
-      //   end,
-      //   department,
-      //   type: 2,
-      //   personality: data2,
-      // }
-      alarm_notify(true);
+      alarm_notify({ ...data1, type: 2 });
       console.log(1234567890);
     }
     successCode(res, "", "Success");
@@ -452,7 +442,7 @@ const notification = async (req, res) => {
 let alarmBooking = [];
 
 const alarm_notify = async (data) => {
-  console.log("data",data);
+  console.log("data", data);
   // let aft_five_minute = moment.duration("00:05:00");
   // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
   // // let test = moment().format("Z");
