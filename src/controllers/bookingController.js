@@ -406,6 +406,7 @@ const notification = async (req, res) => {
     let { start, end, detail, isCheck } = req.body.data.res_bk;
     let department = req.body.data.res_der.label;
     let data2 = req.body.data.res_per;
+    let data3 = req.body.data.res_der;
     let data1 = {
       senderName,
       status,
@@ -431,6 +432,9 @@ const notification = async (req, res) => {
     } else {
       await model.notifications.create({ ...data1, type: 3 });
     }
+    Promise.all(data3.map(async (ele) => {
+      
+    }));
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error Backend");
