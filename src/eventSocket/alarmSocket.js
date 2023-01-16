@@ -36,7 +36,7 @@ module.exports = (io) => {
             io.emit("getNotification");
             notification_alarm({ ...alarmBooking[0], today: today });
             alarmBooking = await alarmBooking.filter(
-              (ele1) => ele1.start !== ele.start
+              (ele1) => moment(ele1.start) !== moment(ele.start)
             );
             console.log("alarm after", alarmBooking);
             console.log("array[0]", data1);
