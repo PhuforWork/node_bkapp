@@ -39,6 +39,10 @@ class department extends Sequelize.Model {
     domain: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    addition: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
