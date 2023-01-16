@@ -10,7 +10,7 @@ module.exports = (io) => {
     let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
-    for (let i = 0; i < alarmBooking.length; i++) {
+    // for (let i = 0; i < alarmBooking.length; i++) {
       let data1 = alarmBooking[0];
       let MM = (await data1.date_early_5.month()) + 1;
       let DD = await data1.date_early_5.date();
@@ -32,7 +32,7 @@ module.exports = (io) => {
           console.log("array[0]", data1);
         }
       );
-    }
+    // }
 
     // Promise.all(
     //   alarmBooking.map(async (ele) => {
