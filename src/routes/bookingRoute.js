@@ -15,7 +15,7 @@ const {
   get_persional_id,
   notification,
   update_dpt_new,
-
+  delete_department,
 } = require("../controllers/bookingController");
 const { guest_booking } = require("../controllers/guestController");
 const upload = require("../Middlewares/upload");
@@ -38,7 +38,10 @@ bookingRoute.put("/update-department/:id", upload.none(), update_depart);
 bookingRoute.put("/update-department-new/:id", upload.none(), update_dpt_new);
 bookingRoute.put("/update-persional/:id", upload.none(), update_persional);
 
-
 bookingRoute.post("/add-guest/:id", upload.none(), guest_booking);
 
-bookingRoute.delete("/delete-booking/:id", delete_bk);module.exports = bookingRoute;
+bookingRoute.delete("/delete-booking/:id", delete_bk);
+module.exports = bookingRoute;
+delete_department;
+bookingRoute.delete("/delete-department/:id", delete_department);
+module.exports = bookingRoute;

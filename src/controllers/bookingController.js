@@ -301,7 +301,15 @@ const update_dpt_new = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
-
+const delete_department = async (req, res) => {
+  try {
+    let { id } = req.params; //id department
+    await model.department.destroy({ where: { id_derp: id } });
+    successCode(res, "", "Success code");
+  } catch (error) {
+    errorCode(res, "", "Error BackEnd");
+  }
+};
 // booking calender
 const update_booking = async (req, res) => {
   try {
@@ -464,4 +472,5 @@ module.exports = {
   get_persional_id,
   notification,
   update_dpt_new,
+  delete_department
 };
