@@ -1,6 +1,7 @@
 const DataTypes = require("sequelize").DataTypes;
 const _booking_info = require("./booking_info");
 const _department = require("./department");
+const _department_notify = require("./department_notify");
 const _department_tb = require("./department_tb");
 const _note_item = require("./note_item");
 const _notifications = require("./notifications");
@@ -14,6 +15,7 @@ const _users = require("./users");
 function initModels(sequelize) {
   const booking_info = _booking_info(sequelize, DataTypes);
   const department = _department(sequelize, DataTypes);
+  const department_notify = _department_notify(sequelize, DataTypes);
   const department_tb = _department_tb(sequelize, DataTypes);
   const note_item = _note_item(sequelize, DataTypes);
   const notifications = _notifications(sequelize, DataTypes);
@@ -30,6 +32,8 @@ function initModels(sequelize) {
   booking_info.hasMany(persionality_tb, { as: "persionality_tbs", foreignKey: "id_booking"});
   select_type_tb.belongsTo(booking_info, { as: "id_booking_booking_info", foreignKey: "id_booking"});
   booking_info.hasMany(select_type_tb, { as: "select_type_tbs", foreignKey: "id_booking"});
+  department_notify.belongsTo(notifications, { as: "id_notify_notification", foreignKey: "id_notify"});
+  notifications.hasMany(department_notify, { as: "department_notifies", foreignKey: "id_notify"});
   persionality_notify.belongsTo(notifications, { as: "id_notify_notification", foreignKey: "id_notify"});
   notifications.hasMany(persionality_notify, { as: "persionality_notifies", foreignKey: "id_notify"});
   booking_info.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
@@ -48,6 +52,7 @@ function initModels(sequelize) {
   return {
     booking_info,
     department,
+    department_notify,
     department_tb,
     note_item,
     notifications,
