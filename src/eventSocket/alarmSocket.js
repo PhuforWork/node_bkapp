@@ -29,17 +29,15 @@ module.exports = (io) => {
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
-            setTimeout(async () => {
             let data1 = alarmBooking[0];
             let today = moment();
             console.log("array[0]", data1);
             // await io.emit("sendAlarm");
             io.emit("getNotification");
             notification_alarm({ ...data1, today: today });
-              alarmBooking = await alarmBooking.filter(
-                (ele1) => ele1.start !== ele.start
-              );
-            }, 10000);
+            alarmBooking = await alarmBooking.filter(
+              (ele1) => ele1.start !== ele.start
+            );
             console.log("alarm after", alarmBooking);
             console.log("array[0]", data1);
           }

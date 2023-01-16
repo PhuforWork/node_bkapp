@@ -12,6 +12,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
 const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
+const { alarm_notification } = require("./controllers/bookingController")(io);
 const { chat_app } = require("./eventSocket/chatSocket")(io);
 
 app.use(express.json());
@@ -57,16 +58,16 @@ io.on("connection", (socket) => {
     ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       io.emit("getNotification");
-      alarm_immediately({
-        senderName,
-        status,
-        id_user,
-        start: data.res_bk.start,
-        end: data.res_bk.end,
-        department: data.res_der.label,
-        personality: data.res_per,
-        type: 2,
-      });
+      // alarm_immediately({
+      //   senderName,
+      //   status,
+      //   id_user,
+      //   start: data.res_bk.start,
+      //   end: data.res_bk.end,
+      //   department: data.res_der.label,
+      //   personality: data.res_per,
+      //   type: 2,
+      // });
     }
   );
   // disconnect
