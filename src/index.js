@@ -12,7 +12,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
 const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
-const { alarm_notification } = require("./controllers/bookingController")(io);
+// const { alarm_notification } = require("./controllers/bookingController")(io);
 const { chat_app } = require("./eventSocket/chatSocket")(io);
 
 app.use(express.json());
