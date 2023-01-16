@@ -20,11 +20,11 @@ module.exports = (io) => {
 
       console.log("array before", alarmBooking);
       console.log("show datetime", hh, mm, ss, DD, MM);
+      console.log("array[0]", data1);
       await schedule.scheduleJob(
         `${ss} ${mm} ${hh} ${DD} ${MM} *`,
         async () => {
           let today = moment();
-          console.log("array[0]", data1);
           io.emit("getNotification");
           notification_alarm({ ...data1, today: today });
           alarmBooking.splice(0, 1);
