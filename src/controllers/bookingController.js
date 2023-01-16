@@ -432,9 +432,15 @@ const notification = async (req, res) => {
     } else {
       await model.notifications.create({ ...data1, type: 3 });
     }
-    Promise.all(data3.map(async (ele) => {
-      
-    }));
+    Promise.all(
+      data3.map(async (ele) => {
+        await model.department_notify.create({
+          id_notify: idNotify.id_notify,
+          label: ele.label,
+          value: ele.value,
+        });
+      })
+    );
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error Backend");
