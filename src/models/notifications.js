@@ -51,6 +51,10 @@ class notifications extends Sequelize.Model {
     detail: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    isRead: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     sequelize,
