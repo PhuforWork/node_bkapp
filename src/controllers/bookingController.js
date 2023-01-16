@@ -416,6 +416,7 @@ const notification = async (req, res) => {
     let department = req.body.data.res_der.label;
     let data2 = req.body.data.res_per;
     let data3 = req.body.data.res_der;
+    console.log(data3);
     let data1 = {
       senderName,
       status,
@@ -472,5 +473,5 @@ module.exports = {
   get_persional_id,
   notification,
   update_dpt_new,
-  delete_department
+  delete_department,
 };
