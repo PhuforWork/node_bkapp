@@ -416,7 +416,7 @@ const notification = async (req, res) => {
     let department = req.body.data.res_der.label;
     let data2 = req.body.data.res_per;
     let data3 = req.body.data.res_der;
-    console.log(data3);
+    console.log("data3",data3);
     let data1 = {
       senderName,
       status,
