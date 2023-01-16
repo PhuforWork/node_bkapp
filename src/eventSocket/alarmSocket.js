@@ -35,11 +35,11 @@ module.exports = (io) => {
             // await io.emit("sendAlarm");
             io.emit("getNotification");
             notification_alarm({ ...data1, today: today });
-            setTimeout(async()=>{
+            setTimeout(async () => {
               alarmBooking = await alarmBooking.filter(
                 (ele1) => ele1.start !== ele.start
               );
-            },10000);
+            }, 10000);
             console.log("alarm after", alarmBooking);
             console.log("array[0]", data1);
           }
