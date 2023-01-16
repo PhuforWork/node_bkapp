@@ -252,19 +252,19 @@ const update_depart = async (req, res) => {
     let { id } = req.params; //id user
     let data = req.body;
     // await model.department.destroy({ where: { id_user: id } });
-    Promise.all(data).then((values) => {
-      values.map(async (ele) => {
-        await model.department.create({
-          label: ele.label,
-          value: ele.value,
-          id_user: ele.id_user,
-          email_depart: ele.email_depart,
-          phoneNumber: ele.phoneNumber,
-          domain: ele.domain,
-          additon: ele.addition,
-        });
-      });
+    // Promise.all(data).then((values) => {
+    //   values.map(async (ele) => {
+    await model.department.create({
+      label: data.label,
+      value: data.value,
+      id_user: data.id_user,
+      email_depart: data.email_depart,
+      phoneNumber: data.phoneNumber,
+      domain: data.domain,
+      additon: data.addition,
     });
+    //   });
+    // });
     successCode(res, "", "Update success department");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
