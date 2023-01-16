@@ -251,7 +251,7 @@ const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
     let data = req.body;
-    await model.department.destroy({ where: { id_user: id } });
+    // await model.department.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
       values.map(async (ele) => {
         await model.department.create({
@@ -261,6 +261,7 @@ const update_depart = async (req, res) => {
           email_depart: ele.email_depart,
           phoneNumber: ele.phoneNumber,
           domain: ele.domain,
+          additon: ele.addition,
         });
       });
     });
@@ -300,6 +301,7 @@ const update_dpt_new = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
+
 // booking calender
 const update_booking = async (req, res) => {
   try {
