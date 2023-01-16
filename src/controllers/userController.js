@@ -751,7 +751,7 @@ const notification_get = async (req, res) => {
   try {
     let { id } = req.params;
     const notifi_get = await model.notifications.findAll({
-      include: ["persionality_notifies","department_notifies"],
+      include: ["persionality_notifies", "department_notifies"],
       where: { id_user: id },
     });
     successCode(res, notifi_get, "Success get notify");
@@ -779,6 +779,27 @@ const notification_delete = async (req, res) => {
   }
 };
 
+const update_one_isRead = async (req, res) => {
+  try {
+    let { id } = req.params; //id notify
+    let isRead = req.body;
+    await model.notifications.update(isRead, { where: { id_notify: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+const update_all_isRead = async (req, res) => {
+  try {
+    let { id } = req.params; // id user
+    let isRead = req.body;
+    await model.notifications.update(isRead, { where: { id_user: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+
 module.exports = {
   getuser,
   loginUser,
@@ -803,5 +824,7 @@ module.exports = {
   notification_delete,
   notification_get,
   set_notify,
-  notification_alarm
+  notification_alarm,
+  update_one_isRead,
+  update_all_isRead,
 };

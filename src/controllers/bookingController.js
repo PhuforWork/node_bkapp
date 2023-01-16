@@ -427,6 +427,7 @@ const notification = async (req, res) => {
       start,
       end,
       detail,
+      isRead: true,
     };
     if (!isCheck) {
       let idNotify = await model.notifications.create(data1);
@@ -456,7 +457,6 @@ const notification = async (req, res) => {
     errorCode(res, "Error Backend");
   }
 };
-
 
 module.exports = {
   booking_user,

@@ -23,6 +23,8 @@ const {
   notification_delete,
   notification_get,
   set_notify,
+  update_one_isRead,
+  update_all_isRead,
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -59,6 +61,11 @@ userRoute.put("/upimg/:id", upload.single("image_url"), update_img);
 userRoute.put("/update-note/:id", upload.none(), note_put);
 userRoute.put("/update-row/:id", upload.none(), update_row);
 userRoute.put("/notification-update/:id", upload.none(), notification_update);
+userRoute.put("/isRead-one-update/:id", upload.none(), update_one_isRead);
+userRoute.put("/isRead-all-update/:id", upload.none(), update_all_isRead);
+
+
+
 // delete
 userRoute.delete("/delete-note/:id", upload.none(), note_detele);
 userRoute.delete("/delete-notify/:id", upload.none(), notification_delete);
