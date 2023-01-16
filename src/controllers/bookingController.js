@@ -247,7 +247,6 @@ const update_slect = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
-// setting user
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
