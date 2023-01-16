@@ -442,7 +442,11 @@ const notification = async (req, res) => {
     } else {
       await model.notifications.create({ ...data1, type: 3 });
     }
-    await model.department_notify.create(data3);
+    id_notify: idNotify.id_notify,
+      await model.department_notify.create({
+        ...data3,
+        id_notify: idNotify.id_notify,
+      });
 
     successCode(res, "", "Success");
   } catch (error) {
