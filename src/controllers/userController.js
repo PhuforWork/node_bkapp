@@ -782,7 +782,7 @@ const notification_delete = async (req, res) => {
 const update_one_isRead = async (req, res) => {
   try {
     let { id } = req.params; //id notify
-    let isRead = req.body;
+    let isRead = false;
     await model.notifications.update(isRead, { where: { id_notify: id } });
     successCode(res, "", "Success");
   } catch (error) {
@@ -792,7 +792,7 @@ const update_one_isRead = async (req, res) => {
 const update_all_isRead = async (req, res) => {
   try {
     let { id } = req.params; // id user
-    let isRead = req.body;
+    let isRead = false;
     await model.notifications.update(isRead, { where: { id_user: id } });
     successCode(res, "", "Success");
   } catch (error) {
