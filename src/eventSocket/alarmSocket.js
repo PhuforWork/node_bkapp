@@ -25,7 +25,6 @@ module.exports = (io) => {
         // let mm = 41;
         // let ss = 1;
         await schedule.scheduleJob(
-          ele.start,
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let data1 = alarmBooking[0];
