@@ -293,10 +293,23 @@ const update_persional = async (req, res) => {
 const update_dpt_new = async (req, res) => {
   try {
     let { id } = req.params; // id department
-    let { label, value, id_user, email_depart, phoneNumber, domain } = req.body;
-    let data = { label, value, id_user, email_depart, phoneNumber, domain };
-    await model.department.update(data, { where: { id_derp: id } });
-    successCode(res, "", "Success Update");
+    let { label, value, id_user, email_depart, phoneNumber, domain, addition } =
+      req.body;
+    let data = {
+      label,
+      value,
+      id_user,
+      email_depart,
+      phoneNumber,
+      domain,
+      addition,
+    };
+    if (data) {
+      await model.department.update(data, { where: { id_derp: id } });
+      successCode(res, "", "Success Update");
+    }esle{
+      failCode(res,{code:15},"Fail update department")
+    }
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
