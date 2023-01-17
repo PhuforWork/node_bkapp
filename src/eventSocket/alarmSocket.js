@@ -11,7 +11,6 @@ module.exports = (io) => {
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
     console.log("array before", alarmBooking);
-    console.log("show datetime", hh, mm, ss, DD, MM);
     Promise.all(
       alarmBooking.map(async (ele) => {
         let MM = (await ele.date_early_5.month()) + 1;
