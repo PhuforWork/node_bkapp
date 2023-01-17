@@ -39,6 +39,7 @@ class notifications extends Sequelize.Model {
     today: {
       type: DataTypes.DATE,
       allowNull: true,
+      unique: "today"
     },
     department: {
       type: DataTypes.STRING(255),
@@ -67,6 +68,14 @@ class notifications extends Sequelize.Model {
         using: "BTREE",
         fields: [
           { name: "id_notify" },
+        ]
+      },
+      {
+        name: "today",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "today" },
         ]
       },
       {
