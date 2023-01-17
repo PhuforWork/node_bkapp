@@ -35,10 +35,9 @@ module.exports = (io) => {
             // await io.emit("sendAlarm");
             io.emit("getNotification");
             notification_alarm({ ...alarmBooking[0], today: today });
-            alarmBooking.splice(0,1);
-            // alarmBooking = await alarmBooking.filter(
-            //   (ele1) => moment(ele1.start) !== moment(ele.start)
-            // );
+            alarmBooking = await alarmBooking.filter(
+              (ele1) => moment(ele1.start) !== moment(ele.start)
+            );
             console.log("alarm after", alarmBooking);
             console.log("array[0]", data1);
           }
