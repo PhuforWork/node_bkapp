@@ -35,11 +35,11 @@ module.exports = (io) => {
             );
             if (checkSend) {
               // await io.emit("sendAlarm");
-              await io.emit("getNotification");
               await notification_alarm({ ...data1, today: today });
               alarmBooking = await alarmBooking.filter(
                 (ele1) => ele1.start !== ele.start
               );
+              await io.emit("getNotification");
             }
             console.log("alarm after", alarmBooking);
           }
