@@ -307,7 +307,7 @@ const update_dpt_new = async (req, res) => {
     if (data) {
       await model.department.update(data, { where: { id_derp: id } });
       successCode(res, "", "Success Update");
-    }esle{
+    }else{
       failCode(res,{code:15},"Fail update department")
     }
   } catch (error) {
