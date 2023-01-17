@@ -10,6 +10,8 @@ module.exports = (io) => {
     let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
+    console.log("array before", alarmBooking);
+    console.log("show datetime", hh, mm, ss, DD, MM);
     Promise.all(
       alarmBooking.map(async (ele) => {
         let MM = (await ele.date_early_5.month()) + 1;
@@ -23,21 +25,23 @@ module.exports = (io) => {
         // let hh = 0;
         // let mm = 41;
         // let ss = 1;
-        console.log("array before", alarmBooking);
-        console.log("show datetime", hh, mm, ss, DD, MM);
         await schedule.scheduleJob(
           ele.start,
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let data1 = alarmBooking[0];
             let today = moment();
-            console.log("array[0]", data1);
-            // await io.emit("sendAlarm");
-            await io.emit("getNotification");
-            await notification_alarm({ ...data1, today: today });
-            alarmBooking = await alarmBooking.filter(
-              (ele1) => ele1.start !== ele.start
+            let checkSend = alarmBooking.some(
+              (ele2) => ele2.start === ele.start
             );
+            if (checkSend) {
+              // await io.emit("sendAlarm");
+              await io.emit("getNotification");
+              await notification_alarm({ ...data1, today: today });
+              alarmBooking = await alarmBooking.filter(
+                (ele1) => ele1.start !== ele.start
+              );
+            }
             console.log("alarm after", alarmBooking);
           }
         );
