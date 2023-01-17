@@ -35,13 +35,13 @@ module.exports = (io) => {
             // await io.emit("sendAlarm");
             await io.emit("getNotification");
             await notification_alarm({ ...data1, today: today });
+            alarmBooking = await alarmBooking.filter(
+              (ele1) => ele1.start !== ele.start
+              );
+              console.log("alarm after", alarmBooking);
           }
           );
-          alarmBooking = await alarmBooking.filter(
-            (ele1) => moment(ele1.start) !== moment(ele.start)
-          );
-          console.log("alarm after", alarmBooking);
-          console.log("array[0]", data1);
+          
       })
     );
   };
