@@ -30,7 +30,7 @@ module.exports = (io) => {
             let checkSend = alarmBooking.some(
               (ele2) => ele2.start === ele.start
             );
-            console.log(check);
+            console.log(checkSend);
             if (checkSend) {
               let data1 = alarmBooking[0];
               let today = moment();
