@@ -35,7 +35,6 @@ module.exports = (io) => {
             // await io.emit("sendAlarm");
             await io.emit("getNotification");
             await notification_alarm({ ...data1, today: today });
-            await schedule.cancelJob(ele.start);
             alarmBooking = await alarmBooking.filter(
               (ele1) => moment(ele1.start) !== moment(ele.start)
             );
