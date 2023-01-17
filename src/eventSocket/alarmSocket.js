@@ -23,10 +23,10 @@ module.exports = (io) => {
         // let hh = 0;
         // let mm = 41;
         // let ss = 1;
-
         console.log("array before", alarmBooking);
         console.log("show datetime", hh, mm, ss, DD, MM);
-        await schedule.scheduleJob(ele.start,
+        await schedule.scheduleJob(
+          ele.start,
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
             let data1 = alarmBooking[0];
@@ -37,10 +37,10 @@ module.exports = (io) => {
             await notification_alarm({ ...data1, today: today });
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
-              );
-              console.log("alarm after", alarmBooking);
+            );
+            console.log("alarm after", alarmBooking);
           }
-          );
+        );
       })
     );
   };
