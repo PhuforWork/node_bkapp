@@ -38,7 +38,8 @@ class notifications extends Sequelize.Model {
     },
     today: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      unique: true
     },
     department: {
       type: DataTypes.STRING(255),

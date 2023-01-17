@@ -730,6 +730,7 @@ const notification_alarm = async (data) => {
     department,
     today,
     type,
+    isRead: true,
   };
   let data2 = data.personality;
   try {
