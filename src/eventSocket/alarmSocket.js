@@ -27,21 +27,15 @@ module.exports = (io) => {
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
-            let checkSend = alarmBooking.some(
-              (ele2) => ele2.start === ele.start
+            let data1 = alarmBooking[0];
+            let today = moment();
+            // await io.emit("sendAlarm");
+            console.log(data1);
+            notification_alarm({ ...data1, today: today });
+            alarmBooking = alarmBooking.filter(
+              (ele1) => ele1.start !== ele.start
             );
-            console.log(checkSend);
-            if (checkSend) {
-              let data1 = alarmBooking[0];
-              let today = moment();
-              // await io.emit("sendAlarm");
-              console.log(data1);
-              notification_alarm({ ...data1, today: today });
-              alarmBooking = alarmBooking.filter(
-                (ele1) => ele1.start !== ele.start
-              );
-              io.emit("getNotification");
-            }
+            io.emit("getNotification");
             console.log("alarm after", alarmBooking);
           }
         );
