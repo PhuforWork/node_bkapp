@@ -2,9 +2,9 @@ const schedule = require("node-schedule");
 const moment = require("moment");
 const { notification_alarm } = require("../controllers/userController");
 // const async = require("async");
+let alarmBooking = [];
 module.exports = (io) => {
   //báo thuc khi lich toi hen
-  let alarmBooking = [];
   const alarm_immediately = async (data) => {
     let aft_five_minute = moment.duration("00:05:00");
     let datetimeLocal = moment(data.start).subtract(aft_five_minute);
@@ -41,7 +41,6 @@ module.exports = (io) => {
               console.log("alarm after", alarmBooking);
           }
           );
-          
       })
     );
   };
