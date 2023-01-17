@@ -17,7 +17,7 @@ module.exports = (io) => {
         let DD = await ele.date_early_5.date();
         let hh = await ele.date_early_5.hours();
         let mm = await ele.date_early_5.minutes();
-        let ss = (await ele.date_early_5.second()) * 0 + 1;
+        let ss = await ele.date_early_5.second();
         //
         // let MM = 1;
         // let DD = 10;
@@ -27,18 +27,20 @@ module.exports = (io) => {
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
-            let data1 = alarmBooking[0];
-            let today = moment();
             let checkSend = alarmBooking.some(
               (ele2) => ele2.start === ele.start
             );
+            console.log(check);
             if (checkSend) {
+              let data1 = alarmBooking[0];
+              let today = moment();
               // await io.emit("sendAlarm");
-              await notification_alarm({ ...data1, today: today });
-              alarmBooking = await alarmBooking.filter(
+              console.log(data1);
+              notification_alarm({ ...data1, today: today });
+              alarmBooking = alarmBooking.filter(
                 (ele1) => ele1.start !== ele.start
               );
-              await io.emit("getNotification");
+              io.emit("getNotification");
             }
             console.log("alarm after", alarmBooking);
           }
