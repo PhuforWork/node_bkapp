@@ -34,13 +34,12 @@ module.exports = (io) => {
             let today = moment();
             console.log("array[0]", data1);
             // await io.emit("sendAlarm");
-            io.emit("getNotification");
-            notification_alarm({ ...data1, today: today });
-            schedule.cancelJob(data1.start);
-            alarmBooking.splice(0, 1);
-            // alarmBooking = await alarmBooking.filter(
-            //   (ele1) => moment(ele1.start) !== moment(ele.start)
-            // );
+            await io.emit("getNotification");
+            await notification_alarm({ ...data1, today: today });
+            await schedule.cancelJob(data1.start);
+            alarmBooking = await alarmBooking.filter(
+              (ele1) => moment(ele1.start) !== moment(ele.start)
+            );
             console.log("alarm after", alarmBooking);
             console.log("array[0]", data1);
           }
