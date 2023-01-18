@@ -7,6 +7,7 @@ module.exports = (io) => {
   //báo thuc khi lich toi hen
   const alarm_immediately = async (data) => {
     let aft_five_minute = moment.duration("00:05:00");
+    let date_now = moment();
     let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
@@ -27,11 +28,10 @@ module.exports = (io) => {
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
-            let data1 = alarmBooking[0];
             let today = moment();
             // await io.emit("sendAlarm");
             console.log(data1);
-            notification_alarm({ ...data1, today: today });
+            notification_alarm({...ele, today: today });
             alarmBooking = alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
