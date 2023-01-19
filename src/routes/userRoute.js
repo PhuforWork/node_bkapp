@@ -25,6 +25,7 @@ const {
   set_notify,
   update_one_isRead,
   update_all_isRead,
+  updateEmail_user
 } = require("../controllers/userController");
 const upload = require("../Middlewares/upload");
 const userRoute = express.Router();
@@ -51,6 +52,7 @@ userRoute.post("/create-note", upload.none(), note_post);
 // put
 // update user
 userRoute.put("/update-user/:id", upload.none(), updateUser);
+userRoute.put("/update-email-user/:id", upload.none(), updateEmail_user);
 userRoute.put("/max-time/:id", put_max);
 userRoute.put("/min-time/:id", put_min);
 userRoute.put("/skip-show/:id", update_isShow);

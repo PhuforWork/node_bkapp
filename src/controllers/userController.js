@@ -178,6 +178,22 @@ const updateUser = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+const updateEmail_user = async (req, res) => {
+  try {
+    let { id } = req.params;
+    let { email, _password } = req.body;
+    const checkUser = await model.users.findByPk(id);
+    const checkpass = await bcrypt.compareSync(_password, checkUser._password);
+    if (checkpass) {
+      await model.users.update({ email }, { where: { id_user: id } });
+      successCode(res, "", "Update successfully");
+    } else {
+      failCode(res, { code: 005 }, "Current password does not match");
+    }
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
 const update_isShow = async (req, res) => {
   try {
     let { id } = req.params;
@@ -827,4 +843,5 @@ module.exports = {
   notification_alarm,
   update_one_isRead,
   update_all_isRead,
+  updateEmail_user
 };
