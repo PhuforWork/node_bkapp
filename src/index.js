@@ -54,9 +54,9 @@ io.on("connection", (socket) => {
   //send notification
   socket.on(
     "sendNotification",
-    ({ senderName, receiverName, type, status, id_user, data }) => {
+    async ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
-      io.emit("getNotification");
+      await io.emit("getNotification");
       alarm_immediately({
         senderName,
         status,
