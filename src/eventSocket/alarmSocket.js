@@ -18,6 +18,7 @@ module.exports = (io) => {
         let hh = await ele.date_early_5.hours();
         let mm = await ele.date_early_5.minutes();
         let ss = await ele.date_early_5.second();
+        
         //
         // let MM = 1;
         // let DD = 10;
@@ -29,12 +30,11 @@ module.exports = (io) => {
           async () => {
             let today = moment();
             // await io.emit("sendAlarm");
-            
+            await io.emit("getNotification");
             await notification_alarm({...ele, today: today });
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
-            await io.emit("getNotification");
             console.log("alarm after", alarmBooking);
           }
         );
