@@ -67,6 +67,7 @@ io.on("connection", (socket) => {
         personality: data.res_per,
         type: 2,
       });
+      await io.emit("getNotification");
     }
   );
   // disconnect

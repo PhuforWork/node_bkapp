@@ -35,6 +35,7 @@ module.exports = (io) => {
             alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
+            await io.emit("getNotification");
             console.log("alarm after", alarmBooking);
           }
         );
