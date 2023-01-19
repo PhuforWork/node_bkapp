@@ -7,7 +7,6 @@ module.exports = (io) => {
   //báo thuc khi lich toi hen
   const alarm_immediately = async (data) => {
     let aft_five_minute = moment.duration("00:05:00");
-    let date_now = moment();
     let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
