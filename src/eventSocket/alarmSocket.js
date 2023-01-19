@@ -30,11 +30,11 @@ module.exports = (io) => {
             let today = moment();
             // await io.emit("sendAlarm");
             
-            notification_alarm({...ele, today: today });
-            alarmBooking = alarmBooking.filter(
+            await notification_alarm({...ele, today: today });
+            alarmBooking = await alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
             );
-            io.emit("getNotification");
+            await io.emit("getNotification");
             console.log("alarm after", alarmBooking);
           }
         );
