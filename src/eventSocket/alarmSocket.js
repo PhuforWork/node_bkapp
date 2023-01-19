@@ -29,7 +29,7 @@ module.exports = (io) => {
           async () => {
             let today = moment();
             // await io.emit("sendAlarm");
-            console.log(data1);
+            
             notification_alarm({...ele, today: today });
             alarmBooking = alarmBooking.filter(
               (ele1) => ele1.start !== ele.start
