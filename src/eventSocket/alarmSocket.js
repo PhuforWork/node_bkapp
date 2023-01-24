@@ -1,4 +1,7 @@
 const schedule = require("node-schedule");
+const sequelize = require("../models/index");
+const init_models = require("../models/init-models");
+const model = init_models(sequelize);
 const moment = require("moment");
 const { notification_alarm } = require("../controllers/userController");
 // const async = require("async");
@@ -7,7 +10,9 @@ module.exports = (io) => {
   //báo thuc khi lich toi hen
   const alarm_immediately = async (data) => {
     let aft_five_minute = moment.duration("00:05:00");
-    let datetimeLocal = moment(data.start).subtract(aft_five_minute);
+    // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
+    let Data = model.notifications.findAll();
+    let datetimeLocal = moment(Data.start).subtract(aft_five_minute);
     // let test = moment().format("Z");
     await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
     console.log("array before", alarmBooking);
@@ -18,13 +23,7 @@ module.exports = (io) => {
         let hh = await ele.date_early_5.hours();
         let mm = await ele.date_early_5.minutes();
         let ss = await ele.date_early_5.second();
-        
-        //
-        // let MM = 1;
-        // let DD = 10;
-        // let hh = 0;
-        // let mm = 41;
-        // let ss = 1;
+      // 
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {

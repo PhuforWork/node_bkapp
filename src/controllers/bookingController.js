@@ -421,6 +421,7 @@ const delete_bk = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// notify booking
 const notification = async (req, res) => {
   try {
     let today = moment();
