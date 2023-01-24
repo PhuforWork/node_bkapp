@@ -6,6 +6,10 @@ const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
 
+const sequelize = require("./models/index");
+const init_models = require("./models/init-models");
+const model = init_models(sequelize);
+
 const app = express();
 
 const httpServer = createServer(app);
@@ -20,9 +24,11 @@ app.use(express.static("."));
 
 httpServer.listen(8081);
 
-app.get("/test", (req, res) => {
+app.get("/test", async(req, res) => {
   let test = req.query;
-  res.send("Hello");
+  let Data = await model.notifications.findAll();
+
+  res.send(Data);
 });
 
 let onlineUser = [];
