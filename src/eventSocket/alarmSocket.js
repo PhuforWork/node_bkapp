@@ -15,6 +15,7 @@ module.exports = (io) => {
       include: ["department_notifies", "persionality_notifies"],
       raw: true,
       nest: true,
+      mapToModel: true,
     });
     // let test = moment().format("Z");
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
