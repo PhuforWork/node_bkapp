@@ -432,7 +432,6 @@ const notification = async (req, res) => {
     let data3 = req.body.data.res_der;
     let aft_five_minute = moment.duration("00:05:00");
 
-    console.log("data3", data3);
     let data1 = {
       senderName,
       status,
