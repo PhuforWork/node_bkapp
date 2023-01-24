@@ -19,7 +19,7 @@ module.exports = (io) => {
     console.log("AAAaaAAaaaaaaaaaaa", Data);
     Promise.all(
       Data.map(async (ele) => {
-        let alarmDate = moment(ele.alarmDate);
+        let alarmDate = await moment(ele.alarmDate);
         let MM = (await alarmDate.month()) + 1;
         let DD = await alarmDate.date();
         let hh = await alarmDate.hours();
