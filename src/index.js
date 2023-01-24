@@ -49,14 +49,14 @@ const getUser = (user_name) => {
 };
 
 io.on("connection", (socket) => {
-  alarm_immediately();
+  // alarm_immediately();
   // add user
   chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
       await addNewUser(data.user_name, socket.id, data.isNotify);
-      alarm_immediately();
+      // alarm_immediately();
     }
   });
   //send notification
