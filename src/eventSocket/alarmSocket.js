@@ -12,9 +12,10 @@ module.exports = (io) => {
     // let aft_five_minute = moment.duration("00:05:00");
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     let Data = await model.notifications.findAll();
+    Data = JSON.stringify(Data);
     // let test = moment().format("Z");
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
-    console.log("AAAaaAAaaaaaaaaaaa",JSON.parse(Data));
+    console.log("AAAaaAAaaaaaaaaaaa",Data);
     // console.log("array before", alarmBooking);
     Promise.all(
       Data.map(async (ele) => {
