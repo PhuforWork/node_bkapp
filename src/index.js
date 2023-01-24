@@ -24,7 +24,7 @@ app.use(express.static("."));
 
 httpServer.listen(8081);
 
-app.get("/test", async(req, res) => {
+app.get("/test", async (req, res) => {
   let test = req.query;
   let Data = await model.notifications.findAll();
 
@@ -63,17 +63,6 @@ io.on("connection", (socket) => {
     async ({ senderName, receiverName, type, status, id_user, data }) => {
       const receiver = getUser(receiverName);
       await io.emit("getNotification");
-      alarm_immediately({
-        senderName,
-        status,
-        id_user,
-        start: data.res_bk.start,
-        end: data.res_bk.end,
-        department: data.res_der.label,
-        personality: data.res_per,
-        type: 2,
-      });
-      await io.emit("getNotification");
     }
   );
   // disconnect
@@ -81,6 +70,8 @@ io.on("connection", (socket) => {
     removeUser(socket.id);
   });
 });
+
+alarm_immediately();
 
 app.use("/api", rootRoute);
 
