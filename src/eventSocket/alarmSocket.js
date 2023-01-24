@@ -13,9 +13,9 @@ module.exports = (io) => {
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     let Data = model.notifications.findAll();
     // let test = moment().format("Z");
-    await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
+    // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
-    console.log("array before", alarmBooking);
+    // console.log("array before", alarmBooking);
     Promise.all(
       Data.map(async (ele) => {
         let MM = (await ele.alarmDate.month()) + 1;
@@ -35,7 +35,7 @@ module.exports = (io) => {
             //   (ele1) => ele1.start !== ele.start
             // );
             await io.emit("getNotification");
-            console.log("alarm after", alarmBooking);
+            // console.log("alarm after", alarmBooking);
           }
         );
       })
