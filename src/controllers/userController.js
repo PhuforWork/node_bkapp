@@ -515,7 +515,7 @@ const note_detele = async (req, res) => {
   }
 };
 
-//
+//time max-min booking
 const put_max = async (req, res) => {
   try {
     let { id } = req.params; // id user
@@ -538,6 +538,7 @@ const put_min = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// row note
 const update_row = async (req, res) => {
   try {
     let { id } = req.params;
@@ -549,6 +550,7 @@ const update_row = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
+// test send email
 const test_send_email = async (req, res) => {
   let { email } = req.body;
   // create reusable transporter object using the default SMTP transport
@@ -777,7 +779,7 @@ const notification_get = async (req, res) => {
 };
 const notification_update = async (req, res) => {
   try {
-    let { id } = req.params;
+    let { id } = req.params; //
     let data = { status: true };
     await model.notifications.update(data, { where: { id_user: id } });
     successCode(res, "", "Success update notification");
@@ -787,8 +789,8 @@ const notification_update = async (req, res) => {
 };
 const notification_delete = async (req, res) => {
   try {
-    let { id } = req.params; // id notifi
-    await model.notifications.destroy({ where: { id_user: id } });
+    let { id } = req.params; // id checkbk
+    await model.notifications.destroy({ where: { checkbk: id } });
     successCode(res, "", "Success delete");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");

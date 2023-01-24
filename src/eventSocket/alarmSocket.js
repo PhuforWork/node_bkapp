@@ -14,7 +14,7 @@ module.exports = (io) => {
     let Data = model.notifications.findAll();
     // let test = moment().format("Z");
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
-
+    console.log("AAAaaAAaaaaaaaaaaa",Data);
     // console.log("array before", alarmBooking);
     Promise.all(
       Data.map(async (ele) => {
