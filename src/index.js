@@ -49,6 +49,7 @@ const getUser = (user_name) => {
 };
 
 io.on("connection", (socket) => {
+  alarm_immediately();
   // add user
   chat_app(socket);
   io.emit("client-connect", socket.id);
