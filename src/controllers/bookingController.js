@@ -442,7 +442,6 @@ const notification = async (req, res) => {
       type,
       start,
       checkbk,
-      valueOf: moment(start).valueOf(),
       alarmDate: moment(start).subtract(aft_five_minute),
       end,
       detail,
