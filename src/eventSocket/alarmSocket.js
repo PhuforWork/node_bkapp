@@ -13,10 +13,8 @@ module.exports = (io) => {
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     let Data = await model.notifications.findAll({
       include: ["department_notifies", "persionality_notifies"],
-      raw: true,
-      nest: true,
-      mapToModel: true,
     });
+    Data = JSON.parse(JSON.stringify(Data));
     // let test = moment().format("Z");
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
