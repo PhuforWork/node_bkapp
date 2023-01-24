@@ -74,8 +74,6 @@ io.on("connection", (socket) => {
   });
 });
 
-alarm_immediately();
-
 app.use("/api", rootRoute);
 
 exports = { addNewUser, removeUser, getUser };

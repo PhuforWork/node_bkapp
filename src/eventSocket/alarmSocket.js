@@ -19,7 +19,6 @@ module.exports = (io) => {
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
     // console.log("array before", alarmBooking);
-    console.log("AAAaaAAaaaaaaaaaaa", Data);
     Promise.all(
       Data.map(async (ele) => {
         let alarmDate = await moment(ele.alarmDate);
