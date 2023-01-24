@@ -749,7 +749,8 @@ const notification_alarm = async (data) => {
     today,
     type,
   };
-  let data2 = data.personality;
+  let data2 = data.persionality_notifies;
+  let data3 = data.department_notifies;
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
@@ -761,6 +762,10 @@ const notification_alarm = async (data) => {
         });
       })
     );
+    await model.department_notify.create({
+      ...data3,
+      id_notify: idNotify.id_notify,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -845,5 +850,5 @@ module.exports = {
   notification_alarm,
   update_one_isRead,
   update_all_isRead,
-  updateEmail_user
+  updateEmail_user,
 };
