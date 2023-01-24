@@ -65,10 +65,6 @@ class notifications extends Sequelize.Model {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
-    valueOf: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     alarmDate: {
       type: DataTypes.DATE,
       allowNull: true
