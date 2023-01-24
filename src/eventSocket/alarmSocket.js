@@ -11,15 +11,15 @@ module.exports = (io) => {
   const alarm_immediately = async (data) => {
     // let aft_five_minute = moment.duration("00:05:00");
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
-    let Data = await model.notifications.findAll(
-      { include: ["department_notifies", "persionality_notifies"] },
-      // { raw: true }
-    );
+    let Data = await model.notifications.findAll({
+      include: ["department_notifies", "persionality_notifies"],
+      raw: true,
+    });
     // let test = moment().format("Z");
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
 
     // console.log("array before", alarmBooking);
-    console.log("AAAaaAAaaaaaaaaaaa", Data.notifications);
+    console.log("AAAaaAAaaaaaaaaaaa", Data);
     Promise.all(
       Data.map(async (ele) => {
         let alarmDate = await moment(ele.alarmDate);
