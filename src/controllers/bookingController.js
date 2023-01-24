@@ -307,8 +307,8 @@ const update_dpt_new = async (req, res) => {
     if (data) {
       await model.department.update(data, { where: { id_derp: id } });
       successCode(res, "", "Success Update");
-    }else{
-      failCode(res,{code:15},"Fail update department")
+    } else {
+      failCode(res, { code: 15 }, "Fail update department");
     }
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -426,10 +426,12 @@ const notification = async (req, res) => {
   try {
     let today = moment();
     let { senderName, status, type } = req.body;
-    let { start, end, detail, isCheck } = req.body.data.res_bk;
+    let { start, end, detail, isCheck, checkbk } = req.body.data.res_bk;
     let department = req.body.data.res_der.label;
     let data2 = req.body.data.res_per;
     let data3 = req.body.data.res_der;
+    let aft_five_minute = moment.duration("00:05:00");
+
     console.log("data3", data3);
     let data1 = {
       senderName,
@@ -439,6 +441,8 @@ const notification = async (req, res) => {
       department,
       type,
       start,
+      checkbk,
+      alarmDate: moment(start).subtract(aft_five_minute),
       end,
       detail,
       isRead: true,
