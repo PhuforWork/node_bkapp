@@ -13,6 +13,7 @@ module.exports = (io) => {
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     let Data = await model.notifications.findAll({
       include: ["department_notifies", "persionality_notifies"],
+      raw: true,
       nest: true,
     });
     // let test = moment().format("Z");
