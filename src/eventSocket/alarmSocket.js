@@ -19,11 +19,12 @@ module.exports = (io) => {
     console.log("AAAaaAAaaaaaaaaaaa", Data);
     Promise.all(
       Data.map(async (ele) => {
-        let MM = (await ele.alarmDate.month()) + 1;
-        let DD = await ele.alarmDate.date();
-        let hh = await ele.alarmDate.hours();
-        let mm = await ele.alarmDate.minutes();
-        let ss = await ele.alarmDate.second();
+        let alarmDate = moment(ele.alarmDate);
+        let MM = (await alarmDate.month()) + 1;
+        let DD = await alarmDate.date();
+        let hh = await alarmDate.hours();
+        let mm = await alarmDate.minutes();
+        let ss = await alarmDate.second();
         //
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
