@@ -15,10 +15,11 @@ module.exports = (io) => {
     Data = JSON.stringify(Data);
     // let test = moment().format("Z");
     // await alarmBooking.push({ ...data, date_early_5: datetimeLocal });
-    console.log("AAAaaAAaaaaaaaaaaa",Data);
+
     // console.log("array before", alarmBooking);
     Promise.all(
       Data.map(async (ele) => {
+        console.log("AAAaaAAaaaaaaaaaaa", ele.alarmDate);
         let MM = (await ele.alarmDate.month()) + 1;
         let DD = await ele.alarmDate.date();
         let hh = await ele.alarmDate.hours();
