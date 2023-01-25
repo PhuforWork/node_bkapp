@@ -762,10 +762,6 @@ const notification_alarm = async (data) => {
         });
       })
     );
-    await model.department_notify.create({
-      ...data3,
-      id_notify: idNotify.id_notify,
-    });
   } catch (error) {
     console.log(error);
   }
