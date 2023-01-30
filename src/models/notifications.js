@@ -88,13 +88,6 @@ class notifications extends Sequelize.Model {
           { name: "id_user" },
         ]
       },
-      {
-        name: "today",
-        using: "BTREE",
-        fields: [
-          { name: "today" },
-        ]
-      },
     ]
   });
   }
