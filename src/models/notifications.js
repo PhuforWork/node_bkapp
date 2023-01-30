@@ -38,8 +38,7 @@ class notifications extends Sequelize.Model {
     },
     today: {
       type: DataTypes.DATE,
-      allowNull: true,
-      unique: "today"
+      allowNull: true
     },
     department: {
       type: DataTypes.STRING(255),
@@ -63,7 +62,8 @@ class notifications extends Sequelize.Model {
     },
     checkbk: {
       type: DataTypes.DOUBLE,
-      allowNull: true
+      allowNull: true,
+      unique: "checkbk"
     },
     alarmDate: {
       type: DataTypes.DATE,
@@ -83,11 +83,11 @@ class notifications extends Sequelize.Model {
         ]
       },
       {
-        name: "today",
+        name: "checkbk",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "today" },
+          { name: "checkbk" },
         ]
       },
       {
