@@ -26,6 +26,11 @@ module.exports = (io) => {
         let mm = await alarmDate.minutes();
         let ss = await alarmDate.second();
         //
+        let data1 = await model.notifications.findAll({
+          where: { alarmDate: ele.alarmDate },
+          include: ["department_notifies", "persionality_notifies"],
+        });
+        console.log(data1);
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
