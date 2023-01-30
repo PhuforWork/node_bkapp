@@ -737,8 +737,17 @@ const test_send_email = async (req, res) => {
 
 // thong bao khi dat lich
 const notification_alarm = async (data) => {
-  let { senderName, status, id_user, start, end, department, today, type } =
-    data;
+  let {
+    senderName,
+    status,
+    id_user,
+    start,
+    end,
+    department,
+    today,
+    type,
+    checkbk,
+  } = data;
   let data1 = {
     senderName,
     status,
@@ -748,9 +757,9 @@ const notification_alarm = async (data) => {
     department,
     today,
     type,
+    checkbk,
   };
   let data2 = data.persionality_notifies;
-  let data3 = data.department_notifies;
   try {
     let idNotify = await model.notifications.create(data1);
     Promise.all(
