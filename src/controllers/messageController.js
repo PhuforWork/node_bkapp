@@ -45,9 +45,9 @@ const delete_mes = async (req, res) => {
 const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    let { images } = req.body;
-    console.log("daaaaaataaaaaaa", req.body);
-    successCode(res, data, "Success");
+    let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
+
+    successCode(res, image_url, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
