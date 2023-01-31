@@ -45,7 +45,7 @@ const delete_mes = async (req, res) => {
 const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    let data = req.file;
+    let data = req.files;
     Promise.all(
       data.map(async (ele) => {
         let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
