@@ -746,6 +746,7 @@ const notification_alarm = async (data) => {
     department,
     today,
     type,
+    detail,
     checkbk
   } = data;
   let data1 = {
@@ -757,6 +758,7 @@ const notification_alarm = async (data) => {
     department,
     today,
     type,
+    detail,
     checkbk
   };
   let data2 = data.persionality_notifies;
