@@ -8,8 +8,9 @@ const {
   send_links,
 } = require("../controllers/messageController");
 const upload = require("../Middlewares/upload");
+const uploadMes = require("../Middlewares/uploadMes");
 const messRoute = express.Router();
-let multipleUpload = upload.fields([{name:'images',maxCount:100}])
+let multipleUpload = uploadMes.fields([{name:'images',maxCount:100}])
 
 messRoute.get("/get-contacts", get_contact_messs);
 
