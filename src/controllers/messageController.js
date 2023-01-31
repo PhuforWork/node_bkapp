@@ -6,7 +6,7 @@ const model = init_models(sequelize);
 const get_contact_messs = async (req, res) => {
   try {
     const getAllContact = await model.users.findAll({
-      include: [],
+      include: ["select_types", "persionalities", "departments","content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, getAllContact, "Get Success");
