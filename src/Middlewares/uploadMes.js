@@ -8,6 +8,6 @@ const storage = multer.diskStorage({
     cb(null, fileNameNew);
   },
 });
-const uploadMes = multer({ storage });
+const upload1 = multer({ storage });
 
-module.exports = uploadMes;
+module.exports = upload1;
