@@ -49,12 +49,13 @@ const send_media = async (req, res) => {
     Promise.all(
       data.map(async (ele) => {
         let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
-        await model.media_message.create({ image_url, id_user: id });
+        // await model.media_message.create({ image_url, id_user: id });
         successCode(res, "", "Success");
       })
     );
   } catch (error) {
-    failCode(res, error, "Error BackEnd");
+    console.log("errrorr",error);
+    failCode(res,"Error BackEnd");
   }
 };
 const send_files = async (req, res) => {};
