@@ -17,7 +17,7 @@ const {
   update_dpt_new,
   delete_department,
 } = require("../controllers/bookingController");
-const { guest_booking } = require("../controllers/guestController");
+
 const upload = require("../Middlewares/upload");
 const bookingRoute = express.Router();
 
