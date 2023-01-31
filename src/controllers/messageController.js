@@ -6,7 +6,12 @@ const model = init_models(sequelize);
 const get_contact_messs = async (req, res) => {
   try {
     const getAllContact = await model.users.findAll({
-      include: ["select_types", "persionalities", "departments","content_messages"],
+      include: [
+        "select_types",
+        "persionalities",
+        "departments",
+        "content_messages",
+      ],
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, getAllContact, "Get Success");
@@ -15,4 +20,39 @@ const get_contact_messs = async (req, res) => {
   }
 };
 
-module.exports = { get_contact_messs };
+const send_mess = async (req, res) => {
+  try {
+    let { id } = req.params; //id_user
+    let { text_mes, date_mes, status } = req.body;
+    let data = { text_mes, date_mes, status, id_user: id };
+    await model.content_message.create(data);
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+
+const delete_mes = async (req, res) => {
+  try {
+    let { id } = req.params; //id_content_mes
+    await model.content_message.destroy({ where: { id_content: id } });
+    successCode(res, "", "Delete Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+
+const send_media = async (req, res) => {
+    
+};
+const send_files = async (req, res) => {};
+const send_links = async (req, res) => {};
+
+module.exports = {
+  get_contact_messs,
+  send_mess,
+  delete_mes,
+  send_media,
+  send_files,
+  send_links,
+};
