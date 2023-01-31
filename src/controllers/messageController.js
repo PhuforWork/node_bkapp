@@ -45,8 +45,8 @@ const delete_mes = async (req, res) => {
 const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    let data = req.body;
-    console.log("daaaaaataaaaaaa",data);
+    let {images} = req.body;
+    console.log("daaaaaataaaaaaa",images);
     successCode(res, data, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
