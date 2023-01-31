@@ -49,7 +49,7 @@ const send_media = async (req, res) => {
 
     successCode(res, image_url, "Success");
   } catch (error) {
-    errorCode(res, "Error BackEnd");
+    failCode(res, error,"Error BackEnd");
   }
 };
 const send_files = async (req, res) => {};
