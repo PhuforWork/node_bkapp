@@ -29,25 +29,15 @@ module.exports = (io) => {
         await schedule.scheduleJob(
           `${ss} ${mm} ${hh} ${DD} ${MM} *`,
           async () => {
-            let data1 = await model.notifications.findAll({
-              where: { alarmDate: ele.alarmDate },
-              include: ["department_notifies", "persionality_notifies"],
+            let today = moment();
+            await io.emit("getNotification");
+            await notification_alarm({
+              ...ele,
+              today: today,
+              type: 2,
+              status: false,
+              checkbk: ele1.checkbk + 19,
             });
-            data1 = JSON.parse(JSON.stringify(data1));
-            console.log("ABC", data1);
-            Promise.all(
-              data1.map(async (ele1) => {
-                let today = moment();
-                await io.emit("getNotification");
-                await notification_alarm({
-                  ...ele1,
-                  today: today,
-                  type: 2,
-                  status: false,
-                  checkbk: ele1.checkbk+19,
-                });
-              })
-            );
             await io.emit("getNotification");
           }
         );
