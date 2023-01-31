@@ -44,7 +44,7 @@ module.exports = (io) => {
                   today: today,
                   type: 2,
                   status: false,
-                  checkbk: ele1.checkbk,
+                  checkbk: ele1.checkbk+19,
                 });
               })
             );
