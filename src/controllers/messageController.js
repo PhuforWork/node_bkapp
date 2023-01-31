@@ -46,6 +46,7 @@ const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
     let data = req.body;
+    console.log("daaaaaataaaaaaa",data);
     successCode(res, data, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
