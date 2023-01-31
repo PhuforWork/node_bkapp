@@ -43,14 +43,13 @@ const delete_mes = async (req, res) => {
 };
 
 const send_media = async (req, res) => {
-  try {
+//   try {
     // let { id } = req.params; //id_user
     let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
-
     successCode(res, image_url, "Success");
-  } catch (error) {
-    failCode(res, error,"Error BackEnd");
-  }
+//   } catch (error) {
+//     failCode(res, error,"Error BackEnd");
+//   }
 };
 const send_files = async (req, res) => {};
 const send_links = async (req, res) => {};
