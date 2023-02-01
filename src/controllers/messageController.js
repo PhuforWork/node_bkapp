@@ -6,10 +6,22 @@ const moment = require("moment");
 const fs = require("fs");
 const path = require("path");
 
+const get_all_contact = async (req, res) => {
+  try {
+    const getAllContact = await model.users.findAll({
+      include: ["content_messages"],
+      attributes: { exclude: ["_password", "email"] },
+    });
+    successCode(res, getAllContact, "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+
 const get_contact_messs = async (req, res) => {
   let { id } = req.params; //id user
   try {
-    const getAllContact = await model.users.findAll({
+    const get_id_Contact = await model.users.findAll({
       include: [
         "select_types",
         "persionalities",
@@ -22,7 +34,7 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
-    successCode(res, getAllContact, "Get Success");
+    successCode(res, get_id_Contact, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -161,6 +173,7 @@ const delete_links = async (req, res) => {
 
 module.exports = {
   get_contact_messs,
+  get_all_contact,
   send_mess,
   delete_mes,
   send_media,
