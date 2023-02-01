@@ -7,6 +7,7 @@ const fs = require("fs");
 const path = require("path");
 
 const get_contact_messs = async (req, res) => {
+  let { id } = req.params; //id user
   try {
     const getAllContact = await model.users.findAll({
       include: [
@@ -18,6 +19,7 @@ const get_contact_messs = async (req, res) => {
         "links_messages",
         "file_messages",
       ],
+      where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, getAllContact, "Get Success");
