@@ -50,8 +50,7 @@ const send_media = async (req, res) => {
     Promise.all(
       data.map(async (ele) => {
         let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
-        console.log(image_url);
-        await model.media_message.create({ image_url, id_user: id });
+        // await model.media_message.create({ image_url, id_user: id });
       })
     );
     successCode(res, "", "Success");
@@ -67,8 +66,7 @@ const send_files = async (req, res) => {
     console.log("daaatssa", data);
     Promise.all(
       data.map(async (ele) => {
-        let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
-        console.log(image_url);
+        let file_url = "http://110.35.173.82:8081" + "/" + ele.path;
         await model.file_message.create({ image_url, id_user: id });
       })
     );
@@ -82,7 +80,7 @@ const send_links = async (req, res) => {
   try {
     let { id } = req.params;
     let { links } = req.body;
-    let data = links;
+    let data = { links, id_user: id };
     await model.links_message.create(data);
     successCode(res, "", "Success");
   } catch (error) {
