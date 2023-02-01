@@ -58,8 +58,8 @@ const send_media = async (req, res) => {
 const send_files = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    // let {images} = req.files;
-    console.log("daaatssa",req);
+    let data = req.files;
+    console.log("daaatssa",data);
     let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
     // await model.media_message.create({ image_url, id_user: id });
     successCode(res, "", "Success");
