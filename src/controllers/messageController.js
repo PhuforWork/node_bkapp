@@ -14,6 +14,9 @@ const get_contact_messs = async (req, res) => {
         "persionalities",
         "departments",
         "content_messages",
+        "media_messages",
+        "links_messages",
+        "file_messages",
       ],
       attributes: { exclude: ["_password", "email"] },
     });
@@ -156,5 +159,5 @@ module.exports = {
   send_links,
   delete_media,
   delete_file,
-  delete_links
+  delete_links,
 };
