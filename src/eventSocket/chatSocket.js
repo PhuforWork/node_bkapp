@@ -1,4 +1,4 @@
-const getUser = require("../../src/index");
+// const getUser = require("../../src/index");
 
 module.exports = (io) => {
   const chat_app = async (socket) => {
