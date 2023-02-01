@@ -112,9 +112,9 @@ const delete_media = async (req, res) => {
     let pathLinks = await model.media_message.findByPk(id);
     console.log(pathLinks);
     let pathSubstring = JSON.parse(JSON.stringify(pathLinks));
-    console.log("substring",pathSubstring.images.substring(25));
-    // fs.unlinkSync(process.cwd() + "/" + path.images);
-    // await model.media_message.destroy({ where: { id_media: id } });
+    pathSubstring = pathSubstring.images.substring(25);
+    fs.unlinkSync(process.cwd() + "/" + pathSubstring);
+    await model.media_message.destroy({ where: { id_media: id } });
     successCode(res, "", "Success");
   } catch (error) {
     console.log(error);
