@@ -48,10 +48,10 @@ const send_media = async (req, res) => {
     let data = req.files;
     console.log("daaatssa", data);
     Promise.all(
-      data.map((ele) => {
+      data.map(async (ele) => {
         let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
         console.log(image_url);
-        // await model.media_message.create({ image_url, id_user: id });
+        await model.media_message.create({ image_url, id_user: id });
       })
     );
     successCode(res, "", "Success");
@@ -66,10 +66,10 @@ const send_files = async (req, res) => {
     let data = req.files;
     console.log("daaatssa", data);
     Promise.all(
-      data.map((ele) => {
+      data.map(async (ele) => {
         let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
         console.log(image_url);
-        // await model.media_message.create({ image_url, id_user: id });
+        await model.file_message.create({ image_url, id_user: id });
       })
     );
     successCode(res, "", "Success");
@@ -79,8 +79,15 @@ const send_files = async (req, res) => {
   }
 };
 const send_links = async (req, res) => {
-  let {id} = req.params;
-  let {} = req.body;
+  try {
+    let { id } = req.params;
+    let { links } = req.body;
+    let data = links;
+    await model.links_message.create(data);
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
 };
 
 module.exports = {
