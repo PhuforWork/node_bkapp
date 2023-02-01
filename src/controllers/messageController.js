@@ -29,8 +29,8 @@ const get_contact_messs = async (req, res) => {
 const send_mess = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    let { text_mes, date_mes, status } = req.body;
-    let data = { text_mes, date_mes, status, id_user: id };
+    let { text_mes, today, status } = req.body;
+    let data = { text_mes, today, status, id_user: id };
     await model.content_message.create(data);
     successCode(res, "", "Success");
   } catch (error) {
