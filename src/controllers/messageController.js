@@ -115,6 +115,7 @@ const delete_media = async (req, res) => {
     // await model.media_message.destroy({ where: { id_media: id } });
     successCode(res, "", "Success");
   } catch (error) {
+    console.log(error);
     errorCode(res, "Error BackEnd");
   }
 };
