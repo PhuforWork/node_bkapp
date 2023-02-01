@@ -36,7 +36,7 @@ module.exports = (io) => {
               today: today,
               type: 2,
               status: false,
-              checkbk: ele1.checkbk + 19,
+              checkbk: ele.checkbk + 19,
             });
             await io.emit("getNotification");
           }
