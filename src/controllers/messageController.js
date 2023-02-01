@@ -49,8 +49,9 @@ const send_media = async (req, res) => {
     console.log("daaatssa",data);
     Promise.all(data.map((ele)=>{
       let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
+      console.log(image_url);
       // await model.media_message.create({ image_url, id_user: id });
-      successCode(res, image_url, "Success");
+      successCode(res,"" , "Success");
     }))
   } catch (error) {
     console.log("errrorr", error);
