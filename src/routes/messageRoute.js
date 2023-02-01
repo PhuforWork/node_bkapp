@@ -15,8 +15,8 @@ const messRoute = express.Router();
 messRoute.get("/get-contacts", get_contact_messs);
 
 messRoute.post("/send-mess", upload.none(), send_mess);
-messRoute.post("/send-files", upload2.single("file"), send_files);
 messRoute.post("/send-images", upload1.array("images"), send_media);
+messRoute.post("/send-files", upload2.array("files"), send_files);
 messRoute.post("/send-links", upload.none(), send_links);
 
 messRoute.delete("/send-mess", delete_mes);
