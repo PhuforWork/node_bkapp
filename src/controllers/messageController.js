@@ -2,6 +2,7 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
+const moment = require("moment");
 
 const get_contact_messs = async (req, res) => {
   try {
@@ -46,11 +47,18 @@ const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
     let data = req.files;
+    let today = moment();
     console.log("daaatssa", data);
     Promise.all(
       data.map(async (ele) => {
         let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
-        // await model.media_message.create({ image_url, id_user: id });
+        await model.media_message.create({
+          images: image_url,
+          today: today,
+          size: ele.size,
+          original_name: ele.originalname,
+          id_user: id,
+        });
       })
     );
     successCode(res, "", "Success");
@@ -63,11 +71,18 @@ const send_files = async (req, res) => {
   try {
     let { id } = req.params; //id_user
     let data = req.files;
+    let today = moment();
     console.log("daaatssa", data);
     Promise.all(
       data.map(async (ele) => {
         let file_url = "http://110.35.173.82:8081" + "/" + ele.path;
-        await model.file_message.create({ image_url, id_user: id });
+        await model.file_message.create({
+          files: file_url,
+          today: today,
+          size: ele.size,
+          original_name: ele.originalname,
+          id_user: id,
+        });
       })
     );
     successCode(res, "", "Success");
@@ -80,7 +95,8 @@ const send_links = async (req, res) => {
   try {
     let { id } = req.params;
     let { links } = req.body;
-    let data = { links, id_user: id };
+    let today = moment();
+    let data = { links, id_user: id, today: today };
     await model.links_message.create(data);
     successCode(res, "", "Success");
   } catch (error) {
