@@ -107,9 +107,10 @@ const send_links = async (req, res) => {
 
 const delete_media = async (req, res) => {
   try {
-    let { id } = req.params;
+    let { id } = req.params; // id media
     let path = await model.media_message.findByPk(id);
     fs.unlinkSync(path.images);
+    await model.media_message.destroy({ where: { id_media: id } });
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -123,5 +124,5 @@ module.exports = {
   send_media,
   send_files,
   send_links,
-  delete_media
+  delete_media,
 };

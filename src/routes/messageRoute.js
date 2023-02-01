@@ -20,7 +20,7 @@ messRoute.post("/send-images/:id", upload1.array("images"), send_media);
 messRoute.post("/send-files/:id", upload2.array("files"), send_files);
 messRoute.post("/send-links", upload.none(), send_links);
 
-messRoute.delete("/delete-mess", delete_mes);
-messRoute.delete("/delete-media", delete_media);
+messRoute.delete("/delete-mess/:id", delete_mes);
+messRoute.delete("/delete-media/:id", delete_media);
 
 module.exports = messRoute;
