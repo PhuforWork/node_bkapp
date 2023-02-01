@@ -78,7 +78,10 @@ const send_files = async (req, res) => {
     failCode(res, "Error BackEnd");
   }
 };
-const send_links = async (req, res) => {};
+const send_links = async (req, res) => {
+  let {id} = req.params;
+  let {} = req.body;
+};
 
 module.exports = {
   get_contact_messs,
