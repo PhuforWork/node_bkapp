@@ -60,7 +60,7 @@ const send_files = async (req, res) => {
     let { id } = req.params; //id_user
     let data = req.files;
     console.log("daaatssa",req.files);
-    let image_url = "http://110.35.173.82:8081" + "/" + req.file.path;
+    // let image_url = "http://110.35.173.82:8081" + "/" + req.files.path;
     // await model.media_message.create({ image_url, id_user: id });
     successCode(res, "", "Success");
   } catch (error) {
