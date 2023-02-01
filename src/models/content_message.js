@@ -16,7 +16,7 @@ class content_message extends Sequelize.Model {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    date_mes: {
+    today: {
       type: DataTypes.DATE,
       allowNull: true
     },
