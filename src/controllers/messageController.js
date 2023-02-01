@@ -3,6 +3,7 @@ const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const moment = require("moment");
+const fs = require("fs");
 
 const get_contact_messs = async (req, res) => {
   try {
@@ -98,6 +99,17 @@ const send_links = async (req, res) => {
     let today = moment();
     let data = { links, id_user: id, today: today };
     await model.links_message.create(data);
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+
+const delete_media = async (req, res) => {
+  try {
+    let { id } = req.params;
+    let path = await model.media_message.findByPk(id);
+    fs.unlinkSync(path.images);
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
