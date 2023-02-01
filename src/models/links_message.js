@@ -24,7 +24,7 @@ class links_message extends Sequelize.Model {
         key: 'id_user'
       }
     },
-    date_mes: {
+    today: {
       type: DataTypes.DATE,
       allowNull: true
     }

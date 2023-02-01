@@ -24,8 +24,16 @@ class media_message extends Sequelize.Model {
         key: 'id_user'
       }
     },
-    date_mes: {
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    today: {
       type: DataTypes.DATE,
+      allowNull: true
+    },
+    original_name: {
+      type: DataTypes.STRING(255),
       allowNull: true
     }
   }, {
