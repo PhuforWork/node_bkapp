@@ -123,4 +123,5 @@ module.exports = {
   send_media,
   send_files,
   send_links,
+  delete_media
 };
