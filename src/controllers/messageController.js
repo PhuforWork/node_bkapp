@@ -137,6 +137,16 @@ const delete_file = async (req, res) => {
   }
 };
 
+const delete_links = async (req, res) => {
+  try {
+    let { id } = req.params; //id links
+    await model.links_message.destroy({ where: { id_links } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "BackEnd");
+  }
+};
+
 module.exports = {
   get_contact_messs,
   send_mess,
@@ -145,5 +155,6 @@ module.exports = {
   send_files,
   send_links,
   delete_media,
-  delete_file
+  delete_file,
+  delete_links
 };
