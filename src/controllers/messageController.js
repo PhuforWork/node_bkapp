@@ -121,6 +121,21 @@ const delete_media = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
+const delete_file = async (req, res) => {
+  try {
+    let { id } = req.params; // id file
+    let pathLinks = await model.file_message.findByPk(id);
+    console.log(pathLinks);
+    let pathSubstring = JSON.parse(JSON.stringify(pathLinks));
+    pathSubstring = pathSubstring.images.substring(25);
+    fs.unlinkSync(process.cwd() + "/" + pathSubstring);
+    await model.file_message.destroy({ where: { id_file: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    console.log(error);
+    errorCode(res, "Error BackEnd");
+  }
+};
 
 module.exports = {
   get_contact_messs,
@@ -130,4 +145,5 @@ module.exports = {
   send_files,
   send_links,
   delete_media,
+  delete_file
 };
