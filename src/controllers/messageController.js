@@ -4,6 +4,7 @@ const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
 const moment = require("moment");
 const fs = require("fs");
+const path = require("path");
 
 const get_contact_messs = async (req, res) => {
   try {
@@ -109,7 +110,8 @@ const delete_media = async (req, res) => {
   try {
     let { id } = req.params; // id media
     let pathLinks = await model.media_message.findByPk(id);
-    let pathSubstring = JSON.parse(JSON.stringify(pathLinks)).substring(25);
+    console.log(pathLinks);
+    // let pathSubstring = JSON.parse(JSON.stringify(pathLinks)).substring(25);
     console.log("substring",pathSubstring);
     // fs.unlinkSync(process.cwd() + "/" + path.images);
     // await model.media_message.destroy({ where: { id_media: id } });
