@@ -415,6 +415,7 @@ const delete_bk = async (req, res) => {
           });
         })
       );
+      console.log("DaiNQ 🚀 -> constdelete_bk= -> dlt", dlt)
       DeleteNotifyByBookingUpdate(dlt.checkbk);
       successCode(res, "", "Success delete");
     } else {
@@ -503,7 +504,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
   })
 }
 const DeleteNotifyByBookingUpdate = (checkbk) => {
-  console.log("DaiNQ 🚀 -> DeleteNotifyByBookingUpdate -> checkbk", checkbk)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
