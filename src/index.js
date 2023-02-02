@@ -46,7 +46,7 @@ const removeUser = (socketId) => {
 
 const getUser = (id_user_receive) => {
   return onlineUser.find((ele) => {
-    ele.id_user === id_user_receive * 1;
+    ele.user_name === "liam97";
   });
 };
 
