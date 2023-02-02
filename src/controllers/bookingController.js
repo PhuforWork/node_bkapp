@@ -414,6 +414,7 @@ const delete_bk = async (req, res) => {
           });
         })
       );
+      DeleteNotifyByBookingUpdate(dlt.checkbk);
       successCode(res, "", "Success delete");
     } else {
       failCode(res, { code: 013 }, "Delete fail");
@@ -491,6 +492,31 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label) => {
         await getNotifyUpdate.save();
         resolve();
       }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
+const DeleteNotifyByBookingUpdate = (checkbk) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //get item will be update by checkbk
+      const getNotifyUpdate = await model.notifications.findOne({
+        where: { checkbk: checkbk }
+      });
+      const getdepart = await model.department_notify.findOne({
+        where: { id_notify: getNotifyUpdate.id_notify }
+      });
+      const getpPersonal = await model.persionality_notify.findOne({
+        where: { id_notify: getNotifyUpdate.id_notify }
+      });
+
+      if (getNotifyUpdate) {
+        await getdepart.destroy();
+        await getNotifyUpdate.destroy();
+        await getpPersonal.destroy();
+      }
+      resolve();
     } catch (e) {
       reject(e);
     }
