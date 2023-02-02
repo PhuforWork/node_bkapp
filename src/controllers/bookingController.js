@@ -395,9 +395,8 @@ const delete_bk = async (req, res) => {
     let { id } = req.params; //id booking
     const check = await model.booking_info.findByPk(id);
     const dlt = await model.booking_info.findAll({
-      where: { id_check_delete: check.id_check_delete },
+      where: { id_check_delete: check.id_check_delete }, raw: true
     });
-    console.log("DaiNQ 🚀 -> constdelete_bk= -> dlt", dlt)
     if (check) {
       Promise.all(
         dlt.map(async (values) => {
