@@ -46,14 +46,19 @@ const get_contact_messs = async (req, res) => {
 const send_mess = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    let { text_mes, today, status, id_user_send, id_user_recive } = req.body;
+    let today = moment();
+    let { text_mes, id_user_send, id_user_recive } = req.body;
+    let images_user_send = await model.users.findByPk(id_user_send);
+    let images_user_recive = await model.users.findByPk(id_user_recive);
     let data = {
       text_mes,
       today,
-      status,
+      status: false,
       id_user: id,
       id_user_send,
       id_user_recive,
+      images_user_send,
+      images_user_recive
     };
     await model.content_message.create(data);
     successCode(res, "", "Success");
