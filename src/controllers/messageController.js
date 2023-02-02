@@ -57,8 +57,8 @@ const send_mess = async (req, res) => {
       id_user: id,
       id_user_send,
       id_user_receive,
-      avatar_send,
-      avatar_receive,
+      avatar_send:avatar_send.image_url,
+      avatar_receive: avatar_receive.image_url,
     };
     await model.content_message.create(data);
     successCode(res, "", "Success");
