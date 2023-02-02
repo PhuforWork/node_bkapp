@@ -480,15 +480,14 @@ const updateNotifyByBookingUpdate = (checkbk, start, end) => {
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      const getNotifyUpdate = await model.notifications.findOne({
-        where: { checkbk: checkbk }
-      });
-      if (getNotifyUpdate) {
-        getNotifyUpdate.start = start;
-        getNotifyUpdate.end = end;
-        await getNotifyUpdate.save();
-        resolve();
-      }
+      await model.notifications.update(
+        {
+          start: start,
+          end: end,
+        }, //what going to be updated
+        { where: { checkbk: checkbk } } // where clause
+      )
+      resolve();
     } catch (e) {
       reject(e);
     }
