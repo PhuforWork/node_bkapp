@@ -71,8 +71,9 @@ io.on("connection", (socket) => {
   );
   //
 
+  console.log("1",onlineUser);
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    console.log(onlineUser);
+    console.log("2",onlineUser);
     let onlineUserNew = [...onlineUser];
     onlineUserNew.map(async (ele) => {
       if (ele.id_user === id_user_receive) {
