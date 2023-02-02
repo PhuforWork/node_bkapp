@@ -71,6 +71,7 @@ io.on("connection", (socket) => {
   );
   //
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
+    console.log({ id_user_receive, msg });
     const receiver = getUser(id_user_receive);
     await io.to(receiver.socketId).emit("getMessage", msg);
     await chat_app();
