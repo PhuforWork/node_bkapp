@@ -495,9 +495,11 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         await getNotifyUpdate.save();
       }
       if (getPersional) {
-        const maps = getPersional.map((item, idx) => {
-          item.label = personality[idx];
-        })
+        if (getPersional.length > 1) {
+          getPersional.forEach((item, idx) => {
+            item.label = personality[idx];
+          })
+        }
         console.log("DaiNQ 🚀 -> maps -> maps", maps)
         // await maps.save();
       }
