@@ -68,6 +68,10 @@ class notifications extends Sequelize.Model {
     alarmDate: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    isNotify: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     sequelize,
