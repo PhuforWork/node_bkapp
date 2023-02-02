@@ -73,8 +73,10 @@ io.on("connection", (socket) => {
   );
   //
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    console.log(id_user_receive);
-    const receiver = await getUser(id_user_receive);
+    let receiver = onlineUser.find((ele) => {
+      ele.id_user == id_user_receive;
+    });
+    console.log(receiver);
     await io.to(receiver.socketId).emit("getMessage", msg);
     await chat_app();
   });
