@@ -72,10 +72,12 @@ io.on("connection", (socket) => {
     }
   );
   //
-  console.log("1",onlineUser);
+
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    let receiver = onlineUser.find((ele) => {
-      ele.id_user == id_user_receive;
+    let receiver = onlineUser.map((ele) => {
+      if(ele.id_user === id_user_receive){
+        return ele;
+      };
     });
     console.log("2",receiver);
     await io.to(receiver.socketId).emit("getMessage", msg);
