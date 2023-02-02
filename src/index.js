@@ -51,14 +51,12 @@ const removeUser = (socketId) => {
 // };
 
 io.on("connection", (socket) => {
-  // alarm_immediately();
   // add user
-  // chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
       await addNewUser(data.user_name, data.id_user, socket.id, data.isNotify);
-      // alarm_immediately();
+      alarm_immediately();
     }
   });
   //send notification
@@ -78,8 +76,8 @@ io.on("connection", (socket) => {
     onlineUserNew.map(async (ele) => {
       if (ele.id_user === id_user_receive) {
         console.log(ele.socketId);
-        await io.to(ele.socketId).emit("getMessage", msg);
-        await chat_app();
+        await io.emit("getMessage", msg);
+        // await chat_app();
       }
     });
   });
