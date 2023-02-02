@@ -484,10 +484,9 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
       });
-      const getPersional = await model.persionality_notify.findAll({
+      await model.persionality_notify.update(personality, {
         where: { id_notify: getNotifyUpdate.id_notify }
       });
-      const clone = [];
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
@@ -495,11 +494,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
       }
-      if (getPersional) {
-        getPersional = personality;
-        await getPersional.save();
-      }
-
       resolve();
     } catch (e) {
       reject(e);
