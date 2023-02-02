@@ -376,7 +376,7 @@ const update_booking = async (req, res) => {
               },
               { where: { id_booking: ele.id_booking } }
             );
-            updateNotifyByBookingUpdate(ele.checkbk, start, end, label);
+            updateNotifyByBookingUpdate(ele.checkbk, start, end, label, personality);
           })
         );
         successCode(res, "", "Add booking success");
@@ -477,12 +477,16 @@ const notification = async (req, res) => {
   }
 };
 //func update notifications item when update booking info
-const updateNotifyByBookingUpdate = (checkbk, start, end, label) => {
+const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) => {
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> personality", personality)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
+      });
+      const getPersional = await model.persionality_notify.findAll({
+        where: { id_notify: getNotifyUpdate.id_notify }
       });
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
@@ -490,8 +494,14 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label) => {
         getNotifyUpdate.department = label;
         getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
-        resolve();
       }
+      // if (getPersional) {
+      //   const maps = getPersional.map((item, idx) => {
+      //   })
+      //   await getPersional.save();
+      // }
+
+      resolve();
     } catch (e) {
       reject(e);
     }
