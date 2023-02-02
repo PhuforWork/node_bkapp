@@ -8,15 +8,15 @@ const path = require("path");
 
 const get_all_contact = async (req, res) => {
   let { id } = req.params;
-  console.log("id",id);
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = JSON.parse(JSON.stringify(getAllContact));
-    let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
-    successCode(res, getAllNewContact, "Success");
+    getAllContact = getAllContact.filter((ele) => ele.user_name === 'quocdai');
+    console.log(getAllContact);
+    successCode(res, getAllContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
