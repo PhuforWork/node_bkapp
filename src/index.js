@@ -45,6 +45,7 @@ const removeUser = (socketId) => {
 };
 
 const getUser = (id_user_receive) => {
+  console.log(onlineUser);
   return onlineUser.find((user) => user.id_user == id_user_receive);
 };
 
@@ -63,7 +64,7 @@ io.on("connection", (socket) => {
   socket.on(
     "sendNotification",
     async ({ senderName, receiverName, type, status, id_user, data }) => {
-      const receiver = await getUser(receiverName);
+      const receiver = getUser(receiverName);
       await io.emit("getNotification");
       await alarm_immediately();
       await io.emit("getNotification");
@@ -71,7 +72,7 @@ io.on("connection", (socket) => {
   );
   //
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    const receiver = getUser(id_user_receive);
+    const receiver = await getUser(id_user_receive);
     console.log(receiver);
     await io.to(receiver.socketId).emit("getMessage", msg);
     await chat_app();
