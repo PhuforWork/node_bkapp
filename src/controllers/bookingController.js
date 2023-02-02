@@ -487,7 +487,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getPersional = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }
       });
-      console.log("DaiNQ 🚀 -> returnnewPromise -> getPersional", getPersional)
       const clone = [];
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
@@ -496,10 +495,10 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
       }
-      // if (getPersional) {
-      //   getPersional.forEach((item, idx) => clone.push(...item.label = personality[idx].label))
-      //   // await maps.save();
-      // }
+      if (getPersional) {
+        getPersional = personality;
+        await getPersional.save();
+      }
 
       resolve();
     } catch (e) {
