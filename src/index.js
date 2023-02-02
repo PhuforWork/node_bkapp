@@ -77,7 +77,7 @@ io.on("connection", (socket) => {
     let onlineUserNew = [...onlineUser];
     onlineUserNew.map(async (ele) => {
       if (ele.id_user === id_user_receive) {
-        console.log(ele);
+        console.log(ele.socketId);
         await io.to(ele.socketId).emit("getMessage", msg);
         await chat_app();
       }
