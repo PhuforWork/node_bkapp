@@ -44,16 +44,16 @@ const removeUser = (socketId) => {
   onlineUser = onlineUser.filter((user) => user.socketId !== socketId);
 };
 
-const getUser = (id_user_receive) => {
-  return onlineUser.find((ele) => {
-    ele.user_name === "liam97";
-  });
-};
+// const getUser = (id_user_receive) => {
+//   return onlineUser.find((ele) => {
+//     ele.user_name === "liam97";
+//   });
+// };
 
 io.on("connection", (socket) => {
   // alarm_immediately();
   // add user
-  chat_app(socket);
+  // chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
