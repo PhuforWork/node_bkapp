@@ -495,11 +495,12 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
       }
-      // if (getPersional) {
-      //   const maps = getPersional.map((item, idx) => {
-      //   })
-      //   await getPersional.save();
-      // }
+      if (getPersional) {
+        const maps = getPersional.map((item, idx) => {
+          item.label = personality[idx];
+        })
+        await maps.save();
+      }
 
       resolve();
     } catch (e) {
