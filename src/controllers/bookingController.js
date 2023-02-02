@@ -328,7 +328,7 @@ const update_booking = async (req, res) => {
   console.log("DaiNQ 🚀 -> constupdate_booking= -> req", req.body)
   try {
     let { id } = req.params; // id booking
-    let { start, end, detail, id_orther_user, checkbk } = req.body;
+    let { start, end, detail, id_orther_user } = req.body;
     let _values = req.body.service._values;
     let label = req.body.department.label;
     let personality = req.body.personality;
@@ -377,9 +377,9 @@ const update_booking = async (req, res) => {
               },
               { where: { id_booking: ele.id_booking } }
             );
+            updateNotifyByBookingUpdate(ele.checkbk, start, end);
           })
         );
-        updateNotifyByBookingUpdate(checkbk, start, end);
         successCode(res, "", "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 11");
