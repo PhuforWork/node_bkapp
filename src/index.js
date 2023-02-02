@@ -44,16 +44,16 @@ const removeUser = (socketId) => {
   onlineUser = onlineUser.filter((user) => user.socketId !== socketId);
 };
 
-const getUser = (id_user_receive) => {
-  return onlineUser.find((ele) => {
-    ele.user_name === "liam97";
-  });
-};
+// const getUser = (id_user_receive) => {
+//   return onlineUser.find((ele) => {
+//     ele.user_name === "liam97";
+//   });
+// };
 
 io.on("connection", (socket) => {
   // alarm_immediately();
   // add user
-  chat_app(socket);
+  // chat_app(socket);
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
@@ -72,9 +72,12 @@ io.on("connection", (socket) => {
     }
   );
   //
+  console.log("1",onlineUser);
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    console.log(id_user_receive);
-    const receiver = await getUser(id_user_receive);
+    let receiver = onlineUser.filter((ele) => {
+      ele.id_user == id_user_receive;
+    });
+    console.log("2",receiver);
     await io.to(receiver.socketId).emit("getMessage", msg);
     await chat_app();
   });
@@ -86,4 +89,4 @@ io.on("connection", (socket) => {
 alarm_immediately();
 app.use("/api", rootRoute);
 
-exports = { addNewUser, removeUser, getUser };
+exports = { addNewUser, removeUser};
