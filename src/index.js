@@ -45,8 +45,8 @@ const removeUser = (socketId) => {
 };
 
 const getUser = (id_user_receive) => {
-  console.log(onlineUser);
-  return onlineUser.filter((ele) => ele.id_user == id_user_receive);
+  console.log("1",id_user_receive,onlineUser.filter((ele) => ele.id_user === id_user_receive));
+  return onlineUser.filter((ele) => ele.id_user === id_user_receive)
 };
 
 io.on("connection", (socket) => {
