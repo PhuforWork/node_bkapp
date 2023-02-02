@@ -495,15 +495,9 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         await getNotifyUpdate.save();
       }
       if (getPersional) {
-        if (getPersional.length > 1) {
-          getPersional.forEach((item, idx) => {
-            item.label = personality[idx];
-          })
-        } else {
-          getPersional.label = personality
-        }
-
-        console.log("DaiNQ 🚀 -> maps -> maps", maps)
+        const clone = [];
+        getPersional.forEach((item, idx) => clone.push({ ...item.label = personality[idx].label }))
+        console.log("DaiNQ 🚀 -> maps -> maps", clone)
         // await maps.save();
       }
 
