@@ -485,7 +485,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
       });
-      await model.persionality_notify.update(personality, {
+      await model.persionality_notify.destroy({
         where: { id_notify: getNotifyUpdate.id_notify },
       });
       if (getNotifyUpdate) {
@@ -505,21 +505,15 @@ const DeleteNotifyByBookingUpdate = (checkbk) => {
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      const getNotifyUpdate = await model.notifications.findOne({
+      await model.notifications.destroy({
         where: { checkbk: checkbk }
       });
-      const getdepart = await model.department_notify.findOne({
+      await model.department_notify.destroy({
         where: { id_notify: getNotifyUpdate.id_notify }
       });
-      const getpPersonal = await model.persionality_notify.findOne({
+      await model.persionality_notify.destroy({
         where: { id_notify: getNotifyUpdate.id_notify }
       });
-
-      if (getNotifyUpdate) {
-        await getdepart.destroy();
-        await getNotifyUpdate.destroy();
-        await getpPersonal.destroy();
-      }
       resolve();
     } catch (e) {
       reject(e);
