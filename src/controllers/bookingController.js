@@ -327,7 +327,7 @@ const delete_department = async (req, res) => {
 const update_booking = async (req, res) => {
   try {
     let { id } = req.params; // id booking
-    let { start, end, detail, id_orther_user } = req.body;
+    let { start, end, detail, id_orther_user, checkbk } = req.body;
     let _values = req.body.service._values;
     let label = req.body.department.label;
     let personality = req.body.personality;
@@ -378,6 +378,7 @@ const update_booking = async (req, res) => {
             );
           })
         );
+        updateNotifyByBookingUpdate(checkbk, start, end);
         successCode(res, "", "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 11");
@@ -474,6 +475,25 @@ const notification = async (req, res) => {
     errorCode(res, "Error Backend");
   }
 };
+
+const updateNotifyByBookingUpdate = (checkbk, start, end) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //get item will be update by checkbk
+      const getNotifyUpdate = await model.notifications.findOne({
+        where: { checkbk: checkbk }
+      });
+      if (getNotifyUpdate) {
+        getNotifyUpdate.start = start;
+        getNotifyUpdate.end = end;
+        await getNotifyUpdate.save();
+        resolve();
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
 
 module.exports = {
   booking_user,
