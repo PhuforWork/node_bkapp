@@ -477,18 +477,17 @@ const notification = async (req, res) => {
 };
 //func update notifications item when update booking info
 const updateNotifyByBookingUpdate = (checkbk, start, end, label) => {
-  console.log("DaiNQ 🚀", checkbk, start, start)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
       });
-      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
         getNotifyUpdate.department = label;
+        getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
         resolve();
       }
