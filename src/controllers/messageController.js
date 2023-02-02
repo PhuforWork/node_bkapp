@@ -14,7 +14,7 @@ const get_all_contact = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = JSON.parse(JSON.stringify(getAllContact));
-    let getAllNewContact = getAllContact.filter((ele) => ele.id_user == id);
+    let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
     successCode(res, getAllNewContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
