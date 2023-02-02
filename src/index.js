@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
   //
 
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    let onlineUserNew = [...onlineUser]
+    let onlineUserNew = [...onlineUser];
     onlineUserNew.map(async (ele) => {
       if (ele.id_user === id_user_receive) {
         console.log(ele);
