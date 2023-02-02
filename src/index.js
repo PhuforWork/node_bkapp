@@ -44,8 +44,9 @@ const removeUser = (socketId) => {
   onlineUser = onlineUser.filter((user) => user.socketId !== socketId);
 };
 
-const getUser = (user_name) => {
-  return onlineUser.find((user) => user.user_name === user_name);
+const getUser = (id_user_receive) => {
+  console.log(onlineUser);
+  return onlineUser.find((user) => user.id_user == id_user_receive);
 };
 
 io.on("connection", (socket) => {
@@ -71,8 +72,8 @@ io.on("connection", (socket) => {
   );
   //
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    console.log({ id_user_receive, msg });
-    const receiver = getUser(id_user_receive);
+    const receiver = await getUser(id_user_receive);
+    console.log(receiver);
     await io.to(receiver.socketId).emit("getMessage", msg);
     await chat_app();
   });
