@@ -71,14 +71,12 @@ io.on("connection", (socket) => {
   );
   //
 
-  console.log("1",onlineUser);
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
     console.log("2",onlineUser);
     let onlineUserNew = [...onlineUser];
     onlineUserNew.map(async (ele) => {
       if (ele.id_user === id_user_receive) {
-        console.log(ele.socketId);
-        await io.emit("getMessage", msg);
+        await io.to(ele.socketId).emit("getMessage", msg);
         // await chat_app();
       }
     });
