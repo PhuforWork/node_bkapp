@@ -395,7 +395,7 @@ const delete_bk = async (req, res) => {
     let { id } = req.params; //id booking
     const check = await model.booking_info.findByPk(id);
     const dlt = await model.booking_info.findAll({
-      where: { id_check_delete: check.id_check_delete },
+      where: { id_check_delete: check.id_check_delete }, raw: true
     });
     if (check) {
       Promise.all(
@@ -414,7 +414,8 @@ const delete_bk = async (req, res) => {
           });
         })
       );
-      DeleteNotifyByBookingUpdate(dlt.checkbk);
+      console.log("DaiNQ 🚀 -> constdelete_bk= -> dlt", dlt)
+      DeleteNotifyByBookingUpdate(dlt[0].checkbk);
       successCode(res, "", "Success delete");
     } else {
       failCode(res, { code: 013 }, "Delete fail");
@@ -502,19 +503,21 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
   })
 }
 const DeleteNotifyByBookingUpdate = (checkbk) => {
-  console.log("DaiNQ 🚀 -> DeleteNotifyByBookingUpdate -> checkbk", checkbk)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      await model.notifications.destroy({
+      const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
       });
-      await model.department_notify.destroy({
-        where: { id_notify: getNotifyUpdate.id_notify }
-      });
-      await model.persionality_notify.destroy({
-        where: { id_notify: getNotifyUpdate.id_notify }
-      });
+      if (getNotifyUpdate) {
+        await model.department_notify.destroy({
+          where: { id_notify: getNotifyUpdate.id_notify }
+        });
+        await model.persionality_notify.destroy({
+          where: { id_notify: getNotifyUpdate.id_notify }
+        });
+        await getNotifyUpdate.destroy()
+      }
       resolve();
     } catch (e) {
       reject(e);
