@@ -325,6 +325,7 @@ const delete_department = async (req, res) => {
 };
 // booking calender
 const update_booking = async (req, res) => {
+  console.log("DaiNQ 🚀 -> constupdate_booking= -> req", req)
   try {
     let { id } = req.params; // id booking
     let { start, end, detail, id_orther_user, checkbk } = req.body;
@@ -477,7 +478,7 @@ const notification = async (req, res) => {
 };
 //func update notifications item when update booking info
 const updateNotifyByBookingUpdate = (checkbk, start, end) => {
-  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> checkbk", checkbk, start, start)
+  console.log("DaiNQ 🚀", checkbk, start, start)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
