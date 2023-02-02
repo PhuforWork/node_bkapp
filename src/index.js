@@ -32,10 +32,10 @@ app.get("/test", async (req, res) => {
 });
 
 let onlineUser = [];
-const addNewUser = async (user_name, socketId, isNotify) => {
+const addNewUser = async (user_name, id_user, socketId, isNotify) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
-      onlineUser.push({ user_name, socketId, isNotify });
+      onlineUser.push({ user_name, id_user, socketId, isNotify });
     await console.log("online user", onlineUser);
   }
 };
@@ -70,14 +70,11 @@ io.on("connection", (socket) => {
     }
   );
   //
-  socket.on(
-    "sendMessage",
-    async ({ id_user_receive, msg }) => {
-      const receiver = getUser(id_user_receive);
-      await io.to(receiver.socketId).emit("getMessage",msg);
-      await chat_app();
-    }
-  );
+  socket.on("sendMessage", async ({ id_user_receive, msg }) => {
+    const receiver = getUser(id_user_receive);
+    await io.to(receiver.socketId).emit("getMessage", msg);
+    await chat_app();
+  });
   // disconnect
   socket.on("disconnect", (reason) => {
     removeUser(socket.id);
