@@ -328,7 +328,7 @@ const update_booking = async (req, res) => {
   console.log("DaiNQ 🚀 -> constupdate_booking= -> req", req.body)
   try {
     let { id } = req.params; // id booking
-    let { start, end, detail, id_orther_user } = req.body;
+    let { start, end, detail, id_orther_user, } = req.body;
     let _values = req.body.service._values;
     let label = req.body.department.label;
     let personality = req.body.personality;
@@ -377,7 +377,7 @@ const update_booking = async (req, res) => {
               },
               { where: { id_booking: ele.id_booking } }
             );
-            updateNotifyByBookingUpdate(ele.checkbk, start, end);
+            updateNotifyByBookingUpdate(ele.checkbk, start, end, label);
           })
         );
         successCode(res, "", "Add booking success");
@@ -477,7 +477,7 @@ const notification = async (req, res) => {
   }
 };
 //func update notifications item when update booking info
-const updateNotifyByBookingUpdate = (checkbk, start, end) => {
+const updateNotifyByBookingUpdate = (checkbk, start, end, label) => {
   console.log("DaiNQ 🚀", checkbk, start, start)
   return new Promise(async (resolve, reject) => {
     try {
@@ -485,9 +485,11 @@ const updateNotifyByBookingUpdate = (checkbk, start, end) => {
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
       });
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
+        getNotifyUpdate.department = label;
         await getNotifyUpdate.save();
         resolve();
       }
