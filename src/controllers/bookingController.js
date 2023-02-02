@@ -415,11 +415,7 @@ const delete_bk = async (req, res) => {
         })
       );
       console.log("DaiNQ 🚀 -> constdelete_bk= -> dlt", dlt)
-<<<<<<< HEAD
       DeleteNotifyByBookingUpdate(dlt[0].checkbk);
-=======
-      DeleteNotifyByBookingUpdate(dlt);
->>>>>>> master
       successCode(res, "", "Success delete");
     } else {
       failCode(res, { code: 013 }, "Delete fail");
