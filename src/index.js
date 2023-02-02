@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
         return ele;
       };
     });
-    console.log("2",receiver);
+    console.log(receiver.socketId);
     await io.to(receiver.socketId).emit("getMessage", msg);
     await chat_app();
   });
