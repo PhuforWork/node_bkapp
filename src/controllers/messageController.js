@@ -8,6 +8,7 @@ const path = require("path");
 
 const get_all_contact = async (req, res) => {
   let { id } = req.params;
+  console.log("id",id);
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
