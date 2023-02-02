@@ -415,7 +415,7 @@ const delete_bk = async (req, res) => {
         })
       );
       console.log("DaiNQ 🚀 -> constdelete_bk= -> dlt", dlt)
-      DeleteNotifyByBookingUpdate(dlt.checkbk);
+      DeleteNotifyByBookingUpdate(dlt);
       successCode(res, "", "Success delete");
     } else {
       failCode(res, { code: 013 }, "Delete fail");
@@ -507,7 +507,7 @@ const DeleteNotifyByBookingUpdate = (checkbk) => {
     try {
       //get item will be update by checkbk
       await model.notifications.destroy({
-        where: { checkbk: checkbk }
+        where: { checkbk: checkbk[0].checkbk }
       });
       await model.department_notify.destroy({
         where: { id_notify: getNotifyUpdate.id_notify }
