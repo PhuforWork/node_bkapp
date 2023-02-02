@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
     if (data.user_name) {
-      await addNewUser(data.user_name, socket.id, data.isNotify);
+      await addNewUser(data.user_name, data.id_user, socket.id, data.isNotify);
       // alarm_immediately();
     }
   });
@@ -67,6 +67,15 @@ io.on("connection", (socket) => {
       await io.emit("getNotification");
       await alarm_immediately();
       await io.emit("getNotification");
+    }
+  );
+  //
+  socket.on(
+    "sendMessage",
+    async ({ id_user_receive, msg }) => {
+      const receiver = getUser(id_user_receive);
+      await io.to(receiver.socketId).emit("getMessage",msg);
+      await chat_app();
     }
   );
   // disconnect
