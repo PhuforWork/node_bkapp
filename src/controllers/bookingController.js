@@ -478,7 +478,6 @@ const notification = async (req, res) => {
 };
 //func update notifications item when update booking info
 const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) => {
-  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> personality", personality)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
@@ -499,7 +498,8 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         const maps = getPersional.map((item, idx) => {
           item.label = personality[idx];
         })
-        await maps.save();
+        console.log("DaiNQ 🚀 -> maps -> maps", maps)
+        // await maps.save();
       }
 
       resolve();
