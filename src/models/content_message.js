@@ -40,19 +40,15 @@ class content_message extends Sequelize.Model {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    files: {
+    media: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    images: {
+    avatar_send: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    images_user_send: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    images_user_recive: {
+    avatar_receive: {
       type: DataTypes.STRING(255),
       allowNull: true
     }
