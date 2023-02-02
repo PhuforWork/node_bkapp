@@ -16,7 +16,7 @@ module.exports = (io) => {
     Data = JSON.parse(JSON.stringify(Data));
     // let test = moment().format("Z");
 
-    console.log("array before", Data);
+    // console.log("array before", Data);
     Promise.all(
       Data.map(async (ele) => {
         let alarmDate = await moment(ele.alarmDate);
