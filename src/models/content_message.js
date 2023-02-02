@@ -47,6 +47,14 @@ class content_message extends Sequelize.Model {
     images: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    images_user_send: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    images_user_recive: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
