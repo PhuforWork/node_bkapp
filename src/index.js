@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
   //
   console.log("1",onlineUser);
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    let receiver = onlineUser.filter((ele) => {
+    let receiver = onlineUser.find((ele) => {
       ele.id_user == id_user_receive;
     });
     console.log("2",receiver);
