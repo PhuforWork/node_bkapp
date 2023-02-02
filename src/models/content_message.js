@@ -12,7 +12,7 @@ class content_message extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    text_mes: {
+    msg: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
@@ -36,7 +36,7 @@ class content_message extends Sequelize.Model {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    id_user_recive: {
+    id_user_receive: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
