@@ -74,15 +74,13 @@ io.on("connection", (socket) => {
   //
 
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    let receiver;
-     onlineUser.map((ele) => {
-      if(ele.id_user === id_user_receive){
-        receiver = ele;
-      };
+    onlineUser.map(async (ele) => {
+      if (ele.id_user === id_user_receive) {
+        console.log(ele);
+        await io.to(ele.socketId).emit("getMessage", msg);
+        await chat_app();
+      }
     });
-    console.log(receiver);
-    await io.to(receiver.socketId).emit("getMessage", msg);
-    await chat_app();
   });
   // disconnect
   socket.on("disconnect", (reason) => {
@@ -92,4 +90,4 @@ io.on("connection", (socket) => {
 alarm_immediately();
 app.use("/api", rootRoute);
 
-exports = { addNewUser, removeUser};
+exports = { addNewUser, removeUser };
