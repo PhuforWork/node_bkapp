@@ -325,7 +325,6 @@ const delete_department = async (req, res) => {
 };
 // booking calender
 const update_booking = async (req, res) => {
-  console.log("DaiNQ 🚀 -> constupdate_booking= -> req", req.body)
   try {
     let { id } = req.params; // id booking
     let { start, end, detail, id_orther_user } = req.body;
@@ -485,6 +484,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end) => {
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }
       });
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
