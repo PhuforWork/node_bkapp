@@ -47,18 +47,18 @@ const send_mess = async (req, res) => {
   try {
     let { id } = req.params; //id_user
     let today = moment();
-    let { text_mes, id_user_send, id_user_recive } = req.body;
-    let images_user_send = await model.users.findByPk(id_user_send);
-    let images_user_recive = await model.users.findByPk(id_user_recive);
+    let { msg, id_user_send, id_user_receive } = req.body;
+    let avatar_send = await model.users.findByPk(id_user_send);
+    let avatar_receive = await model.users.findByPk(id_user_receive);
     let data = {
-      text_mes,
+      msg,
       today,
       status: false,
       id_user: id,
       id_user_send,
-      id_user_recive,
-      images_user_send,
-      images_user_recive
+      id_user_receive,
+      avatar_send,
+      avatar_receive,
     };
     await model.content_message.create(data);
     successCode(res, "", "Success");
