@@ -31,6 +31,7 @@ app.get("/test", async (req, res) => {
   res.send(Data);
 });
 
+let onlineUser = [];
 const addNewUser = async (user_name, id_user, socketId, isNotify) => {
   if (user_name !== null) {
     !onlineUser.some((user) => user.user_name === user_name) &&
@@ -50,8 +51,6 @@ const removeUser = (socketId) => {
 // };
 
 io.on("connection", (socket) => {
-let onlineUser = [];
-
   // add user
   io.emit("client-connect", socket.id);
   socket.on("newUser", async (data) => {
