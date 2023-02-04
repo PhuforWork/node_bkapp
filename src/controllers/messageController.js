@@ -94,26 +94,8 @@ const send_media = async (req, res) => {
     let { id_user_send, id_user_receive } = req.body;
     let avatar_send = await model.users.findByPk(id_user_send);
     let avatar_receive = await model.users.findByPk(id_user_receive);
-    let data_send = {
-      today,
-      status: false,
-      id_user: id_user_send,
-      id_user_send,
-      id_user_receive,
-      avatar_send: avatar_send.image_url,
-      avatar_receive: avatar_receive.image_url,
-    };
-    let data_receive = {
-      today,
-      status: false,
-      id_user: id_user_receive,
-      id_user_send,
-      id_user_receive,
-      avatar_send: avatar_send.image_url,
-      avatar_receive: avatar_receive.image_url,
-    };
-    console.log("data", data);
-    console.log("data 1", req.body);
+    console.log("data",data);
+    console.log("data 1",req.body);
     let today = moment();
     Promise.all(
       data.map(async (ele) => {
@@ -140,10 +122,28 @@ const send_media = async (req, res) => {
             id_user: id,
           });
         }
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          id_user: id_user_send,
+          id_user_send,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
+        });
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          id_user: id_user_receive,
+          id_user_send,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
+        });
       })
     );
-    await model.content_message.create({ ...data_send, media: media });
-    await model.content_message.create({ ...data_receive, media: media });
     successCode(res, "", "Success");
   } catch (error) {
     failCode(res, "Error BackEnd");
