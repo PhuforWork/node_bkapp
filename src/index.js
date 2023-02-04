@@ -25,9 +25,8 @@ app.use(express.static("."));
 httpServer.listen(8081);
 
 app.get("/test", async (req, res) => {
-  let check = await 
-
-  res.send(Data);
+  let Data = await model.messages.findAll({ include: ["messages"] });
+  res.status(200).send(Data);
 });
 
 let onlineUser = [];
@@ -71,7 +70,7 @@ io.on("connection", (socket) => {
   //
 
   socket.on("sendMessage", async ({ id_user_receive, msg }) => {
-    console.log("2",onlineUser);
+    console.log("2", onlineUser);
     let onlineUserNew = [...onlineUser];
     onlineUserNew.map(async (ele) => {
       if (ele.id_user === id_user_receive) {
