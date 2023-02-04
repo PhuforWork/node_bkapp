@@ -20,7 +20,7 @@ messRoute.get("/get-contacts-all/:id", get_all_contact);
 messRoute.get("/get-contacts/:id", get_contact_messs);
 
 messRoute.post("/send-mess/:id", upload.none(), send_mess);
-messRoute.post("/send-media/:id", upload1.array("media"), send_media);
+messRoute.post("/send-media/:id", upload1.none(), send_media);
 // messRoute.post("/send-files/:id", upload2.array("files"), send_files);
 // messRoute.post("/send-links/:id", upload.none(), send_links);
 
