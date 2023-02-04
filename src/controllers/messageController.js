@@ -143,7 +143,6 @@ const send_media = async (req, res) => {
     // );
     successCode(res, "", "Success");
   } catch (error) {
-    console.log("errrorr", error);
     failCode(res, "Error BackEnd");
   }
 };
