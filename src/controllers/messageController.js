@@ -97,55 +97,55 @@ const send_media = async (req, res) => {
     console.log("data",data);
     console.log("data 1",req.body);
     let today = moment();
-    // Promise.all(
-    //   data.map(async (ele) => {
-    //     let media = "http://110.35.173.82:8081" + "/" + ele.path;
-    //     if (
-    //       ele.mimetype === "image/png" ||
-    //       ele.mimetype === "image/jpeg" ||
-    //       ele.mimetype === "image/jpg" ||
-    //       ele.mimetype === "image/gif"
-    //     ) {
-    //       await model.media_message.create({
-    //         images: media,
-    //         today: today,
-    //         size: ele.size,
-    //         original_name: ele.originalname,
-    //         id_user: id,
-    //       });
-    //     } else {
-    //       await model.file_message.create({
-    //         files: file_url,
-    //         today: today,
-    //         size: ele.size,
-    //         original_name: ele.originalname,
-    //         id_user: id,
-    //       });
-    //     }
-    //     await model.content_message.create({
-    //       today,
-    //       status: false,
-    //       media: media,
-    //       msg: false,
-    //       id_user: id_user_send,
-    //       id_user_send,
-    //       id_user_receive,
-    //       avatar_send: avatar_send.image_url,
-    //       avatar_receive: avatar_receive.image_url,
-    //     });
-    //     await model.content_message.create({
-    //       today,
-    //       status: false,
-    //       media: media,
-    //       msg: false,
-    //       id_user: id_user_receive,
-    //       id_user_send,
-    //       id_user_receive,
-    //       avatar_send: avatar_send.image_url,
-    //       avatar_receive: avatar_receive.image_url,
-    //     });
-    //   })
-    // );
+    Promise.all(
+      data.map(async (ele) => {
+        let media = "http://110.35.173.82:8081" + "/" + ele.path;
+        if (
+          ele.mimetype === "image/png" ||
+          ele.mimetype === "image/jpeg" ||
+          ele.mimetype === "image/jpg" ||
+          ele.mimetype === "image/gif"
+        ) {
+          await model.media_message.create({
+            images: media,
+            today: today,
+            size: ele.size,
+            original_name: ele.originalname,
+            id_user: id,
+          });
+        } else {
+          await model.file_message.create({
+            files: file_url,
+            today: today,
+            size: ele.size,
+            original_name: ele.originalname,
+            id_user: id,
+          });
+        }
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          msg: false,
+          id_user: id_user_send,
+          id_user_send,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
+        });
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          msg: false,
+          id_user: id_user_receive,
+          id_user_send,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
+        });
+      })
+    );
     successCode(res, "", "Success");
   } catch (error) {
     failCode(res, "Error BackEnd");
