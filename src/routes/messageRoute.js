@@ -13,7 +13,7 @@ const {
 } = require("../controllers/messageController");
 const upload = require("../Middlewares/upload");
 const upload1 = require("../Middlewares/uploadMes");
-const upload2 = require("../Middlewares/uploadFile");
+// const upload2 = require("../Middlewares/uploadFile");
 const messRoute = express.Router();
 
 messRoute.get("/get-contacts-all/:id", get_all_contact);
