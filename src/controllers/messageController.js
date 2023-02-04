@@ -37,6 +37,7 @@ const get_contact_messs = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     const content_messages = await model.messages.findAll({
+      where: { id_user: id },
       include: ["id_user_receive_mess_receive", "id_user_send_mess_send"],
     });
     successCode(
