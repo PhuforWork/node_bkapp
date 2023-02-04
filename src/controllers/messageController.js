@@ -113,6 +113,26 @@ const send_media = async (req, res) => {
             original_name: ele.originalname,
             id_user: id,
           });
+          await model.content_message.create({
+            today,
+            status: false,
+            media: media,
+            id_user: id_user_send,
+            id_user_send,
+            id_user_receive,
+            avatar_send: avatar_send.image_url,
+            avatar_receive: avatar_receive.image_url,
+          });
+          await model.content_message.create({
+            today,
+            status: false,
+            media: media,
+            id_user: id_user_receive,
+            id_user_send,
+            id_user_receive,
+            avatar_send: avatar_send.image_url,
+            avatar_receive: avatar_receive.image_url,
+          });
         } else {
           await model.file_message.create({
             files: media,
@@ -121,27 +141,27 @@ const send_media = async (req, res) => {
             original_name: ele.originalname,
             id_user: id,
           });
+          await model.content_message.create({
+            today,
+            status: false,
+            media: media,
+            id_user: id_user_send,
+            id_user_send,
+            id_user_receive,
+            avatar_send: avatar_send.image_url,
+            avatar_receive: avatar_receive.image_url,
+          });
+          await model.content_message.create({
+            today,
+            status: false,
+            media: media,
+            id_user: id_user_receive,
+            id_user_send,
+            id_user_receive,
+            avatar_send: avatar_send.image_url,
+            avatar_receive: avatar_receive.image_url,
+          });
         }
-        await model.content_message.create({
-          today,
-          status: false,
-          media: media,
-          id_user: id_user_send,
-          id_user_send,
-          id_user_receive,
-          avatar_send: avatar_send.image_url,
-          avatar_receive: avatar_receive.image_url,
-        });
-        await model.content_message.create({
-          today,
-          status: false,
-          media: media,
-          id_user: id_user_receive,
-          id_user_send,
-          id_user_receive,
-          avatar_send: avatar_send.image_url,
-          avatar_receive: avatar_receive.image_url,
-        });
       })
     );
     successCode(res, "", "Success");
