@@ -90,12 +90,15 @@ const delete_mes = async (req, res) => {
 const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
-    // let data = req.files;
-    let data = req.body;
+    let data = req.files;
+    let { file, id_user_send, id_user_receive } = req.body;
+    let avatar_send = await model.users.findByPk(id_user_send);
+    let avatar_receive = await model.users.findByPk(id_user_receive);
     let today = moment();
     console.log("daaatssa", data);
+    console.log("daaatssabbbbbbbb", { file, id_user_send, id_user_receive });
     // Promise.all(
-    //   data.map(async (ele) => {
+    //   file.map(async (ele) => {
     //     let media = "http://110.35.173.82:8081" + "/" + ele.path;
     //     if (
     //       ele.mimetype === "image/png" ||
