@@ -29,7 +29,6 @@ const get_contact_messs = async (req, res) => {
         "select_types",
         "persionalities",
         "departments",
-        "content_messages",
         "media_messages",
         "links_messages",
         "file_messages",
@@ -37,7 +36,14 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
-    successCode(res, get_id_Contact, "Get Success");
+    const content_messages = await model.messages.findAll({
+      include: ["id_user_receive_mess_receive", "id_user_send_mess_send"],
+    });
+    successCode(
+      res,
+      { ...get_id_Contact, content_messages: content_messages },
+      "Get Success"
+    );
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -60,6 +66,27 @@ const send_mess = async (req, res) => {
       avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
     };
+    await model.mess_sends.create({
+      msg,
+      today,
+      status: false,
+      id_user: id,
+      id_user_send,
+      avatar_send: avatar_send.image_url,
+    });
+    await model.mess_receive.create({
+      msg,
+      today,
+      status: false,
+      id_user: id,
+      id_user_receive,
+      avatar_receive: avatar_receive.image_url,
+    });
+    await model.messages.create({
+      id_user: id,
+      id_user_receive,
+      id_user_send,
+    });
     await model.content_message.create(data);
     successCode(res, "", "Success");
   } catch (error) {
