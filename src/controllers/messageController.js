@@ -115,7 +115,7 @@ const send_media = async (req, res) => {
           });
         } else {
           await model.file_message.create({
-            files: file_url,
+            files: media,
             today: today,
             size: ele.size,
             original_name: ele.originalname,
