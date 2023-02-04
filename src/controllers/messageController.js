@@ -97,9 +97,10 @@ const send_media = async (req, res) => {
     console.log("data",data);
     console.log("data 1",req.body);
     let today = moment();
+    let media;
     Promise.all(
       data.map(async (ele) => {
-        let media = "http://110.35.173.82:8081" + "/" + ele.path;
+        media = "http://110.35.173.82:8081" + "/" + ele.path;
         if (
           ele.mimetype === "image/png" ||
           ele.mimetype === "image/jpeg" ||
@@ -122,28 +123,28 @@ const send_media = async (req, res) => {
             id_user: id,
           });
         }
-        await model.content_message.create({
-          today,
-          status: false,
-          media: media,
-          id_user: id_user_send,
-          id_user_send,
-          id_user_receive,
-          avatar_send: avatar_send.image_url,
-          avatar_receive: avatar_receive.image_url,
-        });
-        await model.content_message.create({
-          today,
-          status: false,
-          media: media,
-          id_user: id_user_receive,
-          id_user_send,
-          id_user_receive,
-          avatar_send: avatar_send.image_url,
-          avatar_receive: avatar_receive.image_url,
-        });
       })
-    );
+      );
+      await model.content_message.create({
+        today,
+        status: false,
+        media: media,
+        id_user: id_user_send,
+        id_user_send,
+        id_user_receive,
+        avatar_send: avatar_send.image_url,
+        avatar_receive: avatar_receive.image_url,
+      });
+      await model.content_message.create({
+        today,
+        status: false,
+        media: media,
+        id_user: id_user_receive,
+        id_user_send,
+        id_user_receive,
+        avatar_send: avatar_send.image_url,
+        avatar_receive: avatar_receive.image_url,
+      });
     successCode(res, "", "Success");
   } catch (error) {
     failCode(res, "Error BackEnd");
