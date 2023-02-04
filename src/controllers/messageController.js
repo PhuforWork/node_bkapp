@@ -91,12 +91,12 @@ const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
     let data = req.files;
-    let { file, id_user_send, id_user_receive } = req.body;
+    let {  id_user_send, id_user_receive } = req.body;
     let avatar_send = await model.users.findByPk(id_user_send);
     let avatar_receive = await model.users.findByPk(id_user_receive);
     let today = moment();
     console.log("daaatssa", data);
-    console.log("daaatssabbbbbbbb", { file, id_user_send, id_user_receive });
+    console.log("daaatssabbbbbbbb", {id_user_send, id_user_receive });
     // Promise.all(
     //   file.map(async (ele) => {
     //     let media = "http://110.35.173.82:8081" + "/" + ele.path;
