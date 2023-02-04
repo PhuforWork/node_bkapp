@@ -94,8 +94,6 @@ const send_media = async (req, res) => {
     let { id_user_send, id_user_receive } = req.body;
     let avatar_send = await model.users.findByPk(id_user_send);
     let avatar_receive = await model.users.findByPk(id_user_receive);
-    console.log("data", data);
-    console.log("data 1", req.body);
     let today = moment();
     Promise.all(
       data.map(async (ele) => {
