@@ -26,7 +26,7 @@ httpServer.listen(8081);
 
 app.get("/test", async (req, res) => {
   let Data = await model.messages.findAll({ include: ["messages"] });
-  res.status(200).send(Data);
+  res.send(Data);
 });
 
 let onlineUser = [];
