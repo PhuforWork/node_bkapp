@@ -21,8 +21,8 @@ messRoute.get("/get-contacts/:id", get_contact_messs);
 
 messRoute.post("/send-mess/:id", upload.single('media'), send_mess);
 messRoute.post("/send-images/:id", upload1.array("media"), send_media);
-messRoute.post("/send-files/:id", upload2.array("files"), send_files);
-messRoute.post("/send-links/:id", upload.none(), send_links);
+// messRoute.post("/send-files/:id", upload2.array("files"), send_files);
+// messRoute.post("/send-links/:id", upload.none(), send_links);
 
 messRoute.delete("/delete-mess/:id", delete_mes);
 messRoute.delete("/delete-media/:id", delete_media);
