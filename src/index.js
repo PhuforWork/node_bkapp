@@ -25,8 +25,7 @@ app.use(express.static("."));
 httpServer.listen(8081);
 
 app.get("/test", async (req, res) => {
-  let test = req.query;
-  let Data = await model.notifications.findAll();
+  let check = await 
 
   res.send(Data);
 });
