@@ -7,9 +7,6 @@ const _department_tb = require("./department_tb");
 const _file_message = require("./file_message");
 const _links_message = require("./links_message");
 const _media_message = require("./media_message");
-const _mess_receive = require("./mess_receive");
-const _mess_sends = require("./mess_sends");
-const _messages = require("./messages");
 const _note_item = require("./note_item");
 const _notifications = require("./notifications");
 const _persionality = require("./persionality");
@@ -28,9 +25,6 @@ function initModels(sequelize) {
   const file_message = _file_message(sequelize, DataTypes);
   const links_message = _links_message(sequelize, DataTypes);
   const media_message = _media_message(sequelize, DataTypes);
-  const mess_receive = _mess_receive(sequelize, DataTypes);
-  const mess_sends = _mess_sends(sequelize, DataTypes);
-  const messages = _messages(sequelize, DataTypes);
   const note_item = _note_item(sequelize, DataTypes);
   const notifications = _notifications(sequelize, DataTypes);
   const persionality = _persionality(sequelize, DataTypes);
@@ -40,18 +34,12 @@ function initModels(sequelize) {
   const select_type_tb = _select_type_tb(sequelize, DataTypes);
   const users = _users(sequelize, DataTypes);
 
-  mess_receive.belongsToMany(mess_sends, { as: 'id_user_send_mess_sends', through: messages, foreignKey: "id_user_receive", otherKey: "id_user_send" });
-  mess_sends.belongsToMany(mess_receive, { as: 'id_user_receive_mess_receives', through: messages, foreignKey: "id_user_send", otherKey: "id_user_receive" });
   department_tb.belongsTo(booking_info, { as: "id_booking_booking_info", foreignKey: "id_booking"});
   booking_info.hasMany(department_tb, { as: "department_tbs", foreignKey: "id_booking"});
   persionality_tb.belongsTo(booking_info, { as: "id_booking_booking_info", foreignKey: "id_booking"});
   booking_info.hasMany(persionality_tb, { as: "persionality_tbs", foreignKey: "id_booking"});
   select_type_tb.belongsTo(booking_info, { as: "id_booking_booking_info", foreignKey: "id_booking"});
   booking_info.hasMany(select_type_tb, { as: "select_type_tbs", foreignKey: "id_booking"});
-  messages.belongsTo(mess_receive, { as: "id_user_receive_mess_receive", foreignKey: "id_user_receive"});
-  mess_receive.hasMany(messages, { as: "messages", foreignKey: "id_user_receive"});
-  messages.belongsTo(mess_sends, { as: "id_user_send_mess_send", foreignKey: "id_user_send"});
-  mess_sends.hasMany(messages, { as: "messages", foreignKey: "id_user_send"});
   department_notify.belongsTo(notifications, { as: "id_notify_notification", foreignKey: "id_notify"});
   notifications.hasMany(department_notify, { as: "department_notifies", foreignKey: "id_notify"});
   persionality_notify.belongsTo(notifications, { as: "id_notify_notification", foreignKey: "id_notify"});
@@ -68,8 +56,6 @@ function initModels(sequelize) {
   users.hasMany(links_message, { as: "links_messages", foreignKey: "id_user"});
   media_message.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
   users.hasMany(media_message, { as: "media_messages", foreignKey: "id_user"});
-  messages.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
-  users.hasMany(messages, { as: "messages", foreignKey: "id_user"});
   note_item.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
   users.hasMany(note_item, { as: "note_items", foreignKey: "id_user"});
   notifications.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
@@ -88,9 +74,6 @@ function initModels(sequelize) {
     file_message,
     links_message,
     media_message,
-    mess_receive,
-    mess_sends,
-    messages,
     note_item,
     notifications,
     persionality,
