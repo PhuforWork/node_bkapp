@@ -5,8 +5,6 @@ const {
   send_mess,
   delete_mes,
   send_media,
-  send_files,
-  send_links,
   delete_media,
   delete_file,
   delete_links,
