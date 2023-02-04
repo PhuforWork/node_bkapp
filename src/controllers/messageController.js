@@ -29,6 +29,7 @@ const get_contact_messs = async (req, res) => {
         "select_types",
         "persionalities",
         "departments",
+        "content_messages",
         "media_messages",
         "links_messages",
         "file_messages",
@@ -36,15 +37,7 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
-    const content_messages = await model.messages.findAll({
-      where: { id_user_send: id },
-      include: ["id_user_receive_mess_receive", "id_user_send_mess_send"],
-    });
-    successCode(
-      res,
-      { ...get_id_Contact, content_messages: content_messages },
-      "Get Success"
-    );
+    successCode(res, get_id_Contact, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -57,38 +50,28 @@ const send_mess = async (req, res) => {
     let { msg, id_user_send, id_user_receive } = req.body;
     let avatar_send = await model.users.findByPk(id_user_send);
     let avatar_receive = await model.users.findByPk(id_user_receive);
-    let data = {
+    let data_send = {
       msg,
       today,
       status: false,
-      id_user: id,
+      id_user: id_user_send,
       id_user_send,
       id_user_receive,
       avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
     };
-    await model.mess_sends.create({
+    let data_receive = {
       msg,
       today,
       status: false,
-      id_user: id,
+      id_user: id_user_receive,
       id_user_send,
+      id_user_receive,
       avatar_send: avatar_send.image_url,
-    });
-    await model.mess_receive.create({
-      msg,
-      today,
-      status: false,
-      id_user: id,
-      id_user_receive,
       avatar_receive: avatar_receive.image_url,
-    });
-    await model.messages.create({
-      id_user: id,
-      id_user_receive,
-      id_user_send,
-    });
-    await model.content_message.create(data);
+    };
+    await model.content_message.create(data_send);
+    await model.content_message.create(data_receive);
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
