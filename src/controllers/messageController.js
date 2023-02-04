@@ -97,10 +97,9 @@ const send_media = async (req, res) => {
     console.log("data", data);
     console.log("data 1", req.body);
     let today = moment();
-    let media;
     Promise.all(
       data.map(async (ele) => {
-        media = "http://110.35.173.82:8081" + "/" + ele.path;
+        let media = "http://110.35.173.82:8081" + "/" + ele.path;
         if (
           ele.mimetype === "image/png" ||
           ele.mimetype === "image/jpeg" ||
