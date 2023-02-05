@@ -487,9 +487,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getPersonal_notify = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }, raw: true
       });
-      await model.persionality_notify.destroy({
-        where: { id_notify: getNotifyUpdate.id_notify }, raw: true
-      });
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
@@ -507,6 +504,9 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
           })
         })
         console.log("DaiNQ 🚀 -> personality.forEach -> clone", clone)
+        await model.persionality_notify.destroy({
+          where: { id_notify: getNotifyUpdate.id_notify }, raw: true
+        });
       }
       resolve();
     } catch (e) {
