@@ -376,9 +376,9 @@ const update_booking = async (req, res) => {
               },
               { where: { id_booking: ele.id_booking } }
             );
-            updateNotifyByBookingUpdate(check1.checkbk, start, end, label, personality);
           })
         );
+        updateNotifyByBookingUpdate(check1.checkbk, start, end, label, personality);
         successCode(res, "", "Add booking success");
       } else {
         failCode(res, { code: 09 }, "Duplicate booking 11");
@@ -478,7 +478,6 @@ const notification = async (req, res) => {
 };
 //func update notifications item when update booking info
 const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) => {
-  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> personality", personality)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
