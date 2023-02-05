@@ -487,7 +487,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getPersonalUpdate = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }, raw: true
       });
-      await getPersonalUpdate.destroy()
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
@@ -496,6 +495,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         await getNotifyUpdate.save();
       }
       if (getPersonalUpdate) {
+        await getPersonalUpdate.destroy();
         console.log("DaiNQ 🚀 -> personality.map -> getNotifyUpdate.id_notify", getNotifyUpdate.id_notify)
         personality.map(async (item) => {
           await model.persionality_notify.create({
