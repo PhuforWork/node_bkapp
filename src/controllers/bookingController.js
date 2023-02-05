@@ -341,7 +341,6 @@ const update_booking = async (req, res) => {
     let check1 = await model.booking_info.findOne({
       where: { id_booking: id }, raw: true
     });
-    console.log("DaiNQ 🚀 -> constupdate_booking= -> check1", check1)
     let check2 = await model.booking_info.findAll({
       where: { id_check_delete: check1.id_check_delete },
     });
@@ -485,6 +484,10 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }, raw: true
       });
+      const getPersonalUpdate = await model.persionality_notify.findAll({
+        where: { id_notify: getNotifyUpdate.id_notify }, raw: true
+      });
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getPersonalUpdate", getPersonalUpdate)
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
