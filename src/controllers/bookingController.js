@@ -492,7 +492,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getNotifyUpdate.end = end;
         getNotifyUpdate.department = label;
         getNotifyUpdate.status = false;
-        await model.notifications.update(getNotifyUpdate, { where: { checkbk: checkbk } });
+        await model.notifications.update(getNotifyUpdate, { where: { checkbk: getNotifyUpdate.checkbk } });
       }
       if (getPersonalUpdate) {
         getPersonalUpdate.forEach(async (item) => {
