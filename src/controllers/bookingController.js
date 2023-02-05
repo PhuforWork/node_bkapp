@@ -484,16 +484,29 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: checkbk }, raw: true
       });
-      const a = await model.persionality_notify.findAll({
+      const getPersonal_notify = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }, raw: true
       });
-      console.log("DaiNQ 🚀 -> returnnewPromise -> a", a)
+      await model.persionality_notify.destroy({
+        where: { id_notify: getNotifyUpdate.id_notify }, raw: true
+      });
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
         getNotifyUpdate.department = label;
         getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
+      }
+      if (getPersonal_notify) {
+        const clone = [];
+        personality.forEach((item) => {
+          clone.push({
+            label: item.label,
+            id_notify: getNotifyUpdate.id_notify,
+            value: item.value,
+          })
+        })
+        console.log("DaiNQ 🚀 -> personality.forEach -> clone", clone)
       }
       resolve();
     } catch (e) {
