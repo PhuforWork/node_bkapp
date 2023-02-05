@@ -501,7 +501,7 @@ const DeleteNotifyByBookingUpdate = (item) => {
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      const getNotifyUpdate = await model.notifications.findAll({
+      const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: item.checkbk }
       })
       if (getNotifyUpdate) {
