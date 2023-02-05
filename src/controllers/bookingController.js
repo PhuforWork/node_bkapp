@@ -495,20 +495,18 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getNotifyUpdate.status = false;
         await getNotifyUpdate.save();
       }
-      if (getPersonal_notify) {
-        const clone = [];
-        personality.forEach((item) => {
-          clone.push({
-            label: item.label,
-            id_notify: getNotifyUpdate.id_notify,
-            value: item.value,
-          })
+      const clone = [];
+      personality.forEach((item) => {
+        clone.push({
+          label: item.label,
+          id_notify: getNotifyUpdate.id_notify,
+          value: item.value,
         })
-        console.log("DaiNQ 🚀 -> personality.forEach -> clone", clone)
-        await model.persionality_notify.destroy({
-          where: { id_notify: getNotifyUpdate.id_notify }, raw: true
-        });
-      }
+      })
+      console.log("DaiNQ 🚀 -> personality.forEach -> clone", clone)
+      await model.persionality_notify.destroy({
+        where: { id_notify: getNotifyUpdate.id_notify }, raw: true
+      });
       resolve();
     } catch (e) {
       reject(e);
