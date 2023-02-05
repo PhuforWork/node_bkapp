@@ -497,14 +497,15 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
     }
   })
 }
-const DeleteNotifyByBookingUpdate = (checkbk) => {
+const DeleteNotifyByBookingUpdate = (item) => {
   console.log("DaiNQ 🚀 -> DeleteNotifyByBookingUpdate -> checkbk", checkbk)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
       const getNotifyUpdate = await model.notifications.findOne({
-        where: { checkbk: checkbk }, raw: true
+        where: { checkbk: item[0].checkbk }, raw: true
       })
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       if (getNotifyUpdate) {
         await model.department_notify.destroy({
           where: { id_notify: getNotifyUpdate.id_notify }
