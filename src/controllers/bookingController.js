@@ -339,8 +339,9 @@ const update_booking = async (req, res) => {
       id_orther_user,
     };
     let check1 = await model.booking_info.findOne({
-      where: { id_booking: id },
+      where: { id_booking: id }, raw: true
     });
+    console.log("DaiNQ 🚀 -> constupdate_booking= -> check1", check1)
     let check2 = await model.booking_info.findAll({
       where: { id_check_delete: check1.id_check_delete },
     });
@@ -376,7 +377,7 @@ const update_booking = async (req, res) => {
               },
               { where: { id_booking: ele.id_booking } }
             );
-            updateNotifyByBookingUpdate(ele.checkbk, start, end, label, personality);
+            updateNotifyByBookingUpdate(check1.checkbk, start, end, label, personality);
           })
         );
         successCode(res, "", "Add booking success");
