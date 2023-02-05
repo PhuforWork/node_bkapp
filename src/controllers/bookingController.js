@@ -486,7 +486,11 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       });
       const getPersonalUpdate = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }, raw: true
-      });
+      }).forEach(async (item) => {
+        await model.persionality_tb.destroy({
+          where: { id_notify: item.id_notify },
+        });
+      });;
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
@@ -495,11 +499,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         await model.notifications.update(getNotifyUpdate, { where: { checkbk: getNotifyUpdate.checkbk } });
       }
       if (getPersonalUpdate) {
-        getPersonalUpdate.forEach(async (item) => {
-          await model.persionality_tb.destroy({
-            where: { id_notify: item.id_notify },
-          });
-        });
         personality.forEach(async (item) => {
           await model.persionality_notify.create({
             label: item.label,
