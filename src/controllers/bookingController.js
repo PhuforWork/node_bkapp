@@ -497,7 +497,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       if (getPersonalUpdate) {
         await getPersonalUpdate.map(async (item) => {
           await item.destroy();
-        })
+        });
         personality.map(async (item) => {
           await model.persionality_notify.create({
             label: item.label,
