@@ -501,9 +501,11 @@ const DeleteNotifyByBookingUpdate = (item) => {
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      await model.notifications.destroy({
+      console.log("DaiNQ 🚀 -> returnnewPromise -> item[0].checkbk", item[0].checkbk)
+      const getNotifyUpdate = await model.notifications.destroy({
         where: { checkbk: item[0].checkbk }
       })
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       // if (getNotifyUpdate) {
       //   await getNotifyUpdate.destroy()
       //   await model.department_notify.destroy({
