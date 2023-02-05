@@ -498,7 +498,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
   })
 }
 const DeleteNotifyByBookingUpdate = (item) => {
-  console.log("DaiNQ 🚀 -> DeleteNotifyByBookingUpdate -> checkbk", checkbk)
+  console.log("DaiNQ 🚀 -> DeleteNotifyByBookingUpdate -> checkbk", item)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
