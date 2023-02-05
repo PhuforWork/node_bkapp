@@ -487,16 +487,17 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getPersonalUpdate = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }, raw: true
       });
-      if (getPersonalUpdate) {
-        await getPersonalUpdate.destroy();
-        // personality.map(async (item) => {
-        //   await model.persionality_notify.create({
-        //     label: item.label,
-        //     id_notify: getNotifyUpdate.id_notify,
-        //     value: item.value
-        //   });
-        // })
-      }
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getPersonalUpdate", getPersonalUpdate)
+      // if (getPersonalUpdate) {
+      //   await getPersonalUpdate.destroy();
+      //   // personality.map(async (item) => {
+      //   //   await model.persionality_notify.create({
+      //   //     label: item.label,
+      //   //     id_notify: getNotifyUpdate.id_notify,
+      //   //     value: item.value
+      //   //   });
+      //   // })
+      // }
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
