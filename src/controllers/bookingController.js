@@ -487,6 +487,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       const getPersonal_notify = await model.persionality_notify.findAll({
         where: { id_notify: getNotifyUpdate.id_notify }, raw: true
       });
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getPersonal_notify", getPersonal_notify)
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
         getNotifyUpdate.end = end;
