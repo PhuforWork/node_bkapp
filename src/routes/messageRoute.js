@@ -5,24 +5,22 @@ const {
   send_mess,
   delete_mes,
   send_media,
-  send_files,
-  send_links,
   delete_media,
   delete_file,
   delete_links,
 } = require("../controllers/messageController");
 const upload = require("../Middlewares/upload");
 const upload1 = require("../Middlewares/uploadMes");
-const upload2 = require("../Middlewares/uploadFile");
+// const upload2 = require("../Middlewares/uploadFile");
 const messRoute = express.Router();
 
 messRoute.get("/get-contacts-all/:id", get_all_contact);
 messRoute.get("/get-contacts/:id", get_contact_messs);
 
-messRoute.post("/send-mess/:id", upload.single('media'), send_mess);
-messRoute.post("/send-images/:id", upload1.array("files"), send_media);
-messRoute.post("/send-files/:id", upload2.array("files"), send_files);
-messRoute.post("/send-links/:id", upload.none(), send_links);
+messRoute.post("/send-mess/:id", upload.none(), send_mess);
+messRoute.post("/send-media/:id",upload1.any(), send_media);
+// messRoute.post("/send-files/:id", upload2.array("files"), send_files);
+// messRoute.post("/send-links/:id", upload.none(), send_links);
 
 messRoute.delete("/delete-mess/:id", delete_mes);
 messRoute.delete("/delete-media/:id", delete_media);

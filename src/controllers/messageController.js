@@ -50,17 +50,28 @@ const send_mess = async (req, res) => {
     let { msg, id_user_send, id_user_receive } = req.body;
     let avatar_send = await model.users.findByPk(id_user_send);
     let avatar_receive = await model.users.findByPk(id_user_receive);
-    let data = {
+    let data_send = {
       msg,
       today,
       status: false,
-      id_user: id,
+      id_user: id_user_send,
       id_user_send,
       id_user_receive,
-      avatar_send:avatar_send.image_url,
+      avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
     };
-    await model.content_message.create(data);
+    let data_receive = {
+      msg,
+      today,
+      status: false,
+      id_user: id_user_receive,
+      id_user_send,
+      id_user_receive,
+      avatar_send: avatar_send.image_url,
+      avatar_receive: avatar_receive.image_url,
+    };
+    await model.content_message.create(data_send);
+    await model.content_message.create(data_receive);
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -76,67 +87,113 @@ const delete_mes = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
-
 const send_media = async (req, res) => {
   try {
     let { id } = req.params; //id_user
     let data = req.files;
+    let { id_user_send, id_user_receive } = req.body;
+    console.log("test",req.body);
     let today = moment();
-    console.log("daaatssa", data);
     Promise.all(
       data.map(async (ele) => {
-        let image_url = "http://110.35.173.82:8081" + "/" + ele.path;
-        await model.media_message.create({
-          images: image_url,
-          today: today,
-          size: ele.size,
-          original_name: ele.originalname,
-          id_user: id,
+        let avatar_send = await model.users.findByPk(id_user_send);
+        let avatar_receive = await model.users.findByPk(id_user_receive);
+        let media = "http://110.35.173.82:8081" + "/" + ele.path;
+        if (
+          ele.mimetype === "image/png" ||
+          ele.mimetype === "image/jpeg" ||
+          ele.mimetype === "image/jpg" ||
+          ele.mimetype === "image/gif"
+        ) {
+          await model.media_message.create({
+            images: media,
+            today: today,
+            size: ele.size,
+            original_name: ele.originalname,
+            id_user: id,
+          });
+          await model.content_message.create({
+            today,
+            status: false,
+            media: media,
+            id_user: id_user_send,
+            id_user_send,
+            id_user_receive,
+            avatar_send: avatar_send.image_url,
+            avatar_receive: avatar_receive.image_url,
+          });
+        } else {
+          await model.file_message.create({
+            files: media,
+            today: today,
+            size: ele.size,
+            original_name: ele.originalname,
+            id_user: id,
+          });
+          await model.content_message.create({
+            today,
+            status: false,
+            media: media,
+            id_user: id_user_send,
+            id_user_send,
+            id_user_receive,
+            avatar_send: avatar_send.image_url,
+            avatar_receive: avatar_receive.image_url,
+          });
+        }
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          id_user: id_user_receive,
+          id_user_send,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
         });
       })
     );
     successCode(res, "", "Success");
   } catch (error) {
-    console.log("errrorr", error);
     failCode(res, "Error BackEnd");
   }
 };
-const send_files = async (req, res) => {
-  try {
-    let { id } = req.params; //id_user
-    let data = req.files;
-    let today = moment();
-    console.log("daaatssa", data);
-    Promise.all(
-      data.map(async (ele) => {
-        let file_url = "http://110.35.173.82:8081" + "/" + ele.path;
-        await model.file_message.create({
-          files: file_url,
-          today: today,
-          size: ele.size,
-          original_name: ele.originalname,
-          id_user: id,
-        });
-      })
-    );
-    successCode(res, "", "Success");
-  } catch (error) {
-    console.log("errrorr", error);
-    failCode(res, "Error BackEnd");
-  }
-};
-const send_links = async (req, res) => {
-  try {
-    let { id } = req.params;
-    let { links } = req.body;
-    let today = moment();
-    let data = { links, id_user: id, today: today };
-    await model.links_message.create(data);
-    successCode(res, "", "Success");
-  } catch (error) {
-    errorCode(res, "Error BackEnd");
-  }
-};
+// const send_files = async (req, res) => {
+//   try {
+//     let { id } = req.params; //id_user
+//     let data = req.files;
+//     let today = moment();
+//     console.log("daaatssa", data);
+//     Promise.all(
+//       data.map(async (ele) => {
+//         let file_url = "http://110.35.173.82:8081" + "/" + ele.path;
+//         await model.file_message.create({
+//           files: file_url,
+//           today: today,
+//           size: ele.size,
+//           original_name: ele.originalname,
+//           id_user: id,
+//         });
+//       })
+//     );
+//     successCode(res, "", "Success");
+//   } catch (error) {
+//     console.log("errrorr", error);
+//     failCode(res, "Error BackEnd");
+//   }
+// };
+// const send_links = async (req, res) => {
+//   try {
+//     let { id } = req.params;
+//     let { links } = req.body;
+//     let today = moment();
+//     let data = { links, id_user: id, today: today };
+//     await model.links_message.create(data);
+//     successCode(res, "", "Success");
+//   } catch (error) {
+//     errorCode(res, "Error BackEnd");
+//   }
+// };
 
 const delete_media = async (req, res) => {
   try {
@@ -185,8 +242,6 @@ module.exports = {
   send_mess,
   delete_mes,
   send_media,
-  send_files,
-  send_links,
   delete_media,
   delete_file,
   delete_links,
