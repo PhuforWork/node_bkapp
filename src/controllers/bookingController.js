@@ -414,6 +414,7 @@ const delete_bk = async (req, res) => {
           });
         })
       );
+      console.log("DaiNQ 🚀 -> constdelete_bk= -> check", check)
       DeleteNotifyByBookingUpdate(check);
       successCode(res, "", "Success delete");
     } else {
@@ -501,7 +502,7 @@ const DeleteNotifyByBookingUpdate = (item) => {
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      console.log("DaiNQ 🚀 -> returnnewPromise -> item[0].checkbk", item[0].checkbk)
+      console.log("DaiNQ 🚀 -> returnnewPromise -> item[0].checkbk", item.checkbk)
       const getNotifyUpdate = await model.notifications.findAll({
         where: { checkbk: item.checkbk }
       })
