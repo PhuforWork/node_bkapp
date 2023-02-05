@@ -498,7 +498,6 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         await model.persionality_notify.destroy({
           where: { id_notify: getNotifyUpdate.id_notify }
         })
-        console.log("DaiNQ 🚀 -> returnnewPromise -> personality.length", personality.length)
         if (personality.length > 1) {
           personality.map(async (item) => {
             await model.persionality_notify.create({
@@ -508,11 +507,11 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
             });
           })
         } else {
-          // await model.persionality_notify.create({
-          //   label: personality[0].label,
-          //   id_notify: getNotifyUpdate.id_notify,
-          //   value: personality[0].value
-          // });
+          await model.persionality_notify.create({
+            label: personality[0].label,
+            id_notify: getNotifyUpdate.id_notify,
+            value: personality[0].value
+          });
         }
       }
       resolve();
