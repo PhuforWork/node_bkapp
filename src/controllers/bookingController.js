@@ -496,9 +496,10 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       }
       if (getPersonalUpdate) {
         getPersonalUpdate.forEach(async (item) => {
-          await model.persionality_tb.destroy({
-            where: { id_notify: item.id_notify },
-          });
+          console.log("DaiNQ 🚀 -> getPersonalUpdate.forEach -> item", item)
+          // await model.persionality_tb.destroy({
+          //   where: { id_notify: item.id_notify },
+          // });
         });
         // personality.forEach(async (item) => {
         //   await model.persionality_notify.create({
