@@ -398,7 +398,6 @@ const delete_bk = async (req, res) => {
       where: { id_check_delete: check.id_check_delete }, raw: true
     });
     if (check) {
-      console.log("DaiNQ 🚀 -> constdelete_bk= -> check", check)
       Promise.all(
         dlt.map(async (values) => {
           await model.department_tb.destroy({
@@ -415,7 +414,7 @@ const delete_bk = async (req, res) => {
           });
         })
       );
-      DeleteNotifyByBookingUpdate(dlt);
+      DeleteNotifyByBookingUpdate(check);
       successCode(res, "", "Success delete");
     } else {
       failCode(res, { code: 013 }, "Delete fail");
@@ -504,7 +503,7 @@ const DeleteNotifyByBookingUpdate = (item) => {
       //get item will be update by checkbk
       console.log("DaiNQ 🚀 -> returnnewPromise -> item[0].checkbk", item[0].checkbk)
       const getNotifyUpdate = await model.notifications.findAll({
-        where: { checkbk: item[0].checkbk }
+        where: { checkbk: item.checkbk }
       })
       console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       // if (getNotifyUpdate) {
