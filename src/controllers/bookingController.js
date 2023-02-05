@@ -508,9 +508,9 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
           })
         } else {
           await model.persionality_notify.create({
-            label: item.label,
+            label: personality.label,
             id_notify: getNotifyUpdate.id_notify,
-            value: item.value
+            value: personality.value
           });
         }
       }
