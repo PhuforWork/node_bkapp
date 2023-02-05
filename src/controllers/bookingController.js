@@ -414,7 +414,6 @@ const delete_bk = async (req, res) => {
           });
         })
       );
-      console.log("DaiNQ 🚀 -> constdelete_bk= -> check", check)
       DeleteNotifyByBookingUpdate(check);
       successCode(res, "", "Success delete");
     } else {
@@ -502,20 +501,18 @@ const DeleteNotifyByBookingUpdate = (item) => {
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
-      console.log("DaiNQ 🚀 -> returnnewPromise -> item[0].checkbk", item.checkbk)
       const getNotifyUpdate = await model.notifications.findAll({
         where: { checkbk: item.checkbk }
       })
-      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
-      // if (getNotifyUpdate) {
-      //   await getNotifyUpdate.destroy()
-      //   await model.department_notify.destroy({
-      //     where: { id_notify: getNotifyUpdate.id_notify }
-      //   });
-      //   await model.persionality_notify.destroy({
-      //     where: { id_notify: getNotifyUpdate.id_notify }
-      //   });
-      // }
+      if (getNotifyUpdate) {
+        await model.department_notify.destroy({
+          where: { id_notify: getNotifyUpdate.id_notify }
+        });
+        await model.persionality_notify.destroy({
+          where: { id_notify: getNotifyUpdate.id_notify }
+        });
+        await getNotifyUpdate.destroy()
+      }
       resolve();
     } catch (e) {
       reject(e);
