@@ -489,14 +489,13 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       });
       if (getPersonalUpdate) {
         await getPersonalUpdate.destroy();
-        personality.map(async (item) => {
-          await model.persionality_notify.create({
-            label: item.label,
-            id_notify: getNotifyUpdate.id_notify,
-            value: item.value
-          });
-
-        })
+        // personality.map(async (item) => {
+        //   await model.persionality_notify.create({
+        //     label: item.label,
+        //     id_notify: getNotifyUpdate.id_notify,
+        //     value: item.value
+        //   });
+        // })
       }
       if (getNotifyUpdate) {
         getNotifyUpdate.start = start;
