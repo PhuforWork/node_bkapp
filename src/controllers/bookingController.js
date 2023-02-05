@@ -505,6 +505,10 @@ const DeleteNotifyByBookingUpdate = (item) => {
       const getNotifyUpdate = await model.notifications.findOne({
         where: { checkbk: item[0].checkbk }, raw: true
       })
+      const getNotifyUpdate1 = await model.notifications.findOne({
+        where: { checkbk: item[1].checkbk }, raw: true
+      })
+      console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate1", getNotifyUpdate1)
       console.log("DaiNQ 🚀 -> returnnewPromise -> getNotifyUpdate", getNotifyUpdate)
       if (getNotifyUpdate) {
         await model.department_notify.destroy({
