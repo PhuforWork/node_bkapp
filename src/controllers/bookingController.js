@@ -496,7 +496,7 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       }
       if (getPersonalUpdate) {
         getPersonalUpdate.forEach(async (item) => {
-          await item.destroy({
+          await model.persionality_tb.destroy({
             where: { id_booking: item.id_booking },
           });
         });
