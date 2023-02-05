@@ -495,16 +495,18 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         await model.notifications.update(getNotifyUpdate, { where: { checkbk: getNotifyUpdate.checkbk } });
       }
       if (getPersonalUpdate.length) {
-        await model.persionality_notify.destroy({
-          where: { id_notify: getNotifyUpdate.id_notify }
-        })
-        personality.forEach(async (item) => {
-          await model.persionality_notify.create({
-            label: item.label,
-            id_notify: getNotifyUpdate.id_notify,
-            value: item.value
-          });
-        })
+        Promise.all(
+          await model.persionality_notify.destroy({
+            where: { id_notify: getNotifyUpdate.id_notify }
+          }),
+          await personality.forEach(async (item) => {
+            await model.persionality_notify.create({
+              label: item.label,
+              id_notify: getNotifyUpdate.id_notify,
+              value: item.value
+            });
+          })
+        );
       }
       resolve();
     } catch (e) {
