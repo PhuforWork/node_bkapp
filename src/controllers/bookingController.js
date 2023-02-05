@@ -398,6 +398,7 @@ const delete_bk = async (req, res) => {
       where: { id_check_delete: check.id_check_delete }, raw: true
     });
     if (check) {
+      console.log("DaiNQ 🚀 -> constdelete_bk= -> check", check)
       Promise.all(
         dlt.map(async (values) => {
           await model.department_tb.destroy({
