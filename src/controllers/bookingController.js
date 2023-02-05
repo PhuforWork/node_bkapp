@@ -498,13 +498,13 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getPersonalUpdate.forEach(async (item) => {
           await item.destroy();
         });
-        personality.forEach(async (item) => {
-          await model.persionality_notify.create({
-            label: item.label,
-            id_notify: getNotifyUpdate.id_notify,
-            value: item.value
-          });
-        })
+        // personality.forEach(async (item) => {
+        //   await model.persionality_notify.create({
+        //     label: item.label,
+        //     id_notify: getNotifyUpdate.id_notify,
+        //     value: item.value
+        //   });
+        // })
       }
       resolve();
     } catch (e) {
