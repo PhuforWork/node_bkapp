@@ -477,9 +477,12 @@ const notification = async (req, res) => {
   }
 };
 //func update notifications item when update booking info
-const updateNotifyByBookingUpdate = (props) => {
-  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> props", props)
-  const { checkbk, start, end, label, personality } = props
+const updateNotifyByBookingUpdate = ({ checkbk, start, end, label, personality }) => {
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> personality", personality)
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> label", label)
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> end", end)
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> start", start)
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> checkbk", checkbk)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
