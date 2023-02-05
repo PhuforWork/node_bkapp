@@ -478,6 +478,7 @@ const notification = async (req, res) => {
 };
 //func update notifications item when update booking info
 const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) => {
+  console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> personality", personality)
   return new Promise(async (resolve, reject) => {
     try {
       //get item will be update by checkbk
@@ -494,11 +495,11 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
         getNotifyUpdate.status = false;
         await model.notifications.update(getNotifyUpdate, { where: { checkbk: getNotifyUpdate.checkbk } });
       }
-      if (getPersonalUpdate.length) {
+      if (getPersonalUpdate) {
         await model.persionality_notify.destroy({
           where: { id_notify: getNotifyUpdate.id_notify }
         })
-        await personality.map(async (item) => {
+        await personality.forEach(async (item) => {
           await model.persionality_notify.create({
             label: item.label,
             id_notify: getNotifyUpdate.id_notify,
