@@ -496,18 +496,17 @@ const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) =>
       }
       if (getPersonalUpdate) {
         getPersonalUpdate.forEach(async (item) => {
-          console.log("DaiNQ 🚀 -> getPersonalUpdate.forEach -> item", item)
-          // await model.persionality_tb.destroy({
-          //   where: { id_notify: item.id_notify },
-          // });
+          await model.persionality_tb.destroy({
+            where: { id_notify: item.id_notify },
+          });
         });
-        // personality.forEach(async (item) => {
-        //   await model.persionality_notify.create({
-        //     label: item.label,
-        //     id_notify: getNotifyUpdate.id_notify,
-        //     value: item.value
-        //   });
-        // })
+        personality.forEach(async (item) => {
+          await model.persionality_notify.create({
+            label: item.label,
+            id_notify: getNotifyUpdate.id_notify,
+            value: item.value
+          });
+        })
       }
       resolve();
     } catch (e) {
