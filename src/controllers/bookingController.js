@@ -477,7 +477,7 @@ const notification = async (req, res) => {
   }
 };
 //func update notifications item when update booking info
-const updateNotifyByBookingUpdate = ({ checkbk, start, end, label, personality }) => {
+const updateNotifyByBookingUpdate = (checkbk, start, end, label, personality) => {
   console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> personality", personality)
   console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> label", label)
   console.log("DaiNQ 🚀 -> updateNotifyByBookingUpdate -> end", end)
