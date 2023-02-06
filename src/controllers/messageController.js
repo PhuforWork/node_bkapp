@@ -39,7 +39,7 @@ const get_contact_messs = async (req, res) => {
         "media_messages",
         "links_messages",
       ],
-      where: { id_user: id },
+      where: { group: get_id_Contact.id_user_receive + id },
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, get_id_Contact, "Get Success");
