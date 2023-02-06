@@ -76,6 +76,17 @@ const send_mess = async (req, res) => {
     errorCode(res, "Error BackEnd");
   }
 };
+//
+const set_status_mes = async (req, res) => {
+  try {
+    let { id } = req.params; // id content
+    let status = true;
+    await model.content_message.update(status, { where: { id_content: id } });
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
 
 const delete_mes = async (req, res) => {
   try {
@@ -226,4 +237,5 @@ module.exports = {
   delete_media,
   delete_file,
   delete_links,
+  set_status_mes
 };
