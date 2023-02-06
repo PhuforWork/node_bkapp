@@ -36,9 +36,10 @@ const get_contact_messs = async (req, res) => {
         "select_types",
         "persionalities",
         "departments",
-        "content_messages",
+        // "content_messages",
         "media_messages",
         "links_messages",
+        { model: model.content_message,as:"content_messages" ,where: { group: 13 } }
       ],
       where: { group: 13 },
       attributes: { exclude: ["_password", "email"] },
