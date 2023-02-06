@@ -112,7 +112,7 @@ const loginUser = async (req, res) => {
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     const checkpass = await bcrypt.compareSync(_password, checkUser._password);
     if (checkpass) {
-      alarm_immediately(data.id_user);
+      alarm_immediately(data);
       successCode(res, data, "Login successfully");
     } else {
       failCode(res, { code: 001 }, "Password not correct");
