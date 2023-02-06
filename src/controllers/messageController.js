@@ -7,7 +7,7 @@ const fs = require("fs");
 const path = require("path");
 
 const get_all_contact = async (req, res) => {
-  let { id_send, id_recive } = req.params;
+  let { id_send, id_receive } = req.params;
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
@@ -15,11 +15,9 @@ const get_all_contact = async (req, res) => {
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     let getAllNewContact = getAllContact.filter((ele) =>
-      ele.content_messages.some((ele) => {
-        if (ele.id_user_send === id_send && ele.id_user_receive === id_recive) {
-          return true;
-        }
-      })
+      ele.content_messages.some(
+        (ele) => (ele.id_user_send === id_send && ele.id_user_receive === id_receive) || (ele.id_user_send === id_receive && ele.id_user_receive === id_send)
+      )
     );
     successCode(res, getAllNewContact, "Success");
   } catch (error) {
