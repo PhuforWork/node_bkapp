@@ -7,14 +7,18 @@ const fs = require("fs");
 const path = require("path");
 
 const get_all_contact = async (req, res) => {
-  let { id } = req.params;
+  let { id_send, id_recive } = req.params;
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
-    let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
+    let getAllNewContact = getAllContact.filter(
+      (ele) =>
+        ele.content_messages.id_user_send === id_send &&
+        ele.content_message.id__user_recevie === id_recive 
+    );
 
     successCode(res, getAllNewContact, "Success");
   } catch (error) {
@@ -35,7 +39,7 @@ const get_contact_messs = async (req, res) => {
         "media_messages",
         "links_messages",
       ],
-      where: { id_user: id },
+      where: { id_user: id_send },
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, get_id_Contact, "Get Success");
