@@ -13,7 +13,6 @@ const get_all_contact = async (req, res) => {
       include: [{
         model:model.content_message,
         as: "content_messages",
-        where: { id_user: id },
       }],
       attributes: { exclude: ["_password", "email"] },
     });
