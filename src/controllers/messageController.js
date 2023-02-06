@@ -14,6 +14,7 @@ const get_all_contact = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
+    getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let getAllNewContact = getAllContact.filter((ele) =>
       ele.content_messages.some(
         (ele) => (ele.group = id_send * 1 + id_receive * 1)
