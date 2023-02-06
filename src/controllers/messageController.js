@@ -13,11 +13,7 @@ const get_all_contact = async (req, res) => {
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
-    let content_message = await model.content_message.findAll({
-      where: { id_user: id },
-    });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
-    content_message = await JSON.parse(JSON.stringify(getAllContact));
     let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
 
     successCode(res, getAllNewContact, "Success");
