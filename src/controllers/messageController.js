@@ -12,8 +12,7 @@ const get_all_contact = async (req, res) => {
     let getAllContact = await model.users.findAll({
       include: [
         {
-          model: model.content_message,
-          as: "content_messages",
+          model: content_message,
           where: {
             id_user: id,
           },
