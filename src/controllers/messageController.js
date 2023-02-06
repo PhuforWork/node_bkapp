@@ -28,7 +28,7 @@ const get_all_contact = async (req, res) => {
 };
 
 const get_contact_messs = async (req, res) => {
-  let { id } = req.params; //id user
+  let { id } = req.params; // group
   try {
     let get_group = await model.users.findAll({ where: { id_user: id } });
     const get_id_Contact = await model.users.findAll({
@@ -40,7 +40,7 @@ const get_contact_messs = async (req, res) => {
         "media_messages",
         "links_messages",
       ],
-      where: { group: get_group.group },
+      where: { group: 13 },
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, get_id_Contact, "Get Success");
