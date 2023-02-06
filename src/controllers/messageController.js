@@ -16,7 +16,11 @@ const get_all_contact = async (req, res) => {
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     let getAllNewContact = getAllContact.filter((ele) =>
       ele.content_messages.some(
-        (ele) => (ele.id_user_send == id_send && ele.id_user_receive == id_receive) || (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+        (ele) =>
+          (ele.id_user_send == id_send * 1 &&
+            ele.id_user_receive == id_receive * 1) ||
+          (ele.id_user_send == id_receive * 1 &&
+            ele.id_user_receive == id_send * 1)
       )
     );
     successCode(res, getAllNewContact, "Success");
