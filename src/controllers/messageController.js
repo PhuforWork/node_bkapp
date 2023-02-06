@@ -10,7 +10,6 @@ const get_all_contact = async (req, res) => {
   let { id } = req.params;
   try {
     let getAllContact = await model.users.findAll({
-      // include: [{ model: model.content_message,as:"content_messages" ,where: { id_user_send: id } }],
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
@@ -18,10 +17,10 @@ const get_all_contact = async (req, res) => {
       where: { id_user: id },
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
-    content_message = await JSON.parse(JSON.stringify(content_message));
-    // let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
+    content_message = await JSON.parse(JSON.stringify(getAllContact));
+    let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
 
-    successCode(res, getAllContact, "Success");
+    successCode(res, getAllNewContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -42,10 +41,7 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
-    const get_contact = await model.content_message.findAll({
-      where: { id_user: id },
-    });
-    successCode(res, { get_id_Contact, get_contact }, "Get Success");
+    successCode(res, get_id_Contact, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
