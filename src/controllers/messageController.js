@@ -92,55 +92,37 @@ const send_media = async (req, res) => {
     let { id } = req.params; //id_user
     let data = req.files;
     let { id_user_send, id_user_receive } = req.body;
-    console.log("test",req.body);
+    console.log("test", req.body);
     let today = moment();
     Promise.all(
       data.map(async (ele) => {
         let avatar_send = await model.users.findByPk(id_user_send);
         let avatar_receive = await model.users.findByPk(id_user_receive);
         let media = "http://110.35.173.82:8081" + "/" + ele.path;
-        if (
-          ele.mimetype === "image/png" ||
-          ele.mimetype === "image/jpeg" ||
-          ele.mimetype === "image/jpg" ||
-          ele.mimetype === "image/gif"
-        ) {
-          await model.media_message.create({
-            images: media,
-            today: today,
-            size: ele.size,
-            original_name: ele.originalname,
-            id_user: id,
-          });
-          await model.content_message.create({
-            today,
-            status: false,
-            media: media,
-            id_user: id_user_send,
-            id_user_send,
-            id_user_receive,
-            avatar_send: avatar_send.image_url,
-            avatar_receive: avatar_receive.image_url,
-          });
-        } else {
-          await model.file_message.create({
-            files: media,
-            today: today,
-            size: ele.size,
-            original_name: ele.originalname,
-            id_user: id,
-          });
-          await model.content_message.create({
-            today,
-            status: false,
-            media: media,
-            id_user: id_user_send,
-            id_user_send,
-            id_user_receive,
-            avatar_send: avatar_send.image_url,
-            avatar_receive: avatar_receive.image_url,
-          });
-        }
+        await model.media_message.create({
+          media: media,
+          today: today,
+          size: ele.size,
+          original_name: ele.originalname,
+          id_user: id_user_send,
+        });
+        await model.media_message.create({
+          media: media,
+          today: today,
+          size: ele.size,
+          original_name: ele.originalname,
+          id_user: id_user_receive,
+        });
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          id_user: id_user_send,
+          id_user_send,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
+        });
         await model.content_message.create({
           today,
           status: false,
