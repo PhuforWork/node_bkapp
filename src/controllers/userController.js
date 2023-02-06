@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
-const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
+const { alarm_immediately } = require("../eventSocket/alarmSocket")(io);
 
 // // const cron = require("node-cron");
 // const schedule = require("node-schedule");
