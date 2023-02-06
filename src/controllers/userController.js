@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const { encodeTokenEmail, compareToken } = require("../Middlewares/auth");
-const { alarm_immediately } = require("../eventSocket/alarmSocket")(io);
+// const { alarm_immediately } = require("../eventSocket/alarmSocket")(io);
 
 // // const cron = require("node-cron");
 // const schedule = require("node-schedule");
@@ -111,8 +111,9 @@ const loginUser = async (req, res) => {
     });
     let data = { user_name: checkUser.user_name, id_user: checkUser.id_user };
     const checkpass = await bcrypt.compareSync(_password, checkUser._password);
+    console.log("DaiNQ 🚀 -> loginUser -> data", data)
     if (checkpass) {
-      alarm_immediately(data);
+      // alarm_immediately(data);
       successCode(res, data, "Login successfully");
     } else {
       failCode(res, { code: 001 }, "Password not correct");
