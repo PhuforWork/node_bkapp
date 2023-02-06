@@ -30,6 +30,7 @@ const get_all_contact = async (req, res) => {
 const get_contact_messs = async (req, res) => {
   let { id } = req.params; //id user
   try {
+    const get_contact = await model.users.findAll();
     const get_id_Contact = await model.users.findAll({
       include: [
         "select_types",
@@ -39,7 +40,7 @@ const get_contact_messs = async (req, res) => {
         "media_messages",
         "links_messages",
       ],
-      where: { group: get_id_Contact.id_user_receive + id },
+      where: { group: get_contact.id_user_receive + id },
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, get_id_Contact, "Get Success");
