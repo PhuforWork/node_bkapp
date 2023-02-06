@@ -12,7 +12,7 @@ class media_message extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
-    images: {
+    media: {
       type: DataTypes.STRING(255),
       allowNull: true
     },

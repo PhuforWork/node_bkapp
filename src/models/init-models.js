@@ -4,7 +4,6 @@ const _content_message = require("./content_message");
 const _department = require("./department");
 const _department_notify = require("./department_notify");
 const _department_tb = require("./department_tb");
-const _file_message = require("./file_message");
 const _links_message = require("./links_message");
 const _media_message = require("./media_message");
 const _note_item = require("./note_item");
@@ -22,7 +21,6 @@ function initModels(sequelize) {
   const department = _department(sequelize, DataTypes);
   const department_notify = _department_notify(sequelize, DataTypes);
   const department_tb = _department_tb(sequelize, DataTypes);
-  const file_message = _file_message(sequelize, DataTypes);
   const links_message = _links_message(sequelize, DataTypes);
   const media_message = _media_message(sequelize, DataTypes);
   const note_item = _note_item(sequelize, DataTypes);
@@ -50,8 +48,6 @@ function initModels(sequelize) {
   users.hasMany(content_message, { as: "content_messages", foreignKey: "id_user"});
   department.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
   users.hasMany(department, { as: "departments", foreignKey: "id_user"});
-  file_message.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
-  users.hasMany(file_message, { as: "file_messages", foreignKey: "id_user"});
   links_message.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
   users.hasMany(links_message, { as: "links_messages", foreignKey: "id_user"});
   media_message.belongsTo(users, { as: "id_user_user", foreignKey: "id_user"});
@@ -71,7 +67,6 @@ function initModels(sequelize) {
     department,
     department_notify,
     department_tb,
-    file_message,
     links_message,
     media_message,
     note_item,

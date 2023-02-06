@@ -51,6 +51,10 @@ class content_message extends Sequelize.Model {
     avatar_receive: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    group: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,

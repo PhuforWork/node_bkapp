@@ -10,7 +10,15 @@ const get_all_contact = async (req, res) => {
   let { id } = req.params;
   try {
     let getAllContact = await model.users.findAll({
-      include: ["content_messages"],
+      include: [
+        {
+          model: model.content_message,
+          as: "content_messages",
+          where: {
+            id_user: id,
+          },
+        },
+      ],
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = JSON.parse(JSON.stringify(getAllContact));
@@ -32,7 +40,6 @@ const get_contact_messs = async (req, res) => {
         "content_messages",
         "media_messages",
         "links_messages",
-        "file_messages",
       ],
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
@@ -50,6 +57,7 @@ const send_mess = async (req, res) => {
     let { msg, id_user_send, id_user_receive } = req.body;
     let avatar_send = await model.users.findByPk(id_user_send);
     let avatar_receive = await model.users.findByPk(id_user_receive);
+    let group = id_user_send * 1 + id_user_receive * 1;
     let data_send = {
       msg,
       today,
@@ -57,6 +65,7 @@ const send_mess = async (req, res) => {
       id_user: id_user_send,
       id_user_send,
       id_user_receive,
+      group: group,
       avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
     };
@@ -67,11 +76,23 @@ const send_mess = async (req, res) => {
       id_user: id_user_receive,
       id_user_send,
       id_user_receive,
+      group: group,
       avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
     };
     await model.content_message.create(data_send);
     await model.content_message.create(data_receive);
+    successCode(res, "", "Success");
+  } catch (error) {
+    errorCode(res, "Error BackEnd");
+  }
+};
+//
+const set_status_mes = async (req, res) => {
+  try {
+    let { id } = req.params; // id content
+    let status = true;
+    await model.content_message.update(status, { where: { id_content: id } });
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -92,55 +113,38 @@ const send_media = async (req, res) => {
     let { id } = req.params; //id_user
     let data = req.files;
     let { id_user_send, id_user_receive } = req.body;
-    console.log("test",req.body);
+    let group = id_user_send * 1 + id_user_receive * 1;
     let today = moment();
     Promise.all(
       data.map(async (ele) => {
         let avatar_send = await model.users.findByPk(id_user_send);
         let avatar_receive = await model.users.findByPk(id_user_receive);
         let media = "http://110.35.173.82:8081" + "/" + ele.path;
-        if (
-          ele.mimetype === "image/png" ||
-          ele.mimetype === "image/jpeg" ||
-          ele.mimetype === "image/jpg" ||
-          ele.mimetype === "image/gif"
-        ) {
-          await model.media_message.create({
-            images: media,
-            today: today,
-            size: ele.size,
-            original_name: ele.originalname,
-            id_user: id,
-          });
-          await model.content_message.create({
-            today,
-            status: false,
-            media: media,
-            id_user: id_user_send,
-            id_user_send,
-            id_user_receive,
-            avatar_send: avatar_send.image_url,
-            avatar_receive: avatar_receive.image_url,
-          });
-        } else {
-          await model.file_message.create({
-            files: media,
-            today: today,
-            size: ele.size,
-            original_name: ele.originalname,
-            id_user: id,
-          });
-          await model.content_message.create({
-            today,
-            status: false,
-            media: media,
-            id_user: id_user_send,
-            id_user_send,
-            id_user_receive,
-            avatar_send: avatar_send.image_url,
-            avatar_receive: avatar_receive.image_url,
-          });
-        }
+        await model.media_message.create({
+          media: media,
+          today: today,
+          size: ele.size,
+          original_name: ele.originalname,
+          id_user: id_user_send,
+        });
+        await model.media_message.create({
+          media: media,
+          today: today,
+          size: ele.size,
+          original_name: ele.originalname,
+          id_user: id_user_receive,
+        });
+        await model.content_message.create({
+          today,
+          status: false,
+          media: media,
+          id_user: id_user_send,
+          id_user_send,
+          group: group,
+          id_user_receive,
+          avatar_send: avatar_send.image_url,
+          avatar_receive: avatar_receive.image_url,
+        });
         await model.content_message.create({
           today,
           status: false,
@@ -148,6 +152,7 @@ const send_media = async (req, res) => {
           id_user: id_user_receive,
           id_user_send,
           id_user_receive,
+          group: group,
           avatar_send: avatar_send.image_url,
           avatar_receive: avatar_receive.image_url,
         });
@@ -245,4 +250,5 @@ module.exports = {
   delete_media,
   delete_file,
   delete_links,
+  set_status_mes,
 };
