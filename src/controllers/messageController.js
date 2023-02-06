@@ -26,7 +26,6 @@ const get_all_contact = async (req, res) => {
 
 const get_contact_messs = async (req, res) => {
   let { id_send, id_receive } = req.params; //id user
-  console.log("params", { id_send, id_receive });
   try {
     let get_id_Contact = await model.users.findAll({
       include: [
@@ -40,7 +39,7 @@ const get_contact_messs = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
-    let get_contact_by = getAllContact.filter((ele) =>
+    let get_contact_by = get_id_Contact.filter((ele) =>
       ele.content_messages.some((ele) => ele.id_user_send == id_send)
     );
     successCode(res, get_contact_by, "Get Success");
