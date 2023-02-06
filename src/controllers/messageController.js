@@ -23,7 +23,8 @@ const get_all_contact = async (req, res) => {
 };
 
 const get_contact_messs = async (req, res) => {
-  let { id } = req.params; //id user
+  let { id_send, id_receive } = req.params; //id user
+  console.log("params", { id_send, id_receive });
   try {
     const get_id_Contact = await model.users.findAll({
       include: [

@@ -16,7 +16,7 @@ const upload1 = require("../Middlewares/uploadMes");
 const messRoute = express.Router();
 
 messRoute.get("/get-contacts-all/:id", get_all_contact);
-messRoute.get("/get-contacts/:id", get_contact_messs);
+messRoute.get("/get-contacts/:id_send/:id_receive", get_contact_messs);
 
 messRoute.post("/send-mess/:id", upload.none(), send_mess);
 messRoute.post("/send-media/:id", upload1.any(), send_media);
