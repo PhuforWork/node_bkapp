@@ -28,20 +28,18 @@ const get_all_contact = async (req, res) => {
 };
 
 const get_contact_messs = async (req, res) => {
-  let { id } = req.params; // group
+  let { id } = req.params; //id user
   try {
-    let get_group = await model.users.findAll({ where: { id_user: id } });
     const get_id_Contact = await model.users.findAll({
       include: [
         "select_types",
         "persionalities",
         "departments",
-        // "content_messages",
+        "content_messages",
         "media_messages",
         "links_messages",
-        { model: model.content_message,as:"content_messages" ,where: { group: 13 } }
       ],
-      where: { group: 13 },
+      where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
     successCode(res, get_id_Contact, "Get Success");
