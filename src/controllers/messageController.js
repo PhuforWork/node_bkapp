@@ -15,7 +15,9 @@ const get_all_contact = async (req, res) => {
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     let getAllNewContact = getAllContact.filter((ele) =>
-      ele.content_messages.some((ele) => (ele.group = id_send + id_receive))
+      ele.content_messages.some(
+        (ele) => (ele.group = id_send * 1 + id_receive * 1)
+      )
     );
     successCode(res, getAllNewContact, "Success");
   } catch (error) {
