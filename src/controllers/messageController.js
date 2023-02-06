@@ -32,7 +32,6 @@ const get_contact_messs = async (req, res) => {
         "content_messages",
         "media_messages",
         "links_messages",
-        "file_messages",
       ],
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
