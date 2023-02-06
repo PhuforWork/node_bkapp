@@ -30,7 +30,9 @@ const get_all_contact = async (req, res) => {
 const get_contact_messs = async (req, res) => {
   let { id } = req.params; //id user
   try {
-    const get_contact = await model.users.findAll();
+    let get_contact = await model.users.findAll();
+    get_contact = await JSON.parse(JSON.stringify(get_contact));
+
     const get_id_Contact = await model.users.findAll({
       include: [
         "select_types",
