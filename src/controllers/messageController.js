@@ -18,7 +18,7 @@ const get_all_contact = async (req, res) => {
       ele.content_messages.some(
         (ele) =>
           ele.id_user_send === id_send * 1 &&
-          ele.id_user_receive == id_receive * 1
+          ele.id_user_receive === id_receive * 1
       )
     );
     successCode(res, getAllNewContact, "Success");
