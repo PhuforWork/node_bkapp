@@ -42,7 +42,10 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id },
       attributes: { exclude: ["_password", "email"] },
     });
-    successCode(res, get_id_Contact, "Get Success");
+    const get_contact = await model.content_message.findAll({
+      where: { id_user: id },
+    });
+    successCode(res, { get_id_Contact, get_contact }, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
