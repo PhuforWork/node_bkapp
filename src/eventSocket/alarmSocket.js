@@ -13,8 +13,9 @@ module.exports = (io) => {
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     let Data = await model.notifications.findAll({
       include: ["department_notifies", "persionality_notifies"],
-      where: { isNotify: 1 }
+      where: { isNotify: 1, id_user: id_user }
     });
+    console.log("DaiNQ 🚀 -> constalarm_immediately= -> Data", Data)
     Data = JSON.parse(JSON.stringify(Data));
     // let test = moment().format("Z");
 
