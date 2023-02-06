@@ -10,7 +10,6 @@ const get_all_contact = async (req, res) => {
   let { id } = req.params;
   try {
     let getAllContact = await model.users.findAll({
-      where: { id_user: id },
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
