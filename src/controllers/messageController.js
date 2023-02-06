@@ -42,7 +42,7 @@ const get_contact_messs = async (req, res) => {
     let get_contact_by = get_id_Contact.filter((ele) =>
       ele.content_messages.some(
         (ele) =>
-          (ele.id_user_send == ele.id_user &&
+          (ele.id_user_send == id_send &&
             ele.id_user_receive == id_receive) ||
           (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
       )
