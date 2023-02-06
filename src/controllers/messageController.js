@@ -10,10 +10,7 @@ const get_all_contact = async (req, res) => {
   let { id } = req.params;
   try {
     let getAllContact = await model.users.findAll({
-      include: [{
-        model:model.content_message,
-        as: "content_messages",
-      }],
+      include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
     let content_message = await model.content_message.findAll({
@@ -22,6 +19,7 @@ const get_all_contact = async (req, res) => {
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     content_message = await JSON.parse(JSON.stringify(content_message));
     let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
+
     successCode(res, getAllNewContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
