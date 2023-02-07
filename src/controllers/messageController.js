@@ -17,7 +17,7 @@ const get_all_contact = async (req, res) => {
     console.log(getAllContact);
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
 
-    let get_contact = getAllContact.map(
+    let get_contact = getAllContact.filter(
       async (ele) =>
         (ele.content_messages.id_send == id_send &&
           ele.content_messages.id_receve ==
@@ -25,7 +25,7 @@ const get_all_contact = async (req, res) => {
         (ele.content_messages.id_send == ele.content_messages.group - id_send &&
           ele.content_messages.id_receve == id_send)
     );
-    successCode(res, { ...getAllContact, get_contact }, "Success");
+    successCode(res,  get_contact , "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
