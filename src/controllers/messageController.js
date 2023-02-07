@@ -15,7 +15,7 @@ const get_all_contact = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
-    // let getContact = getAllContact.filter((ele) => ele.id_user != id_send);
+    getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     // let get_contact = getContact.filter((ele) =>
     //   ele.content_message.some((ele) => ele.id_user_send === id_send)
     // );
