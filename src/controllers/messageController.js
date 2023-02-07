@@ -39,7 +39,7 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id_receive },
       attributes: { exclude: ["_password", "email"] },
     });
-    infor_receive = await JSON.parse(JSON.stringify(infor_receive));
+    // infor_receive = await JSON.parse(JSON.stringify(infor_receive));
     // let get_contact_by = get_id_Contact.filter((ele) => {
     //   if (
     //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
@@ -55,13 +55,13 @@ const get_contact_messs = async (req, res) => {
     //     return true;
     //   }
     // });
-    let getContact = model.content_message.findAll();
-    getContact = await JSON.parse(JSON.stringify(getContact));
-    let get_contact = getContact.filter(
-      (ele) =>
-        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-    );
+    // let getContact = model.content_message.findAll();
+    // getContact = await JSON.parse(JSON.stringify(getContact));
+    // let get_contact = getContact.filter(
+    //   (ele) =>
+    //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+    //     (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+    // );
     successCode(res,  infor_receive, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
