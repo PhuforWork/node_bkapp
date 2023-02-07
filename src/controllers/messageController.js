@@ -55,8 +55,8 @@ const get_contact_messs = async (req, res) => {
     //     return true;
     //   }
     // });
-    let getContact = model.content_message.findAll({
-      where: { id_user: 3 },
+    let getContact = await model.content_message.findAll({
+      where: { id_user: id_send },
     });
     // getContact = await JSON.parse(JSON.stringify(getContact));
     // let get_contact = getContact.filter(
@@ -64,7 +64,7 @@ const get_contact_messs = async (req, res) => {
     //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
     //     (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
     // );
-    successCode(res, getContact, "Get Success");
+    successCode(res, { ...infor_receive, getContact }, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
