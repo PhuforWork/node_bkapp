@@ -15,10 +15,10 @@ const get_all_contact = async (req, res) => {
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    let getAllNewContact = getAllContact.filter((ele) =>
-      ele.content_messages.some((ele) => ele.id_user_send == id_send)
-    );
-    successCode(res, getAllNewContact, "Success");
+    // let getAllNewContact = getAllContact.filter((ele) =>
+    //   ele.content_messages.some((ele) => ele.id_user_send == id_send)
+    // );
+    successCode(res, getAllContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
