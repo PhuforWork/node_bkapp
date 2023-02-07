@@ -9,8 +9,9 @@ const path = require("path");
 const get_all_contact = async (req, res) => {
   let { id_send } = req.params;
   try {
-    let getAllContact = await model.content_message.findAll({
-      include: ["id_user_user"],
+    let getAllContact = await model.users.findAll({
+      include: ["content_messages"],
+      attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
