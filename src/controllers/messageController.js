@@ -25,7 +25,7 @@ const get_all_contact = async (req, res) => {
             ele1.group - id_send * 1 &&
             ele1.id_receve == id_send)
         ) {
-          return { ...ele, content_messages: ele1 };
+          return ele1 ;
         }
       })
     });
