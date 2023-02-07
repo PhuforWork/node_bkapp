@@ -21,11 +21,12 @@ const get_all_contact = async (req, res) => {
       async (ele) =>
         (ele.content_messages.id_send == id_send &&
           ele.content_messages.id_receve ==
-            ele.content_messages.group - id_send) ||
-        (ele.content_messages.id_send == ele.content_messages.group - id_send &&
+            ele.content_messages.group - id_send * 1) ||
+        (ele.content_messages.id_send ==
+          ele.content_messages.group - id_send * 1 &&
           ele.content_messages.id_receve == id_send)
     );
-    successCode(res,  get_contact , "Success");
+    successCode(res, get_contact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
