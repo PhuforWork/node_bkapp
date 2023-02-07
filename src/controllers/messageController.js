@@ -40,6 +40,7 @@ const get_contact_messs = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
+    console.log(get_id_Contact.content_messages);
     let get_contact_by = get_id_Contact.filter((ele) =>
       ele.content_messages.some(
         (ele) =>
