@@ -18,7 +18,7 @@ const get_all_contact = async (req, res) => {
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let get_contact = getAllContact.map((ele) => {
       if(ele.content_messages.length > 0){
-        ele.content_messages.map((ele) => {
+        ele.content_messages.filter((ele) => {
           if (
             (ele.id_user_send == id_send &&
               ele.id_user_receive == ele.id_user) ||
@@ -27,6 +27,7 @@ const get_all_contact = async (req, res) => {
           ) {
             return ele;
           }
+          return;
         });
       }
       return {...ele, content_messages: []};
