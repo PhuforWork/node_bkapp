@@ -18,11 +18,13 @@ const get_all_contact = async (req, res) => {
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let get_contact = getAllContact.map((ele) => {
       if(ele.content_messages.length > 0){
-      let mang =  ele.content_messages.map((ele) => (ele.id_user_send == id_send &&
-        ele.id_user_receive == ele.id_user) ||
-      (ele.id_user_send == ele.id_user &&
-        ele.id_user_receive == id_send));
-        console.log("dfgsfgsfdgsfdgsfg",mang)
+      let mang =  ele.content_messages.filter((item) => (
+        (item.id_user_send == id_send &&
+          item.id_user_receive == item.id_user) ||
+        (item.id_user_send == item.id_user &&
+          item.id_user_receive == id_send)
+      ));
+      return { ...ele, content_messages: mang}
       }
       return {...ele, content_messages: []};
     });
