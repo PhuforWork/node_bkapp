@@ -26,6 +26,7 @@ const get_all_contact = async (req, res) => {
         ) {
           return ele;
         }
+        return;
       });
     });
     // let get_contact = getAllContact.filter(
