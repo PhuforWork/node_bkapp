@@ -39,7 +39,7 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id_receive },
       attributes: { exclude: ["_password", "email"] },
     });
-    // infor_receive = await JSON.parse(JSON.stringify(infor_receive));
+    infor_receive = await JSON.parse(JSON.stringify(infor_receive));
     // let get_contact_by = get_id_Contact.filter((ele) => {
     //   if (
     //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
