@@ -14,8 +14,8 @@ const get_all_contact = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
-    getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    let getContact = getAllContact.filter((ele) =>
+    let getContact = getAllContact.filter((ele) => ele.id_user != id_send);
+    let get_contact = getContact.filter((ele) =>
       ele.content_message.some((ele) => {
         console.log(ele);
       })
@@ -29,7 +29,7 @@ const get_all_contact = async (req, res) => {
     //       ele.content_messages.group - id_send * 1 &&
     //       ele.content_messages.id_receve == id_send)
     // );
-    successCode(res, getContact, "Success");
+    successCode(res, get_contact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
