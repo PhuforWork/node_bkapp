@@ -7,19 +7,17 @@ const fs = require("fs");
 const path = require("path");
 
 const get_all_contact = async (req, res) => {
-  let { id } = req.params;
+  let { id_send } = req.params;
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
-    let content_message = await model.content_message.findAll({
-      where: { id_user: id },
-    });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
-    content_message = await JSON.parse(JSON.stringify(content_message));
-    let getAllNewContact = getAllContact.filter((ele) => ele.id_user != id);
-
+    getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
+    let getAllNewContact = getAllContact.filter((ele) =>
+      ele.content_messages.some((ele) => ele.id_user_send == id_send)
+    );
     successCode(res, getAllNewContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -27,9 +25,9 @@ const get_all_contact = async (req, res) => {
 };
 
 const get_contact_messs = async (req, res) => {
-  let { id } = req.params; //id user
+  let { id_send, id_receive } = req.params; //id user
   try {
-    const get_id_Contact = await model.users.findAll({
+    let get_id_Contact = await model.users.findAll({
       include: [
         "select_types",
         "persionalities",
@@ -38,10 +36,18 @@ const get_contact_messs = async (req, res) => {
         "media_messages",
         "links_messages",
       ],
-      where: { id_user: id },
+      where: { id_user: id_send },
       attributes: { exclude: ["_password", "email"] },
     });
-    successCode(res, get_id_Contact, "Get Success");
+    get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
+    let get_contact_by = get_id_Contact.filter((ele) =>
+      ele.content_messages.some(
+        (ele) =>
+          (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+          (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+      )
+    );
+    successCode(res, get_contact_by, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
