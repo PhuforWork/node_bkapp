@@ -16,9 +16,9 @@ const get_all_contact = async (req, res) => {
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    // let get_contact = getContact.filter((ele) =>
-    //   ele.content_message.some((ele) => ele.id_user_send === id_send)
-    // );
+    let get_contact = getAllContact.filter((ele) =>
+      ele.content_message.some((ele) => ele.id_user_send === id_send)
+    );
     // let get_contact = getAllContact.filter(
     //   async (ele) =>
     //     (ele.content_messages.id_send == id_send &&
@@ -28,7 +28,7 @@ const get_all_contact = async (req, res) => {
     //       ele.content_messages.group - id_send * 1 &&
     //       ele.content_messages.id_receve == id_send)
     // );
-    successCode(res, getAllContact, "Success");
+    successCode(res, get_contact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
