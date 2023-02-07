@@ -180,7 +180,7 @@ const send_media = async (req, res) => {
         });
         await model.content_message.create({
           today,
-          status: false,
+          status: true,
           media: media,
           id_user: id_user_send,
           id_user_send,
