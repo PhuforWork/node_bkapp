@@ -19,8 +19,7 @@ const get_all_contact = async (req, res) => {
     let get_contact = getAllContact.filter((ele) =>
       ele.content_messages.some(
         (ele1) =>
-          ele1.id_user_receive == id_send &&
-          ele1.id_user_send == ele1.group - id_send
+          ele1.id_user_receive == id_send 
       )
     );
     // let get_contact = getAllContact.filter(
