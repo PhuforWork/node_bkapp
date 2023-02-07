@@ -40,15 +40,22 @@ const get_contact_messs = async (req, res) => {
       attributes: { exclude: ["_password", "email"] },
     });
     get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
-    console.log(get_id_Contact);
-    let get_contact_by = get_id_Contact.filter((ele) =>
-      ele.content_messages.some(
-        (ele) =>
-          (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-          (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-      )
-    );
-    successCode(res, get_id_Contact.content_messages, "Get Success");
+    let get_contact_by = get_id_Contact.filter((ele) => {
+      if (
+        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+      ) {
+        return ele.content_messages.some(
+          (ele) =>
+            (ele.id_user_send == id_send &&
+              ele.id_user_receive == id_receive) ||
+            (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+        );
+      } else {
+        return true;
+      }
+    });
+    successCode(res, get_contact_by, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
