@@ -27,35 +27,44 @@ const get_all_contact = async (req, res) => {
 const get_contact_messs = async (req, res) => {
   let { id_send, id_receive } = req.params; //id user
   try {
-    let get_id_Contact = await model.users.findAll({
+    let infor_receive = await model.users.findAll({
       include: [
         "select_types",
         "persionalities",
         "departments",
-        "content_messages",
+        // "content_messages",
         "media_messages",
         "links_messages",
       ],
       where: { id_user: id_receive },
       attributes: { exclude: ["_password", "email"] },
     });
-    get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
-    let get_contact_by = get_id_Contact.filter((ele) => {
-      if (
-        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-      ) {
-        return ele.content_messages.some(
-          (ele) =>
-            (ele.id_user_send == id_send &&
-              ele.id_user_receive == id_receive) ||
-            (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-        );
-      } else {
-        return true;
-      }
-    });
-    successCode(res, get_contact_by, "Get Success");
+    // get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
+    // let get_contact_by = get_id_Contact.filter((ele) => {
+    //   if (
+    //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+    //     (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+    //   ) {
+    //     return ele.content_messages.some(
+    //       (ele) =>
+    //         (ele.id_user_send == id_send &&
+    //           ele.id_user_receive == id_receive) ||
+    //         (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+    //     );
+    //   } else {
+    //     return true;
+    //   }
+    // });
+    let getContact = model.content_message.findAll();
+    get_contact = await JSON.parse(JSON.stringify(getContact));
+    let get_contact = get_id_Contact.filter((ele) =>
+      ele.content_messages.some(
+        (ele) =>
+          (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+          (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+      )
+    );
+    successCode(res, { infor_receive, get_contact }, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
