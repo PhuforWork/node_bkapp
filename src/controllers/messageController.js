@@ -104,7 +104,7 @@ const send_mess = async (req, res) => {
 //
 const set_status_mes = async (req, res) => {
   try {
-    let { id } = req.params; // id user receive
+    let { id } = req.params; // id user send
     let status = true;
     await model.content_message.update(
       { status: status },
