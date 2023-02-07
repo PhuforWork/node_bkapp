@@ -109,7 +109,7 @@ const set_status_mes = async (req, res) => {
     await model.content_message.update(
       { status: status },
       {
-        where: { id_user_receive: id },
+        where: { id_user: id },
       }
     );
     successCode(res, "", "Success");
