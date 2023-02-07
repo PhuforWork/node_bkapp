@@ -13,16 +13,19 @@ const get_all_contact = async (req, res) => {
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
+    let get_contact;
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    let getContact = await model.content_message.findAll({
-      where: { id_user: id_send },
-    });
-    getContact = await JSON.parse(JSON.stringify(getContact));
-    let get_contact = getContact.filter(
-      (ele) =>
-        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+    Promise.all(
+      getAllContact.map(async (ele) => {
+        get_contact = ele.filter(
+          (ele) =>
+            (ele.content_messages.id_user_send == id_send &&
+              ele.content_messages.id_user_receive == id_receive) ||
+            (ele.content_messages.id_user_send == id_receive &&
+              ele.content_messages.id_user_receive == id_send)
+        );
+      })
     );
     successCode(res, { ...getAllContact, get_contact }, "Success");
   } catch (error) {
