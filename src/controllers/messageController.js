@@ -36,7 +36,7 @@ const get_contact_messs = async (req, res) => {
         "media_messages",
         "links_messages",
       ],
-      where: { id_user: id_send },
+      where: { id_user: id_receive },
       attributes: { exclude: ["_password", "email"] },
     });
     get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
