@@ -7,14 +7,14 @@ const { notification_alarm } = require("../controllers/userController");
 
 module.exports = (io) => {
   //báo thuc khi lich toi hen
-  const alarm_immediately = async () => {
+  const alarm_immediately = async (id) => {
+    console.log("DaiNQ 🚀 -> constalarm_immediately= -> id", id)
     // let aft_five_minute = moment.duration("00:05:00");
     // let datetimeLocal = moment(data.start).subtract(aft_five_minute);
     let Data = await model.notifications.findAll({
       include: ["department_notifies", "persionality_notifies"],
       where: { isNotify: 1 }
     });
-    console.log("DaiNQ 🚀 -> constalarm_immediately= -> Data", Data)
     Data = JSON.parse(JSON.stringify(Data));
     // let test = moment().format("Z");
 

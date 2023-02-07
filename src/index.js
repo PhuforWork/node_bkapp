@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
   socket.on("newUser", async (data) => {
     if (data.user_name) {
       await addNewUser(data.user_name, data.id_user, socket.id, data.isNotify);
-      alarm_immediately();
+      alarm_immediately(data.id_user);
     }
   });
   //send notification
@@ -63,7 +63,7 @@ io.on("connection", (socket) => {
     async ({ senderName, receiverName, type, status, id_user, data }) => {
       // const receiver = getUser(receiverName);
       await io.emit("getNotification");
-      await alarm_immediately();
+      await alarm_immediately(id_user);
       await io.emit("getNotification");
     }
   );
