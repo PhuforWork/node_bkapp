@@ -58,13 +58,13 @@ const get_contact_messs = async (req, res) => {
     let getContact = await model.content_message.findAll({
       where: { id_user: id_send },
     });
-    // getContact = await JSON.parse(JSON.stringify(getContact));
-    // let get_contact = getContact.filter(
-    //   (ele) =>
-    //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-    //     (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-    // );
-    successCode(res, { ...infor_receive, getContact }, "Get Success");
+    getContact = await JSON.parse(JSON.stringify(getContact));
+    let get_contact = getContact.filter(
+      (ele) =>
+        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+    );
+    successCode(res, { ...infor_receive, get_contact }, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
