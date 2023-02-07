@@ -17,16 +17,17 @@ const get_all_contact = async (req, res) => {
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let get_contact = getAllContact.map((ele) => {
-      if(ele.content_messages.length > 0){
-      let mang =  ele.content_messages.filter((item) => (
-        (item.id_user_send == id_send &&
-          item.id_user_receive == item.id_user) ||
-        (item.id_user_send == item.id_user &&
-          item.id_user_receive == id_send)
-      ));
-      return { ...ele, content_messages: mang}
+      if (ele.content_messages.length > 0) {
+        let mang = ele.content_messages.filter(
+          (item) =>
+            (item.id_user_send == id_send &&
+              item.id_user_receive == item.id_user) ||
+            (item.id_user_send == item.id_user &&
+              item.id_user_receive == id_send)
+        );
+        return { ...ele, content_messages: mang };
       }
-      return {...ele, content_messages: []};
+      return { ...ele, content_messages: [] };
     });
     // let get_contact = getAllContact.filter(
     //   async (ele) =>
@@ -99,7 +100,7 @@ const send_mess = async (req, res) => {
     let data_send = {
       msg,
       today,
-      status: false,
+      status: true,
       id_user: id_user_send,
       id_user_send,
       id_user_receive,
@@ -128,9 +129,11 @@ const send_mess = async (req, res) => {
 //
 const set_status_mes = async (req, res) => {
   try {
-    let { id } = req.params; // id content
+    let { id } = req.params; // id user receive
     let status = true;
-    await model.content_message.update(status, { where: { id_content: id } });
+    await model.content_message.update(status, {
+      where: { id_user_receive: id },
+    });
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
