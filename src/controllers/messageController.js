@@ -17,7 +17,7 @@ const get_all_contact = async (req, res) => {
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let get_contact = getAllContact.filter((ele) =>
-      ele.content_message.some((ele) => ele.id_user == id_send)
+      ele.some((ele) => ele.content_messages.id_user == id_send)
     );
     // let get_contact = getAllContact.filter(
     //   async (ele) =>
