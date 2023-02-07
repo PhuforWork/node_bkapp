@@ -22,9 +22,9 @@ const get_all_contact = async (req, res) => {
           (ele) =>
             (ele.content_messages.id_user_send == id_send &&
               ele.content_messages.id_user_receive ==
-                ele.content_messages.group - id_send) ||
+                ele.content_messages.group - id_send*1) ||
             (ele.content_messages.id_user_send ==
-              ele.content_messages.group - id_send &&
+              ele.content_messages.group - id_send*1 &&
               ele.content_messages.id_user_receive == id_send)
         );
         successCode(res, { ...getAllContact, get_contact }, "Success");
