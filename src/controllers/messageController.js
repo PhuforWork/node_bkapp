@@ -21,8 +21,8 @@ const get_all_contact = async (req, res) => {
         if (
           (ele.id_user_send == id_send &&
             ele.id_user_receive == ele.group - id_send) ||
-          (ele.id_user_send == id_send &&
-            ele.id_user_receive == ele.group - id_send)
+          (ele.id_user_send == ele.group - id_send &&
+            ele.id_user_receive == id_send)
         ) {
           return ele;
         }
