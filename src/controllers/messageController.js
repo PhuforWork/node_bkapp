@@ -86,7 +86,7 @@ const send_mess = async (req, res) => {
     let data_receive = {
       msg,
       today,
-      status: false,
+      status: true,
       id_user: id_user_receive,
       id_user_send,
       id_user_receive,
@@ -104,7 +104,7 @@ const send_mess = async (req, res) => {
 //
 const set_status_mes = async (req, res) => {
   try {
-    let { id } = req.params; // id user send
+    let { id } = req.params; // id user receive
     let status = true;
     await model.content_message.update(
       { status: status },
@@ -166,7 +166,7 @@ const send_media = async (req, res) => {
         });
         await model.content_message.create({
           today,
-          status: false,
+          status: true,
           media: media,
           id_user: id_user_receive,
           id_user_send: id_user_receive,
