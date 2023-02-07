@@ -15,10 +15,16 @@ const get_all_contact = async (req, res) => {
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    // let getAllNewContact = getAllContact.filter((ele) =>
-    //   ele.content_messages.some((ele) => ele.id_user_send == id_send)
-    // );
-    successCode(res, getAllContact, "Success");
+    let getContact = await model.content_message.findAll({
+      where: { id_user: id_send },
+    });
+    getContact = await JSON.parse(JSON.stringify(getContact));
+    let get_contact = getContact.filter(
+      (ele) =>
+        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
+    );
+    successCode(res, { ...getAllContact, get_contact }, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -32,7 +38,6 @@ const get_contact_messs = async (req, res) => {
         "select_types",
         "persionalities",
         "departments",
-        // "content_messages",
         "media_messages",
         "links_messages",
       ],
