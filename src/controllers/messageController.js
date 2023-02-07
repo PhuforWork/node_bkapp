@@ -55,9 +55,7 @@ const get_contact_messs = async (req, res) => {
     //     return true;
     //   }
     // });
-    let getContact = model.content_message.findAll({
-      where: { id_user: id_send },
-    });
+    let getContact = model.content_message.findAll();
     // getContact = await JSON.parse(JSON.stringify(getContact));
     // let get_contact = getContact.filter(
     //   (ele) =>
