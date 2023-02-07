@@ -17,11 +17,6 @@ const get_all_contact = async (req, res) => {
     // let getAllNewContact = getAllContact.filter((ele) =>
     //   ele.content_messages.some((ele) => ele.id_user_send == id_send)
     // );
-
-
-
-
-
     successCode(res, getAllContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
