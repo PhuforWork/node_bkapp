@@ -100,7 +100,7 @@ const send_mess = async (req, res) => {
     let data_send = {
       msg,
       today,
-      status: true,
+      status: false,
       id_user: id_user_send,
       id_user_send,
       id_user_receive,
@@ -180,7 +180,7 @@ const send_media = async (req, res) => {
         });
         await model.content_message.create({
           today,
-          status: true,
+          status: false,
           media: media,
           id_user: id_user_send,
           id_user_send,
