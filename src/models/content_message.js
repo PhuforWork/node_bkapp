@@ -13,7 +13,7 @@ class content_message extends Sequelize.Model {
       primaryKey: true
     },
     msg: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     today: {
