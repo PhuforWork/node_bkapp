@@ -31,6 +31,7 @@ const get_all_contact = async (req, res) => {
     // );
     successCode(res, get_contact, "Success");
   } catch (error) {
+    console.log(error);
     errorCode(res, "Error BackEnd");
   }
 };
