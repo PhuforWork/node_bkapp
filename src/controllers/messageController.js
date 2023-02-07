@@ -16,16 +16,18 @@ const get_all_contact = async (req, res) => {
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let get_contact = getAllContact.map((ele) => {
-      if (
-        (ele.content_messages.id_send == id_send &&
-          ele.content_messages.id_receve ==
-            ele.content_messages.group - id_send * 1) ||
-        (ele.content_messages.id_send ==
-          ele.content_messages.group - id_send * 1 &&
-          ele.content_messages.id_receve == id_send)
-      ) {
-        return { ...ele, content_messages: ele.content_messages };
-      }
+      ele.content_messages.map((ele1)=>{
+        if (
+          (ele1.id_send == id_send &&
+            ele1.id_receve ==
+              ele1.group - id_send * 1) ||
+          (ele1.id_send ==
+            ele1.group - id_send * 1 &&
+            ele1.id_receve == id_send)
+        ) {
+          return { ...ele, content_messages: ele1 };
+        }
+      })
     });
     // let get_contact = getAllContact.filter(
     //   async (ele) =>
