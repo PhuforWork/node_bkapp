@@ -13,23 +13,17 @@ const get_all_contact = async (req, res) => {
       include: ["content_messages"],
       attributes: { exclude: ["_password", "email"] },
     });
-    let get_contact;
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     console.log(getAllContact);
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    Promise.all(
-      getAllContact.map(async (ele1) => {
-        console.log();
-         get_contact = getAllContact.filter(
-          (ele) =>
-            (ele1.content_messages.id_user_send == id_send &&
-              ele1.content_messages.id_user_receive ==
-                ele1.content_messages.group - id_send * 1) ||
-            (ele1.content_messages.id_user_send ==
-              ele1.content_messages.group - id_send * 1 &&
-              ele1.content_messages.id_user_receive == id_send)
-        );
-      })
+
+    let get_contact = getAllContact.map(
+      async (ele) =>
+        (ele.content_messages.id_send == id_send &&
+          ele.content_messages.id_receve ==
+            ele.content_messages.group - id_send) ||
+        (ele.content_messages.id_send == ele.content_messages.group - id_send &&
+          ele.content_messages.id_receve == id_send)
     );
     successCode(res, { ...getAllContact, get_contact }, "Success");
   } catch (error) {
