@@ -131,9 +131,12 @@ const set_status_mes = async (req, res) => {
   try {
     let { id } = req.params; // id user receive
     let status = true;
-    await model.content_message.update(status, {
-      where: { id_user_receive: id },
-    });
+    await model.content_message.update(
+      { status: status },
+      {
+        where: { id_user_receive: id },
+      }
+    );
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
