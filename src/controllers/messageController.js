@@ -29,15 +29,6 @@ const get_all_contact = async (req, res) => {
       }
       return { ...ele, content_messages: [] };
     });
-    // let get_contact = getAllContact.filter(
-    //   async (ele) =>
-    //     (ele.content_messages.id_send == id_send &&
-    //       ele.content_messages.id_receve ==
-    //         ele.content_messages.group - id_send * 1) ||
-    //     (ele.content_messages.id_send ==
-    //       ele.content_messages.group - id_send * 1 &&
-    //       ele.content_messages.id_receve == id_send)
-    // );
     successCode(res, get_contact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -58,22 +49,6 @@ const get_contact_messs = async (req, res) => {
       where: { id_user: id_receive },
       attributes: { exclude: ["_password", "email"] },
     });
-    // infor_receive = await JSON.parse(JSON.stringify(infor_receive));
-    // let get_contact_by = get_id_Contact.filter((ele) => {
-    //   if (
-    //     (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-    //     (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-    //   ) {
-    //     return ele.content_messages.some(
-    //       (ele) =>
-    //         (ele.id_user_send == id_send &&
-    //           ele.id_user_receive == id_receive) ||
-    //         (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-    //     );
-    //   } else {
-    //     return true;
-    //   }
-    // });
     let getContact = await model.content_message.findAll({
       where: { id_user: id_send },
     });
@@ -102,8 +77,8 @@ const send_mess = async (req, res) => {
       today,
       status: false,
       id_user: id_user_send,
-      id_user_send: id_user_send,
-      id_user_receive: id_user_receive,
+      id_user_send,
+      id_user_receive,
       group: group,
       avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
@@ -113,8 +88,8 @@ const send_mess = async (req, res) => {
       today,
       status: false,
       id_user: id_user_receive,
-      id_user_send: id_user_receive,
-      id_user_receive: id_user_send,
+      id_user_send,
+      id_user_receive,
       group: group,
       avatar_send: avatar_send.image_url,
       avatar_receive: avatar_receive.image_url,
