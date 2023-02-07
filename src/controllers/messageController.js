@@ -16,9 +16,7 @@ const get_all_contact = async (req, res) => {
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     let getContact = getAllContact.filter((ele) => ele.id_user != id_send);
     let get_contact = getContact.filter((ele) =>
-      ele.content_message.some((ele) => {
-        console.log(ele);
-      })
+      ele.content_message.some((ele) => ele.id_user_send === id_send)
     );
     // let get_contact = getAllContact.filter(
     //   async (ele) =>
@@ -31,7 +29,6 @@ const get_all_contact = async (req, res) => {
     // );
     successCode(res, get_contact, "Success");
   } catch (error) {
-    console.log(error);
     errorCode(res, "Error BackEnd");
   }
 };
