@@ -58,7 +58,7 @@ const get_contact_messs = async (req, res) => {
     let getContact = model.content_message.findAll();
     getContact = await JSON.parse(JSON.stringify(getContact));
     let get_contact = get_contact.filter((ele) =>
-      ele.content_messages.some(
+      ele.some(
         (ele) =>
           (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
           (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
