@@ -64,7 +64,7 @@ const get_contact_messs = async (req, res) => {
         (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
         (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
     );
-    successCode(res, { ...infor_receive, get_contact }, "Get Success");
+    successCode(res, { ...infor_receive, ...get_contact }, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
