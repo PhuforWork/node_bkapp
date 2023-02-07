@@ -1,7 +1,6 @@
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
-const { alarm_immediately } = require("../eventSocket/alarmSocket")(io);
 const model = init_models(sequelize);
 const moment = require("moment");
 const schedule = require("node-schedule");
@@ -47,7 +46,6 @@ const booking_userid = async (req, res) => {
           id_user: id,
         },
       });
-      alarm_immediately(id)
       successCode(res, check_bkUser, "Get success booking of user");
     }
   } catch (error) {
