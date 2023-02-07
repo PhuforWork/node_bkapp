@@ -27,7 +27,7 @@ const get_all_contact = async (req, res) => {
     //       ele.content_messages.group - id_send * 1 &&
     //       ele.content_messages.id_receve == id_send)
     // );
-    successCode(res, get_contact, "Success");
+    successCode(res, getContact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
