@@ -8,6 +8,7 @@ const path = require("path");
 
 const get_all_contact = async (req, res) => {
   let { id_send } = req.params;
+  console.log(id_send);
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
@@ -15,10 +16,20 @@ const get_all_contact = async (req, res) => {
     });
     getAllContact = await JSON.parse(JSON.stringify(getAllContact));
     getAllContact = getAllContact.filter((ele) => ele.id_user != id_send);
-    let getAllNewContact = getAllContact.filter((ele) =>
-      ele.content_messages.some((ele) => ele.id_user_send == id_send)
-    );
-    successCode(res, getAllNewContact, "Success");
+    let get_contact = getAllContact.map((ele) => {
+      if (ele.content_messages.length > 0) {
+        let mang = ele.content_messages.filter(
+          (item) =>
+            (item.id_user_send == id_send &&
+              item.id_user_receive == item.id_user) ||
+            (item.id_user_send == item.id_user &&
+              item.id_user_receive == id_send)
+        );
+        return { ...ele, content_messages: mang };
+      }
+      return { ...ele, content_messages: [] };
+    });
+    successCode(res, get_contact, "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -27,27 +38,27 @@ const get_all_contact = async (req, res) => {
 const get_contact_messs = async (req, res) => {
   let { id_send, id_receive } = req.params; //id user
   try {
-    let get_id_Contact = await model.users.findAll({
+    let infor_receive = await model.users.findAll({
       include: [
         "select_types",
         "persionalities",
         "departments",
-        "content_messages",
         "media_messages",
         "links_messages",
       ],
-      where: { id_user: id_send },
+      where: { id_user: id_receive },
       attributes: { exclude: ["_password", "email"] },
     });
-    get_id_Contact = await JSON.parse(JSON.stringify(get_id_Contact));
-    let get_contact_by = get_id_Contact.filter((ele) =>
-      ele.content_messages.some(
-        (ele) =>
-          (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
-          (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
-      )
+    let getContact = await model.content_message.findAll({
+      where: { id_user: id_send },
+    });
+    getContact = await JSON.parse(JSON.stringify(getContact));
+    let get_contact = getContact.filter(
+      (ele) =>
+        (ele.id_user_send == id_send && ele.id_user_receive == id_receive) ||
+        (ele.id_user_send == id_receive && ele.id_user_receive == id_send)
     );
-    successCode(res, get_contact_by, "Get Success");
+    successCode(res, { ...infor_receive, get_contact }, "Get Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
   }
@@ -75,7 +86,7 @@ const send_mess = async (req, res) => {
     let data_receive = {
       msg,
       today,
-      status: false,
+      status: true,
       id_user: id_user_receive,
       id_user_send,
       id_user_receive,
@@ -93,9 +104,14 @@ const send_mess = async (req, res) => {
 //
 const set_status_mes = async (req, res) => {
   try {
-    let { id } = req.params; // id content
+    let { id } = req.params; // id user receive
     let status = true;
-    await model.content_message.update(status, { where: { id_content: id } });
+    await model.content_message.update(
+      { status: status },
+      {
+        where: { id_user: id },
+      }
+    );
     successCode(res, "", "Success");
   } catch (error) {
     errorCode(res, "Error BackEnd");
@@ -142,19 +158,19 @@ const send_media = async (req, res) => {
           status: false,
           media: media,
           id_user: id_user_send,
-          id_user_send,
           group: group,
-          id_user_receive,
+          id_user_send: id_user_send,
+          id_user_receive: id_user_receive,
           avatar_send: avatar_send.image_url,
           avatar_receive: avatar_receive.image_url,
         });
         await model.content_message.create({
           today,
-          status: false,
+          status: true,
           media: media,
           id_user: id_user_receive,
-          id_user_send,
-          id_user_receive,
+          id_user_send: id_user_receive,
+          id_user_receive: id_user_send,
           group: group,
           avatar_send: avatar_send.image_url,
           avatar_receive: avatar_receive.image_url,
