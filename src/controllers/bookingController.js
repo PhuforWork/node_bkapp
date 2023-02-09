@@ -427,7 +427,7 @@ const delete_bk = async (req, res) => {
 const notification = async (req, res) => {
   try {
     let today = moment();
-    let { senderName, status, type, isNotify } = req.body;
+    let { senderName, status, type } = req.body;
     let { start, end, detail, isCheck, checkbk } = req.body.data.res_bk;
     let department = req.body.data.res_der.label;
     let data2 = req.body.data.res_per;
@@ -447,7 +447,6 @@ const notification = async (req, res) => {
       end,
       detail,
       isRead: true,
-      isNotify: isNotify ? 1 : 0,
     };
 
     if (!isCheck) {
