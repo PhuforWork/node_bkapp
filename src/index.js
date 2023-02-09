@@ -25,7 +25,7 @@ app.use(express.static("."));
 httpServer.listen(8081);
 
 app.get("/test", async (req, res) => {
-  let Data = await model.messages.findAll({ include: ["id_user_receive_mess_receive","id_user_send_mess_send"] });
+  let Data = await model.messages.findAll({ include: ["id_user_receive_mess_receive", "id_user_send_mess_send"] });
   res.status(200).send(Data);
 });
 
@@ -61,10 +61,10 @@ io.on("connection", (socket) => {
   socket.on(
     "sendNotification",
     async ({ senderName, receiverName, type, status, id_user, data }) => {
-      console.log("ggggggggggg",{ senderName, receiverName, type, status, id_user, data });
+      console.log("ggggggggggg", { senderName, receiverName, type, status, id_user, data });
       // const receiver = getUser(receiverName);
       await io.emit("getNotification");
-      await alarm_immediately();
+      await alarm_immediately(type, id_user, data);
       await io.emit("getNotification");
     }
   );
