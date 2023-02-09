@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
       const cloneData = { type, id_user, data };
       // const receiver = getUser(receiverName);
       await io.emit("getNotification");
-      await alarm_immediately(cloneData);
+      await alarm_immediately(...cloneData);
       await io.emit("getNotification");
     }
   );
