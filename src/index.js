@@ -62,9 +62,9 @@ io.on("connection", (socket) => {
     "sendNotification",
     async ({ senderName, receiverName, type, status, id_user, data }) => {
       // const receiver = getUser(receiverName);
-      await io.emit("getNotification", type, id_user, data);
+      await io.emit("getNotification", { type, id_user, data });
       await alarm_immediately(type, id_user, data);
-      await io.emit("getNotification", type, id_user, data);
+      await io.emit("getNotification", { type, id_user, data });
     }
   );
   //
