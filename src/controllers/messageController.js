@@ -8,7 +8,7 @@ const path = require("path");
 
 const get_all_contact = async (req, res) => {
   let { id_send } = req.params;
-  console.log(id_send);
+
   try {
     let getAllContact = await model.users.findAll({
       include: ["content_messages"],
@@ -223,7 +223,6 @@ const delete_media = async (req, res) => {
   try {
     let { id } = req.params; // id media
     let pathLinks = await model.media_message.findByPk(id);
-    console.log(pathLinks);
     let pathSubstring = JSON.parse(JSON.stringify(pathLinks));
     pathSubstring = pathSubstring.images.substring(25);
     fs.unlinkSync(process.cwd() + "/" + pathSubstring);
@@ -238,7 +237,6 @@ const delete_file = async (req, res) => {
   try {
     let { id } = req.params; // id file
     let pathLinks = await model.file_message.findByPk(id);
-    console.log(pathLinks);
     let pathSubstring = JSON.parse(JSON.stringify(pathLinks));
     pathSubstring = pathSubstring.images.substring(25);
     fs.unlinkSync(process.cwd() + "/" + pathSubstring);
