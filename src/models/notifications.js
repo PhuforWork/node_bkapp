@@ -62,7 +62,8 @@ class notifications extends Sequelize.Model {
     },
     checkbk: {
       type: DataTypes.DOUBLE,
-      allowNull: true
+      allowNull: true,
+      unique: "checkbk"
     },
     alarmDate: {
       type: DataTypes.DATE,
@@ -83,6 +84,14 @@ class notifications extends Sequelize.Model {
         using: "BTREE",
         fields: [
           { name: "id_notify" },
+        ]
+      },
+      {
+        name: "checkbk",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "checkbk" },
         ]
       },
       {
