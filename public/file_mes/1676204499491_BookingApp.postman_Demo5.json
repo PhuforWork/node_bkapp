@@ -1,0 +1,575 @@
+{
+	"info": {
+		"_postman_id": "a41312b8-874d-4bc4-a459-5d3517162920",
+		"name": "BookingApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24629471"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/user/getuser",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/user/getbooking-info",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getbooking-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "_password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/sigup-user",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"sigup-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test1230@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "_password",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/change-pass",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"change-pass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_name",
+									"value": "test000",
+									"type": "text"
+								},
+								{
+									"key": "_password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email ",
+									"value": "test123@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/forgot-pass ",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"forgot-pass "
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_url",
+									"type": "file",
+									"src": "/Users/quocphu97/Desktop/source_miniu/node_bkapp_2/public/images/anh-chan-dung-1.jpg"
+								},
+								{
+									"key": "user_name",
+									"value": "test123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "_password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/update-user/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"update-user",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "get booking (get all bk and id_user )",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/booking/get-booking",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"get-booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get booking by id_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/booking/get-booking/6",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"get-booking",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post booking by id_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_selection",
+									"value": "selectD",
+									"type": "text"
+								},
+								{
+									"key": "id_booking",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/booking/add-type",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"add-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update booking by id_booking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "start_time",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "end_time",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "_date",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/booking/update-booking/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"update-booking",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update selection by id_user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_selection",
+									"value": "[\"selectA\",\"selectB\",\"selectC\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/booking/update-select/9",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"update-select",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update department by id_user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_department",
+									"value": "[\"departA\",\"departB\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/booking/update-persional/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"update-persional",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post department first by id_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_department",
+									"value": "[\"departA\",\"departB\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/booking/add-depart/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"add-depart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post selection by id user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_selection",
+									"value": "[\"selectA\",\"selectB\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/booking/add-select/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"add-select",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/booking/get-service/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"get-service",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": []
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "add avartar test",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image_url",
+									"type": "file",
+									"src": "/Users/quocphu97/Desktop/source_miniu/node_bkapp_2/public/images/anh-chan-dung-1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/user/upimg/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"upimg",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://110.35.173.82:8081",
+			"type": "string"
+		}
+	]
+}
