@@ -21,6 +21,14 @@ const { chat_app } = require("./eventSocket/chatSocket")(io);
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
+app.use(function (request, response, next) {
+
+  if (process.env.NODE_ENV != 'development' && !request.secure) {
+    return response.redirect("https://" + request.headers.host + request.url);
+  }
+
+  next();
+})
 
 httpServer.listen(8081);
 
