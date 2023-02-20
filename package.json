@@ -29,6 +29,7 @@
     "sequelize-auto": "^0.8.8",
     "socket.io": "^4.5.4",
     "ssh2": "^1.11.0",
+    "tls": "^0.0.1",
     "toastr": "^2.1.4",
     "tunnel-ssh": "^4.1.6"
   },
