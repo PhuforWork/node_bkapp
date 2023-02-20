@@ -38,7 +38,7 @@ const http = require('http');
 http.createServer(function (req, res) {
   res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
   res.end();
-}).listen(80);
+}).listen(8081);
 
 // httpServer.listen(8081);
 
