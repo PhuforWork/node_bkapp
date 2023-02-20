@@ -5,7 +5,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
-const https = require('https');
 
 const sequelize = require("./models/index");
 const init_models = require("./models/init-models");
@@ -13,34 +12,19 @@ const model = init_models(sequelize);
 
 const app = express();
 
+var secure = require('express-force-https');
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
 const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
 const { chat_app } = require("./eventSocket/chatSocket")(io);
-const fs = require('fs');
 
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
+app.use(secure);
 
-const options = {
-  key: fs.readFileSync('./key.pem'),
-  cert: fs.readFileSync('./cert.pem')
-};
-
-https.createServer(options, function (req, res) {
-  res.end('secure!');
-}).listen(8081);
-
-// Redirect from http port 80 to https
-const http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-  res.end();
-}).listen(8081);
-
-// httpServer.listen(8081);
+httpServer.listen(8081);
 
 app.get("/test", async (req, res) => {
   let Data = await model.messages.findAll({ include: ["id_user_receive_mess_receive", "id_user_send_mess_send"] });
