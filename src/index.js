@@ -21,15 +21,13 @@ const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
 const { chat_app } = require("./eventSocket/chatSocket")(io);
 
 const optionSSL = {
-  key: fs.readFileSync("./etc/pki/tls/private/castisworld_private.key"),
-  cert: fs.readFileSync("./etc/pki/tls/certs/castisworld.crt")
+  key: fs.readFileSync("~/etc/pki/tls/private/castisworld_private.key"),
+  cert: fs.readFileSync("~/etc/pki/tls/certs/castisworld.crt")
 };
 
 app.use(express.json());
 app.use(cors(options));
-app.use(express.static('public', {
-  extensions: ['html', 'htm'],
-}));
+app.use(express.static("."));
 https.createServer(optionSSL, app).listen(443, '110.35.173.82');
 
 // httpServer.listen(8081);
