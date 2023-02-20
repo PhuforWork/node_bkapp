@@ -18,9 +18,12 @@ const io = new Server(httpServer, { cors: { origin: "*" } });
 const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
 const { chat_app } = require("./eventSocket/chatSocket")(io);
 
+const options = {
+  origin: ["https://110.35.173.82"]
+}
+
 app.use(express.json());
-app.use(cors());
-app.options('*', cors());
+app.use(cors(options));
 app.use(express.static("."));
 
 httpServer.listen(8081);
