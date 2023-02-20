@@ -23,7 +23,7 @@ app.use(cors());
 app.use(express.static("."));
 app.use(function (request, response, next) {
 
-  if (process.env.NODE_ENV != 'development' && !request.secure) {
+  if (process.env.APP_URL !== request.secure) {
     return response.redirect("https://" + request.headers.host + request.url);
   }
 
