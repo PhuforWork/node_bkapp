@@ -5,8 +5,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
-const tls = require('tls');
-const https = require('https');
 
 const sequelize = require("./models/index");
 const init_models = require("./models/init-models");
@@ -21,7 +19,7 @@ const { alarm_immediately } = require("./eventSocket/alarmSocket")(io);
 const { chat_app } = require("./eventSocket/chatSocket")(io);
 
 app.use(express.json());
-app.use(cors(options));
+app.use(cors());
 app.use(express.static("."));
 
 httpServer.listen(8081);
