@@ -22,12 +22,12 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
 app.use(function (req, res, next) {
+  console.log("DaiNQ 🚀 -> req:", req)
   if (req.headers["x-forwarded-proto"] == "http") {
     res.redirect("https://" + req.headers.host + req.url, next);
   } else {
     return next();
   }
-  console.log("DaiNQ 🚀 -> req:", req)
 });
 
 httpServer.listen(8081);
