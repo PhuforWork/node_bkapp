@@ -5,7 +5,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
-const secure = require('express-force-https');
 
 const sequelize = require("./models/index");
 const init_models = require("./models/init-models");
