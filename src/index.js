@@ -33,7 +33,7 @@ https.createServer(optionSSL, app).listen(443, '110.35.173.82');
 // httpServer.listen(8081);
 
 app.get("/test", async (req, res) => {
-  let Data = await model.messages.findAll({ include: ["id_user_receive_mess_receive", "id_user_send_mess_send"] });
+  let Data = await model.content_message.findAll();
   res.status(200).send(Data);
 });
 
