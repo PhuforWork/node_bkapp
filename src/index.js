@@ -27,6 +27,7 @@ app.use(function (req, res, next) {
   } else {
     return next();
   }
+  console.log("DaiNQ 🚀 -> req:", req)
 });
 
 httpServer.listen(8081);
