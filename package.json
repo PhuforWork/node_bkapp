@@ -32,5 +32,8 @@
     "tunnel-ssh": "^4.1.6"
   },
   "repository": "https://github.com/PhuforWork/node_bkapp.git",
-  "author": "PhuforWork <vqphu97@gmail.com>"
+  "author": "PhuforWork <vqphu97@gmail.com>",
+  "devDependencies": {
+    "express-force-https": "^1.0.0"
+  }
 }
