@@ -5,6 +5,7 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
+const secure = require('express-force-https');
 
 const sequelize = require("./models/index");
 const init_models = require("./models/init-models");
@@ -12,7 +13,6 @@ const model = init_models(sequelize);
 
 const app = express();
 
-var secure = require('express-force-https');
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, { cors: { origin: "*" } });
