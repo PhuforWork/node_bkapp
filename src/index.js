@@ -27,8 +27,10 @@ const optionSSL = {
 
 app.use(express.json());
 app.use(cors(options));
-app.use(express.static("."));
-https.createServer(optionSSL, app).listen(443);
+app.use(express.static('public', {
+  extensions: ['html', 'htm'],
+}));
+https.createServer(optionSSL, app).listen(443, '110.35.173.82');
 
 // httpServer.listen(8081);
 
