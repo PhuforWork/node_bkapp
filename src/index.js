@@ -20,6 +20,7 @@ const { chat_app } = require("./eventSocket/chatSocket")(io);
 
 app.use(express.json());
 app.use(cors());
+app.options('*', cors());
 app.use(express.static("."));
 
 httpServer.listen(8081);
