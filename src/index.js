@@ -22,12 +22,6 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors());
 app.use(express.static("."));
-app.use(function requireHTTPS(req, res, next) {
-  if (!req.secure) {
-    return res.redirect('https://' + req.headers.host + req.url);
-  }
-  next();
-})
 
 httpServer.listen(8081);
 
