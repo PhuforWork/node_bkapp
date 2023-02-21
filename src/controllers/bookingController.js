@@ -249,16 +249,14 @@ const update_slect = async (req, res) => {
   }
 };
 
-const handleTranslate = (trans) => {
-  return new Promise(async (reject, reject) => {
-    await translate(trans, { to: 'en' })
-      .then(res => {
-        reject(res)
-      })
-      .catch(err => {
-        reject(err)
-      });
-  })
+const handleTranslate = async (trans) => {
+  await translate(trans, { to: 'en' })
+    .then(res => {
+      return res
+    })
+    .catch(err => {
+      console.log("DaiNQ 🚀 -> handleTranslate -> err:", err)
+    });
 }
 
 const update_depart = async (req, res) => {
