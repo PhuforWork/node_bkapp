@@ -258,11 +258,9 @@ const handleTranslate = async (trans) => {
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
-    let data = req.body;
-    const subname = await handleTranslate(data.label)
-    // await model.department.destroy({ where: { id_user: id } });
-    // Promise.all(data).then((values) => {
-    //   values.map(async (ele) => {
+    let data = req.body;//data transfer in body request
+    const subname = await handleTranslate(data.label)//auto translate label to english and remove whites spaces
+    //create a new departement item
     await model.department.create({
       label: data.label,
       value: data.value,
@@ -273,8 +271,6 @@ const update_depart = async (req, res) => {
       additon: data.addition,
       sub_name: subname.replace(/\s+/g, '').toLowerCase(),
     });
-    //   });
-    // });
     successCode(res, "", "Update success department");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -282,7 +278,7 @@ const update_depart = async (req, res) => {
 };
 const update_persional = async (req, res) => {
   try {
-    let { id } = req.params; //id user
+    let { id } = req.params;
     let data = req.body;
     await model.persionality.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
