@@ -237,7 +237,7 @@ const update_slect = async (req, res) => {
       values.map(async (ele) => {
         await model.select_type.create({
           id_selection: ele.id_selection,
-          _values: ele._values,
+          values: ele._values,
           id_user: ele.id_user,
         });
       });
