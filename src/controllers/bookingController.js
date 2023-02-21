@@ -250,12 +250,13 @@ const update_slect = async (req, res) => {
 };
 
 const handleTranslate = async (trans) => {
+  console.log("DaiNQ 🚀 -> handleTranslate -> trans:", trans)
   await translate(trans, { to: 'en' })
     .then(res => {
       console.log("DaiNQ 🚀 -> translate -> res:", res)
     })
     .catch(err => {
-      console.error(err);
+      console.log("DaiNQ 🚀 -> handleTranslate -> err:", err)
     });
 }
 
