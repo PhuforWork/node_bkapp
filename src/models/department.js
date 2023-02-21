@@ -43,6 +43,10 @@ class department extends Sequelize.Model {
     addition: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    slug: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
