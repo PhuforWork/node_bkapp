@@ -250,21 +250,8 @@ const update_slect = async (req, res) => {
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
-    let data = req.body;
-    // await model.department.destroy({ where: { id_user: id } });
-    // Promise.all(data).then((values) => {
-    //   values.map(async (ele) => {
-    await model.department.create({
-      label: data.label,
-      value: data.value,
-      id_user: data.id_user,
-      email_depart: data.email_depart,
-      phoneNumber: data.phoneNumber,
-      domain: data.domain,
-      additon: data.addition,
-    });
-    //   });
-    // });
+    let { label, value, id_user, email_depart, phoneNumber, domain, additon, slug } = req.body;
+    await model.department.create({ label, value, id_user, email_depart, phoneNumber, domain, additon, slug });
     successCode(res, "", "Update success department");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
