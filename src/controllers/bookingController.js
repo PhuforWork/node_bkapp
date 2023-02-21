@@ -1,7 +1,7 @@
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
-const translate = require('google-translate-api');
+// const translate = require('google-translate-api');
 const model = init_models(sequelize);
 const moment = require("moment");
 const schedule = require("node-schedule");
@@ -251,11 +251,11 @@ const update_slect = async (req, res) => {
 
 const handleTranslate = (trans) => {
   console.log("DaiNQ 🚀 -> handleTranslate -> trans:", trans)
-  translate(trans, { to: 'en' }).then(res => {
-    console.log("DaiNQ 🚀 -> translate -> res:", res)
-  }).catch(err => {
-    console.error(err);
-  });
+  // translate(trans, { to: 'en' }).then(res => {
+  //   console.log("DaiNQ 🚀 -> translate -> res:", res)
+  // }).catch(err => {
+  //   console.error(err);
+  // });
 }
 
 const update_depart = async (req, res) => {
