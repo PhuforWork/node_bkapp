@@ -256,7 +256,7 @@ const handleTranslate = async (trans) => {
       console.log("DaiNQ 🚀 -> translate -> res:", res)
     })
     .catch(err => {
-      console.log("DaiNQ 🚀 -> handleTranslate -> err:", err)
+      console.log("DaiNQ 🚀 -> handleTranslate -> err->259:", err)
     });
 }
 
