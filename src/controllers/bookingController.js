@@ -250,9 +250,21 @@ const update_slect = async (req, res) => {
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
-    console.log("DaiNQ 🚀 -> constupdate_depart= -> req.body:", req.body)
-    let { label, value, id_user, email_depart, phoneNumber, domain, additon, slug } = req.body;
-    await model.department.create({ label, value, id_user, email_depart, phoneNumber, domain, additon, slug });
+    let data = req.body;
+    // await model.department.destroy({ where: { id_user: id } });
+    // Promise.all(data).then((values) => {
+    //   values.map(async (ele) => {
+    await model.department.create({
+      label: data.label,
+      value: data.value,
+      id_user: data.id_user,
+      email_depart: data.email_depart,
+      phoneNumber: data.phoneNumber,
+      domain: data.domain,
+      additon: data.addition,
+    });
+    //   });
+    // });
     successCode(res, "", "Update success department");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -281,6 +293,7 @@ const update_persional = async (req, res) => {
 const update_dpt_new = async (req, res) => {
   try {
     let { id } = req.params; // id department
+    console.log("DaiNQ 🚀 -> constupdate_dpt_new= -> req.body:", req.body)
     let { label, value, id_user, email_depart, phoneNumber, domain, addition } =
       req.body;
     let data = {
