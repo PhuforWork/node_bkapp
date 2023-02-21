@@ -250,6 +250,7 @@ const update_slect = async (req, res) => {
 };
 
 const handleTranslate = (trans) => {
+  console.log("DaiNQ 🚀 -> handleTranslate -> trans:", trans)
   translate(trans, { to: 'en' }).then(res => {
     console.log("DaiNQ 🚀 -> translate -> res:", res)
   }).catch(err => {
