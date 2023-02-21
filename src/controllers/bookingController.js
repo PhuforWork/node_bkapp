@@ -1,6 +1,7 @@
 const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
+const translate = require('google-translate-api');
 const model = init_models(sequelize);
 const moment = require("moment");
 const schedule = require("node-schedule");
@@ -247,11 +248,20 @@ const update_slect = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+
+const handleTranslate = (trans) => {
+  translate(trans, { to: 'en' }).then(res => {
+    console.log("DaiNQ 🚀 -> translate -> res:", res)
+  }).catch(err => {
+    console.error(err);
+  });
+}
+
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
-    console.log("DaiNQ 🚀 -> constupdate_depart= -> req.body:", req.body)
     let data = req.body;
+    const subname = await handleTranslate(data.label)
     // await model.department.destroy({ where: { id_user: id } });
     // Promise.all(data).then((values) => {
     //   values.map(async (ele) => {
@@ -263,6 +273,7 @@ const update_depart = async (req, res) => {
       phoneNumber: data.phoneNumber,
       domain: data.domain,
       additon: data.addition,
+      sub_name: subname,
     });
     //   });
     // });
