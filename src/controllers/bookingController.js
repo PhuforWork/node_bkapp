@@ -252,7 +252,7 @@ const update_slect = async (req, res) => {
 const handleTranslate = async (trans) => {
   await translate(trans, { to: 'en' })
     .then(res => {
-      console.log("DaiNQ 🚀 -> translate -> res:", res)
+      return res.text().replace(" ", "");
     })
     .catch(err => {
       console.log("DaiNQ 🚀 -> handleTranslate -> err->259:", err)
@@ -264,6 +264,7 @@ const update_depart = async (req, res) => {
     let { id } = req.params; //id user
     let data = req.body;
     const subname = await handleTranslate(data.label)
+    console.log("DaiNQ 🚀 -> constupdate_depart= -> subname:", subname)
     // await model.department.destroy({ where: { id_user: id } });
     // Promise.all(data).then((values) => {
     //   values.map(async (ele) => {
