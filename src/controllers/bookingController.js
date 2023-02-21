@@ -250,14 +250,17 @@ const update_slect = async (req, res) => {
 };
 
 const handleTranslate = async (trans) => {
-  await translate(trans, { to: 'en' })
-    .then(res => {
-      console.log("DaiNQ 🚀 -> handleTranslate -> res:", res)
-      return res
-    })
-    .catch(err => {
-      console.log("DaiNQ 🚀 -> handleTranslate -> err->259:", err)
-    });
+  return new Promise((reject, reject) => {
+    translate(trans, { to: 'en' })
+      .then(res => {
+        console.log("DaiNQ 🚀 -> handleTranslate -> res:", res)
+        reject(res)
+      })
+      .catch(err => {
+        reject(err)
+        console.log("DaiNQ 🚀 -> handleTranslate -> err->259:", err)
+      });
+  })
 }
 
 const update_depart = async (req, res) => {
