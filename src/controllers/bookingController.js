@@ -252,7 +252,8 @@ const update_slect = async (req, res) => {
 const handleTranslate = async (trans) => {
   await translate(trans, { to: 'en' })
     .then(res => {
-      return res.text().replace(" ", "");
+      const clone = res.join('').toLowerCase();
+      return clone.replace(" ", "")
     })
     .catch(err => {
       console.log("DaiNQ 🚀 -> handleTranslate -> err->259:", err)
