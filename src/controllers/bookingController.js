@@ -260,7 +260,7 @@ const update_depart = async (req, res) => {
     let { id } = req.params; //id user
     let data = req.body;
     const subname = await handleTranslate(data.label)
-    console.log("DaiNQ 🚀 -> constupdate_depart= -> subname:", subname.replace(/\s+/g, ''))
+    console.log("DaiNQ 🚀 -> constupdate_depart= -> subname:", subname.replace(/\s+/g, '').toLowerCase())
     // await model.department.destroy({ where: { id_user: id } });
     // Promise.all(data).then((values) => {
     //   values.map(async (ele) => {
