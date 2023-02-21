@@ -2,9 +2,9 @@ const sequelize = require("../models/index");
 const init_models = require("../models/init-models");
 const { successCode, failCode, errorCode } = require("../untils/respone");
 const model = init_models(sequelize);
+const translate = require('translate-google')
 const moment = require("moment");
 const schedule = require("node-schedule");
-const translate = require('google-translate-api');
 
 // get
 const booking_user = async (req, res) => {
@@ -250,7 +250,7 @@ const update_slect = async (req, res) => {
 };
 
 const handleTranslate = async (trans) => {
-  await translate('안녕하세요', { from: 'ko', to: 'en' })
+  await translate('안녕하세요', { to: 'en' })
     .then(res => {
       console.log("DaiNQ 🚀 -> translate -> res:", res)
     })
