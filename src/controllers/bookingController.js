@@ -250,7 +250,7 @@ const update_slect = async (req, res) => {
 };
 
 const handleTranslate = async (trans) => {
-  await translate('안녕하세요', { to: 'en' })
+  await translate(trans, { to: 'en' })
     .then(res => {
       console.log("DaiNQ 🚀 -> translate -> res:", res)
     })
