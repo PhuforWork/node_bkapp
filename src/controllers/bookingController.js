@@ -250,6 +250,7 @@ const update_slect = async (req, res) => {
 const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
+    console.log("DaiNQ 🚀 -> constupdate_depart= -> req.body:", req.body)
     let { label, value, id_user, email_depart, phoneNumber, domain, additon, slug } = req.body;
     await model.department.create({ label, value, id_user, email_depart, phoneNumber, domain, additon, slug });
     successCode(res, "", "Update success department");
