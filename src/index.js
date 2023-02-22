@@ -22,9 +22,7 @@ const { chat_app } = require("./eventSocket/chatSocket")(io);
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
-tls.getCipherSuites().forEach(suite => {
-  console.log(suite);
-});
+console.log(tls.getCipherSuites());
 
 httpServer.listen(8081);
 
