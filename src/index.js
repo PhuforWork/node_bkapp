@@ -5,6 +5,7 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
+const tls = require('tls');
 
 const sequelize = require("./models/index");
 const init_models = require("./models/init-models");
@@ -21,6 +22,9 @@ const { chat_app } = require("./eventSocket/chatSocket")(io);
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
+tls.getCipherSuites().forEach(suite => {
+  console.log(suite);
+});
 
 httpServer.listen(8081);
 
