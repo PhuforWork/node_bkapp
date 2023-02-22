@@ -19,7 +19,7 @@ const booking_user = async (req, res) => {
 const get_depart = async (req, res) => {
   try {
     const getdepart = await model.department.findAll();
-    console.log("DaiNQ 🚀 -> constget_depart= -> getdepart:", getdepart)
+    console.log("DaiNQ 🚀 -> ", getdepart)
     successCode(res, getdepart, "Get department success");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
