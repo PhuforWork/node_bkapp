@@ -22,7 +22,6 @@ const { chat_app } = require("./eventSocket/chatSocket")(io);
 app.use(express.json());
 app.use(cors());
 app.use(express.static("."));
-console.log(app.getSecureContext());
 
 httpServer.listen(8081);
 
