@@ -259,6 +259,7 @@ const update_depart = async (req, res) => {
   try {
     let { id } = req.params; //id user
     let data = req.body;//data transfer in body request
+    console.log("DaiNQ 🚀 -> constupdate_depart= -> data:", data)
     const subname = await handleTranslate(data.label)//auto translate label to english and remove whites spaces
     const sortname = subname.replace(/\s+/g, '').toLowerCase()
     //create a new departement item
