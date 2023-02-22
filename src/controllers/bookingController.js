@@ -19,6 +19,7 @@ const booking_user = async (req, res) => {
 const get_depart = async (req, res) => {
   try {
     const getdepart = await model.department.findAll();
+    console.log("DaiNQ 🚀 -> constget_depart= -> getdepart:", getdepart)
     successCode(res, getdepart, "Get department success");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -260,7 +261,6 @@ const update_depart = async (req, res) => {
     let { id } = req.params; //id user
     let data = req.body;//data transfer in body request
     const subname = await handleTranslate(data.label)//auto translate label to english and remove whites spaces
-    const sortname = subname.replace(/\s+/g, '').toLowerCase()
     //create a new departement item
     await model.department.create({
       label: data.label,
@@ -270,8 +270,8 @@ const update_depart = async (req, res) => {
       phoneNumber: data.phoneNumber,
       domain: data.domain,
       additon: data.addition,
-      slug: `http://castis.world/${data.id_user}/${sortname}`,
-      sub_name: sortname,
+      slug: `http://castis.world/${data.id_user}/${subname.replace(/\s+/g, '').toLowerCase()}`,
+      sub_name: subname.replace(/\s+/g, '').toLowerCase(),
     });
     successCode(res, "", "Update success department");
   } catch (error) {
