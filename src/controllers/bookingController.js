@@ -9,7 +9,9 @@ const schedule = require("node-schedule");
 // get
 const booking_user = async (req, res) => {
   try {
-    const check_bkUser = await model.booking_info.findAll();
+    const check_bkUser = await model.booking_info.findAll().then(function (dataResult) {
+      console.log("DaiNQ 🚀 -> data:", dataResult)
+    });
     successCode(res, check_bkUser, "Get success booking of user");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
@@ -19,7 +21,6 @@ const booking_user = async (req, res) => {
 const get_depart = async (req, res) => {
   try {
     const getdepart = await model.department.findAll();
-    console.log("DaiNQ 🚀 -> ", getdepart)
     successCode(res, getdepart, "Get department success");
   } catch (error) {
     errorCode(res, "", "Error BackEnd");
