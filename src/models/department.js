@@ -47,6 +47,10 @@ class department extends Sequelize.Model {
     slug: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    sub_name: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
