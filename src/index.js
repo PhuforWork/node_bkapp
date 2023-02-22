@@ -5,7 +5,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cron = require("node-cron");
 const moment = require("moment");
-const tls = require('tls');
 
 const sequelize = require("./models/index");
 const init_models = require("./models/init-models");

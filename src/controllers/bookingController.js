@@ -270,7 +270,7 @@ const update_depart = async (req, res) => {
       phoneNumber: data.phoneNumber,
       domain: data.domain,
       additon: data.addition,
-      slug: `castis.world/${data.id_user}/${sortname}`,
+      slug: `http://castis.world/${data.id_user}/${sortname}`,
       sub_name: sortname,
     });
     successCode(res, "", "Update success department");
