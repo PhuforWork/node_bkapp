@@ -452,6 +452,7 @@ const forgot_password = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+
 const change_pass = async (req, res) => {
   try {
     let { email, _password } = req.body;
