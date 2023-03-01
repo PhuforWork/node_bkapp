@@ -1,3 +1,4 @@
+//Cấu hinh mariadb
 require("dotenv").config();
 
 module.exports = {
