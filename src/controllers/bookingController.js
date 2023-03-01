@@ -5,7 +5,7 @@ const model = init_models(sequelize);
 const moment = require("moment");
 const schedule = require("node-schedule");
 
-// get
+// get all booking user
 const booking_user = async (req, res) => {
   try {
     const check_bkUser = await model.booking_info.findAll();
@@ -14,7 +14,7 @@ const booking_user = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
-
+// get all department 
 const get_depart = async (req, res) => {
   try {
     const getdepart = await model.department.findAll();
@@ -23,6 +23,7 @@ const get_depart = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// get perersional by id user
 const get_persional_id = async (req, res) => {
   try {
     let { id } = req.params; //id user
@@ -35,6 +36,7 @@ const get_persional_id = async (req, res) => {
   }
 };
 
+// api booking user by id user
 const booking_userid = async (req, res) => {
   try {
     let { id } = req.params;
@@ -52,6 +54,7 @@ const booking_userid = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+
 const get_department_slect = async (req, res) => {
   try {
     let { id } = req.params;
