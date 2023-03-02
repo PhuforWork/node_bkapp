@@ -6,7 +6,7 @@ const translate = require('translate-google')
 const moment = require("moment");
 const schedule = require("node-schedule");
 
-// get
+// get all booking user
 const booking_user = async (req, res) => {
   try {
     const check_bkUser = await model.booking_info.findAll();
@@ -15,7 +15,7 @@ const booking_user = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
-
+// get all department 
 const get_depart = async (req, res) => {
   try {
     const getdepart = await model.department.findAll();
@@ -25,6 +25,7 @@ const get_depart = async (req, res) => {
   }
 };
 
+// get perersional by id user
 const get_persional_id = async (req, res) => {
   try {
     let { id } = req.params; //id user
@@ -37,6 +38,7 @@ const get_persional_id = async (req, res) => {
   }
 };
 
+// api booking user by id user
 const booking_userid = async (req, res) => {
   try {
     let { id } = req.params;
@@ -54,6 +56,7 @@ const booking_userid = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+//get department selection by id user
 const get_department_slect = async (req, res) => {
   try {
     let { id } = req.params;
@@ -68,6 +71,7 @@ const get_department_slect = async (req, res) => {
   }
 };
 // post
+// add booking calender by user
 const add_booking = async (req, res) => {
   try {
     let { id } = req.params; // id user
@@ -207,7 +211,7 @@ const add_booking = async (req, res) => {
     errorCode(res, "Error 500");
   }
 };
-
+//add department by id_user
 const add_depart = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
@@ -218,6 +222,7 @@ const add_depart = async (req, res) => {
     successCode(res, data_bk, "Add department success");
   }
 };
+// add selection by id user
 const add_slect = async (req, res) => {
   let { id } = req.params; //id user
   let id_user = id;
@@ -228,7 +233,6 @@ const add_slect = async (req, res) => {
     successCode(res, data_bk, "Add department success");
   }
 };
-
 //setting user
 const update_slect = async (req, res) => {
   try {
@@ -399,6 +403,7 @@ const update_booking = async (req, res) => {
     errorCode(res, "", "Error BackEnd");
   }
 };
+// delete booking user
 const delete_bk = async (req, res) => {
   try {
     let { id } = req.params; //id booking
