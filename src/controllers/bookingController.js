@@ -240,7 +240,9 @@ const update_slect = async (req, res) => {
     let data = req.body;
     await model.select_type.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
+      console.log(" 🚀- DaiNQ - 🚀: -> Promise.all -> values:", values)
       values.map(async (ele) => {
+        console.log(" 🚀- DaiNQ - 🚀: -> values.map -> ele:", ele)
         await model.select_type.create({
           id_selection: ele.id_selection,
           values: ele._values,
