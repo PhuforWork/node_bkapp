@@ -238,6 +238,7 @@ const update_slect = async (req, res) => {
   try {
     let { id } = req.params; //id user
     let data = req.body;
+    console.log(" 🚀- DaiNQ - 🚀: -> constupdate_slect= -> data:", data)
     await model.select_type.destroy({ where: { id_user: id } });
     Promise.all(data).then((values) => {
       console.log(" 🚀- DaiNQ - 🚀: -> Promise.all -> values:", values)
